@@ -1,0 +1,76 @@
+@import '../../style/mixin.scss';
+
+.menu {
+    position: absolute;
+    z-index: 1000020;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    height: 0;
+
+    .menuTriggerWrapper {
+        position: absolute;
+        bottom: -28px;
+        left: 50%;
+        margin-left: -30px;
+        width: 60px;
+        height: 60px;
+        background: rgba(224,232,255,1);
+        border-radius: 50%;
+        opacity: 0.5;
+
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .menuTrigger {
+        @include buttonReset;
+        width: 50px;
+        position: relative;
+        top: 8px;
+        z-index: 1;
+        transition: .5s all;
+        &.open {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .menuWrapper {
+        display: inline-flex;
+        justify-content: center;
+        flex-direction: row;
+        background: rgba(224,232,255,0.4);
+        padding: 10px 0;
+        position: relative;
+        top: 0;
+        transition: .5s all;
+        
+        &.open {
+            top: -78px;
+        }
+    }
+
+    .menuItemWrapper {
+        width: 75px;
+        text-align: center;
+        border-left: 1px solid #b0b0b0;
+        &:first-child {
+            border-left: none;
+        }
+    }
+
+    .menuItem {
+        @include buttonReset;
+    }
+
+    .icon {
+        margin-top: 5px;
+        height: 32px;
+        width: 32px;
+        background: transparent;
+    }
+}
