@@ -1,0 +1,22 @@
+.symbols {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 610px;
+    min-height: 400px;
+    padding: 30px 45px;
+
+
+    .symbolsRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 20px 0;
+    }
+
+    .closeButton {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}

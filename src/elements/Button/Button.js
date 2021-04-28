@@ -5,7 +5,7 @@ import style from './Button.module.scss';
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
+const Button = ({ primary, backgroundColor, size, label, ...props }) => {
   const mode = primary ? style['button--primary'] : style['button--secondary'];
   return (
     <button
@@ -33,3 +33,5 @@ Button.defaultProps = {
   size: 'medium',
   onClick: undefined,
 };
+
+export default Button;
