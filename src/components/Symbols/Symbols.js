@@ -10,15 +10,16 @@ import style from './Symbols.module.scss';
 /**
  * Primary UI component for user interaction
  */
-const Symbols = ({ }) => {
+const Symbols = ({ onCompClick, onCompClose }) => {
 
 
     const onCloseClick = (e) => {
         console.log('onCloseClick ' , e);
+        onCompClose(e);
     }
 
     return (
-        <Holder className={style.symbols}>
+        <Holder className={style.symbols} onCompClick={onCompClick}>
             <Button className={style.closeButton} label="X" icon="close" onClick={onCloseClick}></Button>
             <div className={style.symbolsRow}>
                 <Tile label="Individual Work"></Tile>

@@ -3,7 +3,7 @@ import { Dice, DownArrow, SymbolIcon } from '../../elements/Icon/Icon';
 
 import style from './Player.module.scss';
 
- const Player = () => {
+ const Player = ({ onItemClick }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(true);
 
@@ -12,13 +12,17 @@ import style from './Player.module.scss';
         setIsMenuOpen(!isMenuOpen);
     }
 
+    const onMenuItemClick = (e) => {
+        onItemClick(e.currentTarget.dataset.id);
+    }
+
     return (
         <div className={style.menu}>
             
             <div className={`${style.menuWrapper} ${ isMenuOpen ? style.open : ''}`}>
 
                 <div className={style.menuItemWrapper}>
-                    <button type="button" className={style.menuItem}>
+                    <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="symbols">
                             <div className={style.menuItemLabel}>
                                 <span>symbols</span>
                             </div>
@@ -29,7 +33,7 @@ import style from './Player.module.scss';
                 </div>
                 
                 <div className={style.menuItemWrapper}>
-                    <button type="button" className={style.menuItem}>
+                    <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="number">
                             <div className={style.menuItemLabel}>
                                 <span>number</span>
                             </div>

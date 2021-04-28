@@ -65,6 +65,7 @@
 
     .menuItem {
         @include buttonReset;
+        cursor: pointer;
     }
 
     .icon {

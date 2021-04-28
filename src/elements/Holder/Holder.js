@@ -5,7 +5,7 @@ import style from './Holder.module.scss';
 
 let allowToDrag = false;
 
- const Holder = ({ className, initialPos={ x:0, y:0}, width="250", height="250", minWidth="250", minHeight="250", resizable=true, children}) => {
+ const Holder = ({ onCompClick, className, initialPos={ x:0, y:0}, width="250", height="250", minWidth="250", minHeight="250", resizable=true, children}) => {
 
     // const [currentWidth, setCurrentWidth] = useState(width); 
     // const [currentHeight, setCurrentHeight] = useState(height); 
@@ -23,12 +23,13 @@ let allowToDrag = false;
     
     const onMouseDown = (e) => {
         const pos  = e.target.getBoundingClientRect();
-        const size = 10;
+        const size = 15;
         if( ((e.clientX-pos.x) < (pos.width - size)) && ((e.clientY-pos.y) < (pos.height - size))) {
             allowToDrag = true;
         } else {
             allowToDrag = false;
         }
+        onCompClick && onCompClick();
     }
 
     const onStart = (e) => {
