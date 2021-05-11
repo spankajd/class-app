@@ -1,0 +1,28 @@
+.randomNumber {
+
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
+    flex-grow: 1;
+    // border: 1px solid;
+
+    .row {
+        flex-grow: 1;
+        margin: 10px 0;
+    }
+    
+    .numberSymbol {
+        flex-grow: 2;
+        min-height: 72px;
+    }
+
+    .numberInput {
+        input {
+            width: 50px;
+            margin-left: 10px;
+        }
+    }
+
+
+}

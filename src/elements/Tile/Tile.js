@@ -14,8 +14,8 @@ const Tile = ({ icon, label, isActive=false }) => {
     }
 
     return (
-        <div className={`${style.tile} ${isActiveFlag ? style.active : ''}`}>
-            <button className={style.tileButton} onClick={onButtonClick}>
+        <div className={`${style.tile} ${isActiveFlag ? style.active : ''}`} onClick={onButtonClick}>
+            <button className={style.tileButton}>
                 <Dice></Dice>
                 <div className={style.tileLabel}>{label}</div>
             </button>

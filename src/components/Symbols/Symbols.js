@@ -1,7 +1,6 @@
 
 import React from 'react';
 
-import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
 import Tile from '../../elements/Tile/Tile';
 
@@ -19,8 +18,7 @@ const Symbols = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={style.symbols} onCompClick={onCompClick}>
-            <Button className={style.closeButton} label="X" icon="close" onClick={onCloseClick}></Button>
+        <Holder className={style.symbols} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.symbolsRow}>
                 <Tile label="Individual Work"></Tile>
                 <Tile label="Silence"></Tile>
