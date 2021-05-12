@@ -8,6 +8,7 @@ import Player from '../../components/Player/Player';
 // import Holder from '../../elements/Holder/Holder';
 import Symbols from '../../components/Symbols/Symbols';
 import Number from '../../components/Number/Number';
+import Teacher from '../../components/Teacher/Teacher';
 
 class MainContainer extends Component {
     state = {
@@ -18,7 +19,6 @@ class MainContainer extends Component {
     onCompClick = (index) => {
         const { stageItems } = this.state;
         let selectedComp;
-
         let newStageItems = stageItems.filter(comp => {
             if (comp.key == index) {
                 selectedComp = comp;
@@ -46,7 +46,7 @@ class MainContainer extends Component {
     }
 
     onItemClick = (menuName) => {
-        console.log('menuName ', menuName);
+        // console.log('menuName ', menuName);
         const { stageItems } = this.state;
         const key = stageItems.length;
 
@@ -56,6 +56,9 @@ class MainContainer extends Component {
                 break;
             case 'number':
                 stageItems.push(<Number key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Number>)
+                break;
+            case 'teacher':
+                stageItems.push(<Teacher key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
                 break;
         }
 

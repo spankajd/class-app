@@ -33,6 +33,17 @@ import style from './Player.module.scss';
                 </div>
                 
                 <div className={style.menuItemWrapper}>
+                    <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="teacher">
+                            <div className={style.menuItemLabel}>
+                                <span>teacher</span>
+                            </div>
+                            <span className={style.menuItemContent}>
+                                <Dice className={style.icon}></Dice>
+                            </span>
+                    </button>
+                </div>
+                
+                <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="number">
                             <div className={style.menuItemLabel}>
                                 <span>number</span>

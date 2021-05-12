@@ -15,7 +15,7 @@ const Holder = ({ onCompClick, onClose, className, initialPos = { x: 0, y: 0 }, 
     const spanStyles = {
         // width: currentWidth+'px',
         // height: currentHeight+'px',
-        background: 'rgb(236 236 236)',
+        // background: 'rgb(236 236 236)',
         resize: resizable ? 'both' : '',
         overflow: 'auto',
         // minWidth: minWidth+'px',
@@ -45,8 +45,8 @@ const Holder = ({ onCompClick, onClose, className, initialPos = { x: 0, y: 0 }, 
     return (
         <Draggable defaultPosition={initialPos} onMouseDown={onMouseDown} onStart={onStart}>
             <div style={spanStyles} className={`${style.holder} ${className ? className : ''}`}>
-                <Button className={style.closeButton} label="X" icon="close" onClick={onCloseClick}></Button>
                 {children}
+                <Button className={style.closeButton} label="X" icon="close" onClick={onCloseClick}></Button>
             </div>
         </Draggable>
     )
