@@ -1,0 +1,23 @@
+.text {
+    padding: 35px;
+    width: 500px;
+    height: 400px;
+
+    .wrapper {
+        width: 100%;
+        height: 100%;
+
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    .toolbar {
+        background: transparent;
+    }
+
+    .editor {
+        height: auto;
+        background: #FAFAFA;
+        flex-grow: 2;
+    }
+}

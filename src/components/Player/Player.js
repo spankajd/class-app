@@ -55,6 +55,17 @@ import style from './Player.module.scss';
                 </div>
                 
                 <div className={style.menuItemWrapper}>
+                    <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="text">
+                            <div className={style.menuItemLabel}>
+                                <span>text</span>
+                            </div>
+                            <span className={style.menuItemContent}>
+                                <Dice className={style.icon}></Dice>
+                            </span>
+                    </button>
+                </div>
+                
+                <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="qrcode">
                             <div className={style.menuItemLabel}>
                                 <span>qr code</span>

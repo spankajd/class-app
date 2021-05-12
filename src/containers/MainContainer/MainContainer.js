@@ -10,6 +10,7 @@ import Symbols from '../../components/Symbols/Symbols';
 import Number from '../../components/Number/Number';
 import Teacher from '../../components/Teacher/Teacher';
 import QRcode from '../../components/QRcode/QRcode';
+import Text from '../../components/Text/Text';
 
 class MainContainer extends Component {
     state = {
@@ -60,6 +61,9 @@ class MainContainer extends Component {
                 break;
             case 'teacher':
                 stageItems.push(<Teacher key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
+                break;
+            case 'text':
+                stageItems.push(<Text key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)
                 break;
             case 'qrcode':
                 stageItems.push(<QRcode key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
