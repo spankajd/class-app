@@ -7,10 +7,14 @@ import RandomNumber from '../RandomNumber/RandomNumber';
 import style from './Number.module.scss';
 
 
-const Number = ({  }) => {
+const Number = ({ onCompClick, onCompClose }) => {
+    
+    const onCloseClick = e => {
+        onCompClose(e);
+    }
 
     return (
-        <Holder className={`${style.number}`}>
+        <Holder className={`${style.number}`} onCompClick={onCompClick} onClose={onCloseClick}>
             <Dice></Dice>
             <RandomNumber></RandomNumber>
         </Holder>
