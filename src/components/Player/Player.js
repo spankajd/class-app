@@ -76,6 +76,17 @@ import style from './Player.module.scss';
                     </button>
                 </div>
                 
+                <div className={style.menuItemWrapper}>
+                    <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="webcam">
+                            <div className={style.menuItemLabel}>
+                                <span>webcan</span>
+                            </div>
+                            <span className={style.menuItemContent}>
+                                <Dice className={style.icon}></Dice>
+                            </span>
+                    </button>
+                </div>
+                
             </div>
 
             <div className={style.menuTriggerWrapper}>

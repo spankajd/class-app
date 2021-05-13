@@ -11,6 +11,7 @@ import Number from '../../components/Number/Number';
 import Teacher from '../../components/Teacher/Teacher';
 import QRcode from '../../components/QRcode/QRcode';
 import Text from '../../components/Text/Text';
+import WebCam from '../../components/WebCam/WebCam';
 
 class MainContainer extends Component {
     state = {
@@ -67,6 +68,9 @@ class MainContainer extends Component {
                 break;
             case 'qrcode':
                 stageItems.push(<QRcode key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
+                break;
+            case 'webcam':
+                stageItems.push(<WebCam key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
                 break;
         }
 
