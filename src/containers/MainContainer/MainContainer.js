@@ -10,6 +10,7 @@ import Symbols from '../../components/Symbols/Symbols';
 import Number from '../../components/Number/Number';
 import Teacher from '../../components/Teacher/Teacher';
 import QRcode from '../../components/QRcode/QRcode';
+import Timer from '../../components/Timer/Timer';
 import Text from '../../components/Text/Text';
 import WebCam from '../../components/WebCam/WebCam';
 
@@ -62,6 +63,9 @@ class MainContainer extends Component {
                 break;
             case 'teacher':
                 stageItems.push(<Teacher key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
+                break;
+            case 'timer':
+                stageItems.push(<Timer key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Timer>)
                 break;
             case 'text':
                 stageItems.push(<Text key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)

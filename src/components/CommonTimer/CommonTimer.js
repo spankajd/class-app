@@ -31,7 +31,7 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate }) => {
         let {total} = time;
         total += factor;
         update(total);
-        onTimeUpdate && onTimeUpdate(newTime);
+        onTimeUpdate && onTimeUpdate(total);
     }
 
     const update = (total) => {
