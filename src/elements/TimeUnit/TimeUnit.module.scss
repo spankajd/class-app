@@ -1,0 +1,31 @@
+.timeUnit {
+    padding: 0;
+    display: inline-block;
+
+    .container {
+        text-align: center;
+    }
+
+    .button {
+        height: 32px;
+        width: 32px;
+        background-color: transparent;
+        border: none;
+        font-size: 1.5rem;
+        opacity: 0;
+        pointer-events: none;
+
+        &.active {
+            opacity: 1;
+            pointer-events: unset;
+            cursor: pointer;
+        }
+    }
+    
+    .number {
+        font-weight: 600;
+        font-size: 5rem;
+        line-height: 5rem;
+        letter-spacing: -.015625em;
+    }
+}
