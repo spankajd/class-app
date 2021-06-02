@@ -1,0 +1,24 @@
+
+.reel {
+    position: relative;
+    width: 100%;
+    
+    .title {
+        margin: 15px 0;
+    }
+
+    padding-bottom: 15px;
+    border-bottom: 1px solid #999;
+
+    :global { 
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }   
+    }
+
+    img {
+        width: 175px;
+    }
+    
+}

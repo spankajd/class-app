@@ -1,0 +1,16 @@
+.background {
+    position: relative;
+    display: inline-flex;
+
+    flex-direction: column;
+
+    width: 700px;
+    height: 585px;
+    padding: 25px;
+
+    global {
+        .slick-prev:before, .slick-next:before {
+            color: black;
+        }
+    }
+}

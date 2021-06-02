@@ -15,6 +15,7 @@ import Timer from '../../components/Timer/Timer';
 import Text from '../../components/Text/Text';
 import WebCam from '../../components/WebCam/WebCam';
 import ScreenShot from '../../components/ScreenShot/ScreenShot';
+import Background from '../../components/Background/Background';
 
 class MainContainer extends Component {
     state = {
@@ -78,6 +79,9 @@ class MainContainer extends Component {
                 break;
             case 'webcam':
                 stageItems.push(<WebCam key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
+                break;
+            case 'background':
+                stageItems.push(<Background key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Background>)
                 break;
         }
 
