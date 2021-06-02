@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ScreenCapture } from 'react-screen-capture';
 import _ from 'lodash';
 
 import style from './MainContainer.module.scss';
@@ -13,10 +14,12 @@ import QRcode from '../../components/QRcode/QRcode';
 import Timer from '../../components/Timer/Timer';
 import Text from '../../components/Text/Text';
 import WebCam from '../../components/WebCam/WebCam';
+import ScreenShot from '../../components/ScreenShot/ScreenShot';
 
 class MainContainer extends Component {
     state = {
-        stageItems: []
+        stageItems: [],
+        screenCapture: ''
     }
 
 
@@ -91,15 +94,30 @@ class MainContainer extends Component {
         })
     }
 
+    handleScreenCapture = (screenCapture) => {
+        // console.log('onScreenCapture ', e);
+        this.setState({
+            screenCapture: screenCapture
+        });
+    }
+
+    onScreenShotClose = () => {
+        this.setState({
+            screenCapture: ''
+        });
+    }
+
     render() {
-        // const {stageItems} = this.state;
+        const { screenCapture } = this.state;
         return (
-            <div className={style.mainContainer}>
-                {/* <Holder></Holder> */}
-                {/* <Symbols></Symbols> */}
-                {this.renderItems()}
-                <Player onItemClick={e => this.onItemClick(e)}></Player>
-            </div>
+            <ScreenCapture onEndCapture={this.handleScreenCapture}>
+                {({ onStartCapture }) => (
+                    <div className={style.mainContainer}>
+                        {this.renderItems()}
+                        <Player onItemClick={e => this.onItemClick(e)} onScreenCapture={onStartCapture}></Player>
+                        {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}
+                    </div>)}
+            </ScreenCapture>
         )
     }
 }

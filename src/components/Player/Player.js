@@ -3,7 +3,7 @@ import { Dice, DownArrow, SymbolIcon } from '../../elements/Icon/Icon';
 
 import style from './Player.module.scss';
 
- const Player = ({ onItemClick }) => {
+ const Player = ({ onItemClick, onScreenCapture }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(true);
 
@@ -91,6 +91,17 @@ import style from './Player.module.scss';
                     <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="webcam">
                             <div className={style.menuItemLabel}>
                                 <span>webcan</span>
+                            </div>
+                            <span className={style.menuItemContent}>
+                                <Dice className={style.icon}></Dice>
+                            </span>
+                    </button>
+                </div>
+                
+                <div className={style.menuItemWrapper}>
+                    <button type="button" className={style.menuItem} onClick={onScreenCapture} data-id="webcam">
+                            <div className={style.menuItemLabel}>
+                                <span>postbox</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Dice className={style.icon}></Dice>

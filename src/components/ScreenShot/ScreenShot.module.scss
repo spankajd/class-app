@@ -1,0 +1,30 @@
+.screenShot {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 78px);
+    background: rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    .closeButton {
+        position: absolute;
+        right: 25px;
+        top: 25px;
+        z-index: 2;
+    }
+
+    .image {
+        width: calc(100% - 30px);
+    }
+
+    .controlPanel {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        width: 275px;
+        display: inline-flex;
+        justify-content: space-between;
+        z-index: 2;
+    }
+}
