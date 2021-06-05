@@ -12,87 +12,61 @@ import style from './Reel.module.scss';
 // https://www.npmjs.com/package/react-slick
 // https://react-slick.neostack.com/docs/example/auto-play-methods
 
-const data = [
-    {
-        original: 'https://picsum.photos/id/1018/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1018/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1015/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1015/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/250/150/',
-    },
-];
-
-const Reel = ({ images = data, label='', selected, onSelect }) => {
+const Reel = ({ dataset, onSelect }) => {
 
     const settings = {
         dots: false,
         lazyLoad: true,
         infinite: false,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 6,
         slidesToScroll: 1,
         initialSlide: 1,
         responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              initialSlide: 2
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
         ]
     };
 
-    const onItemClick = () => {
-
+    const onItemClick = obj => {
+        onSelect && onSelect(obj);
     }
 
     return (
         <div className={style.reel}>
-            {label && (<div className={style.title}>{label}</div>)}
+            {dataset.label && (<div className={style.title}>{dataset.label}</div>)}
             <Slider {...settings}>
-                {images.map( ({thumbnail}) => {
-                    return <div onClick={onItemClick}>
-                        <img src={thumbnail} />
-                    </div>;
+                {dataset.data.map(item => {
+                    const temp = Math.random();
+                    return <> {
+                        dataset.type == 'color' ?
+                            (<div className={style.frameColor} style={{backgroundColor:item}} onClick={() => onItemClick({type:'color','data':item})}></div>) :
+                            (<div className={style.frameImage} onClick={() => onItemClick({type:'image','data': `${item.thumbnail}&${temp}`})}>
+                                <img src={`${item.thumbnail}&${temp}`} />
+                            </div>)
+                    }</>
                 })}
             </Slider>
         </div>

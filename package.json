@@ -164,6 +164,7 @@
       "react-app"
     ]
   },
+  "homepage": "https://webhost.mitrmedia.com/ftp/klett/Classroom_Internal/",
   "devDependencies": {
     "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",

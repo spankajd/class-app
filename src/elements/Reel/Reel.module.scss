@@ -18,7 +18,23 @@
     }
 
     img {
-        width: 175px;
+        width: 100%;
     }
-    
+
+    .frameWrapper {
+        width: 100px;
+    }
+
+    .frameImage {
+        position: relative;
+        width: auto !important;
+        // padding-top: 62.5%;
+        margin: 2%;
+    }
+
+    .frameColor {
+        position: relative;
+        padding-top: 62.5%;
+        margin: 2%;
+    }
 }

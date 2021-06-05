@@ -17,10 +17,19 @@ import WebCam from '../../components/WebCam/WebCam';
 import ScreenShot from '../../components/ScreenShot/ScreenShot';
 import Background from '../../components/Background/Background';
 
+import backgroundPath from '../../assets/background';
+
 class MainContainer extends Component {
     state = {
         stageItems: [],
-        screenCapture: ''
+        screenCapture: '',
+
+        background : {
+            // type:'color',
+            // data:'orange'
+            type:'image',
+            data:'https://source.unsplash.com/1600x900/?season'
+        }
     }
 
 
@@ -81,7 +90,7 @@ class MainContainer extends Component {
                 stageItems.push(<WebCam key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
                 break;
             case 'background':
-                stageItems.push(<Background key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Background>)
+                stageItems.push(<Background key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)} dataset={backgroundPath} onChange={e => this.onBackgroundChange(e)}></Background>)
                 break;
         }
 
@@ -111,12 +120,24 @@ class MainContainer extends Component {
         });
     }
 
+    onBackgroundChange = obj => {
+        this.setState({
+            background: obj
+        })
+    }
+
     render() {
-        const { screenCapture } = this.state;
+        const { screenCapture, background } = this.state;
+
+        const inlineStyle = {
+            backgroundImage: background.type == 'image' ? `url("${background.data}")` : '',
+            backgroundColor: background.type == 'color' ? background.data : '',
+        }
+
         return (
             <ScreenCapture onEndCapture={this.handleScreenCapture}>
                 {({ onStartCapture }) => (
-                    <div className={style.mainContainer}>
+                    <div className={style.mainContainer} style={inlineStyle}>
                         {this.renderItems()}
                         <Player onItemClick={e => this.onItemClick(e)} onScreenCapture={onStartCapture}></Player>
                         {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}

@@ -5,11 +5,14 @@
     flex-direction: column;
 
     width: 700px;
-    height: 585px;
+    height: 550px;
     padding: 25px;
+    min-width: 700px;
+    min-height: 550px;
 
     global {
-        .slick-prev:before, .slick-next:before {
+        .slick-prev:before,
+        .slick-next:before {
             color: black;
         }
     }
