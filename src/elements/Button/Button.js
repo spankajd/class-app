@@ -5,13 +5,13 @@ import style from './Button.module.scss';
 /**
  * Primary UI component for user interaction
  */
-const Button = ({ primary, backgroundColor, size, disabled, label, ...props }) => {
+const Button = ({ primary, backgroundColor, size, disabled, label, className, ...props }) => {
   const mode = primary ? style['button--primary'] : style['button--secondary'];
   const disabledClass = disabled ? style['button--disabled'] : '';
   return (
     <button
       type="button"
-      className={[style['button'], style[`button--${size}`], mode, disabledClass].join(' ')}
+      className={[style['button'], style[`button--${size}`], mode, disabledClass, className].join(' ')}
       style={backgroundColor && { backgroundColor }}
       {...props}
     >

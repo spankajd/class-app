@@ -18,17 +18,18 @@ import ScreenShot from '../../components/ScreenShot/ScreenShot';
 import Background from '../../components/Background/Background';
 
 import backgroundPath from '../../assets/background';
+import WhoIsNext from '../../components/WhoIsNext/WhoIsNext';
 
 class MainContainer extends Component {
     state = {
         stageItems: [],
         screenCapture: '',
 
-        background : {
+        background: {
             // type:'color',
             // data:'orange'
-            type:'image',
-            data:'https://source.unsplash.com/1600x900/?season'
+            type: 'image',
+            data: 'https://source.unsplash.com/1600x900/?season'
         }
     }
 
@@ -73,6 +74,9 @@ class MainContainer extends Component {
                 break;
             case 'number':
                 stageItems.push(<Number key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Number>)
+                break;
+            case 'whoisnext':
+                stageItems.push(<WhoIsNext key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WhoIsNext>)
                 break;
             case 'teacher':
                 stageItems.push(<Teacher key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
