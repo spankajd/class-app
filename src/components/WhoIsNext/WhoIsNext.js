@@ -8,15 +8,23 @@ import _ from "lodash";
 import style from './WhoIsNext.module.scss';
 
 
+// Steps 
+// 1. choose format
+// 5 Import override (Yes - 2 / Cancel - 1)
+// 2. confirmation for random output ( Yes - 3 / Reset - 4)
+// 3. next random ( Yes - 3 / Reset - 4)
+// 4. reset ( Yes - 1 / Cancel - 4)
+
 const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
+    const popUpSteps = [2, 3, 4, 5];
     const [inputStage, setInputStage] = useState('');
     const [textAreaVal, setTextAreaVal] = useState('');
     const [numberOfStudent, setNumberOfStudent] = useState('');
-
     const [currentStep, setCurrentStep] = useState(1);
+    const [previousStep, setPreviousStep] = useState(1);
     const [output, setOutput] = useState('');
-
+    const [buffer, setBuffer] = useState('');
     const [list, setList] = useState([]);
 
     const onCloseClick = e => {
@@ -30,7 +38,12 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     const onBrowse = e => {
         var fr = new FileReader();
         fr.onload = function () {
-            setTextAreaVal(fr.result);
+            if (textAreaVal) {
+                setCurrentStep(5);
+                setBuffer(fr.result);
+            } else {
+                setTextAreaVal(fr.result);
+            }
         }
         fr.readAsText(e.target.files[0]);
     }
@@ -40,20 +53,15 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     }
 
     const onNumberInputChange = e => {
-        setNumberOfStudent(e.target.value);
+        let val = e.target.value;
+        const re = /^[0-9\b]+$/;
+        val = re.test(val) || val === '' ? val : numberOfStudent;
+        val = val ? Math.min(Math.max(val, 1), 30) : '';
+        setNumberOfStudent(val);
     }
 
     const onSubmitClick = e => {
-        if (inputStage == 'nickname') {
-            textAreaVal &&
-                console.log('onSubmitClick ', textAreaVal.split("\n"));
-            let arr = textAreaVal.split("\n");
-            _.without(arr, ['', ' '])
-            setList(arr);
-        } else {
-            generateRadomList();
-        }
-
+        generateRadomList();
         setCurrentStep(2);
     }
 
@@ -62,7 +70,26 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
         getRandomFromList();
     }
 
-    const onCancel = e => {
+    const onCancel = (val) => {
+        setCurrentStep(!isNaN(val) ? val : previousStep);
+        setPreviousStep(1);
+    }
+
+    const onOverride = e => {
+        setTextAreaVal(buffer);
+        setCurrentStep(1);
+    }
+
+
+
+    const onReset = val => {
+        setCurrentStep(4);
+        setPreviousStep(val);
+    }
+
+    const onResetConfirm = () => {
+        setNumberOfStudent('');
+        setTextAreaVal('');
         setCurrentStep(1);
     }
 
@@ -73,19 +100,29 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     const getRandomFromList = () => {
         const random = Math.floor(Math.random() * (list.length));
         setOutput(list.splice(random, 1));
+        if(list.length == 0) {
+            generateRadomList();
+        }
         // console.log('list ', list, random);
     }
 
     const generateRadomList = () => {
-        let tempArr = [];
-        for (let i = 0; i < numberOfStudent; i++) {
-            tempArr.push(`${inputStage} ${i + 1}`);
+
+        if (inputStage == 'nickname') {
+            let arr = textAreaVal.split("\n");
+            _.without(arr, ['', ' '])
+            setList(arr);
+        } else {
+            let tempArr = [];
+            for (let i = 0; i < numberOfStudent; i++) {
+                tempArr.push(`${inputStage} ${i + 1}`);
+            }
+            setList(tempArr);
         }
-        setList(tempArr);
     }
 
     return (
-        <Holder className={`${style.whoIsNext}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
@@ -113,7 +150,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                                     {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
                                     <div className={style.submitWrapper}>
                                         <Button label="Submit" onClick={onSubmitClick}></Button>
-                                        <Button label="Submit & Print"></Button>
+                                        <Button disabled label="Submit & Print"></Button>
                                     </div>
                                 </div>
                             </>)}
@@ -122,10 +159,11 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 2 && (
                     <>
-                        <div>Do you want to reset the information on your students you have entered?</div>
-                        <div>
+                        <div>Do you want me to give you a random student who is next now?</div>
+                        <div className={style.actionWrapper}>
                             <Button primary label="Yes" onClick={onSubmitConfirm}></Button>
-                            <Button primary label="Cancel" onClick={onCancel}></Button>
+                            <Button primary label="Cancel" onClick={() => onCancel(1)}></Button>
+                            <Button primary label="Reset students" onClick={() => onReset(2)}></Button>
                         </div>
                     </>
                 )
@@ -134,9 +172,31 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                 currentStep == 3 && output && (
                     <>
                         <div>{output}</div>
-                        <div>
+                        <div className={style.actionWrapper}>
                             <Button primary label="Choose Next" onClick={onChooseNext}></Button>
-                            <Button primary label="Reset Students" onClick={onCancel}></Button>
+                            <Button primary label="Reset Students" onClick={() => onReset(3)}></Button>
+                        </div>
+                    </>
+                )
+            }
+            {
+                currentStep == 4 && (
+                    <>
+                        <div>Do you want to reset the information on your students you have entered?</div>
+                        <div className={style.actionWrapper}>
+                            <Button primary label="Yes" onClick={onResetConfirm}></Button>
+                            <Button primary label="Cancel" onClick={onCancel}></Button>
+                        </div>
+                    </>
+                )
+            }
+            {
+                currentStep == 5 && (
+                    <>
+                        <div>Do you want to override the nicknames you have entered?</div>
+                        <div className={style.actionWrapper}>
+                            <Button primary label="Yes" onClick={onOverride}></Button>
+                            <Button primary label="Cancel" onClick={onCancel}></Button>
                         </div>
                     </>
                 )
