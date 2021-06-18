@@ -29,7 +29,8 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate }) => {
 
     const onChange = (factor) => {
         let {total} = time;
-        total += factor;
+        let newTotal = total+factor;
+        total = Math.max( newTotal, 0) || total ;
         update(total);
         onTimeUpdate && onTimeUpdate(total);
     }

@@ -14,7 +14,7 @@ export const intervalForTimer = Comp => {
 
         setParams(param) {
             const {startSec, stopSec, currentTime, factor} = this.state;
-            console.log(param , this.state);
+            // console.log(param , this.state);
             this.setState({
                 startSec: param.start || startSec,
                 stopSec: param.stop || stopSec,
@@ -29,9 +29,9 @@ export const intervalForTimer = Comp => {
             intervalObj = setInterval( () => {
                 const {startSec, stopSec, currentTime, factor} = _thisRef.state;
                 let newCurrentSec = currentTime + factor;
-                console.log('Interval >>>>' , _thisRef.state, newCurrentSec);
+                // console.log('Interval >>>>' , _thisRef.state, newCurrentSec);
                 
-                if( ( startSec < stopSec && stopSec < newCurrentSec) || ( startSec > stopSec && startSec < newCurrentSec) ) { 
+                if( ( startSec < stopSec && stopSec < newCurrentSec) || ( startSec > stopSec && stopSec > newCurrentSec) ) { 
                     clearInterval(intervalObj);
                     return false;
                 }

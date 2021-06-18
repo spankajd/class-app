@@ -42,6 +42,10 @@
             top: 0;
             left: 0;
             z-index: 1;
+            width: 30px;
+            height: 30px;
+            margin: 0px;
+            padding: 0px;
 
             &:checked {
                 ~ .checkmark {
@@ -88,5 +92,17 @@
 
     .radio {
         margin: 15px;
+    }
+
+    .controlPanel {
+        display: flex;
+        justify-content: space-evenly;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .disabled {
+        pointer-events: none;
+        opacity: .5;
     }
 }

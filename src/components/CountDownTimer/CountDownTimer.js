@@ -34,8 +34,10 @@ const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, 
     },[currentSecond]);
 
     useEffect( () => { 
-        setCurrentMode(editMode);
-    },[editMode]);
+        if(!intervalStarted) {
+            setCurrentMode(editMode);
+        }
+    },[intervalStarted, editMode]);
 
     useEffect( () => { 
         if(intervalStarted) {
