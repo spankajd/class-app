@@ -23,10 +23,21 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
         generateNumber && generateNumber();
     }
 
+    const renderOutput = () => {
+        let arr = [];
+        let str = '' + (output ? output : 0);
+        for (let i = 0; i < str.length; i++) {
+            arr.push(
+                <NumberBox num={str[i]} key={i}></NumberBox>
+            )
+        }
+        return arr;
+    }
+
     return (
         <div className={`${style.randomNumber}`}>
             <div className={`${style.row} ${style.numberSymbol}`}>
-                { numArr.map( i =>  <NumberBox num={i}></NumberBox>)}
+                { numArr.map( i =>  <NumberBox num={i} key={i}></NumberBox>)}
             </div>
             <div className={`${style.row} ${style.numberInput}`}>
                 <label>Number of digits</label>
@@ -35,7 +46,7 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
             <div className={`${style.row} ${style.numberTrigger}`}>
                 <Button label="Generate" primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
             </div>
-            {output && (<div className={`${style.row} ${style.numberOutput}`}>{output}</div>)}
+            <div className={`${style.row} ${style.numberOutput}`}>{renderOutput()}</div>
         </div>
     );
 };
