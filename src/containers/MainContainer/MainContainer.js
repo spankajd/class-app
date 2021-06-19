@@ -19,6 +19,7 @@ import Background from '../../components/Background/Background';
 
 import backgroundPath from '../../assets/background';
 import WhoIsNext from '../../components/WhoIsNext/WhoIsNext';
+import GroupBuilder from '../../components/GroupBuilder/GroupBuilder';
 
 class MainContainer extends Component {
     state = {
@@ -77,6 +78,9 @@ class MainContainer extends Component {
                 break;
             case 'whoisnext':
                 stageItems.push(<WhoIsNext key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WhoIsNext>)
+                break;
+            case 'groupbuilder':
+                stageItems.push(<GroupBuilder key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></GroupBuilder>)
                 break;
             case 'teacher':
                 stageItems.push(<Teacher key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)

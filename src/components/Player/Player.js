@@ -55,6 +55,17 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                 </div>
 
                 <div className={style.menuItemWrapper}>
+                    <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="groupbuilder">
+                        <div className={style.menuItemLabel}>
+                            <span>group builder</span>
+                        </div>
+                        <span className={style.menuItemContent}>
+                            <Dice className={style.icon}></Dice>
+                        </span>
+                    </button>
+                </div>
+
+                <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="timer">
                         <div className={style.menuItemLabel}>
                             <span>timer</span>
