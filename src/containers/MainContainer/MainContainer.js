@@ -20,6 +20,7 @@ import Background from '../../components/Background/Background';
 import backgroundPath from '../../assets/background';
 import WhoIsNext from '../../components/WhoIsNext/WhoIsNext';
 import GroupBuilder from '../../components/GroupBuilder/GroupBuilder';
+import NoiseLevel from '../../components/NoiseLevel/NoiseLevel';
 
 class MainContainer extends Component {
     state = {
@@ -81,6 +82,9 @@ class MainContainer extends Component {
                 break;
             case 'groupbuilder':
                 stageItems.push(<GroupBuilder key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></GroupBuilder>)
+                break;
+            case 'noiselevel':
+                stageItems.push(<NoiseLevel key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></NoiseLevel>)
                 break;
             case 'teacher':
                 stageItems.push(<Teacher key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)

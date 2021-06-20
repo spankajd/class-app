@@ -1,0 +1,68 @@
+.noiseLevel {
+    min-width: 300px;
+    min-height: 400px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 35px 35px 45px 35px;
+
+    .row{
+        margin: 0 0 30px;
+        display: flex;
+    }
+
+    .col {
+        display: inline-block;
+        width: 50%;
+    }
+
+    .inputPanel {
+        flex-direction: column;
+
+        input {
+            width: 35px;
+            height: 25px;
+        }
+    }
+    .progressBar {
+        display: inline-block;
+        width: 80%;
+        height: 30px;
+        background: #6a9fcd;
+    }
+    .counterWrapper {
+        position: relative;
+        display: inline-block;
+        margin: 0 10px;
+        input {
+            width: 35px;
+            height: 80%;
+        }
+        span {
+            position: absolute;
+            top: 135%;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    .sensitivityWrapper {
+        
+        label {
+            position: relative;
+            margin-right: 55px;
+        }
+        span {
+            position: absolute;
+            top: 120%;
+            left : 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    .bottomPanel {
+        margin: 50px 0 0;   
+        justify-content: center;
+    }
+}
