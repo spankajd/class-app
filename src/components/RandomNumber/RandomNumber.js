@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
-import Button from '../../elements/Button/Button';
+import DigitRoll from 'digit-roll-react';
 
-import style from './RandomNumber.module.scss';
+import Button from '../../elements/Button/Button';
 import NumberBox from '../../elements/NumberBox/NumberBox';
 import { generateRandomNumber } from '../HigherOrder/generateRandomNumber';
 
+import style from './RandomNumber.module.scss';
 
 const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
     const numArr = [0,1,2,3,4,5,6,7,8,9];
@@ -25,11 +26,21 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
 
     const renderOutput = () => {
         let arr = [];
-        let str = '' + (output ? output : 0);
+        let str = '';
+        if(output) {
+            str += output;
+        } else {
+            for(let i = 0; i < curVal; i ++)
+                str += '-';
+        }
+        
         for (let i = 0; i < str.length; i++) {
             arr.push(
                 <NumberBox num={str[i]} key={i}></NumberBox>
             )
+        } 
+        if(output) {
+            return (<DigitRoll num={output} length={curVal} className={style.numberBox} divider="" />)
         }
         return arr;
     }

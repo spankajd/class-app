@@ -27,6 +27,7 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
     }, [output]);
 
     const [curVal, setCurrentVal] = useState(1);
+    const [flag, setFlag] = useState(true);
 
     const onInputChange = (e) => {
         const val = e.target.value;
@@ -36,6 +37,7 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
     }
 
     const onGenerateClick = () => {
+        setFlag(!flag);
         generateNumber && generateNumber(true);
     }
 
@@ -45,7 +47,7 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
         for (let i = 1; i <= curVal; i++) {
             arr.push(
                 <div className={style.dice}>
-                    <ol className={`${style['die-list']} ${style['even-roll']}`} dataRoll="1" ref={refArr[i - 1]}>
+                    <ol className={`${style['die-list']} ${style[flag ? 'even-roll' : 'odd-roll']}`} dataRoll="1" ref={refArr[i - 1]}>
                         <li className={style['die-item']} data-side="1">
                             <span className={style['dot']}></span>
                         </li>

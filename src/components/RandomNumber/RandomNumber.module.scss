@@ -24,5 +24,28 @@
         }
     }
 
+    .numberOutput {
+        display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    }
 
+    .numberBox {
+
+        :global {
+            .DigitRoll__Cell {
+                position: relative;
+                border: 1px solid #999;
+                width: 35px !important;
+                height: 35px !important;
+                background: linear-gradient( #FFF, #999);
+                display: inline-block;
+                text-align: center;
+                font-weight: bold;
+                font-size: 26px;
+                line-height: 36px;
+            }
+        } 
+        
+    }
 }
