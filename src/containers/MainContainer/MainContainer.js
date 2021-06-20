@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ScreenCapture } from 'react-screen-capture';
+// import { ScreenCapture } from 'react-screen-capture';
+import html2canvas from 'html2canvas';
+
 import _ from 'lodash';
 
 import style from './MainContainer.module.scss';
@@ -35,6 +37,10 @@ class MainContainer extends Component {
         }
     }
 
+    constructor(props) {
+        super(props);
+        this.mainContainerRef = React.createRef();
+    }
 
     onCompClick = (index) => {
         const { stageItems } = this.state;
@@ -138,6 +144,16 @@ class MainContainer extends Component {
         })
     }
 
+    onStartCapture = () => {
+        const _thisRef = this;
+        // console.log('this.mainContainerRef.current ' , this.mainContainerRef.current)
+        html2canvas(this.mainContainerRef.current).then(function(canvas) {
+            // console.log('>>>>',canvas,canvas.toDataURL('image/jpeg', 0.5));
+            _thisRef.handleScreenCapture(canvas.toDataURL('image/jpeg', 0.5));
+            // document.body.appendChild(canvas);
+        });
+    }
+
     render() {
         const { screenCapture, background } = this.state;
 
@@ -147,14 +163,15 @@ class MainContainer extends Component {
         }
 
         return (
-            <ScreenCapture onEndCapture={this.handleScreenCapture}>
-                {({ onStartCapture }) => (
-                    <div className={style.mainContainer} style={inlineStyle}>
+            // <ScreenCapture onEndCapture={this.handleScreenCapture}>
+                // {({ onStartCapture }) => (
+                    <div className={style.mainContainer} style={inlineStyle} ref={this.mainContainerRef}>
                         {this.renderItems()}
-                        <Player onItemClick={e => this.onItemClick(e)} onScreenCapture={onStartCapture}></Player>
+                        <Player onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture() }></Player>
                         {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}
-                    </div>)}
-            </ScreenCapture>
+                    </div>
+                    // )}
+            // </ScreenCapture>
         )
     }
 }
