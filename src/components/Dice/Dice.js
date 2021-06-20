@@ -46,34 +46,34 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
         const refArr = [dice_1, dice_2, dice_3, dice_4, dice_5];
         for (let i = 1; i <= curVal; i++) {
             arr.push(
-                <div className={style.dice}>
-                    <ol className={`${style['die-list']} ${style[flag ? 'even-roll' : 'odd-roll']}`} dataRoll="1" ref={refArr[i - 1]}>
-                        <li className={style['die-item']} data-side="1">
+                <div key={i+"_dice"} className={style.dice}>
+                    <ol key={i+"_ol"} className={`${style['die-list']} ${style[flag ? 'even-roll' : 'odd-roll']}`} dataroll="1" ref={refArr[i - 1]}>
+                        <li key={i+"_1"} className={style['die-item']} data-side="1">
                             <span className={style['dot']}></span>
                         </li>
-                        <li className={style['die-item']} data-side="2">
-                            <span className={style['dot']}></span>
-                            <span className={style['dot']}></span>
-                        </li>
-                        <li className={style['die-item']} data-side="3">
-                            <span className={style['dot']}></span>
+                        <li key={i+"_2"} className={style['die-item']} data-side="2">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                         </li>
-                        <li className={style['die-item']} data-side="4">
-                            <span className={style['dot']}></span>
+                        <li key={i+"_3"} className={style['die-item']} data-side="3">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                         </li>
-                        <li className={style['die-item']} data-side="5">
-                            <span className={style['dot']}></span>
+                        <li key={i+"_4"} className={style['die-item']} data-side="4">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                         </li>
-                        <li className={style['die-item']} data-side="6">
+                        <li key={i+"_5"} className={style['die-item']} data-side="5">
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                        </li>
+                        <li key={i+"_6"} className={style['die-item']} data-side="6">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>

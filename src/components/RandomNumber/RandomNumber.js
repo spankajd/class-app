@@ -27,9 +27,7 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
     const renderOutput = () => {
         let arr = [];
         let str = '';
-        if(output) {
-            str += output;
-        } else {
+        if(!output) {
             for(let i = 0; i < curVal; i ++)
                 str += '-';
         }
@@ -40,7 +38,7 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
             )
         } 
         if(output) {
-            return (<DigitRoll num={output} length={curVal} className={style.numberBox} divider="" />)
+            return (<DigitRoll num={output} length={curVal} className={style.numberBox} divider="" delay="1"  />)
         }
         return arr;
     }
