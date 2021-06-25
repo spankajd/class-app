@@ -1,11 +1,11 @@
 import React from 'react';
 
-import WhoIsNext from './WhoIsNext';
+import GroupBuilder from './GroupBuilder';
 
 export default {
-  title: 'Components/WhoIsNext',
-  component: WhoIsNext
+  title: 'Components/GroupBuilder',
+  component: GroupBuilder
 };
 
 
-export const main = () => <WhoIsNext></WhoIsNext>;
+export const main = () => <GroupBuilder></GroupBuilder>;
