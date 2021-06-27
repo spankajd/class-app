@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
 
@@ -27,11 +28,26 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     const [output, setOutput] = useState('');
     const [buffer, setBuffer] = useState('');
     const [list, setList] = useState([]);
+    const componentRef = useRef();
 
+
+    useEffect(() => {
+        if (currentStep === 6) {
+            print();
+        }
+    }, [currentStep]);
 
     useEffect(() => {
         setOutput('');
     }, [numberOfGroup]);
+
+    const print = useReactToPrint({
+        content: () => componentRef.current,
+    })
+
+    const handlePrint = () => {
+        setCurrentStep(6);
+    };
 
     const onCloseClick = e => {
         onCompClose(e);
@@ -79,8 +95,13 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
         setCurrentStep(2);
     }
 
+    const onPrintClick = e => {
+        generateRadomList();
+        setCurrentStep(6);
+    }
+
     const onSubmitConfirm = e => {
-        if(output) {
+        if (output) {
             setCurrentStep(3);
         } else {
             getRandomFromList();
@@ -194,7 +215,6 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                                     {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
                                     <div className={style.submitWrapper}>
                                         <Button label="Submit" onClick={onSubmitClick}></Button>
-                                        <Button disabled label="Submit & Print"></Button>
                                     </div>
                                 </div>
                             </>)}
@@ -208,6 +228,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                             <Button primary label="Create Groups" onClick={onSubmitConfirm}></Button>
                             <Button primary label="Cancel" onClick={() => onCancel(1)}></Button>
                             <Button primary label="Reset students" onClick={() => onReset(2)}></Button>
+                            {output && <Button label="Print" onClick={handlePrint}></Button>}
                         </div>
                         <div className={style.outputWrapper}>
                             {output && renderGroup()}
@@ -246,6 +267,68 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                             <Button primary label="Cancel" onClick={onCancel}></Button>
                         </div>
                     </>
+                )
+            }
+            {
+                currentStep == 6 && (
+                    <div ref={componentRef}>
+                        {Object.keys(output).map(key =>
+                            <div key={key} >
+                                <div style={{
+                                    margin: "25px"
+                                }}>{(new Date()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                                <h3 style={{
+                                    margin: "25px"
+                                }}>{key}</h3>
+                                <table className={style.table} style={{
+                                    borderCollapse: "collapse",
+                                    width: "calc(100% - 50px)",
+                                    background: "#e2ebf8",
+                                    color: "#9ea5ad",
+                                    margin: "25px"
+                                }}>
+                                    <tr>
+                                        <th style={{
+                                            paddingTop: "12px",
+                                            paddingBottom: "12px",
+                                            backgroundColor: "#a1bce6",
+                                            color: "#000",
+                                            border: "1px solid #aab0ba",
+                                            padding: "8px",
+                                            textAlign: "center"
+                                        }}>{inputStage}</th>
+                                        <th style={{
+                                            paddingTop: "12px",
+                                            paddingBottom: "12px",
+                                            backgroundColor: "#a1bce6",
+                                            color: "#000",
+                                            border: "1px solid #aab0ba",
+                                            padding: "8px",
+                                            textAlign: "center"
+                                        }}>Real Names</th>
+                                    </tr>
+                                    {
+                                        output[key].map((element, index) => element != '' && element != undefined && element != '\n' ? (
+                                            <tr key={`${key}_${index}`}>
+                                                <td style={{
+                                                    border: "1px solid #aab0ba",
+                                                    padding: "8px",
+                                                    textAlign: "center"
+                                                }}>{element}</td>
+                                                <td style={{
+                                                    border: "1px solid #aab0ba",
+                                                    padding: "8px",
+                                                    textAlign: "center"
+                                                }}></td>
+                                            </tr>
+                                        ) : ''
+                                        )
+                                    }
+                                </table>
+                            </div>
+                        )
+                        }
+                    </div>
                 )
             }
         </Holder>

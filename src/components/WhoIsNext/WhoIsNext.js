@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
 
@@ -26,6 +27,17 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     const [output, setOutput] = useState('');
     const [buffer, setBuffer] = useState('');
     const [list, setList] = useState([]);
+    const componentRef = useRef();
+
+    useEffect(() => {
+        if (currentStep === 6) {
+            handlePrint();
+        }
+    }, [currentStep])
+
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
 
     const onCloseClick = e => {
         onCompClose(e);
@@ -65,6 +77,11 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
         setCurrentStep(2);
     }
 
+    const onPrintClick = e => {
+        generateRadomList();
+        setCurrentStep(6);
+    }
+
     const onSubmitConfirm = e => {
         setCurrentStep(3);
         getRandomFromList();
@@ -100,7 +117,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     const getRandomFromList = () => {
         const random = Math.floor(Math.random() * (list.length));
         setOutput(list.splice(random, 1));
-        if(list.length == 0) {
+        if (list.length == 0) {
             generateRadomList();
         }
         // console.log('list ', list, random);
@@ -122,7 +139,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${currentStep === 6 ? style.printPreview : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
@@ -150,7 +167,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                                     {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
                                     <div className={style.submitWrapper}>
                                         <Button label="Submit" onClick={onSubmitClick}></Button>
-                                        <Button disabled label="Submit & Print"></Button>
+                                        <Button label="Submit & Print" onClick={onPrintClick}></Button>
                                     </div>
                                 </div>
                             </>)}
@@ -199,6 +216,59 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                             <Button primary label="Cancel" onClick={onCancel}></Button>
                         </div>
                     </>
+                )
+            }
+            {
+                currentStep == 6 && (
+                    <div ref={componentRef}>
+                        <div style={{
+                            margin: "25px"
+                        }}>{(new Date()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                        <table className={style.table} style={{
+                            borderCollapse: "collapse",
+                            width: "calc(100% - 50px)",
+                            background: "#e2ebf8",
+                            color: "#9ea5ad",
+                            margin: "25px"
+                        }}>
+                            <tr>
+                                <th style={{
+                                    paddingTop: "12px",
+                                    paddingBottom: "12px",
+                                    backgroundColor: "#a1bce6",
+                                    color: "#000",
+                                    border: "1px solid #aab0ba",
+                                    padding: "8px",
+                                    textAlign: "center"
+                                }}>{inputStage}</th>
+                                <th style={{
+                                    paddingTop: "12px",
+                                    paddingBottom: "12px",
+                                    backgroundColor: "#a1bce6",
+                                    color: "#000",
+                                    border: "1px solid #aab0ba",
+                                    padding: "8px",
+                                    textAlign: "center"
+                                }}>Real Names</th>
+                            </tr>
+                            {
+                                list.map((item, index) =>
+                                    <tr key={index}>
+                                        <td style={{
+                                            border: "1px solid #aab0ba",
+                                            padding: "8px",
+                                            textAlign: "center"
+                                        }}>{item}</td>
+                                        <td style={{
+                                            border: "1px solid #aab0ba",
+                                            padding: "8px",
+                                            textAlign: "center"
+                                        }}></td>
+                                    </tr>
+                                )
+                            }
+                        </table>
+                    </div>
                 )
             }
         </Holder>
