@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dice, DownArrow, SymbolIcon } from '../../elements/Icon/Icon';
+import * as Icon from '../../elements/Icon/Icon';
 
 import style from './Player.module.scss';
 
@@ -27,7 +27,7 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>symbols</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <SymbolIcon className={style.icon}></SymbolIcon>
+                            <Icon.IconSymbol className={style.icon}></Icon.IconSymbol>
                         </span>
                     </button>
                 </div>
@@ -38,10 +38,13 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>teacher</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconTeacher className={style.icon}></Icon.IconTeacher>
                         </span>
                     </button>
                 </div>
+            </div>
+
+            <div className={`${style.menuWrapper} ${isMenuOpen ? style.open : ''}`}>
 
                 <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="whoisnext">
@@ -49,7 +52,7 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>who is next?</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconWhoIsNext className={style.icon}></Icon.IconWhoIsNext>
                         </span>
                     </button>
                 </div>
@@ -60,7 +63,7 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>group builder</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconGroupBuilder className={style.icon}></Icon.IconGroupBuilder>
                         </span>
                     </button>
                 </div>
@@ -71,7 +74,7 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>noise level</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconNoiseLevel className={style.icon}></Icon.IconNoiseLevel>
                         </span>
                     </button>
                 </div>
@@ -82,18 +85,20 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>timer</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconTimer className={style.icon}></Icon.IconTimer>
                         </span>
                     </button>
                 </div>
+            </div>
 
+            <div className={`${style.menuWrapper} ${isMenuOpen ? style.open : ''}`}>
                 <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="text">
                         <div className={style.menuItemLabel}>
                             <span>text</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconEasyText className={style.icon}></Icon.IconEasyText>
                         </span>
                     </button>
                 </div>
@@ -104,18 +109,20 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>number</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconNumber className={style.icon}></Icon.IconNumber>
                         </span>
                     </button>
                 </div>
+            </div>
 
+            <div className={`${style.menuWrapper} ${isMenuOpen ? style.open : ''}`}>
                 <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="webcam">
                         <div className={style.menuItemLabel}>
                             <span>webcan</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconWebCam className={style.icon}></Icon.IconWebCam>
                         </span>
                     </button>
                 </div>
@@ -126,7 +133,7 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>qr code</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconQRCode className={style.icon}></Icon.IconQRCode>
                         </span>
                     </button>
                 </div>
@@ -137,7 +144,7 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>postbox</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconPostbox className={style.icon}></Icon.IconPostbox>
                         </span>
                     </button>
                 </div>
@@ -148,19 +155,18 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                             <span>background</span>
                         </div>
                         <span className={style.menuItemContent}>
-                            <Dice className={style.icon}></Dice>
+                            <Icon.IconBackground className={style.icon}></Icon.IconBackground>
                         </span>
                     </button>
                 </div>
 
             </div>
-
-            <div className={style.menuTriggerWrapper}>
-                <button className={`${style.menuTrigger} ${!isMenuOpen ? style.open : ''}`} onClick={onMenuTriggerClick}>
-                    <DownArrow></DownArrow>
+            <div className={`${style.menuTriggerWrapper} ${!isMenuOpen ? style.open : ''}`}>
+                <button className={`${style.menuTrigger}`} onClick={onMenuTriggerClick}>
+                    <Icon.DownArrow></Icon.DownArrow>
                 </button>
             </div>
-        </div>
+        </div >
     )
 }
 

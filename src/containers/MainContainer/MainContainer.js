@@ -23,6 +23,7 @@ import backgroundPath from '../../assets/background';
 import WhoIsNext from '../../components/WhoIsNext/WhoIsNext';
 import GroupBuilder from '../../components/GroupBuilder/GroupBuilder';
 import NoiseLevel from '../../components/NoiseLevel/NoiseLevel';
+import SideControls from '../../components/SideControls/SideControls';
 
 class MainContainer extends Component {
     state = {
@@ -147,11 +148,17 @@ class MainContainer extends Component {
     onStartCapture = () => {
         const _thisRef = this;
         // console.log('this.mainContainerRef.current ' , this.mainContainerRef.current)
-        html2canvas(this.mainContainerRef.current).then(function(canvas) {
+        html2canvas(this.mainContainerRef.current).then(function (canvas) {
             // console.log('>>>>',canvas,canvas.toDataURL('image/jpeg', 0.5));
             _thisRef.handleScreenCapture(canvas.toDataURL('image/jpeg', 0.5));
             // document.body.appendChild(canvas);
         });
+    }
+
+    onClearAll = () => {
+        this.setState({
+            stageItems: []
+        })
     }
 
     render() {
@@ -163,15 +170,12 @@ class MainContainer extends Component {
         }
 
         return (
-            // <ScreenCapture onEndCapture={this.handleScreenCapture}>
-                // {({ onStartCapture }) => (
-                    <div className={style.mainContainer} style={inlineStyle} ref={this.mainContainerRef}>
-                        {this.renderItems()}
-                        <Player onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture() }></Player>
-                        {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}
-                    </div>
-                    // )}
-            // </ScreenCapture>
+            <div className={style.mainContainer} style={inlineStyle} ref={this.mainContainerRef}>
+                {this.renderItems()}
+                <Player onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture()}></Player>
+                <SideControls clearAll={() => this.onClearAll()}></SideControls>
+                {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}
+            </div>
         )
     }
 }

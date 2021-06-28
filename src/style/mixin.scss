@@ -1,6 +1,24 @@
 
 @mixin buttonReset {
-    background: transparent;
-    border: none;
-    outline: none;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+@mixin flexAlignCenter {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin svgStroke($color) {
+  line, path, circle, polyline {
+    stroke: $color;
   }
+}
+
+@mixin svgFill($color) {
+  line, path, circle, polyline {
+    fill: $color;
+  }
+}

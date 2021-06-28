@@ -1,0 +1,52 @@
+@import '../../style/mixin.scss';
+
+.sideControls {
+    position: fixed;
+    top: 45%;
+    left: 100%;
+    display: inline-block;
+    background: var(--color-primary_background);
+    
+    &.open {
+
+        left: unset;
+        right: 0px;
+
+        .trigger {
+            svg {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+
+    .trigger {
+        @include flexAlignCenter;
+        
+        position: absolute;
+        width: 25px;
+        height: 100%;
+        left: -25px;
+        background: var(--color-handle);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        svg {
+            transform: rotate(90deg);
+        }
+    }
+    .itemWrapper {
+        @include flexAlignCenter;
+    }
+    .item {
+        padding: 12px 6px;
+        width: 54px;
+        height: 40px;
+        svg {
+            width: 100%;
+        }
+
+    }
+    .handle {
+        @include flexAlignCenter;
+        width: 30px;
+    }
+}

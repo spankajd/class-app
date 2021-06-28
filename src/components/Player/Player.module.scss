@@ -10,18 +10,33 @@
 
     .menuTriggerWrapper {
         position: absolute;
-        bottom: -28px;
+        top: -122px;
         left: 50%;
         margin-left: -30px;
         width: 60px;
-        height: 60px;
-        background: rgba(224,232,255,1);
+        height: 40px;
+        background: var(--color-primary_background);
         border-radius: 50%;
-        opacity: 0.5;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        opacity: 0.6;
+        box-shadow: 0px 0px 10px 0px var(--color-boxShadow);
+        transition: .5s all;
 
+        svg {
+            @include svgStroke(var(--color-primary_font));
+            @include svgFill(var(--color-primary_font));
+        }
 
         &:hover {
             opacity: 1;
+        }
+
+        &.open {
+            top: -42px;
+            svg {
+                transform: rotate(180deg);
+            }
         }
     }
 
@@ -31,24 +46,22 @@
         position: relative;
         top: 8px;
         z-index: 1;
-        transition: .5s all;
-        &.open {
-            svg {
-                transform: rotate(180deg);
-            }
-        }
     }
 
     .menuWrapper {
-        display: inline-flex;
-        justify-content: center;
+        @include flexAlignCenter;
         flex-direction: row;
-        background: rgba(224,232,255,0.4);
-        padding: 10px 0;
+        background: var(--color-primary_background);
+        padding: 0;
+        margin: 0 1px;
+        overflow: hidden;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         position: relative;
         top: 0;
         transition: .5s all;
-        
+        box-shadow: 0px 0px 10px 0px var(--color-boxShadow);
+
         &.open {
             top: -78px;
         }
@@ -56,23 +69,40 @@
 
     .menuItemWrapper {
         min-width: 70px;
-        padding: 0 5px;
+        padding: 10px 5px;
         text-align: center;
-        border-left: 1px solid #b0b0b0;
+        border-left: 1px solid var(--color-border);
         &:first-child {
             border-left: none;
+        }
+
+        &:hover {
+            background: var(--color-hover_background);
+            .menuItem {
+                color: var(--color-hover_font);
+            }
+            .icon {
+                transform: scale(1.25);
+                @include svgStroke(var(--color-hover_font));
+            }
+            
         }
     }
 
     .menuItem {
         @include buttonReset;
+        color: var(--color-primary_font);
         cursor: pointer;
+
+        &:hover {
+            color: var(--color-hover_font);
+        }
     }
 
     .icon {
-        margin-top: 5px;
-        height: 32px;
-        width: 32px;
+        height: var(--icon-size);
+        width: var(--icon-size);
         background: transparent;
+        @include svgStroke(var(--color-primary_font));
     }
 }
