@@ -3,11 +3,11 @@ import * as Icon from '../../elements/Icon/Icon';
 
 import style from './Player.module.scss';
 
-const Player = ({ onItemClick, onScreenCapture }) => {
+const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(true);
 
-
+    
     const onMenuTriggerClick = () => {
         setIsMenuOpen(!isMenuOpen);
     }
@@ -139,7 +139,7 @@ const Player = ({ onItemClick, onScreenCapture }) => {
                 </div>
 
                 <div className={style.menuItemWrapper}>
-                    <button type="button" className={style.menuItem} onClick={onScreenCapture} data-id="webcam">
+                    <button type="button" className={style.menuItem} onClick={onScreenCapture} data-id="postbox">
                         <div className={style.menuItemLabel}>
                             <span>postbox</span>
                         </div>

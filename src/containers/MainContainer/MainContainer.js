@@ -25,9 +25,12 @@ import GroupBuilder from '../../components/GroupBuilder/GroupBuilder';
 import NoiseLevel from '../../components/NoiseLevel/NoiseLevel';
 import SideControls from '../../components/SideControls/SideControls';
 
+const limitedItems = ['symbols', 'teacher', 'whoisnext', 'groupbuilder', 'noiselevel', 'number', 'webcam', 'background'];
+
 class MainContainer extends Component {
     state = {
         stageItems: [],
+        openedItems: [],
         screenCapture: '',
 
         background: {
@@ -61,61 +64,69 @@ class MainContainer extends Component {
     }
 
     onCompClose = (index) => {
-        const { stageItems } = this.state;
-        let newStageItems = stageItems.filter(comp => {
-            return comp.key != index
+        const { stageItems, openedItems } = this.state;
+        let newOpenItems,
+            newStageItems = stageItems.filter(comp => {
+            if (comp.key == index) {
+                newOpenItems = openedItems.filter(name => {
+                    return name != comp.props['data-id']
+                });
+            }
+            return comp.key != index;
         });
 
         this.setState({
-            stageItems: newStageItems
-        })
-
+            stageItems: newStageItems,
+            openedItems : newOpenItems
+        });
     }
 
     onItemClick = (menuName) => {
-        // console.log('menuName ', menuName);
-        const { stageItems } = this.state;
+        const { stageItems, openedItems } = this.state;
+        if( limitedItems.includes(menuName) && openedItems.includes(menuName) )
+            return false;
         const key = stageItems.length;
-
+        openedItems.push(menuName);
         switch (menuName) {
             case 'symbols':
-                stageItems.push(<Symbols key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
+                stageItems.push(<Symbols data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
                 break;
             case 'number':
-                stageItems.push(<Number key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Number>)
+                stageItems.push(<Number data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Number>)
                 break;
             case 'whoisnext':
-                stageItems.push(<WhoIsNext key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WhoIsNext>)
+                stageItems.push(<WhoIsNext data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WhoIsNext>)
                 break;
             case 'groupbuilder':
-                stageItems.push(<GroupBuilder key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></GroupBuilder>)
+                stageItems.push(<GroupBuilder data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></GroupBuilder>)
                 break;
             case 'noiselevel':
-                stageItems.push(<NoiseLevel key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></NoiseLevel>)
+                stageItems.push(<NoiseLevel data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></NoiseLevel>)
                 break;
             case 'teacher':
-                stageItems.push(<Teacher key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
+                stageItems.push(<Teacher data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
                 break;
             case 'timer':
-                stageItems.push(<Timer key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Timer>)
+                stageItems.push(<Timer data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Timer>)
                 break;
             case 'text':
-                stageItems.push(<Text key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)
+                stageItems.push(<Text data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)
                 break;
             case 'qrcode':
-                stageItems.push(<QRcode key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
+                stageItems.push(<QRcode data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
                 break;
             case 'webcam':
-                stageItems.push(<WebCam key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
+                stageItems.push(<WebCam data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
                 break;
             case 'background':
-                stageItems.push(<Background key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)} dataset={backgroundPath} onChange={e => this.onBackgroundChange(e)}></Background>)
+                stageItems.push(<Background data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)} dataset={backgroundPath} onChange={e => this.onBackgroundChange(e)}></Background>)
                 break;
         }
 
 
         this.setState({
-            stageItems: stageItems
+            stageItems: stageItems,
+            openedItems: openedItems
         })
     }
 
@@ -157,12 +168,13 @@ class MainContainer extends Component {
 
     onClearAll = () => {
         this.setState({
-            stageItems: []
+            stageItems: [],
+            openedItems: []
         })
     }
 
     render() {
-        const { screenCapture, background } = this.state;
+        const { screenCapture, background, openedItems } = this.state;
 
         const inlineStyle = {
             backgroundImage: background.type == 'image' ? `url("${background.data}")` : '',
@@ -172,7 +184,7 @@ class MainContainer extends Component {
         return (
             <div className={style.mainContainer} style={inlineStyle} ref={this.mainContainerRef}>
                 {this.renderItems()}
-                <Player onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture()}></Player>
+                <Player openedItems={openedItems} onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture()}></Player>
                 <SideControls clearAll={() => this.onClearAll()}></SideControls>
                 {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}
             </div>

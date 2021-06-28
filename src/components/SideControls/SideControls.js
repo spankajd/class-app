@@ -21,7 +21,7 @@ const SideControls = ({ onItemClick, clearAll }) => {
     const initialPos = { x: 0, y: 0 };
 
     return (
-        <Draggable defaultPosition={initialPos} handle={"."+style.handle} axis="y">
+        <Draggable defaultPosition={initialPos} handle={"."+style.handle} axis="y" defaultClassNameDragging={style.dragging}>
             <div className={`${style.sideControls} ${isMenuOpen ? style.open : ''}`}>
                 <div className={style.trigger} onClick={onTriggerClick}>
                     <DownArrow></DownArrow>

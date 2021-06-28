@@ -6,12 +6,12 @@ import style from './Holder.module.scss';
 
 let allowToDrag = false;
 
-const Holder = ({ onCompClick, onClose, className, initialPos = { x: 0, y: 0 }, width = "250", height = "250", minWidth = "250", minHeight = "250", resizable = true, children }) => {
+const Holder = ({ onCompClick, onClose, className, width = "250", height = "250", minWidth = "250", minHeight = "250", resizable = true, children }) => {
 
     // const [currentWidth, setCurrentWidth] = useState(width); 
     // const [currentHeight, setCurrentHeight] = useState(height); 
-
-
+    
+    
     const spanStyles = {
         // width: currentWidth+'px',
         // height: currentHeight+'px',
@@ -38,12 +38,11 @@ const Holder = ({ onCompClick, onClose, className, initialPos = { x: 0, y: 0 }, 
     }
 
     const onCloseClick = (e) => {
-        console.log('onCloseClick ' , e);
         onClose && onClose(e);
     }
 
     return (
-        <Draggable defaultPosition={initialPos} onMouseDown={onMouseDown} onStart={onStart}>
+        <Draggable onMouseDown={onMouseDown} onStart={onStart} positionOffset={{x: '-50%', y: '-50%'}} defaultClassNameDragging={style.dragging}>
             <div style={spanStyles} className={`${style.holder} ${className ? className : ''}`}>
                 {children}
                 <Button className={style.closeButton} label="X" icon="close" onClick={onCloseClick}></Button>
