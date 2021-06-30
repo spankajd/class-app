@@ -231,6 +231,14 @@ export const DownArrow = ({ className, stroke = '#000' }) => {
   );
 }
 
+export const Close = ({className, stroke = '#000'}) => {
+  return (
+    <svg viewBox="0 0 40 40" className={className}>
+      <line x1="12" y1="12" x2="28" y2="28" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" strokeMiterlimit="10"></line>
+      <line x1="28" y1="12" x2="12" y2="28" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" strokeMiterlimit="10"></line>    
+    </svg>
+  );
+}
 
 export const Dice = ({ className }) => {
   return (
