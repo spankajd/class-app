@@ -6,6 +6,7 @@
     --color-blazeOrange: #FF6602;
     --color-grayNurse: #DEE2DA;
     --color-alto: #DEDEDE;
+    --color-gallery: #EAEAEA;
 
     --color-black : rgba(0,0,0,1);
     --color-black_1 : rgba(0,0,0,.1);
@@ -43,6 +44,8 @@
     --color-handle:var(--color-grayNurse);
     --color-close_background: var(--color-alto);
     --icon-size : 54px;
+
+    --color-symbolBorder: 5px solid var(--color-gallery);
 }
 
 body {

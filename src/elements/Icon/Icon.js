@@ -240,6 +240,101 @@ export const Close = ({className, stroke = '#000'}) => {
   );
 }
 
+export const IndividualWork = ({className, stroke = '#000'}) => {
+  return (
+    <svg viewBox="0 0 40.16 31.189" className={className}>
+        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M29.3,29.6v-9.4c0-0.8-0.6-1.4-1.4-1.4c0,0-0.1,0-0.1,0H12.4c-0.8,0-1.5,0.6-1.5,1.4c0,0,0,0,0,0v9.4"/>
+        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M20.1,10.8c-2.3,0-4.2-1.9-4.2-4.2s1.9-4.2,4.2-4.2s4.2,1.9,4.2,4.2c0,0,0,0,0,0C24.2,8.9,22.4,10.8,20.1,10.8
+          z"/>
+        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M26.2,16.8c-0.1-2.3-2.8-4.1-6.1-4.1s-6,1.9-6.1,4.1"/>
+    </svg>
+  );
+}
+
+export const EntireClass = ({className, stroke = '#000'}) => {
+  return (
+    <svg viewBox="0 0 40.16 31.189" className={className}>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M20.1,8.7c-1.9,0-3.5-1.6-3.5-3.5c0-1.9,1.6-3.5,3.5-3.5c1.9,0,3.5,1.6,3.5,3.5c0,0,0,0,0,0
+        C23.6,7.1,22,8.7,20.1,8.7z"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M25.2,14.3c-0.1-2-2.3-3.5-5.1-3.5c-2.7,0-5,1.6-5.1,3.5"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M32.9,23.9c-1.9,0-3.5-1.6-3.5-3.5c0-1.9,1.6-3.5,3.5-3.5s3.5,1.6,3.5,3.5c0,0,0,0,0,0
+        C36.4,22.4,34.8,23.9,32.9,23.9z"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M37.9,29.5c-0.1-2-2.3-3.5-5.1-3.5c-2.7,0-5,1.6-5.1,3.5"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M7.3,23.9c-1.9,0-3.5-1.6-3.5-3.5c0-1.9,1.6-3.5,3.5-3.5c1.9,0,3.5,1.6,3.5,3.5c0,0,0,0,0,0
+        C10.8,22.4,9.2,23.9,7.3,23.9C7.3,23.9,7.3,23.9,7.3,23.9z"/>
+      <path  fill="none" stroke={stroke} strokeMiterlimit="10"  d="M12.4,29.5c-0.1-2-2.3-3.5-5.1-3.5c-2.7,0-5,1.6-5.1,3.5"/>
+      <polyline fill="none" stroke={stroke} strokeWidth="0.75" points="17,21.7 15.5,23.3 17.1,24.9 "/>
+      <line  fill="none" stroke={stroke} strokeMiterlimit="10"  x1="16" y1="23.3" x2="24.8" y2="23.3"/>
+      <polyline fill="none" stroke={stroke} strokeWidth="0.75" points="10.2,7.2 11.7,5.7 10.2,4.1 "/>
+      <polyline  fill="none" stroke={stroke} strokeMiterlimit="10"  points="11.2,5.6 3.7,5.6 3.7,13.2 "/>
+      <polyline fill="none" stroke={stroke} strokeWidth="0.75" points="33.1,12.1 34.7,13.6 36.3,12 "/>
+      <polyline fill="none" stroke={stroke} strokeMiterlimit="10" points="34.7,13.1 34.7,5.5 27.9,5.5 "/>
+    </svg>
+  );
+}
+
+export const PartnerWork = ({className, stroke = '#000'}) => {
+  return (
+    <svg viewBox="0 0 40.16 31.189" className={className}>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M36.8,29.6v-9.4c0-0.8-0.6-1.4-1.4-1.4c0,0-0.1,0-0.1,0H4.9c-0.8,0-1.5,0.6-1.5,1.4c0,0,0,0,0,0v9.4"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M27.4,10.8c-2.3,0-4.2-1.9-4.2-4.2s1.9-4.2,4.2-4.2s4.2,1.9,4.2,4.2c0,0,0,0,0,0C31.5,8.9,29.7,10.8,27.4,10.8z
+        "/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M33.5,16.8c-0.1-2.3-2.8-4.1-6.1-4.1s-6,1.9-6.1,4.1"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M12.8,10.8c-2.3,0-4.2-1.9-4.2-4.2s1.9-4.2,4.2-4.2S17,4.3,17,6.6c0,0,0,0,0,0C17,8.9,15.1,10.8,12.8,10.8z"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M18.9,16.8c-0.1-2.3-2.8-4.1-6.1-4.1s-6,1.9-6.1,4.1"/>
+    </svg>
+  );
+}
+
+export const TeacherUpFront = ({className, stroke = '#000'}) => {
+  return (
+    <svg viewBox="0 0 40.16 31.189" className={className}>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M38.6,27.5V15c0-1.8-1.5-3.3-3.3-3.3c-1.8,0-3.3,1.5-3.3,3.3v7.4"/>
+      <polyline fill="none" stroke={stroke} strokeMiterlimit="10" points="24.8,19.6 29,19.6 29,4.1 1.6,4.1 1.6,19.6 3.7,19.6 "/>
+      <line fill="none" stroke={stroke} strokeMiterlimit="10" x1="1.5" y1="22.7" x2="25.3" y2="22.7"/>
+      <circle fill="none" stroke={stroke} strokeMiterlimit="10" cx="35.3" cy="6.7" r="3.1"/>
+      <circle fill="none" stroke={stroke} strokeMiterlimit="10" cx="9.2" cy="13.8" r="2.7"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M13.2,20.9c-0.1-1.5-1.8-2.7-4-2.7s-3.9,1.2-4,2.7"/>
+      <circle fill="none" stroke={stroke} strokeMiterlimit="10" cx="19" cy="13.8" r="2.7"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M23,20.9c-0.1-1.5-1.8-2.7-4-2.7s-3.9,1.2-4,2.7"/>
+    </svg>
+  );
+}
+
+export const Silence = ({className, stroke = '#000'}) => {
+  return (
+    <svg viewBox="0 0 40.16 31.189" className={className}>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M9.5,4.9L10,5.2l0.1,0.1c0.8,0.4,1.6,0.9,2.3,1.4l0.3,0.3c0.3,0.2,0.6,0.4,1,0.8l0,0c1.2,0.8,2.6,1.3,4.1,1.5
+        M29.6,4.8l-0.5-0.2c-0.9-0.4-1.7-0.8-2.6-1.3c-1.5-1.2-4-3.2-7-1.5c-3-1.7-5.5,0.3-7,1.5c-0.8,0.5-1.7,1-2.6,1.3L9.5,4.7 M21.2,9.2
+        c1.5-0.2,2.8-0.7,4.1-1.5l0,0c0.5-0.3,0.7-0.5,1-0.8l0.3-0.3c0.7-0.5,1.5-1,2.3-1.4l0.1-0.1l0.5-0.3"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M30.7,24.9l-0.2-10c0-0.8-0.7-1.5-1.5-1.5c0,0,0,0,0,0h-0.2c-0.6,0-1.1,0.3-1.3,0.8c0,0,0,2.1,0,2.1v-2.6
+        c0-0.8-0.7-1.5-1.5-1.5c0,0,0,0,0,0h-0.2c-0.6,0-1.1,0.3-1.3,0.9v2.5v-3.1c0-0.8-0.7-1.5-1.6-1.5h-0.2c-0.6,0-1.1,0.3-1.3,0.8
+        c0,0,0,2.4,0,2.4l-0.1-9.9V3.8c0-0.8-0.7-1.5-1.6-1.5c0,0,0,0-0.1,0h-0.2c-0.8,0-1.5,0.7-1.5,1.6l0,0L18,18.7
+        c-0.3-0.1-0.6-1.4-1.2-1.9c-0.3-0.3-0.7-0.6-1.2-0.7c-0.6-0.2-1.2-0.1-1.6,0.4c-0.4,0.5-0.4,1.1-0.1,1.7l3.4,8
+        c0.1,0.3,0.2,0.6,0.3,0.9c0.4,1.3,1.3,2.5,2.4,3.2"/>
+      <line fill="none" stroke={stroke} strokeMiterlimit="10" x1="29.3" y1="5" x2="21.6" y2="5"/>
+      <line fill="none" stroke={stroke} strokeMiterlimit="10" x1="17.4" y1="5" x2="10.6" y2="5"/>
+    </svg>
+  );
+}
+
+export const WorkInGroup = ({className, stroke = '#000'}) => {
+  return (
+    <svg viewBox="0 0 40.16 31.189" className={className}>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M25.1,16.7c-1.5-1.1-3.2-1.6-5-1.5c-1.8-0.1-3.6,0.5-5.1,1.6"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M20.1,13.2c-2.3,0-4.2-1.9-4.2-4.2c0-2.3,1.9-4.2,4.2-4.2c2.3,0,4.2,1.9,4.2,4.2c0,0,0,0,0,0
+        C24.3,11.4,22.4,13.2,20.1,13.2z"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M30.2,9.8c-2.3,0-4.2-1.9-4.2-4.2c0-2.3,1.9-4.2,4.2-4.2c2.3,0,4.2,1.9,4.2,4.2C34.4,7.9,32.5,9.8,30.2,9.8
+        C30.2,9.8,30.2,9.8,30.2,9.8z"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M36.3,15.9c-0.1-2.3-2.8-4.1-6.1-4.1s-6,1.9-6.1,4.1"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M9.9,9.8c-2.3,0-4.2-1.9-4.2-4.2c0-2.3,1.9-4.2,4.2-4.2c2.3,0,4.2,1.9,4.2,4.2C14.1,7.9,12.2,9.8,9.9,9.8
+        C9.9,9.8,9.9,9.8,9.9,9.8z"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M16,15.9c-0.1-2.3-2.8-4.1-6.1-4.1s-6,1.9-6.1,4.1"/>
+      <path fill="none" stroke={stroke} strokeMiterlimit="10" d="M39,29.8v-9.4c0-0.8-0.6-1.4-1.4-1.4c0,0-0.1,0-0.1,0H2.7c-0.8,0-1.5,0.6-1.5,1.4c0,0,0,0,0,0v9.4"/>
+    </svg>
+  );
+}
+
 export const Dice = ({ className }) => {
   return (
 

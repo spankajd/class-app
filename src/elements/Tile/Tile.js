@@ -1,24 +1,24 @@
 
 import React, { useState } from 'react';
-import { Dice } from '../Icon/Icon';
 
 import style from './Tile.module.scss';
 
 
-const Tile = ({ icon, label, isActive=false }) => {
+const Tile = ({ disabled, label, isActive = false, id, children, onClick }) => {
 
     const [isActiveFlag, setIsActiveFlag] = useState(isActive);
-
+    
     const onButtonClick = () => {
         setIsActiveFlag(!isActiveFlag);
+        onClick(id);
     }
-
+    
     return (
-        <div className={`${style.tile} ${isActiveFlag ? style.active : ''}`} onClick={onButtonClick}>
+        <div className={`${style.tile} ${isActiveFlag ? style.active : ''} ${disabled ? style.disabled : ''}`} onClick={onButtonClick}>
             <button className={style.tileButton}>
-                <Dice></Dice>
-                <div className={style.tileLabel}>{label}</div>
+                {children}
             </button>
+            <div className={style.tileLabel}>{label}</div>
         </div>
     );
 };
