@@ -7,7 +7,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(true);
 
-    
+
     const onMenuTriggerClick = () => {
         setIsMenuOpen(!isMenuOpen);
     }
@@ -162,9 +162,11 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
 
             </div>
             <div className={`${style.menuTriggerWrapper} ${!isMenuOpen ? style.open : ''}`}>
-                <button className={`${style.menuTrigger}`} onClick={onMenuTriggerClick}>
-                    <Icon.DownArrow></Icon.DownArrow>
-                </button>
+                <div className={`${style.menuTriggerContainer}`}>
+                    <button className={`${style.menuTrigger}`} onClick={onMenuTriggerClick}>
+                        <Icon.DownArrow></Icon.DownArrow>
+                    </button>
+                </div>
             </div>
         </div >
     )
