@@ -3,10 +3,19 @@
 :root{
     --color-blumine: #15617C;
     --color-silverChalice: #B0B0B0;
+    --color-gray: #868686;
+    --color-mineShaft :#333333;
     --color-blazeOrange: #FF6602;
     --color-grayNurse: #DEE2DA;
     --color-alto: #DEDEDE;
     --color-gallery: #EAEAEA;
+    --color-burntUmber: #91342A;
+    --color-bourbon: #C3791D;
+    --color-greenLea: #387309;
+    --color-scarlet: #FF3314;
+    --color-mySin: #FDB62D;
+    --color-chartreuse: #7BFF14;
+    
 
     --color-black : rgba(0,0,0,1);
     --color-black_1 : rgba(0,0,0,.1);
@@ -46,6 +55,14 @@
     --icon-size : 54px;
 
     --color-symbolBorder: 5px solid var(--color-gallery);
+    
+    --color-redSignal: var(--color-burntUmber);
+    --color-yellowSignal: var(--color-bourbon);
+    --color-greenSignal: var(--color-greenLea);
+    --color-redSignalActive: var(--color-scarlet);
+    --color-yellowSignalActive: var(--color-mySin);
+    --color-greenSignalActive: var(--color-chartreuse);
+
 }
 
 body {

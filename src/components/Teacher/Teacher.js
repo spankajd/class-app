@@ -51,9 +51,9 @@ const Teacher = ({ onCompClick, onCompClose }) => {
             </div>
             <div className={`${style.col}  ${style.labelWrapper}`}>
                 <div className={style.labelContainer}>
-                    <div>Not available</div>
-                    <div>If very urgent</div>
-                    <div>Available</div>
+                    <div className={isRedActive && style.redActive}>Not available</div>
+                    <div className={isYellowActive && style.yellowActive}>If very urgent</div>
+                    <div className={isGreenActive && style.greenActive}>Available</div>
                 </div>
             </div>
         </Holder>
