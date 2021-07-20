@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
+import RadioButton from '../../elements/RadioButton/RadioButton';
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
 import StandardTimer from '../StandardTimer/StandardTimer';
 
@@ -52,27 +53,21 @@ const Timer = ({ onCompClick, onCompClose }) => {
         countDownRef.current.state.currentTime = countDownRef.current.state.startSec;
     }
 
-    const onRadioChange = (e) => {
-        setSelectedTimer(e.target.value);
+    const onRadioChange = (id) => {
+        setSelectedTimer(id);
     }
 
     return (
         <Holder className={`${style.timer}`} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.row}>
                 <label className={style.label} for="standard">Standard timer</label>
-                <div className={`${style.radioWrapper} ${intervalStarted || pauseFlag ? style.disabled : ''}`}>
-                    <input type="radio" name="timer" id="standard" value="standard" className={style.radio} onChange={onRadioChange} disabled={intervalStarted}></input>
-                    <span className={style.checkmark}></span>
-                </div>
+                <RadioButton name="timer" id="standard" value="standard" disabled={intervalStarted || pauseFlag} onChange={onRadioChange}></RadioButton>
                 {/* <StandardTimer ref={standardTimer} ></StandardTimer> */}
                 <StandardTimer ref={standardRef} intervalStarted={intervalStarted && selectedTimer === 'standard'}></StandardTimer>
             </div>
             <div className={style.row}>
                 <label className={style.label} for="countdown">Countdown timer</label>
-                <div className={`${style.radioWrapper} ${intervalStarted || pauseFlag ? style.disabled : ''}`}>
-                    <input type="radio" name="timer" id="countdown" value="countdown" className={style.radio} onChange={onRadioChange} disabled={intervalStarted}></input>
-                    <span className={style.checkmark}></span>
-                </div>
+                <RadioButton name="timer" id="countdown" value="countdown" disabled={intervalStarted || pauseFlag} onChange={onRadioChange}></RadioButton>
                 {/* <CountDownTimer ref={countDownTimer} ></CountDownTimer> */}
                 <CountDownTimer ref={countDownRef} editMode={selectedTimer === 'countdown'} intervalStarted={intervalStarted && selectedTimer === 'countdown'} ></CountDownTimer>
             </div>

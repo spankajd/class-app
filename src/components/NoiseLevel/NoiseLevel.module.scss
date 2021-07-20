@@ -1,57 +1,88 @@
 .noiseLevel {
-    min-width: 300px;
-    min-height: 400px;
+    min-width: 296px;
+    min-height: 324px;
     
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 35px 35px 45px 35px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px 35px;
+    gap: 35px;
 
     .row{
-        margin: 0 0 30px;
         display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
     }
 
     .col {
-        display: inline-block;
-        width: 50%;
-    }
-
-    .inputPanel {
+        display: flex;
         flex-direction: column;
+    }
 
-        input {
-            width: 35px;
-            height: 25px;
-        }
+    .leftPanel {
+        flex-grow: 2;
     }
-    .progressBar {
-        display: inline-block;
-        width: 80%;
-        height: 30px;
-        background: #6a9fcd;
+
+    input[type="text"] {
+        width: 45px;
+        height: 32px;
+        border-radius: 5px;
+        border-width: 1px;
+        text-align: center;
     }
-    .counterWrapper {
-        position: relative;
-        display: inline-block;
-        margin: 0 10px;
-        input {
-            width: 35px;
-            height: 80%;
+    .progressWrapper {
+
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-end;
+        
+        .progressBar {
+            display: inline-block;
+            width: 45px;
+            height: 76%;
+            border: 1px solid var(--color-border);
+            border-radius: 5px;
+            position: relative;
+            .bar {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+            }
+            .primaryBar {
+                height: 20%;
+                background: var(--color-limeade);
+            }
+            .secondaryBar {
+                height: 80%;
+                background: var(--color-teaGreen);
+            }
         }
-        span {
-            position: absolute;
-            top: 135%;
-            left: 50%;
-            transform: translate(-50%, 0);
+        .counterWrapper {
+            position: relative;
+            margin-top: 18px;
+            display: inline-flex;
+            flex-direction: column;
+
+            span {
+                display: inline-block;
+                margin-top: 8px;
+            }
         }
+
     }
 
     .sensitivityWrapper {
+        padding: 5px;
         
+        .optionWrapper {
+            margin-top: 10px;
+        }
+
         label {
             position: relative;
-            margin-right: 55px;
+            // margin-right: 55px;
         }
         span {
             position: absolute;
@@ -61,8 +92,15 @@
         }
     }
 
+    .warningInputWrapper {
+        margin: 45px 0 25px;
+        input {
+            width: 100%;
+        }
+    }
+
     .bottomPanel {
-        margin: 50px 0 0;   
         justify-content: center;
+        padding-bottom: 0px;
     }
 }
