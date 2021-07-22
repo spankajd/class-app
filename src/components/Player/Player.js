@@ -16,6 +16,13 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
         onItemClick(e.currentTarget.dataset.id);
     }
 
+    const onPostBoxClick = e => {
+        setIsMenuOpen(false);
+        setTimeout(() => {
+            onScreenCapture && onScreenCapture();
+        },400);
+    }
+
     return (
         <div className={style.menu}>
 
@@ -139,7 +146,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                 </div>
 
                 <div className={style.menuItemWrapper}>
-                    <button type="button" className={style.menuItem} onClick={onScreenCapture} data-id="postbox">
+                    <button type="button" className={style.menuItem} onClick={onPostBoxClick} data-id="postbox">
                         <div className={style.menuItemLabel}>
                             <span>postbox</span>
                         </div>

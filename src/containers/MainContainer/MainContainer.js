@@ -161,7 +161,7 @@ class MainContainer extends Component {
     onStartCapture = () => {
         const _thisRef = this;
         // console.log('this.mainContainerRef.current ' , this.mainContainerRef.current)
-        html2canvas(this.mainContainerRef.current).then(function (canvas) {
+        html2canvas(this.mainContainerRef.current, {useCORS : true}).then(function (canvas) {
             // console.log('>>>>',canvas,canvas.toDataURL('image/jpeg', 0.5));
             _thisRef.handleScreenCapture(canvas.toDataURL('image/jpeg', 0.5));
             // document.body.appendChild(canvas);
