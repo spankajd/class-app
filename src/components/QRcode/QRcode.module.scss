@@ -1,28 +1,43 @@
 .qrcode {
     display: inline-flex;
     flex-direction: column;
-    min-width: 405px;
+    min-width: 335px;
     min-height: 385px;
     padding: 25px;
     
-    width: 405px;
-    height: 385px;
+    width: 335px;
 
     align-items: center;
+    .title {
+        font-weight: bold;
+        text-align: left;
+        width: 100%;
+    }
 
-    .title,
+    .subtitle,
     .input {
-        margin: 15px 0;
+        margin: 5px 0;
+        padding: 8px 5px;
         width: 100%;
     }
 
     input {
         font-size: 16px;
     }
-    
-    svg {
-        width: 100%;
-        height: 100%;
-        margin: 15px 0;
+    .qrContainer {
+        margin: 10px 0;
+        width: 65%;
+        // background: url('../../assets/images/capture.svg');
+        // background-position: center;
+        // background-size: 100%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            width: 75%;
+            height: 75%;
+            margin: 15px auto;
+        }
     }
+
 }

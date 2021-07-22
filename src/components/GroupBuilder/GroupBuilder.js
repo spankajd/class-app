@@ -42,7 +42,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }, [numberOfGroup]);
 
     const print = useReactToPrint({
-        content: () => componentRef.current,
+        content: () => componentRef.current
     })
 
     const handlePrint = () => {
