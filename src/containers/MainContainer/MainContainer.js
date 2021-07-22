@@ -87,6 +87,8 @@ class MainContainer extends Component {
             return false;
         const key = stageItems.length;
         openedItems.push(menuName);
+        let count = 0;
+        openedItems.forEach( i => i === menuName ? count++ : null);
         switch (menuName) {
             case 'symbols':
                 stageItems.push(<Symbols data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
@@ -107,13 +109,13 @@ class MainContainer extends Component {
                 stageItems.push(<Teacher data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
                 break;
             case 'timer':
-                stageItems.push(<Timer data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Timer>)
+                stageItems.push(<Timer count={count} data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Timer>)
                 break;
             case 'text':
-                stageItems.push(<Text data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)
+                stageItems.push(<Text count={count} data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)
                 break;
             case 'qrcode':
-                stageItems.push(<QRcode data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
+                stageItems.push(<QRcode count={count} data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
                 break;
             case 'webcam':
                 stageItems.push(<WebCam data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)

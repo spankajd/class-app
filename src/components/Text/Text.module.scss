@@ -1,23 +1,34 @@
 .text {
-    padding: 35px;
-    width: 500px;
-    height: 400px;
-
+    width: 400px;
     .wrapper {
         width: 100%;
         height: 100%;
-
         display: inline-flex;
         flex-direction: column;
     }
-
+    .title {
+        display: inline-block;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        background: var(--color-concrete);
+        padding: 15px 25px 10px;
+    }
     .toolbar {
-        background: transparent;
+        background: var(--color-concrete);
+        padding: 15px 25px;
+        display: none;
     }
 
     .editor {
-        height: auto;
-        background: #FAFAFA;
+        background: var(--color-white);
         flex-grow: 2;
+        margin: 0 25px 25px;
+        height: 150px;
+    }
+
+    &.focused {
+        .toolbar {
+            display: flex;
+        }
     }
 }

@@ -30,7 +30,10 @@
             border-radius: 22px;
             z-index: -1;
         }
-        
+
+        .closeButton {
+            display: inline-block;
+        }
     }
 
     &:before{
@@ -51,8 +54,9 @@
     }
 
     .closeButton {
-        @include buttonReset;
         display: inline-block;
+        @include buttonReset;
+        display: none;
         position: absolute;
         right: 6px;
         top: 6px;

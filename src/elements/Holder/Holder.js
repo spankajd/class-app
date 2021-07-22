@@ -7,7 +7,7 @@ import { Close } from '../Icon/Icon';
 
 let allowToDrag = false;
 
-const Holder = ({ onCompClick, onClose, className, width = "250", height = "250", minWidth = "250", minHeight = "250", resizable = true, children }) => {
+const Holder = ({ onCompClick, onClose, className, activeClassName, width = "250", height = "250", minWidth = "250", minHeight = "250", resizable = true, children }) => {
 
     const [focused, setFocused] = useState(true);
     const holderNodeRef = useRef();
@@ -51,7 +51,7 @@ const Holder = ({ onCompClick, onClose, className, width = "250", height = "250"
 
     return (
         <Draggable onMouseDown={onMouseDown} onStart={onStart} positionOffset={{ x: '-50%', y: '-50%' }} defaultClassNameDragging={style.dragging}>
-            <div style={spanStyles} className={`${style.holder} ${className ? className : ''} ${focused ? style.active : ''}`} ref={holderNodeRef}>
+            <div style={spanStyles} className={`${style.holder} ${className ? className : ''} ${focused ? style.active : ''} ${focused && activeClassName ? activeClassName : ''}`} ref={holderNodeRef}>
                 {children}
                 <button className={style.closeButton} onClick={onCloseClick}>
                     <Close></Close>

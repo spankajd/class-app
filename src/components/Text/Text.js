@@ -9,7 +9,7 @@ import style from './Text.module.scss';
 
 
 
-const Text = ({ onCompClick, onCompClose }) => {
+const Text = ({ count=1, onCompClick, onCompClose }) => {
 
     // const [editorState, setEditorState ] = useState('');
 
@@ -22,7 +22,8 @@ const Text = ({ onCompClick, onCompClose }) => {
     // }
     //https://jpuri.github.io/react-draft-wysiwyg/#/docs
     return (
-        <Holder className={style.text} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={style.text} onCompClick={onCompClick} onClose={onCloseClick} activeClassName={style.focused}>
+            <div className={style.title}>Text {count}</div>
             <Editor
                 toolbar={{options:[ 'fontFamily', 'fontSize', 'inline', 'colorPicker', 'remove', 'history'],
                 inline:{options: ['bold', 'italic', 'underline']} 
@@ -30,6 +31,7 @@ const Text = ({ onCompClick, onCompClose }) => {
                 wrapperClassName={style.wrapper}
                 toolbarClassName={style.toolbar}
                 editorClassName={style.editor}
+                placeholder="Type here"
             />
         </Holder>
     );
