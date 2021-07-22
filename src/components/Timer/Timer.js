@@ -7,24 +7,25 @@ import CountDownTimer from '../CountDownTimer/CountDownTimer';
 import StandardTimer from '../StandardTimer/StandardTimer';
 
 import style from './Timer.module.scss';
+import ToggleButton from '../../elements/ToggleButton/ToggleButton';
 
 
-const Timer = ({ onCompClick, onCompClose }) => {
+const Timer = ({ count = 1, onCompClick, onCompClose }) => {
 
     const [intervalStarted, setIntervalStarted] = useState(false);
     const [resetFlag, setResetFlag] = useState(false);
     const [pauseFlag, setPauseFlag] = useState(false);
-    const [selectedTimer, setSelectedTimer] = useState('');
+    const [selectedTimer, setSelectedTimer] = useState(false);
     const standardRef = useRef();
     const countDownRef = useRef();
 
-    useEffect(() => {
-        if (!intervalStarted && !resetFlag) {
-            standardRef.current.state.currentTime = 0;
-            countDownRef.current.state.currentTime = countDownRef.current.state.startSec;
-            countDownRef.current.state.editMode = true;
-        }
-    }, [intervalStarted, resetFlag]);
+    // useEffect(() => {
+    //     if (!intervalStarted && !resetFlag) {
+    //         standardRef.current.state.currentTime = 0;
+    //         countDownRef.current.state.currentTime = countDownRef.current.state.startSec;
+    //         countDownRef.current.state.editMode = true;
+    //     }
+    // }, [intervalStarted, resetFlag]);
 
     const onCloseClick = e => {
         onCompClose(e);
@@ -49,27 +50,30 @@ const Timer = ({ onCompClick, onCompClose }) => {
         setIntervalStarted(false);
         setResetFlag(false);
         setPauseFlag(false);
-        standardRef.current.state.currentTime = 0;
-        countDownRef.current.state.currentTime = countDownRef.current.state.startSec;
+        if(standardRef && standardRef.current) standardRef.current.state.currentTime = 0;
+        if(countDownRef && countDownRef.current) countDownRef.current.state.currentTime = countDownRef.current.state.startSec;
     }
 
-    const onRadioChange = (id) => {
-        setSelectedTimer(id);
+    const onRadioChange = flag => {
+        setSelectedTimer(flag);
     }
 
     return (
         <Holder className={`${style.timer}`} onCompClick={onCompClick} onClose={onCloseClick}>
-            <div className={style.row}>
-                <label className={style.label} for="standard">Standard timer</label>
-                <RadioButton name="timer" id="standard" value="standard" disabled={intervalStarted || pauseFlag} onChange={onRadioChange}></RadioButton>
-                {/* <StandardTimer ref={standardTimer} ></StandardTimer> */}
-                <StandardTimer ref={standardRef} intervalStarted={intervalStarted && selectedTimer === 'standard'}></StandardTimer>
+            <div className={style.titleRow}>
+                Timer {count}
+            </div>
+            <div className={style.labelRow}>
+                <label className={!selectedTimer ? style.active : ''}>Standard timer</label>
+                <ToggleButton onChange={onRadioChange} />
+                <label className={selectedTimer ? style.active : ''}>Countdown timer</label>
             </div>
             <div className={style.row}>
-                <label className={style.label} for="countdown">Countdown timer</label>
-                <RadioButton name="timer" id="countdown" value="countdown" disabled={intervalStarted || pauseFlag} onChange={onRadioChange}></RadioButton>
-                {/* <CountDownTimer ref={countDownTimer} ></CountDownTimer> */}
-                <CountDownTimer ref={countDownRef} editMode={selectedTimer === 'countdown'} intervalStarted={intervalStarted && selectedTimer === 'countdown'} ></CountDownTimer>
+                {selectedTimer ?
+                    <CountDownTimer ref={countDownRef} editMode={true} intervalStarted={intervalStarted} ></CountDownTimer>
+                    :
+                    <StandardTimer ref={standardRef} intervalStarted={intervalStarted}></StandardTimer>
+                }
             </div>
             <div className={style.controlPanel}>
                 {intervalStarted || resetFlag ? (<>
