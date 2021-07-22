@@ -1,6 +1,5 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { BigDice } from '../../elements/Icon/Icon';
 import Button from '../../elements/Button/Button';
 
 import style from './Dice.module.scss';
@@ -90,19 +89,19 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
 
     return (
         <div className={`${style.diceWrapper}`}>
-            <div className={`${style.row} ${style.diceImg}`}>
-                <BigDice></BigDice>
-            </div>
-            <div className={`${style.row} ${style.diceInput}`}>
-                <label>Number of dice</label>
-                <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
-            </div>
-            <div className={`${style.row} ${style.diceTrigger}`}>
-                <Button label="Roll" primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
-            </div>
             {(<div className={`${style.row} ${style.diceOutput}`}>
                 {renderDice()}
             </div>)}
+            <div className={`${style.row}`}>
+            <div className={`${style.col} ${style.diceInput}`}>
+                <label>Number of dice (Max. 5)</label>
+                <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
+            </div>
+            <div className={`${style.col} ${style.diceTrigger}`}>
+                <Button label="Roll" primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
+            </div>
+            </div>
+            
         </div>
     );
 };
