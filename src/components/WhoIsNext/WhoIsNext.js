@@ -7,6 +7,7 @@ import Holder from '../../elements/Holder/Holder';
 import _ from "lodash";
 
 import style from './WhoIsNext.module.scss';
+import RadioButton from '../../elements/RadioButton/RadioButton';
 
 
 // Steps 
@@ -31,6 +32,9 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
     useEffect(() => {
         if (currentStep === 6) {
+            setTimeout( () => {
+                setCurrentStep(previousStep);
+            }, 500);
             handlePrint();
         }
     }, [currentStep])
@@ -43,8 +47,8 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
         onCompClose(e);
     }
 
-    const onSelectStage = e => {
-        setInputStage(e.target.dataset.id);
+    const onSelectStage = id => {
+        setInputStage(id);
     }
 
     const onBrowse = e => {
@@ -72,12 +76,17 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
         setNumberOfStudent(val);
     }
 
+    const onClearClick = e => {
+
+    }
+
     const onSubmitClick = e => {
         generateRadomList();
         setCurrentStep(2);
     }
 
     const onPrintClick = e => {
+        setPreviousStep(e);
         generateRadomList();
         setCurrentStep(6);
     }
@@ -143,32 +152,42 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
-                        <span className={style.step}>1</span>
+                        <div className={style.step}>1</div>
                         <div className={style.title}>Choose format</div>
                         <div className={style.controls}>
-                            <Button primary={true} onClick={onSelectStage} className={`${style.stageButton} ${!inputStage || inputStage == 'nickname' ? style.selected : ''}`} label="Nickname" data-id="nickname"></Button>
-                            <Button primary={true} onClick={onSelectStage} className={`${style.stageButton} ${!inputStage || inputStage == 'number' ? style.selected : ''}`} label="Number" data-id="number"></Button>
-                            <Button primary={true} onClick={onSelectStage} className={`${style.stageButton} ${!inputStage || inputStage == 'symbols' ? style.selected : ''}`} label="Symbols" data-id="symbols"></Button>
+                            <label>
+                                <RadioButton name="step" id="nickname" value="nickname" onChange={onSelectStage} checked={inputStage == 'nickname'}></RadioButton>
+                                <span className={style.label}>Nickname</span>
+                            </label>
+
+                            <label>
+                                <RadioButton name="step" id="number" value="number" onChange={onSelectStage} checked={inputStage == 'number'}></RadioButton>
+                                <span className={style.label}>Numbers</span>
+                            </label>
+
+                            <label>
+                                <RadioButton name="step" id="symbols" value="symbols" onChange={onSelectStage} checked={inputStage == 'symbols'}></RadioButton>
+                                <span className={style.label}>Symbols</span>
+                            </label>
                         </div>
                     </div>
                     <div className={`${style.panel} ${style.inputPanel}`}>
                         {inputStage &&
                             (<>
-                                <span className={style.step}>2</span>
+                                <div className={style.step}>2</div>
                                 <div className={style.title}>{inputStage == 'nickname' ? 'Enter or import data' : 'Enter data'}</div>
 
                                 {inputStage == 'nickname' ? (
                                     <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
                                     (<>
-                                        <label> How many students in your class? </label>
+                                        <label className={style.question}> How many students in your class? </label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
                                 <div className={style.buttomWrapper}>
                                     {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    <div className={style.submitWrapper}>
-                                        <Button label="Submit" onClick={onSubmitClick}></Button>
-                                        <Button label="Submit & Print" onClick={onPrintClick}></Button>
-                                    </div>
+                                    <Button primary label="Clear" onClick={onClearClick}></Button>
+                                    <Button primary label="Print" onClick={() => onPrintClick(1)}></Button>
+                                    <Button primary label="Submit" onClick={onSubmitClick}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -176,7 +195,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 2 && (
                     <>
-                        <div>Do you want me to give you a random student who is next now?</div>
+                        <div className={style.subtitle}>Do you want me to give you a random student who is next now?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label="Yes" onClick={onSubmitConfirm}></Button>
                             <Button primary label="Cancel" onClick={() => onCancel(1)}></Button>
@@ -188,10 +207,11 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 3 && output && (
                     <>
-                        <div>{output}</div>
+                        <div className={style.subtitle}>{output}</div>
                         <div className={style.actionWrapper}>
+                            <Button primary label="Reset" onClick={() => onReset(3)}></Button>
+                            <Button primary label="Print" onClick={() => onPrintClick(3)}></Button>
                             <Button primary label="Choose Next" onClick={onChooseNext}></Button>
-                            <Button primary label="Reset Students" onClick={() => onReset(3)}></Button>
                         </div>
                     </>
                 )
@@ -199,10 +219,10 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 4 && (
                     <>
-                        <div>Do you want to reset the information on your students you have entered?</div>
+                        <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Yes" onClick={onResetConfirm}></Button>
                             <Button primary label="Cancel" onClick={onCancel}></Button>
+                            <Button primary label="Yes" onClick={onResetConfirm}></Button>
                         </div>
                     </>
                 )
@@ -210,10 +230,10 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 5 && (
                     <>
-                        <div>Do you want to override the nicknames you have entered?</div>
+                        <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Yes" onClick={onOverride}></Button>
                             <Button primary label="Cancel" onClick={onCancel}></Button>
+                            <Button primary label="Yes" onClick={onOverride}></Button>
                         </div>
                     </>
                 )
