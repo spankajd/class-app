@@ -13,13 +13,13 @@
 }
 
 @mixin svgStroke($color) {
-  line, path, circle, polyline {
+  line, path, circle, polyline, rect {
     stroke: $color;
   }
 }
 
 @mixin svgFill($color) {
-  line, path, circle, polyline {
+  line, path, circle, polyline, rect {
     fill: $color;
   }
 }

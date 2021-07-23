@@ -2,97 +2,86 @@ import React from 'react';
 
 export const IconBackground = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="11.947,10.102 28.213,10.102 28.213,20.917 "/>
-      <rect x="10.244" y="11.634" fill={fill} stroke={stroke} strokeMiterlimit="10" width="16.27" height="10.818"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M10.298,19.069l3.427-2.304l3.626,2.339c0,0,3.84-1.661,3.825-1.634 s5.271,2.468,5.271,2.468"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="24.213" cy="13.802" r="1.037"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="22.595" y1="15.365" x2="21.632" y2="16.328"/>
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="13.651,8.738 29.916,8.738 29.916,19.556 "/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="22.127" y1="13.802" x2="20.855" y2="13.802"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="24.213" y1="16.055" x2="24.213" y2="17.323"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="5.2,5.5 35,5.5 35,25.4 "/>
+      <rect x="2" y="8.3" fill={fill} stroke={stroke} strokeMiterlimit="10" width="29.8" height="19.8"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M2.1,22l6.3-4.2l6.6,4.3c0,0,7-3,7-3c0,0,9.7,4.5,9.7,4.5"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="27.7" cy="12.3" r="1.9"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="24.7" y1="15.2" x2="22.9" y2="16.9"/>
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="8.3,3 38.1,3 38.1,22.9 "/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="23.8" y1="12.3" x2="21.5" y2="12.3"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="27.7" y1="16.4" x2="27.7" y2="18.8"/>
     </svg>
   );
 };
 export const IconEasyText = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M26.072,11.934c-0.172-0.677-0.423-1.331-0.748-1.949
-        c-0.391-0.632-0.608-0.779-1.898-0.779h-2.34v11.388c0,1.825,0.188,2.082,2.41,2.223v1.208h-6.808v-1.208
-        c2.176-0.141,2.363-0.39,2.363-2.223V9.194h-2.129c-1.29,0-1.665,0.14-2.062,0.842c-0.321,0.606-0.582,1.242-0.78,1.898h-0.971
-        c0.14-1.431,0.28-3.458,0.351-4.768h0.815c0.351,0.562,0.608,0.538,1.263,0.538h9.271c0.656,0,0.843-0.094,1.193-0.538h0.838
-        c0,1.099,0.094,3.337,0.211,4.697L26.072,11.934z"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M29.8,9.7c-0.3-1.1-0.7-2.1-1.2-3.1c-0.6-1-1-1.3-3.1-1.3h-3.8v18.4c0,2.9,0.3,3.4,3.9,3.6v2h-11v-2
+        c3.5-0.2,3.8-0.6,3.8-3.6V5.3H15c-2.1,0-2.7,0.2-3.3,1.4c-0.5,1-0.9,2-1.3,3.1H8.8C9,7.4,9.3,4.1,9.4,2h1.3c0.6,0.9,1,0.9,2,0.9h15
+        c1.1,0,1.4-0.2,1.9-0.9H31c0,1.8,0.2,5.4,0.3,7.6L29.8,9.7z"/>
     </svg>
   );
 };
 export const IconGroupBuilder = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M15.507,18.866c-1.44-0.009-2.601-1.184-2.593-2.624
-        c0.009-1.44,1.184-2.602,2.624-2.593c1.435,0.009,2.593,1.174,2.593,2.608c-0.002,1.442-1.173,2.61-2.616,2.608
-        C15.512,18.866,15.509,18.866,15.507,18.866z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M19.324,22.656c-0.066-1.438-1.75-2.593-3.813-2.593
-        s-3.75,1.17-3.817,2.593"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M24.649,18.866c-1.44-0.003-2.606-1.172-2.604-2.612
-        s1.172-2.606,2.612-2.604c1.438,0.002,2.604,1.169,2.604,2.608C27.26,17.698,26.09,18.866,24.649,18.866z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M28.467,22.656c-0.066-1.438-1.751-2.593-3.813-2.593
-        s-3.751,1.17-3.817,2.593"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.08" cy="10.963" r="2.433"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.08" y1="9.86" x2="20.08" y2="12.071"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="18.977" y1="10.963" x2="21.184" y2="10.963"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M11,22.1c-2.9,0-5.2-2.3-5.1-5.2c0-2.9,2.3-5.2,5.2-5.1c2.8,0,5.1,2.3,5.1,5.2C16.2,19.8,13.9,22.1,11,22.1
+        C11,22.1,11,22.1,11,22.1z"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M18.6,29.6c-0.1-2.9-3.5-5.1-7.6-5.1s-7.4,2.3-7.6,5.1"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M29.1,22.1c-2.9,0-5.2-2.3-5.2-5.2c0-2.9,2.3-5.2,5.2-5.2c2.9,0,5.2,2.3,5.2,5.2C34.3,19.8,32,22.1,29.1,22.1z"
+        />
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M36.7,29.6c-0.1-2.9-3.5-5.1-7.6-5.1s-7.4,2.3-7.6,5.1"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.1" cy="6.4" r="4.8"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.1" y1="4.2" x2="20.1" y2="8.6"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="17.9" y1="6.4" x2="22.3" y2="6.4"/>
     </svg>
   );
 };
 
 export const IconNoiseLevel = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M21.702,8.554c-3.221,2.308-10.242,2.729-10.242,2.729v6.012
-      c0,0,7.018,0.507,10.242,2.811"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M23.348,7.31c-0.216,0-0.391,0.175-0.391,0.391v13.255
-      c0,0.216,0.175,0.391,0.391,0.391h1.127c0.215,0,0.389-0.175,0.389-0.391V7.7c0-0.216-0.174-0.391-0.389-0.391H23.348z"/>
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="11.3,12.297 9.394,12.297 9.394,16.366 11.3,16.366 "/>
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="12.423,17.513 13.99,23.818 16.642,23.155 15.355,17.953 "/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="28.747" y1="13.977" x2="33.074" y2="13.977"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="27.129" y1="17.872" x2="30.763" y2="20.285"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="27.129" y1="10.086" x2="30.763" y2="7.673"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="12.77" y1="14.335" x2="15.526" y2="14.335"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="12.77" y1="15.618" x2="15.526" y2="15.618"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="12.77" y1="13.049" x2="15.526" y2="13.049"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.9,5.3c-4.7,3.4-15.1,4-15.1,4v8.8c0,0,10.3,0.7,15.1,4.1"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M23.3,3.4c-0.3,0-0.6,0.3-0.6,0.6v19.5c0,0.3,0.3,0.6,0.6,0.6H25c0.3,0,0.6-0.3,0.6-0.6V4
+        c0-0.3-0.3-0.6-0.6-0.6L23.3,3.4L23.3,3.4z"/>
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="5.6,10.8 2.8,10.8 2.8,16.7 5.6,16.7 "/>
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="7.3,18.4 9.6,27.7 13.5,26.7 11.6,19.1 "/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="31.3" y1="13.2" x2="37.6" y2="13.2"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="28.9" y1="19" x2="34.2" y2="22.5"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="28.9" y1="7.5" x2="34.2" y2="4"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="7.8" y1="13.8" x2="11.8" y2="13.8"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="7.8" y1="15.6" x2="11.8" y2="15.6"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="7.8" y1="11.9" x2="11.8" y2="11.9"/>
     </svg>
   );
 };
 
 export const IconNumber = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M19.932,21.443h5.848c0.139,0.019,0.266-0.08,0.284-0.219
-      c0-0.002,0-0.005,0-0.007l1.072-14.55H14.458l1.041,10.916"/>
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="19.936,23.233 25.289,23.233 25.477,21.466 "/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M13.674,17.646h5.548c0.368,0,0.667,0.299,0.667,0.667v5.548
-      c0,0.368-0.299,0.666-0.667,0.666h-5.548c-0.368,0-0.667-0.298-0.667-0.666v-5.548C13.008,17.945,13.306,17.646,13.674,17.646z"/>
-      <path d="M16.872,20.663c0.234,0.231,0.237,0.609,0.006,0.844c-0.002,0.002-0.004,0.004-0.006,0.006
-      c-0.235,0.234-0.615,0.234-0.849,0c-0.234-0.235-0.234-0.615,0-0.85S16.637,20.429,16.872,20.663"/>
-      <path d="M15.359,19.147c0.234,0.234,0.234,0.615-0.001,0.849c-0.235,0.234-0.615,0.234-0.849,0c-0.234-0.234-0.234-0.614,0-0.849
-      C14.744,18.914,15.123,18.914,15.359,19.147"/>
-      <path d="M18.388,22.172c0.233,0.235,0.233,0.614,0,0.85c-0.235,0.235-0.615,0.235-0.85,0c-0.235-0.234-0.235-0.615,0-0.85
-      C17.773,21.94,18.152,21.94,18.388,22.172"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M19.9,24.6h9c0.2,0,0.4-0.1,0.4-0.3c0,0,0,0,0,0l1.6-22.4H11.4L13,18.7"/>
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="19.9,27.3 28.1,27.3 28.4,24.6 "/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M10.2,18.7h8.5c0.6,0,1,0.5,1,1v8.5c0,0.6-0.5,1-1,1h-8.5c-0.6,0-1-0.5-1-1v-8.5C9.2,19.2,9.7,18.7,10.2,18.7z"
+        />
+      <path d="M15.1,23.4c0.4,0.4,0.4,0.9,0,1.3c0,0,0,0,0,0c-0.4,0.4-0.9,0.4-1.3,0c-0.4-0.4-0.4-0.9,0-1.3C14.2,23,14.8,23,15.1,23.4"/>
+      <path d="M12.8,21.1c0.4,0.4,0.4,0.9,0,1.3c-0.4,0.4-0.9,0.4-1.3,0c-0.4-0.4-0.4-0.9,0-1.3C11.9,20.7,12.5,20.7,12.8,21.1"/>
+      <path d="M17.5,25.7c0.4,0.4,0.4,0.9,0,1.3c-0.4,0.4-0.9,0.4-1.3,0c-0.4-0.4-0.4-0.9,0-1.3C16.5,25.4,17.1,25.4,17.5,25.7"/>
     </svg>
   );
 };
 
 export const IconPostbox = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M13.979,5.564h12.207c0.574,0,1.041,0.466,1.041,1.041v17.984
-        c0,0.575-0.467,1.041-1.041,1.041H13.979c-0.575,0-1.041-0.466-1.041-1.041V6.605C12.938,6.03,13.404,5.564,13.979,5.564z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M15.117,17.264v2.066h2.066 M25.043,17.264v2.066h-2.066
-        M25.043,10.57V8.503h-2.066 M15.117,10.57V8.503h2.066"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="12.984" y1="22.589" x2="27.191" y2="22.589"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.092" cy="13.915" r="2.433"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.092" y1="12.812" x2="20.092" y2="15.022"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="18.988" y1="13.914" x2="21.199" y2="13.914"/>
-      <circle cx="20.08" cy="24.09" r="0.589"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M11.8,2h16.6c0.8,0,1.4,0.6,1.4,1.4v24.4c0,0.8-0.6,1.4-1.4,1.4H11.8c-0.8,0-1.4-0.6-1.4-1.4V3.4
+        C10.4,2.6,11,2,11.8,2z"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M13.3,17.9v2.8h2.8 M26.8,17.9v2.8H24 M26.8,8.8V6H24 M13.3,8.8V6h2.8"/>
+      <line  fill={fill} stroke={stroke} strokeMiterlimit="10" x1="10.5" y1="25.1" x2="29.7" y2="25.1"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.1" cy="13.3" r="3.3"/>
+      <line  fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.1" y1="11.8" x2="20.1" y2="14.8"/>
+      <line  fill={fill} stroke={stroke} strokeMiterlimit="10" x1="18.6" y1="13.3" x2="21.6" y2="13.3"/>
+      <circle cx="20.1" cy="27.1" r="0.8"/>
     </svg>
   );
 };
@@ -100,23 +89,21 @@ export const IconPostbox = ({ className, fill = 'none', stroke = '#000' }) => {
 
 export const IconQRCode = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M12.345,19.174v4.156h4.414 M27.815,19.174v4.156h-4.413
-        M27.815,12.024V7.86h-4.413 M12.345,12.016V7.86h4.414"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M26.174,15.661v1.231 M26.174,18.098v1.232"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M22.797,9.583h2.995c0.179,0,0.323,0.145,0.323,0.323v2.994
-        c0,0.179-0.145,0.324-0.323,0.324h-2.995c-0.178,0-0.322-0.146-0.322-0.324V9.906C22.475,9.728,22.619,9.583,22.797,9.583z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M14.341,9.583h2.994c0.179,0,0.324,0.145,0.324,0.323v2.994
-        c0,0.179-0.145,0.324-0.324,0.324h-2.994c-0.179,0-0.324-0.146-0.324-0.324V9.906C14.018,9.728,14.163,9.583,14.341,9.583z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M14.341,17.981h2.994c0.179,0,0.324,0.146,0.324,0.324v2.994
-        c0,0.179-0.145,0.323-0.324,0.323h-2.994c-0.179,0-0.324-0.145-0.324-0.323v-2.994C14.018,18.126,14.163,17.981,14.341,17.981z"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.22" y1="9.871" x2="20.22" y2="13.198"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M24.338,19.307h-2.34c-0.215,0-0.39,0.174-0.39,0.39v1.622
-        c0,0.188-0.151,0.339-0.339,0.339h-1.817"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="23.92" y1="21.622" x2="26.115" y2="21.622"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M18.797,15.595h1.169c0.145,0,0.257,0.168,0.257,0.39v2.769"/>
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="22.475,15.599 22.475,17.396 24.326,17.4 24.326,15.611 "/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="14.018" y1="15.603" x2="16.294" y2="15.603"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M6.1,22.1v7.5h8 M34.1,22.1v7.5h-8 M34.1,9.1V1.6h-8 M6.1,9.1V1.6h8"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M31.1,15.7v2.2 M31.1,20.1v2.2"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M25,4.7h5.4C30.7,4.7,31,5,31,5.3v5.4c0,0.3-0.3,0.6-0.6,0.6H25c-0.3,0-0.6-0.3-0.6-0.6V5.3
+        C24.4,5,24.7,4.7,25,4.7z"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M9.7,4.7h5.4c0.3,0,0.6,0.3,0.6,0.6v5.4c0,0.3-0.3,0.6-0.6,0.6H9.7c-0.3,0-0.6-0.3-0.6-0.6V5.3
+        C9.1,5,9.4,4.7,9.7,4.7z"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M9.7,19.9h5.4c0.3,0,0.6,0.3,0.6,0.6v5.4c0,0.3-0.3,0.6-0.6,0.6H9.7c-0.3,0-0.6-0.3-0.6-0.6v-5.4
+        C9.1,20.2,9.4,19.9,9.7,19.9z"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.3" y1="5.2" x2="20.3" y2="11.3"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M27.8,22.3h-4.2c-0.4,0-0.7,0.3-0.7,0.7V26c0,0.3-0.3,0.6-0.6,0.6h-3.3"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="27" y1="26.5" x2="31" y2="26.5"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M17.8,15.6h2.1c0.3,0,0.5,0.3,0.5,0.7v5"/>
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="24.4,15.6 24.4,18.9 27.8,18.9 27.8,15.6 "/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="9.1" y1="15.6" x2="13.2" y2="15.6"/>
     </svg>
   );
 };
@@ -124,38 +111,31 @@ export const IconQRCode = ({ className, fill = 'none', stroke = '#000' }) => {
 
 export const IconSymbol = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M11.144,18.765c-0.502-0.218-1.043-0.327-1.59-0.324
-        c-1.618,0-2.936,0.905-2.991,2.031"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="9.546" cy="15.123" r="2.043"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="16.77" cy="15.123" r="2.043"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M18.345,18.757c-1.012-0.424-2.15-0.424-3.162,0"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="23.99" cy="15.123" r="2.047"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M26.98,20.472c-0.051-1.126-1.372-2.031-2.99-2.031
-        c-0.545-0.003-1.085,0.105-1.586,0.32"/>
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="28.357,18.659 33.605,18.659 33.605,6.776 13.16,6.776 
-        13.16,16.971 "/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="13.156" cy="19.061" r="2.043"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M16.15,24.414c-0.055-1.131-1.373-2.035-2.995-2.035
-        c-1.622,0-2.936,0.904-2.99,2.035"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.38" cy="19.061" r="2.047"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M23.371,24.414c-0.055-1.131-1.373-2.035-2.991-2.035
-        c-1.618,0-2.936,0.904-2.99,2.035"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M8.1,19.8c-0.7-0.3-1.4-0.4-2.1-0.4c-2.2,0-3.9,1.2-4,2.7"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="6" cy="15" r="2.7"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="15.7" cy="15" r="2.7"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M17.8,19.8c-1.4-0.6-2.9-0.6-4.2,0"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="25.3" cy="15" r="2.7"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M29.3,22.1c-0.1-1.5-1.8-2.7-4-2.7c-0.7,0-1.4,0.1-2.1,0.4"/>
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="31.1,19.7 38.1,19.7 38.1,3.8 10.8,3.8 10.8,17.4 "/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="10.8" cy="20.2" r="2.7"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M14.8,27.4c-0.1-1.5-1.8-2.7-4-2.7s-3.9,1.2-4,2.7"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.5" cy="20.2" r="2.7"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M24.5,27.4c-0.1-1.5-1.8-2.7-4-2.7s-3.9,1.2-4,2.7"/>
       </svg>
   );
 };
 
 export const IconTeacher = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.08,23.037c-1.344,0-2.433-1.089-2.433-2.433
-        s1.089-2.433,2.433-2.433s2.433,1.089,2.433,2.433C22.511,21.948,21.423,23.035,20.08,23.037z"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.08" cy="14.585" r="2.433"/>
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.08" cy="8.566" r="2.433"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M18.275,4.413c0,0-2.339,0-2.339,2.339v15.65c0,0,0,2.339,2.339,2.339
-        h3.61c0,0,2.34,0,2.34-2.339V6.764c0,0,0-2.339-2.34-2.339L18.275,4.413z"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="21.27" y1="24.882" x2="21.27" y2="26.777"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="18.891" y1="24.937" x2="18.891" y2="26.777"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.1,24.6c-1.6,0-2.9-1.3-2.9-2.9c0-1.6,1.3-2.9,2.9-2.9S23,20,23,21.7C23,23.3,21.7,24.6,20.1,24.6z"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.1" cy="14.4" r="2.9"/>
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="20.1" cy="7.1" r="2.9"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M17.9,2.1c0,0-2.8,0-2.8,2.8v18.9c0,0,0,2.8,2.8,2.8h4.4c0,0,2.8,0,2.8-2.8V4.9c0,0,0-2.8-2.8-2.8L17.9,2.1z"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="21.5" y1="26.8" x2="21.5" y2="29.1"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="18.6" y1="26.9" x2="18.6" y2="29.1"/>
     </svg>
 
   );
@@ -164,57 +144,50 @@ export const IconTeacher = ({ className, fill = 'none', stroke = '#000' }) => {
 
 export const IconTimer = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.08,24.289c-4.477,0.002-8.107-3.625-8.109-8.102
-        s3.625-8.107,8.102-8.109s8.107,3.625,8.109,8.102c0,0.003,0,0.005,0,0.008C28.182,20.662,24.555,24.289,20.08,24.289z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.08,9.318c3.785-0.006,6.859,3.058,6.865,6.843
-        c0,0.004,0,0.008,0,0.012"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.91,16.188c0,0.458-0.372,0.83-0.83,0.83s-0.831-0.372-0.831-0.83
-        c0-0.459,0.372-0.831,0.831-0.831c0.457-0.002,0.828,0.366,0.83,0.823C20.91,16.183,20.91,16.185,20.91,16.188z"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.08" y1="15.096" x2="20.08" y2="10.27"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="25.043" y1="8.374" x2="25.702" y2="7.178"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="15.55" y1="8.098" x2="14.895" y2="6.901"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.08" y1="23.174" x2="20.08" y2="21.833"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="14.478" y1="16.188" x2="13.136" y2="16.188"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="25.975" y1="16.188" x2="25.69" y2="16.188"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="25.008" y1="21.135" x2="24.057" y2="20.184"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="16.1" y1="12.223" x2="15.148" y2="11.276"/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="15.148" y1="21.131" x2="16.1" y2="20.184"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.1,29.5c-7.1,0-12.9-5.8-13-12.9c0-7.1,5.8-12.9,12.9-13S33,9.4,33,16.5c0,0,0,0,0,0
+        C33,23.7,27.2,29.5,20.1,29.5z"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.1,5.6c6,0,11,4.9,11,10.9c0,0,0,0,0,0"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M21.4,16.5c0,0.7-0.6,1.3-1.3,1.3s-1.3-0.6-1.3-1.3c0-0.7,0.6-1.3,1.3-1.3C20.8,15.2,21.4,15.8,21.4,16.5
+        C21.4,16.5,21.4,16.5,21.4,16.5z"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.1" y1="14.8" x2="20.1" y2="7.1"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="28" y1="4.1" x2="29.1" y2="2.2"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="12.8" y1="3.6" x2="11.8" y2="1.7"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="20.1" y1="27.7" x2="20.1" y2="25.6"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="11.1" y1="16.5" x2="9" y2="16.5"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="29.5" y1="16.5" x2="29" y2="16.5"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="28" y1="24.4" x2="26.4" y2="22.9"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="13.7" y1="10.2" x2="12.2" y2="8.7"/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="12.2" y1="24.4" x2="13.7" y2="22.9"/>
     </svg>
   );
 };
 
 export const IconWebCam = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M16.33,24.067v-2.963c0.004-0.769,0.535-1.434,1.283-1.61"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.08,19.918c-3.533,0-6.398-2.864-6.398-6.397
-        s2.865-6.397,6.398-6.397s6.398,2.864,6.398,6.397S23.613,19.918,20.08,19.918L20.08,19.918z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.08,16.667c-1.738,0-3.146-1.409-3.146-3.146
-        s1.409-3.146,3.146-3.146c1.738,0,3.146,1.409,3.146,3.146S21.818,16.667,20.08,16.667L20.08,16.667z"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.08,15.392c-1.034,0-1.872-0.838-1.872-1.871
-        s0.838-1.871,1.872-1.871c1.033,0,1.871,0.838,1.871,1.871l0,0C21.951,14.554,21.113,15.392,20.08,15.392z"/>
-      <circle cx="23.375" cy="10.242" r="0.588"/>
-      <path fill="none" stroke="#000000" strokeWidth="0.5" strokeMiterlimit="10" d="M20.08,12.616c0.502,0.002,0.906,0.41,0.904,0.912
-        l0,0"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M22.595,19.493c0.729,0.193,1.236,0.853,1.235,1.606v2.963"/>
+    <svg className={className} viewBox="0 0 40.2 31.2" >
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M13.9,29.6v-4.9c0-1.3,0.9-2.4,2.1-2.7"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.1,22.7c-5.8,0-10.6-4.7-10.6-10.6S14.2,1.6,20.1,1.6s10.6,4.7,10.6,10.6S25.9,22.7,20.1,22.7L20.1,22.7z"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.1,17.4c-2.9,0-5.2-2.3-5.2-5.2S17.2,7,20.1,7c2.9,0,5.2,2.3,5.2,5.2S23,17.4,20.1,17.4L20.1,17.4z"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M20.1,15.3c-1.7,0-3.1-1.4-3.1-3.1s1.4-3.1,3.1-3.1c1.7,0,3.1,1.4,3.1,3.1l0,0C23.2,13.9,21.8,15.3,20.1,15.3z"
+        />
+      <circle cx="25.5" cy="6.7" r="1"/>
+      <path fill="none" stroke="#000000" strokeWidth="0.5" strokeMiterlimit="10" d="M20.1,10.7c0.8,0,1.5,0.7,1.5,1.5l0,0"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M24.2,22c1.2,0.3,2,1.4,2,2.7v4.9"/>
     </svg>
   );
 };
 
 export const IconWhoIsNext = ({ className, fill = 'none', stroke = '#000' }) => {
   return (
-    <svg className={className} viewBox="0 0 40.16 31.189">
-      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="21.573" cy="13.7" r="2.608"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M25.391,20.098c-0.07-1.438-1.751-2.593-3.817-2.593
-        s-3.747,1.17-3.817,2.593"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M17.113,15.595c0,1.723-1.396,3.119-3.119,3.119
-        s-3.119-1.396-3.119-3.119s1.396-3.119,3.119-3.119S17.113,13.872,17.113,15.595z"/>
-      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="14.688,14.527 15.737,15.575 14.661,16.663 "/>
-      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="15.397" y1="15.595" x2="12.201" y2="15.595"/>
-      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M14.809,18.777c0.031,0.074,0.066,0.144,0.101,0.218
-        c1.877,3.737,6.428,5.244,10.164,3.367c3.737-1.877,5.244-6.429,3.367-10.165S22.014,6.953,18.277,8.83
-        c-1.498,0.753-2.704,1.981-3.429,3.493"/>
+    <svg className={className} viewBox="0 0 40.2 31.2">
+      <circle fill={fill} stroke={stroke} strokeMiterlimit="10" cx="22.8" cy="12.1" r="4.8"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M29.9,23.9c-0.1-2.7-3.2-4.8-7-4.8s-6.9,2.2-7,4.8"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M14.6,15.6c0,3.2-2.6,5.8-5.8,5.8s-5.8-2.6-5.8-5.8s2.6-5.8,5.8-5.8S14.6,12.4,14.6,15.6z"/>
+      <polyline fill={fill} stroke={stroke} strokeMiterlimit="10" points="10.2,13.6 12.1,15.6 10.1,17.6 "/>
+      <line fill={fill} stroke={stroke} strokeMiterlimit="10" x1="11.5" y1="15.6" x2="5.6" y2="15.6"/>
+      <path fill={fill} stroke={stroke} strokeMiterlimit="10" d="M10.4,21.5c0.1,0.1,0.1,0.3,0.2,0.4c3.5,6.9,11.9,9.7,18.7,6.2c6.9-3.5,9.7-11.9,6.2-18.7
+        c-3.5-6.9-11.9-9.7-18.7-6.2c-2.8,1.4-5,3.7-6.3,6.4"/>
     </svg>
   );
 };
@@ -371,6 +344,69 @@ export const ScreenShotIcon = ({className, stroke = '#000'}) => {
         v-5.92h-6.441L27.46,5.5z M12.24,28.323H4.12v-7.595h1.61v5.922h6.45L12.24,28.323z M27.41,28.323h8.119v-7.595H33.92v5.922h-6.449
         L27.41,28.323z"/>
     </svg>
+  );
+}
+
+export const ClearScreenIcon = ({className, fill = '#000'}) => {
+  return (
+    <svg viewBox="0 0 39.857 31.923" className={className}>
+      <g transform="translate(-0.124 -21.356)">
+        <g transform="translate(0.124 21.356)">
+          <rect id="Rectangle_286" width="18.701" height="2.645" transform="translate(10.578 29.279)" fill={fill}/>
+          <rect id="Rectangle_287" width="2.456" height="4.533" transform="translate(18.701 25.501)" fill={fill}/>
+          <rect id="Rectangle_288" width="39.857" height="26.634" rx="5" fill={fill}/>
+          <rect id="Rectangle_289" width="34.19" height="19.645" rx="3" transform="translate(2.833 2.833)" fill="#fff"/>
+        </g>
+        <g id="Group_231" transform="translate(20.218 25.134) rotate(45)">
+          <rect id="Rectangle_290" width="2.078" height="12.656" rx="1.039" transform="translate(5.289 0)" fill={fill}/>
+          <rect id="Rectangle_291" width="2.078" height="12.656" rx="1.039" transform="translate(12.656 5.289) rotate(90)" fill={fill}/>
+        </g>
+      </g>
+    </svg>
+  );
+}
+
+export const CopyRightIcon = ({className, fill = '#000'}) => {
+  return (
+    <svg viewBox="0 0 7 33" className={className}>
+      <g transform="translate(-24 -9)">
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(24 9)" fill={fill}/>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(24 22)" fill={fill}/>
+        <circle cx="3.5" cy="3.5" r="3.5" transform="translate(24 35)" fill={fill}/>
+      </g>
+    </svg>
+  );
+}
+
+export const ScreenLockIcon = ({className, stroke = '#000', fill = '#000'}) => {
+  return (
+    <svg viewBox="0 0 37.156 31.94" className={className}>
+        <g transform="translate(-1129 -121)">
+          <g transform="translate(1129 121)">
+            <path d="M15.97,31.94A15.974,15.974,0,0,1,9.754,1.255,15.971,15.971,0,0,1,31.783,13.71l-1.559.4a14.386,14.386,0,1,0-2.931,10.7l1.293.951a16.2,16.2,0,0,1-1.323,1.5A15.924,15.924,0,0,1,15.97,31.94Z" transform="translate(0 0)" fill="#21546b"/>
+            <g transform="matrix(0.966, -0.259, 0.259, 0.966, 25.362, 11.17)">
+              <line x1="4.791" y1="4.791" transform="translate(0 0)" fill="none" stroke="#21546b" strokeLinecap="round" strokeWidth="1.5"/>
+              <line x1="4.791" y2="4.791" transform="translate(4.791 0)" fill="none" stroke="#21546b" strokeLinecap="round" strokeWidth="1.5"/>
+            </g>
+            <path d="M2,16a2,2,0,0,1-2-2V8A2,2,0,0,1,2,6V5.5a4.5,4.5,0,1,1,9,0V6a2,2,0,0,1,2,2v6a2,2,0,0,1-2,2Zm3-5a1.506,1.506,0,0,0,.875,1.364v1.012a.625.625,0,0,0,1.25,0V12.364A1.5,1.5,0,1,0,5,11ZM9.5,6V5.5a3,3,0,1,0-6,0V6Z" transform="translate(9.857 7)" fill="#21546b"/>
+          </g>
+        </g>
+      </svg>
+  );
+}
+
+export const ScreenUnlockIcon = ({className, stroke = '#000', fill = '#000'}) => {
+  return (
+    <svg viewBox="0 0 37.156 31.94" className={className}>
+        <g>
+          <path d="M15.97,31.94A15.974,15.974,0,0,1,9.754,1.255,15.971,15.971,0,0,1,31.783,13.71l-1.559.4a14.386,14.386,0,1,0-2.931,10.7l1.293.951a16.2,16.2,0,0,1-1.323,1.5A15.924,15.924,0,0,1,15.97,31.94Z" transform="translate(0 0)" fill={fill}/>
+          <g transform="matrix(0.966, -0.259, 0.259, 0.966, 25.362, 11.17)">
+            <line x1="4.791" y1="4.791" transform="translate(0 0)" fill="none" stroke={stroke} strokeLinecap="round" strokeWidth="1.5"/>
+            <line x1="4.791" y2="4.791" transform="translate(4.791)" fill="none" stroke={stroke} strokeLinecap="round" strokeWidth="1.5"/>
+          </g>
+          <path d="M2,19a2,2,0,0,1-2-2V11A2,2,0,0,1,2,9H9.5V4.5a3,3,0,0,0-6,0v2H2v-2a4.5,4.5,0,0,1,9,0V9a2,2,0,0,1,2,2v6a2,2,0,0,1-2,2Zm3-5a1.506,1.506,0,0,0,.875,1.363v1.012a.625.625,0,0,0,1.25,0V15.364A1.5,1.5,0,1,0,5,14Z" transform="translate(9.857 6)" fill={fill}/>
+        </g>
+      </svg>
   );
 }
 

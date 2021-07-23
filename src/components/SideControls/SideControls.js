@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 
-import { DownArrow, SymbolIcon } from '../../elements/Icon/Icon';
+import { DownArrow, ClearScreenIcon, CopyRightIcon, ScreenLockIcon } from '../../elements/Icon/Icon';
 
 import style from './SideControls.module.scss';
 
@@ -18,20 +18,29 @@ const SideControls = ({ onItemClick, clearAll }) => {
         if (clearAll) clearAll();
     }
 
+    const onScreenLockClick = () => {
+        alert('onScreenLock');
+    }
+
     const initialPos = { x: 0, y: 0 };
 
     return (
-        <Draggable defaultPosition={initialPos} handle={"."+style.handle} axis="y" defaultClassNameDragging={style.dragging}>
+        <Draggable defaultPosition={initialPos} handle={"." + style.handle} axis="y" defaultClassNameDragging={style.dragging}>
             <div className={`${style.sideControls} ${isMenuOpen ? style.open : ''}`}>
                 <div className={style.trigger} onClick={onTriggerClick}>
-                    <DownArrow></DownArrow>
+                    <div className={style.triggerBG}>
+                        <DownArrow />
+                    </div>
                 </div>
                 <div className={style.itemWrapper}>
-                    <div className={`${style.item} ${style.handle}`} onClick={onClearAllClick}>
-                        <strong className="cursor">:</strong>
+                    <div className={`${style.item} ${style.copyRight}`} onClick={onClearAllClick}>
+                        <CopyRightIcon />
                     </div>
                     <div className={style.item} onClick={onClearAllClick}>
-                        <SymbolIcon></SymbolIcon>
+                        <ClearScreenIcon />
+                    </div>
+                    <div className={`${style.item} ${style.screenLock}`} onClick={onScreenLockClick}>
+                        <ScreenLockIcon />
                     </div>
                 </div>
             </div >

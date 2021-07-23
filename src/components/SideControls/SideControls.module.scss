@@ -2,7 +2,7 @@
 
 .sideControls {
     position: fixed;
-    top: 45%;
+    top: 15px;
     left: 100%;
     display: inline-block;
     background: var(--color-primary_background);
@@ -20,36 +20,61 @@
     }
 
     .trigger {
-        @include flexAlignCenter;
         cursor: pointer;
         position: absolute;
-        width: 25px;
+        width: 32px;
         height: 100%;
-        left: -25px;
-        background: var(--color-handle);
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
+        left: -32px;
+        overflow: hidden;
+
+        .triggerBG {
+            @include flexAlignCenter;
+            position: relative;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--color-handle);
+        }
         svg {
             transform: rotate(90deg);
+            position: relative;
+            left: -10px;
+            width: 30px;
         }
     }
     .itemWrapper {
         @include flexAlignCenter;
     }
     .item {
+        @include flexAlignCenter;
         padding: 12px 6px;
         width: 54px;
         height: 40px;
-        svg {
-            width: 100%;
-        }
 
+        svg {
+            width: 45px;
+        }
+        border-right: 1px solid var(--color-border);
+        &:last-child {
+            border-right: none;
+        }
+    }
+
+    .screenLock {
+        display: none;
+    }
+    .copyRight {
+        svg {
+            width: 6px;
+        }
     }
     .handle {
         @include flexAlignCenter;
         width: 30px;
         cursor: -webkit-grab;
         cursor: grab;
+
+        
     }
 
     &.grabbing {
