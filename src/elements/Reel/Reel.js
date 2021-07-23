@@ -56,7 +56,7 @@ const Reel = ({ dataset, onSelect }) => {
 
     return (
         <div className={style.reel}>
-            {dataset.label && (<div className={style.title}>{dataset.label}</div>)}
+            {/* {dataset.label && (<div className={style.title}>{dataset.label}</div>)}
             <Slider {...settings}>
                 {dataset.data.map(item => {
                     const temp = Math.random();
@@ -68,7 +68,8 @@ const Reel = ({ dataset, onSelect }) => {
                             </div>)
                     }</>
                 })}
-            </Slider>
+            </Slider> */}
+            
         </div>
     );
 };

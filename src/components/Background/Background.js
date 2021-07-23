@@ -5,7 +5,7 @@ import Holder from '../../elements/Holder/Holder';
 import Reel from '../../elements/Reel/Reel';
 
 import style from './Background.module.scss';
-
+import ColorPicker from '../ColorPicker/ColorPicker';
 
 const Background = ({ onCompClick, onCompClose, dataset, onChange }) => {
 
@@ -15,9 +15,10 @@ const Background = ({ onCompClick, onCompClose, dataset, onChange }) => {
 
     return (
         <Holder className={`${style.background}`} onCompClick={onCompClick} onClose={onCloseClick}>
-            {
-                dataset.map(item => <Reel dataset={item} onSelect={onChange}/>)
-            }
+            <div className={`${style.panel} ${style.leftPanel}`}></div>
+            <div className={`${style.panel} ${style.rightPanel}`}>
+                <ColorPicker/>
+            </div>
         </Holder>
     );
 };

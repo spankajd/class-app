@@ -1,18 +1,26 @@
 .background {
     display: inline-flex;
 
-    flex-direction: column;
+    flex-direction: row;
 
     width: 700px;
-    height: 550px;
-    padding: 25px;
-    min-width: 700px;
-    min-height: 550px;
+    height: 350px;
+    padding: 10px;
+    background: var(--color-white_4);
+    gap: 10px;
 
-    global {
-        .slick-prev:before,
-        .slick-next:before {
-            color: black;
-        }
+    .panel {
+        background: var(--color-white);
+        flex-grow: 1;
+        border-radius: 10px;
     }
+
+    
+    // global {
+    //     .slick-prev:before,
+    //     .slick-next:before {
+    //         color: black;
+    //     }
+    // }
+    
 }
