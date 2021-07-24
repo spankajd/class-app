@@ -108,6 +108,10 @@
         font-size: 24px;
         max-width: 375px;
         word-wrap: break-word;
+
+        svg {
+            height: 50px;
+        }
     }
 
     .question {
@@ -126,5 +130,10 @@
               margin-left: 0px;   
             }
         }
+    }
+
+    .disabled {
+        opacity: .5;
+        pointer-events: none;
     }
 }

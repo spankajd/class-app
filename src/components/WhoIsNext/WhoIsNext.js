@@ -8,6 +8,7 @@ import _ from "lodash";
 
 import style from './WhoIsNext.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
+import * as Symbols from "../../assets/symbols"; 
 
 
 // Steps 
@@ -77,7 +78,8 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     }
 
     const onClearClick = e => {
-
+        setTextAreaVal('');
+        setNumberOfStudent('');
     }
 
     const onSubmitClick = e => {
@@ -86,7 +88,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     }
 
     const onPrintClick = e => {
-        setPreviousStep(e);
+        if(e)  setPreviousStep(e);
         generateRadomList();
         setCurrentStep(6);
     }
@@ -117,6 +119,10 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
         setNumberOfStudent('');
         setTextAreaVal('');
         setCurrentStep(1);
+        setPreviousStep(1);
+        setOutput('');
+        setBuffer('');
+        setList([]);
     }
 
     const onChooseNext = e => {
@@ -125,7 +131,10 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
     const getRandomFromList = () => {
         const random = Math.floor(Math.random() * (list.length));
-        setOutput(list.splice(random, 1));
+        if( inputStage == 'symbols') 
+            setOutput( React.createElement(Symbols[list.splice(random, 1)]) );
+        else
+            setOutput(list.splice(random, 1));
         if (list.length == 0) {
             generateRadomList();
         }
@@ -136,12 +145,20 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
         if (inputStage == 'nickname') {
             let arr = textAreaVal.split("\n");
-            _.without(arr, ['', ' '])
+            _.without(arr, ['', ' ']);
+            setNumberOfStudent(arr.length);
             setList(arr);
-        } else {
+        } else if (inputStage == 'number') {
             let tempArr = [];
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(`${inputStage} ${i + 1}`);
+            }
+            setList(tempArr);
+        } else if (inputStage == 'symbols'){
+            let tempArr = [];
+            let keys = _.keys(Symbols);
+            for (let i = 0; i < numberOfStudent; i++) {
+                tempArr.push(keys[Math.floor(Math.random() * keys.length)] );
             }
             setList(tempArr);
         }
@@ -183,7 +200,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                                         <label className={style.question}> How many students in your class? </label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
-                                <div className={style.buttomWrapper}>
+                                <div className={`${style.buttomWrapper} ${ (   (!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')  ) ? style.disabled : ''}`}  >
                                     {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
                                     <Button primary label="Clear" onClick={onClearClick}></Button>
                                     <Button primary label="Print" onClick={() => onPrintClick(1)}></Button>
@@ -199,7 +216,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                         <div className={style.actionWrapper}>
                             <Button primary label="Yes" onClick={onSubmitConfirm}></Button>
                             <Button primary label="Cancel" onClick={() => onCancel(1)}></Button>
-                            <Button primary label="Reset students" onClick={() => onReset(2)}></Button>
+                            <Button primary label="Reset" onClick={() => onReset(2)}></Button>
                         </div>
                     </>
                 )
@@ -278,7 +295,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                                             border: "1px solid #aab0ba",
                                             padding: "8px",
                                             textAlign: "center"
-                                        }}>{item}</td>
+                                        }}>{ inputStage === 'symbols' ? React.createElement(Symbols[item]) : item}</td>
                                         <td style={{
                                             border: "1px solid #aab0ba",
                                             padding: "8px",

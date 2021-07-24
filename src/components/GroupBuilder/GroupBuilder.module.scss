@@ -1,38 +1,52 @@
+@import '../../style/mixin.scss';
+$colors: #ffff00 #66ffff #ff99ff #99ff33 #ff6699 #1affc6 #99ff66 #ffd966 #8c66ff #ff6666 #66b3ff;
+$repeat: 20;  // How often you want the pattern to repeat.
+// Warning: a higher number outputs more CSS.
+
 .groupbuilder {
-    width: 600px;
-    height: 450px; 
+    // width: 600px;
+    // height: 450px; 
     padding: 35px 45px;
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    &.groupOutPut {
+        flex-direction: column;
+    }
 
     .panel {
-        border-left: 1px dashed #333;
-        padding-left: 25px;
+        border-top: 1px dashed var(--color-border);
         position: relative;
-        padding-bottom: 20px;
+        padding-right: 65px; 
     }
     .inputPanel {
         flex-grow: 2;
+        border-top: none;
+        padding-right: 0;
     }
 
     .step {
         position: absolute;
-        top: -4px;
+        top: -13px;
         left: -12.5px;
 
         width: 25px;
         height: 25px;
         border-radius: 50%;
-
-        background: #999;
+        background: var(--color-white);
+        border: 1px solid var(--color-limeade);
+        color: var(--color-limeade);
         text-align: center;
+        font-weight: bold;
 
         line-height: 25px;
-
+        margin-bottom: 10px;
     }
 
     .title {
-        margin-bottom: 20px;
+        margin: 30px 0 10px;
+        font-weight: bold;
+        color:var(--color-gray);
     }
 
     .stageButton {
@@ -45,39 +59,45 @@
 
     .textarea {
         width: 100%;
-        height: 235px;
+        height: 175px;
         resize: none;
     }
 
     .input {
         width: 45px;
         height: 30px;
-        margin-left: 15px;
     }
 
     .controls {
         display: inline-flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-around;
-        width: 350px;
+        // width: 350px;
+
+        label {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 8px; 
+            font-weight: bold;
+        }
     }
 
     .buttomWrapper {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin-top: 15px;
+        width: 325px;
+        gap: 15px;
+
     }
 
     .importButton {
+
         input {
             display: none;
         }
-    }
-
-    .submitWrapper {
-        display: inline-flex;
-        justify-content: space-between;
-        width: 250px;
     }
 
     &.popUpBox {
@@ -86,43 +106,78 @@
         transform: translate(-50% , -50%) !important;
         width: auto !important;
         height: auto !important; 
-        // padding: 35px 85px 35px 45px;
+        padding: 75px 65px 65px;
+        flex-direction: column;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 24px;
+        max-width: 375px;
+        word-wrap: break-word;
+    }
+
+    .question {
+        font-size: 20px;
+        width: 100%;
+        display: block;
+        margin: 30px 0;
     }
 
     .actionWrapper {
-        margin-top: 25px;
+        margin-left: 25px;
+        @include flexAlignCenter;
         button {
-            margin: 10px;
+            margin: 0 15px;
             &:first-child {
               margin-left: 0px;   
             }
         }
     }
 
-    .outputWrapper {
-        display: flex;
+    .numberOfGroupWrapper {
+        display: inline-flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .outputWrapper {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 15px;
         margin-top: 50px;
-        max-width: 650px;
+        // max-width: 650px;
         max-height: 450px;
         overflow: scroll;
 
     }
     .groupCol {
         position: relative;
+        background: burlywood;
+        padding: 10px;
+        border-radius: 15px;
+        min-width: 150px;
+    }
+
+
+    
+
+    @for $i from 1 through $repeat {
+        .groupCol:nth-child(#{length($colors)}n+#{$i}) {
+            background: lighten(nth($colors, random(length($colors))), 20%);
+        }
     }
     .groupTitle {
         position: relative;
         text-align: center;
+        font-size: 15px;
+        font-weight: bold;
     }
     .groupData {
         position: relative;
-        background: white;
-        padding: 10px 11px 10px 35px;
+        padding: 0 10px;
         overflow: scroll;
-        height: 100%;
-        border: 1px solid #CCC;
+        // height: 100%;
     }
     .disabled {
         opacity: .5;
@@ -130,5 +185,13 @@
     }
     .groupDataItem {
         margin: 5px 0;
+
+        &.symbols {
+            text-align: center;
+            svg {
+                width: 40px;
+            }
+        }
     }
 }
+

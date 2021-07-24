@@ -7,7 +7,8 @@ import Holder from '../../elements/Holder/Holder';
 import _ from "lodash";
 
 import style from './GroupBuilder.module.scss';
-
+import RadioButton from '../../elements/RadioButton/RadioButton';
+import * as Symbols from "../../assets/symbols"; 
 
 // Steps 
 // 1. choose format
@@ -18,7 +19,7 @@ import style from './GroupBuilder.module.scss';
 
 const GroupBuilder = ({ onCompClick, onCompClose }) => {
 
-    const popUpSteps = [2, 3, 4, 5];
+    const popUpSteps = [3, 4, 5];
     const [inputStage, setInputStage] = useState('');
     const [textAreaVal, setTextAreaVal] = useState('');
     const [numberOfStudent, setNumberOfStudent] = useState('');
@@ -33,10 +34,13 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
 
     useEffect(() => {
         if (currentStep === 6) {
+            setTimeout( () => {
+                setCurrentStep(previousStep);
+            }, 500);
             print();
         }
     }, [currentStep]);
-
+    
     useEffect(() => {
         setOutput('');
     }, [numberOfGroup]);
@@ -54,7 +58,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }
 
     const onSelectStage = e => {
-        setInputStage(e.target.dataset.id);
+        setInputStage(e);
     }
 
     const onBrowse = e => {
@@ -86,16 +90,20 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
         let val = e.target.value;
         const re = /^[0-9\b]+$/;
         val = re.test(val) || val === '' ? val : numberOfGroup;
-        val = val ? Math.min(Math.max(val, 1), 5) : '';
+        val = val ? Math.min(Math.max(val, 1), numberOfStudent) : '';
         setNumberOfGroup(val);
     }
-
+    const onClearClick = e => {
+        setTextAreaVal('');
+        setNumberOfStudent('');
+    }
     const onSubmitClick = e => {
         generateRadomList();
         setCurrentStep(2);
     }
 
     const onPrintClick = e => {
+        if(e)  setPreviousStep(e);
         generateRadomList();
         setCurrentStep(6);
     }
@@ -130,6 +138,12 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
         setTextAreaVal('');
         setCurrentStep(1);
         setOutput('');
+        setTextAreaVal('');
+        setNumberOfStudent('');
+        setNumberOfGroup('');
+        setPreviousStep(1);
+        setBuffer('');
+        setList([]);
     }
 
     const onConfirmShuffle = e => {
@@ -142,7 +156,6 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
         var size = Math.ceil(list.length / numberOfGroup);
         var tempOutPut = {};
         var tempList = list.slice(0);
-        console.log('size ', size);
         for (let i = 0; i < numberOfGroup; i++) {
             tempOutPut["Group " + String.fromCharCode(65 + i)] = [];
         }
@@ -157,15 +170,22 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }
 
     const generateRadomList = () => {
-
         if (inputStage == 'nickname') {
             let arr = textAreaVal.split("\n");
             _.without(arr, ['', ' '])
+            setNumberOfStudent(arr.length);
             setList(arr);
-        } else {
+        } else if (inputStage == 'number') {
             let tempArr = [];
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(`${inputStage} ${i + 1}`);
+            }
+            setList(tempArr);
+        } else if (inputStage == 'symbols'){
+            let tempArr = [];
+            let keys = _.keys(Symbols);
+            for (let i = 0; i < numberOfStudent; i++) {
+                tempArr.push(keys[Math.floor(Math.random() * keys.length)] );
             }
             setList(tempArr);
         }
@@ -175,10 +195,13 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
         let arr = [];
 
         for (var key in output) {
+            let counter = 0;
             arr.push(
-                <div className={style.groupCol}>
-                    <div className={style.groupTitle}>{key}</div>
-                    <ol className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li className={style.groupDataItem}>{element}</li>) : '')}</ol>
+                <div key={'1_1_'+counter} className={style.groupCol}>
+                    <div key={'1_'+counter} className={style.groupTitle}>{key}</div>
+                    <ul className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li key={counter++} className={`${style.groupDataItem} ${style.symbols}`}>{
+                        inputStage == 'symbols' ? React.createElement(Symbols[element]) : element
+                        }</li>) : '')}</ul>
                 </div>
             )
         }
@@ -187,16 +210,27 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={`${style.groupbuilder} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={`${style.groupbuilder} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${currentStep == 2 ? style.groupOutPut : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
-                        <span className={style.step}>1</span>
+                        <div className={style.step}>1</div>
                         <div className={style.title}>Choose format</div>
                         <div className={style.controls}>
-                            <Button primary={true} onClick={onSelectStage} className={`${style.stageButton} ${!inputStage || inputStage == 'nickname' ? style.selected : ''}`} label="Nickname" data-id="nickname"></Button>
-                            <Button primary={true} onClick={onSelectStage} className={`${style.stageButton} ${!inputStage || inputStage == 'number' ? style.selected : ''}`} label="Number" data-id="number"></Button>
-                            <Button primary={true} onClick={onSelectStage} className={`${style.stageButton} ${!inputStage || inputStage == 'symbols' ? style.selected : ''}`} label="Symbols" data-id="symbols"></Button>
+                            <label>
+                                <RadioButton name="group_step" id="nickname" value="nickname" onChange={onSelectStage} checked={inputStage == 'nickname'}></RadioButton>
+                                <span className={style.label}>Nickname</span>
+                            </label>
+
+                            <label>
+                                <RadioButton name="group_step" id="number" value="number" onChange={onSelectStage} checked={inputStage == 'number'}></RadioButton>
+                                <span className={style.label}>Numbers</span>
+                            </label>
+
+                            <label>
+                                <RadioButton name="group_step" id="symbols" value="symbols" onChange={onSelectStage} checked={inputStage == 'symbols'}></RadioButton>
+                                <span className={style.label}>Symbols</span>
+                            </label>
                         </div>
                     </div>
                     <div className={`${style.panel} ${style.inputPanel}`}>
@@ -208,14 +242,14 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                                 {inputStage == 'nickname' ? (
                                     <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
                                     (<>
-                                        <label> How many students in your class? </label>
+                                        <label className={style.question}> How many students in your class? </label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
-                                <div className={style.buttomWrapper}>
+                                <div className={`${style.buttomWrapper} ${ (   (!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')  ) ? style.disabled : ''}`}>
                                     {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    <div className={style.submitWrapper}>
-                                        <Button label="Submit" onClick={onSubmitClick}></Button>
-                                    </div>
+                                    <Button primary label="Clear" onClick={onClearClick}></Button>
+                                    <Button primary label="Print" onClick={() => onPrintClick(1)}></Button>
+                                    <Button primary label="Submit" onClick={onSubmitClick}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -223,16 +257,18 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 2 && (
                     <>
-                        <div><label>Number of Groups</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
-                        <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
-                            <Button primary label="Create Groups" onClick={onSubmitConfirm}></Button>
-                            <Button primary label="Cancel" onClick={() => onCancel(1)}></Button>
-                            <Button primary label="Reset students" onClick={() => onReset(2)}></Button>
-                            {output && <Button label="Print" onClick={handlePrint}></Button>}
+                        <div className={style.numberOfGroupWrapper}>
+                            <div className={style.numberOfGroup}><label>Number of Groups</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
+                            <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
+                                <Button primary label="Reset" onClick={() => onReset(2)}></Button>
+                                <Button primary label="Print" onClick={() => onPrintClick(2)}></Button>
+                                <Button primary label="Create groups" onClick={onSubmitConfirm}></Button>
+                                {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
+                            </div>
                         </div>
-                        <div className={style.outputWrapper}>
-                            {output && renderGroup()}
-                        </div>
+                        {output && (<div className={style.outputWrapper}>
+                            {renderGroup()}
+                        </div>)}
                     </>
                 )
             }
@@ -314,7 +350,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                                                     border: "1px solid #aab0ba",
                                                     padding: "8px",
                                                     textAlign: "center"
-                                                }}>{element}</td>
+                                                }}>{inputStage == 'symbols' ? React.createElement(Symbols[element]) : element}</td>
                                                 <td style={{
                                                     border: "1px solid #aab0ba",
                                                     padding: "8px",
