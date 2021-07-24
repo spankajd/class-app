@@ -13,7 +13,11 @@ $repeat: 20;  // How often you want the pattern to repeat.
     &.groupOutPut {
         flex-direction: column;
     }
-
+    &.firstStep {
+        .panel {
+            border: none;
+        }
+    }
     .panel {
         border-top: 1px dashed var(--color-border);
         position: relative;
@@ -94,9 +98,22 @@ $repeat: 20;  // How often you want the pattern to repeat.
     }
 
     .importButton {
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        display: inline-block;
+        line-height: 1;
+        font-weight: bold;
+        color: var(--color-white);
+        background-color: var(--color-cerulean);
 
         input {
             display: none;
+        }
+        &.disabled {
+            color: var(--color-white);
+            background-color: var(--color-silver);
+            pointer-events: none;
         }
     }
 
@@ -108,12 +125,13 @@ $repeat: 20;  // How often you want the pattern to repeat.
         height: auto !important; 
         padding: 75px 65px 65px;
         flex-direction: column;
+        gap: 15px;
     }
 
     .subtitle {
         text-align: center;
         font-size: 24px;
-        max-width: 375px;
+        max-width: 385px;
         word-wrap: break-word;
     }
 
@@ -128,7 +146,7 @@ $repeat: 20;  // How often you want the pattern to repeat.
         margin-left: 25px;
         @include flexAlignCenter;
         button {
-            margin: 0 15px;
+            margin: 0 10px;
             &:first-child {
               margin-left: 0px;   
             }
@@ -139,12 +157,18 @@ $repeat: 20;  // How often you want the pattern to repeat.
         display: inline-flex;
         flex-direction: row;
         align-items: center;
+
+        input {
+            margin-left: 10px;
+            text-align: center;
+        }
     }
 
     .outputWrapper {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-gap: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
         margin-top: 50px;
         // max-width: 650px;
         max-height: 450px;
@@ -178,10 +202,6 @@ $repeat: 20;  // How often you want the pattern to repeat.
         padding: 0 10px;
         overflow: scroll;
         // height: 100%;
-    }
-    .disabled {
-        opacity: .5;
-        pointer-events: none;
     }
     .groupDataItem {
         margin: 5px 0;

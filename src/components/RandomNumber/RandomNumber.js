@@ -48,7 +48,7 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
             <div className={`${style.row} ${style.numberOutput}`}>{renderOutput()}</div>
             <div className={`${style.row}`}>
                 <div className={`${style.col} ${style.numberInput}`}>
-                    <label>Number of digit (Max. 10)</label>
+                    <label>Number of digit <span>(Max. 10)</span></label>
                     <input type="text" onChange={onInputChange} maxLength="2" value={curVal} />
                 </div>
                 <div className={`${style.col} ${style.numberTrigger}`}>

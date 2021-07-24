@@ -6,7 +6,11 @@
     padding: 35px 45px;
     display: inline-flex;
     flex-direction: row;
-
+    &.firstStep {
+        .panel {
+            border: none;
+        }
+    }
     .panel {
         border-top: 1px dashed var(--color-border);
         position: relative;
@@ -74,6 +78,7 @@
             margin-bottom: 15px;
             gap: 8px; 
             font-weight: bold;
+            cursor: pointer;
         }
     }
 
@@ -82,14 +87,28 @@
         justify-content: flex-start;
         margin-top: 15px;
         width: 325px;
-        gap: 15px;
+        gap: 6px;
 
     }
 
     .importButton {
+        padding: 10px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        display: inline-block;
+        line-height: 1;
+        font-weight: bold;
+        color: var(--color-white);
+        background-color: var(--color-cerulean);
 
         input {
             display: none;
+        }
+
+        &.disabled {
+            color: var(--color-white);
+            background-color: var(--color-silver);
+            pointer-events: none;
         }
     }
 
@@ -106,6 +125,7 @@
     .subtitle {
         text-align: center;
         font-size: 24px;
+        font-weight: bold;
         max-width: 375px;
         word-wrap: break-word;
 
@@ -125,15 +145,10 @@
         margin-top: 25px;
         @include flexAlignCenter;
         button {
-            margin: 0 15px;
+            margin: 0 10px;
             &:first-child {
               margin-left: 0px;   
             }
         }
-    }
-
-    .disabled {
-        opacity: .5;
-        pointer-events: none;
     }
 }

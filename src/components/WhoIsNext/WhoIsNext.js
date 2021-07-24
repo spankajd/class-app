@@ -165,7 +165,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${currentStep === 6 ? style.printPreview : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${!inputStage ? style.firstStep : ''} ${currentStep === 6 ? style.printPreview : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
@@ -200,11 +200,11 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                                         <label className={style.question}> How many students in your class? </label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
-                                <div className={`${style.buttomWrapper} ${ (   (!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')  ) ? style.disabled : ''}`}  >
-                                    {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    <Button primary label="Clear" onClick={onClearClick}></Button>
-                                    <Button primary label="Print" onClick={() => onPrintClick(1)}></Button>
-                                    <Button primary label="Submit" onClick={onSubmitClick}></Button>
+                                <div className={`${style.buttomWrapper} `}  >
+                                    {inputStage == 'nickname' && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
+                                    <Button primary label="Clear" onClick={onClearClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
+                                    <Button primary label="Print" onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
+                                    <Button primary label="Submit" onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
                                 </div>
                             </>)}
                     </div>

@@ -210,7 +210,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={`${style.groupbuilder} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${currentStep == 2 ? style.groupOutPut : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={`${style.groupbuilder} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''} ${!inputStage ? style.firstStep : ''} ${currentStep == 2 ? style.groupOutPut : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
@@ -245,11 +245,11 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                                         <label className={style.question}> How many students in your class? </label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
-                                <div className={`${style.buttomWrapper} ${ (   (!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')  ) ? style.disabled : ''}`}>
+                                <div className={`${style.buttomWrapper}`}>
                                     {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    <Button primary label="Clear" onClick={onClearClick}></Button>
-                                    <Button primary label="Print" onClick={() => onPrintClick(1)}></Button>
-                                    <Button primary label="Submit" onClick={onSubmitClick}></Button>
+                                    <Button primary label="Clear" onClick={onClearClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
+                                    <Button primary label="Print" onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
+                                    <Button primary label="Submit" onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -260,9 +260,9 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                         <div className={style.numberOfGroupWrapper}>
                             <div className={style.numberOfGroup}><label>Number of Groups</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
                             <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
-                                <Button primary label="Reset" onClick={() => onReset(2)}></Button>
-                                <Button primary label="Print" onClick={() => onPrintClick(2)}></Button>
-                                <Button primary label="Create groups" onClick={onSubmitConfirm}></Button>
+                                <Button primary label="Reset" onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
+                                <Button primary label="Print" onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
+                                <Button primary label={output ? "Shuffle group" : "Create groups"} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
                                 {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
                             </div>
                         </div>
@@ -275,7 +275,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 3 && output && (
                     <>
-                        <div>Do you want to re-shuffle the group?</div>
+                        <div className={style.subtitle}>Do you want to re-shuffle the group?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label="Yes" onClick={onConfirmShuffle}></Button>
                             <Button primary label="Cancel" onClick={() => onCancel(2)}></Button>
@@ -286,7 +286,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 4 && (
                     <>
-                        <div>Do you want to reset the information on your students you have entered?</div>
+                        <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label="Yes" onClick={onResetConfirm}></Button>
                             <Button primary label="Cancel" onClick={onCancel}></Button>
@@ -297,7 +297,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 5 && (
                     <>
-                        <div>Do you want to override the nicknames you have entered?</div>
+                        <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label="Yes" onClick={onOverride}></Button>
                             <Button primary label="Cancel" onClick={onCancel}></Button>

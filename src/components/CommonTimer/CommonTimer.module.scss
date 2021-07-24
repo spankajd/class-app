@@ -12,7 +12,6 @@
         label {
             margin-top: 10px;
             text-align: center;
-            font-weight: bold;
         }
 
         input {
@@ -26,12 +25,12 @@
         }
     }
     .separator {
-        font-size: 5rem;
+        font-size: 4.5rem;
         margin: 0 5px;
         line-height: 8rem;
-
+        color: var(--color-hippieBlue);
         span {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             display: inline-block;
         }
     }

@@ -1,9 +1,11 @@
 @import-normalize;
+@import '../assets/fonts/index.css';
 
 :root{
     --color-blumine: #15617C;
     --color-silverChalice: #B0B0B0;
     --color-gray: #868686;
+    --color-dustyGray : #9B9B9B;
     --color-silver : #C8C8C8;
     --color-mineShaft :#333333;
     --color-tundora: #424242;
@@ -22,6 +24,9 @@
     --color-blackSqueeze : #F1F7FA;
     --color-concrete : #F2F2F2;
     --color-mercury : #E8E8E8;
+    --color-cerulean : #00A6EF;
+    --color-bahamaBlue : #026592;
+    --color-hippieBlue : #6C9BB4;
 
     --color-black : rgba(0,0,0,1);
     --color-black_1 : rgba(0,0,0,.1);
@@ -76,6 +81,14 @@ body {
     height: 100vh;
     width: 100vw;
     position: fixed;
+    font-family: 'Myriad Web Pro';
 
     color: var(--color-primary_font);
+}
+
+input {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-dustyGray);
 }

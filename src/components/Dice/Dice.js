@@ -94,7 +94,7 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
             </div>)}
             <div className={`${style.row}`}>
             <div className={`${style.col} ${style.diceInput}`}>
-                <label>Number of dice (Max. 5)</label>
+                <label>Number of dice <span>(Max. 5)</span></label>
                 <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
             </div>
             <div className={`${style.col} ${style.diceTrigger}`}>

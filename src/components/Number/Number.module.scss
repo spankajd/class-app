@@ -2,7 +2,7 @@
     
     padding: 25px;
 
-    width: 420px;
+    width: 435px;
     height:235px;
     
     .labelRow {
@@ -14,10 +14,11 @@
             align-items: center;
             justify-content: space-evenly;
             width: 60%;
-            margin-top: 20px; 
+            margin-top: 20px;
 
             label {
-                color: var(--color-silver);
+                color: var(--color-silver); 
+                font-size: 22px;
                 &.active {
                     color: var(--color-tundora);
                 }

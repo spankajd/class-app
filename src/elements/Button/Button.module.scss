@@ -1,18 +1,22 @@
 
 .button {
-    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 700;
     border: 0;
-    border-radius: .25em;
+    border-radius: 25px;
     cursor: pointer;
     display: inline-block;
     line-height: 1;
+    font-weight: bold;
+
     &.button--primary {
-        color: white;
-        background-color: #1ea7fd;
+        color: var(--color-white);
+        background-color: var(--color-cerulean);
+
+        &:hover {
+            background-color: var(--color-bahamaBlue);
+        }
     }
     &.button--secondary {
-        color: #333;
+        color: var(--color-silver);
         background-color: transparent;
         box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
     }
@@ -30,9 +34,12 @@
     }
 
     &.button--disabled {
-        opacity: .7;
+        color: var(--color-white);
+        background-color: var(--color-silver);
         pointer-events: none;
     }
+
+    
   }
   
   

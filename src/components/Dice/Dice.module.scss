@@ -28,10 +28,18 @@
     }
 
     .diceInput {
+        label {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--color-dustyGray);
+        }
+        span {
+            font-weight: 400;
+        }
         input {
-            width: 45px;
-            height: 35px;
-            margin-left: 10px;
+            width: 40px;
+            height: 30px;
+            margin-left: 15px;
             text-align: center;
         }
     }
