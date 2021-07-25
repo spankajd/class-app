@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 
 import TimeUnit from '../../elements/TimeUnit/TimeUnit';
 import { calculateTime } from '../../helper';
@@ -10,6 +9,7 @@ import style from './CommonTimer.module.scss';
 
 const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate }) => {
 
+    const { t, i18n } = useTranslation();
     const [hourStr, setHourStr] = useState('00');
     const [minuteStr, setMinuteStr] = useState('00');
     const [secondStr, setSecondStr] = useState('00');
@@ -114,17 +114,17 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate }) => {
             </div> */}
             <div className={`${style.group} ${style.hour}`}>
                 <input type="text" name="hour" value={hourStr} onChange={onChange} readOnly={!editMode} />
-                <label>{i18n.t('timer.hours')}</label>
+                <label>{t('timer.hours')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.minute}`}>
                 <input type="text" name="minute" value={minuteStr} onChange={onChange} readOnly={!editMode}/>
-                <label>{i18n.t('timer.minutes')}</label>
+                <label>{t('timer.minutes')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.second}`}>
                 <input type="text" name="second" value={secondStr} onChange={onChange} readOnly={!editMode} />
-                <label>{i18n.t('timer.seconds')}</label>
+                <label>{t('timer.seconds')}</label>
             </div>
 
         </div>

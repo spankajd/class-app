@@ -1,6 +1,5 @@
-
 import React, { useState, useRef } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 import { useReactToPrint } from 'react-to-print';
 import QRCode from 'qrcode.react';
 
@@ -11,6 +10,7 @@ import Button from '../../elements/Button/Button';
 
 
 const QRcode = ({ onCompClick, onCompClose, count }) => {
+    const { t, i18n } = useTranslation();
     const placeHolder = "https://www.klett-sprachen.de/";
     const [inputVal, setInputVal] = useState("");
     const [qrInput, setQrInput] = useState(placeHolder);
@@ -33,12 +33,12 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
     return (
         <Holder className={style.qrcode} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.title}>Title {count}</div>
-            <div className={style.subtitle}>{i18n.t('qrcode.instruction')}</div>
+            <div className={style.subtitle}>{t('qrcode.instruction')}</div>
             <input className={style.input} type="text" placeholder={placeHolder} value={inputVal} onChange={onInputChange}></input>
             <div className={style.qrContainer} ref={componentRef}>
                 <QRCode value={qrInput} renderAs="svg"></QRCode>
             </div>
-            <Button primary label={i18n.t("whoisnext.print")} onClick={print} />
+            <Button primary label={t("whoisnext.print")} onClick={print} />
         </Holder>
     );
 };

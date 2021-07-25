@@ -11,7 +11,7 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
-    lng: "ger",
+    lng: "en",
     fallbackLng: "en", // use en if detected lng is not available
 
     keySeparator: false, // we do not use keys in form messages.welcome

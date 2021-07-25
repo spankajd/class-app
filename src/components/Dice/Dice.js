@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 import Button from '../../elements/Button/Button';
 
 import style from './Dice.module.scss';
@@ -8,6 +8,7 @@ import { generateRandomNumber } from '../HigherOrder/generateRandomNumber';
 
 const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
 
+    const { t, i18n } = useTranslation();
     const dice_1 = useRef();
     const dice_2 = useRef();
     const dice_3 = useRef();
@@ -94,11 +95,11 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
             </div>)}
             <div className={`${style.row}`}>
             <div className={`${style.col} ${style.diceInput}`}>
-                <label>{i18n.t('number.numberOfDice')}</label>
+                <label>{t('number.numberOfDice')}</label>
                 <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
             </div>
             <div className={`${style.col} ${style.diceTrigger}`}>
-                <Button label={i18n.t('number.roll')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
+                <Button label={t('number.roll')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
             </div>
             </div>
             

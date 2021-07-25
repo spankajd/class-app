@@ -1,6 +1,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
 import RadioButton from '../../elements/RadioButton/RadioButton';
@@ -13,6 +13,7 @@ import ToggleButton from '../../elements/ToggleButton/ToggleButton';
 
 const Timer = ({ count = 1, onCompClick, onCompClose }) => {
 
+    const { t, i18n } = useTranslation();
     const [intervalStarted, setIntervalStarted] = useState(false);
     const [resetFlag, setResetFlag] = useState(false);
     const [pauseFlag, setPauseFlag] = useState(false);
@@ -65,9 +66,9 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
                 Timer {count}
             </div>
             <div className={style.labelRow}>
-                <label className={!selectedTimer ? style.active : ''}>{i18n.t('timer.standardtimer')}</label>
+                <label className={!selectedTimer ? style.active : ''}>{t('timer.standardtimer')}</label>
                 <ToggleButton onChange={onRadioChange} />
-                <label className={selectedTimer ? style.active : ''}>{i18n.t('timer.countdowntimer')}</label>
+                <label className={selectedTimer ? style.active : ''}>{t('timer.countdowntimer')}</label>
             </div>
             <div className={style.row}>
                 {selectedTimer ?
@@ -80,9 +81,9 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
                 {intervalStarted || resetFlag ? (<>
                     {pauseFlag ? (<Button primary label="Resume" onClick={onResumeClick}></Button>) :
                         (<Button primary label="Pause" onClick={onPauseClick}></Button>)}
-                    <Button primary label={i18n.t('timer.reset')} onClick={onResetClick}></Button>
+                    <Button primary label={t('timer.reset')} onClick={onResetClick}></Button>
                 </>) :
-                    (<Button primary label={i18n.t('timer.start')} onClick={onStartClick}></Button>)}
+                    (<Button primary label={t('timer.start')} onClick={onStartClick}></Button>)}
             </div>
         </Holder >
     );

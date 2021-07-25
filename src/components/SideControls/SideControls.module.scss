@@ -81,4 +81,14 @@
         cursor: -webkit-grabbing;
         cursor: grabbing;
     }
+    .dropdownWrapper {
+        width: 75px;
+        // padding: 0;
+
+        .dropdown {
+            width: 100%;
+        }
+    }
+
+    
 }

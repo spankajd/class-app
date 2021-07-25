@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 import Slider from "react-slick";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -12,6 +12,7 @@ import style from './ImageGallary.module.scss';
 
 const ImageGallary = ({ dataset, onSelect }) => {
 
+    const { t, i18n } = useTranslation();
     const [dropdownOptions, setDropdownOptions] = useState(null);
     const [selectedOption, setSelectedOption] = useState('');
     const [selectedDataSet, setSelectedDataSet] = useState(null);
@@ -90,7 +91,7 @@ const ImageGallary = ({ dataset, onSelect }) => {
     return (
         <div className={style.imageGallary}>
             <div className={style.dropdownWrapper}>
-                <label>{i18n.t("background.category")}</label>
+                <label>{t("background.category")}</label>
                 {dropdownOptions && (<Dropdown options={dropdownOptions} onChange={onDropdownSelect} value={selectedOption} className={style.dropdown} placeholder="Select an option" />)}
             </div>
             

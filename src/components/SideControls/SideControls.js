@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next'
 import Draggable from 'react-draggable';
+
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 import { DownArrow, ClearScreenIcon, CopyRightIcon, ScreenLockIcon } from '../../elements/Icon/Icon';
 
@@ -8,7 +12,13 @@ import style from './SideControls.module.scss';
 const SideControls = ({ onItemClick, clearAll }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const dropdownOptions = ['en', 'ger'];
+    const { t, i18n } = useTranslation()
+    const [selectedOption, setSelectedOption] = useState(i18n.language);
 
+    const onDropdownSelect = e => {
+      i18n.changeLanguage(e.value)
+    }
 
     const onTriggerClick = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -16,6 +26,10 @@ const SideControls = ({ onItemClick, clearAll }) => {
 
     const onClearAllClick = (e) => {
         if (clearAll) clearAll();
+    }
+
+    const onCopyRightClick = () => {
+        alert('on Copy rights click');
     }
 
     const onScreenLockClick = () => {
@@ -33,7 +47,10 @@ const SideControls = ({ onItemClick, clearAll }) => {
                     </div>
                 </div>
                 <div className={style.itemWrapper}>
-                    <div className={`${style.item} ${style.copyRight}`} onClick={onClearAllClick}>
+                    <div className={`${style.item} ${style.dropdownWrapper}`}>
+                        <Dropdown options={dropdownOptions} onChange={onDropdownSelect} value={selectedOption} className={style.dropdown} placeholder="Language" />
+                    </div>
+                    <div className={`${style.item} ${style.copyRight}`} onClick={onCopyRightClick}>
                         <CopyRightIcon />
                     </div>
                     <div className={style.item} onClick={onClearAllClick}>

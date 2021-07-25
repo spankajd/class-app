@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 
 import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
@@ -24,6 +24,7 @@ const NUMBER = 'number';
 const SYMBOLS = 'symbols';
 
 const GroupBuilder = ({ onCompClick, onCompClose }) => {
+    const { t, i18n } = useTranslation();
 
     const popUpSteps = [3, 4, 5];
     const [inputStage, setInputStage] = useState('');
@@ -221,21 +222,21 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                 (<>
                     <div className={style.panel}>
                         <div className={style.step}>1</div>
-                        <div className={style.title}>{i18n.t('whoisnext.chooseformat')}</div>
+                        <div className={style.title}>{t('whoisnext.chooseformat')}</div>
                         <div className={style.controls}>
                             <label>
                                 <RadioButton name="group_step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
-                                <span className={style.label}>{i18n.t('whoisnext.nicknames')}</span>
+                                <span className={style.label}>{t('whoisnext.nicknames')}</span>
                             </label>
 
                             <label>
                                 <RadioButton name="group_step" id={NUMBER} value={NUMBER} onChange={onSelectStage} checked={inputStage == NUMBER}></RadioButton>
-                                <span className={style.label}>{i18n.t('whoisnext.numbers')}</span>
+                                <span className={style.label}>{t('whoisnext.numbers')}</span>
                             </label>
 
                             <label>
                                 <RadioButton name="group_step" id={SYMBOLS} value={SYMBOLS} onChange={onSelectStage} checked={inputStage == SYMBOLS}></RadioButton>
-                                <span className={style.label}>{i18n.t('whoisnext.symbols')}</span>
+                                <span className={style.label}>{t('whoisnext.symbols')}</span>
                             </label>
                         </div>
                     </div>
@@ -243,19 +244,19 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                         {inputStage &&
                             (<>
                                 <span className={style.step}>2</span>
-                                <div className={style.title}>{inputStage == NICKNAME ? i18n.t('whoisnext.enterorimportdata') : 'Enter data'}</div>
+                                <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
 
                                 {inputStage == NICKNAME ? (
                                     <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
                                     (<>
-                                        <label className={style.question}>{i18n.t('whoisnext.howmanystudent')}</label>
+                                        <label className={style.question}>{t('whoisnext.howmanystudent')}</label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
                                 <div className={`${style.buttomWrapper}`}>
                                     {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    <Button primary label={i18n.t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                    <Button primary label={i18n.t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                    <Button primary label={i18n.t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -264,11 +265,11 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                 currentStep == 2 && (
                     <>
                         <div className={style.numberOfGroupWrapper}>
-                            <div className={style.numberOfGroup}><label>{i18n.t('groupbuilder.numberofgroups')}</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
+                            <div className={style.numberOfGroup}><label>{t('groupbuilder.numberofgroups')}</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
                             <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
-                                <Button primary label={i18n.t('whoisnext.reset')} onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
-                                <Button primary label={i18n.t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
-                                <Button primary label={output ? i18n.t('groupbuilder.shufflegroups') : i18n.t('groupbuilder.creategroups')} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
+                                <Button primary label={t('whoisnext.reset')} onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
+                                <Button primary label={t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
+                                <Button primary label={output ? t('groupbuilder.shufflegroups') : t('groupbuilder.creategroups')} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
                                 {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
                             </div>
                         </div>
@@ -283,8 +284,8 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to re-shuffle the group?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
-                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
+                            <Button primary label={t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
+                            <Button primary label={t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
                         </div>
                     </>
                 )
@@ -294,8 +295,8 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onResetConfirm}></Button>
-                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
+                            <Button primary label={t('whoisnext.cancel')} onClick={onCancel}></Button>
                         </div>
                     </>
                 )
@@ -305,8 +306,8 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onOverride}></Button>
-                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>
+                            <Button primary label={t('whoisnext.cancel')} onClick={onCancel}></Button>
                         </div>
                     </>
                 )

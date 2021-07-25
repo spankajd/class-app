@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 import DigitRoll from 'digit-roll-react';
 
 import Button from '../../elements/Button/Button';
@@ -9,6 +9,7 @@ import { generateRandomNumber } from '../HigherOrder/generateRandomNumber';
 import style from './RandomNumber.module.scss';
 
 const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
+    const { t, i18n } = useTranslation();
     const numArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     const [curVal, setCurrentVal] = useState(1);
@@ -48,11 +49,11 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
             <div className={`${style.row} ${style.numberOutput}`}>{renderOutput()}</div>
             <div className={`${style.row}`}>
                 <div className={`${style.col} ${style.numberInput}`}>
-                    <label>{i18n.t('number.numberOfDigit')}</label>
+                    <label>{t('number.numberOfDigit')}</label>
                     <input type="text" onChange={onInputChange} maxLength="2" value={curVal} />
                 </div>
                 <div className={`${style.col} ${style.numberTrigger}`}>
-                    <Button label={i18n.t('number.generate')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
+                    <Button label={t('number.generate')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
                 </div>
             </div>
         </div>

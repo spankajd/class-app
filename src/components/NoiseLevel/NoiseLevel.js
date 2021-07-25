@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 
 import Holder from '../../elements/Holder/Holder';
 import Signal from '../../elements/Signal/Signal';
@@ -26,6 +26,7 @@ var sensitivity = 1.5;
 
 const NoiseLevel = ({ onCompClick, onCompClose }) => {
 
+    const { t, i18n } = useTranslation();
     const [maxNoise, setMaxNoise] = useState(75);
     const [currentNoise, setCurrentNoise] = useState(0);
     const [noiseLimit, setNoiseLimit] = useState(4);
@@ -208,27 +209,27 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
         <Holder className={style.noiseLevel} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={`${style.col} ${style.leftPanel}`}>
                 <div className={style.row}>
-                    <span className={style.label}>{i18n.t('noiselevel.maximumnoise')}</span>
+                    <span className={style.label}>{t('noiselevel.maximumnoise')}</span>
                     <input className={style.input} type="text" onChange={onMaxNoiseUpdate} value={maxNoise} />
                 </div>
                 <div className={style.row}>
-                    <div className={style.label}>{i18n.t('noiselevel.noiselimit')}</div>
+                    <div className={style.label}>{t('noiselevel.noiselimit')}</div>
                     <input className={style.input} type="text" onChange={onNoiseLimitUpdate} value={noiseLimit} />
                 </div>
                 <div className={`${style.col} ${style.sensitivityWrapper}`}>
-                    <div className={style.label}>{i18n.t('noiselevel.sensitivity')}</div>
+                    <div className={style.label}>{t('noiselevel.sensitivity')}</div>
                     <div className={`${style.row} ${style.optionWrapper}`}>
                         <label>
                             <RadioButton name="sensitivity" id="low" value="low" onChange={onRadioChange}></RadioButton>
-                            <span className={style.label}>{i18n.t('noiselevel.low')}</span>
+                            <span className={style.label}>{t('noiselevel.low')}</span>
                         </label>
                         <label>
                             <RadioButton name="sensitivity" id="medium" value="medium" onChange={onRadioChange}></RadioButton>
-                            <span className={style.label}>{i18n.t('noiselevel.medium')}</span>
+                            <span className={style.label}>{t('noiselevel.medium')}</span>
                         </label>
                         <label>
                             <RadioButton name="sensitivity" id="high" value="high" onChange={onRadioChange}></RadioButton>
-                            <span className={style.label}>{i18n.t('noiselevel.high')}</span>
+                            <span className={style.label}>{t('noiselevel.high')}</span>
                         </label>
                     </div>
                 </div>
@@ -236,7 +237,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                     <input className={style.input} type="text" placeholder={'The noise level is being exceeded'} />
                 </div>
                 <div className={`${style.row} ${style.bottomPanel}`}>
-                    <Button primary label={startMic ? i18n.t('noiselevel.stop') : i18n.t('noiselevel.start')} onClick={onStartClick}></Button>
+                    <Button primary label={startMic ? t('noiselevel.stop') : t('noiselevel.start')} onClick={onStartClick}></Button>
                 </div>
             </div>
             <div className={`${style.col} ${style.progressWrapper}`}>
@@ -246,7 +247,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                 </div>
                 <label className={style.counterWrapper}>
                     <input type="text" readyonly value={noiseCounter} />
-                    <span className={style.label}>{i18n.t('noiselevel.counter')}</span>
+                    <span className={style.label}>{t('noiselevel.counter')}</span>
                 </label>
             </div>
         </Holder>

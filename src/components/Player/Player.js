@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next'
 import * as Icon from '../../elements/Icon/Icon';
 
 import style from './Player.module.scss';
 
 const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
 
+    const { t, i18n } = useTranslation();
     const [isMenuOpen, setIsMenuOpen] = useState(true);
-
 
     const onMenuTriggerClick = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -33,7 +33,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="symbols">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.symbols')}</span>
+                                <span>{t('widgetbar.symbols')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconSymbol className={style.icon}></Icon.IconSymbol>
@@ -46,7 +46,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="teacher">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.teacher')}</span>
+                                <span>{t('widgetbar.teacher')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconTeacher className={style.icon}></Icon.IconTeacher>
@@ -62,7 +62,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="whoisnext">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.whoisnext')}</span>
+                                <span>{t('widgetbar.whoisnext')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconWhoIsNext className={style.icon}></Icon.IconWhoIsNext>
@@ -75,7 +75,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="groupbuilder">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.groupbuilder')}</span>
+                                <span>{t('widgetbar.groupbuilder')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconGroupBuilder className={style.icon}></Icon.IconGroupBuilder>
@@ -88,7 +88,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="noiselevel">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.noiselevel')}</span>
+                                <span>{t('widgetbar.noiselevel')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconNoiseLevel className={style.icon}></Icon.IconNoiseLevel>
@@ -101,7 +101,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="timer">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.timer')}</span>
+                                <span>{t('widgetbar.timer')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconTimer className={style.icon}></Icon.IconTimer>
@@ -116,7 +116,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="text">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.easytext')}</span>
+                                <span>{t('widgetbar.easytext')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconEasyText className={style.icon}></Icon.IconEasyText>
@@ -129,7 +129,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="number">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.number')}</span>
+                                <span>{t('widgetbar.number')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconNumber className={style.icon}></Icon.IconNumber>
@@ -144,7 +144,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="webcam">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.webcam')}</span>
+                                <span>{t('widgetbar.webcam')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconWebCam className={style.icon}></Icon.IconWebCam>
@@ -157,7 +157,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="qrcode">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.qrcode')}</span>
+                                <span>{t('widgetbar.qrcode')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconQRCode className={style.icon}></Icon.IconQRCode>
@@ -170,7 +170,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onPostBoxClick} data-id="postbox">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.postbox')}</span>
+                                <span>{t('widgetbar.postbox')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconPostbox className={style.icon}></Icon.IconPostbox>
@@ -183,7 +183,7 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
                     <div className={style.menuItemContainer}>
                         <button type="button" className={style.menuItem} onClick={onMenuItemClick} data-id="background">
                             <div className={style.menuItemLabel}>
-                                <span>{i18n.t('widgetbar.background')}</span>
+                                <span>{t('widgetbar.background')}</span>
                             </div>
                             <span className={style.menuItemContent}>
                                 <Icon.IconBackground className={style.icon}></Icon.IconBackground>

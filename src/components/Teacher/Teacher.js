@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import i18n from '../../i18n';
+import { useTranslation } from 'react-i18next';
 
 import Holder from '../../elements/Holder/Holder';
 import Signal from '../../elements/Signal/Signal';
@@ -17,6 +17,7 @@ const GREEN = 'green';
 
 const Teacher = ({ onCompClick, onCompClose }) => {
 
+    const { t, i18n } = useTranslation();
     const [isRedActive, setIsRedActive] = useState(false);
     const [isYellowActive, setIsYellowActive] = useState(false);
     const [isGreenActive, setIsGreenActive] = useState(false);
@@ -57,9 +58,9 @@ const Teacher = ({ onCompClick, onCompClose }) => {
             </div>
             <div className={`${style.col}  ${style.labelWrapper}`}>
                 <div className={style.labelContainer}>
-                    <div className={isRedActive && style.redActive}>{i18n.t('teacher.notavailable')}</div>
-                    <div className={isYellowActive && style.yellowActive}>{i18n.t('teacher.ifveryurgent')}</div>
-                    <div className={isGreenActive && style.greenActive}>{i18n.t('teacher.available')}</div>
+                    <div className={isRedActive && style.redActive}>{t('teacher.notavailable')}</div>
+                    <div className={isYellowActive && style.yellowActive}>{t('teacher.ifveryurgent')}</div>
+                    <div className={isGreenActive && style.greenActive}>{t('teacher.available')}</div>
                 </div>
             </div>
         </Holder>
