@@ -1,5 +1,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
+import i18n from '../../i18n';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
 import RadioButton from '../../elements/RadioButton/RadioButton';
@@ -64,9 +65,9 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
                 Timer {count}
             </div>
             <div className={style.labelRow}>
-                <label className={!selectedTimer ? style.active : ''}>Standard timer</label>
+                <label className={!selectedTimer ? style.active : ''}>{i18n.t('timer.standardtimer')}</label>
                 <ToggleButton onChange={onRadioChange} />
-                <label className={selectedTimer ? style.active : ''}>Countdown timer</label>
+                <label className={selectedTimer ? style.active : ''}>{i18n.t('timer.countdowntimer')}</label>
             </div>
             <div className={style.row}>
                 {selectedTimer ?
@@ -79,9 +80,9 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
                 {intervalStarted || resetFlag ? (<>
                     {pauseFlag ? (<Button primary label="Resume" onClick={onResumeClick}></Button>) :
                         (<Button primary label="Pause" onClick={onPauseClick}></Button>)}
-                    <Button primary label="Reset" onClick={onResetClick}></Button>
+                    <Button primary label={i18n.t('timer.reset')} onClick={onResetClick}></Button>
                 </>) :
-                    (<Button primary label="Start" onClick={onStartClick}></Button>)}
+                    (<Button primary label={i18n.t('timer.start')} onClick={onStartClick}></Button>)}
             </div>
         </Holder >
     );

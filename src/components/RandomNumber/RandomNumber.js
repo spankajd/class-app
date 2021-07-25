@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import i18n from '../../i18n';
 import DigitRoll from 'digit-roll-react';
 
 import Button from '../../elements/Button/Button';
@@ -48,11 +48,11 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
             <div className={`${style.row} ${style.numberOutput}`}>{renderOutput()}</div>
             <div className={`${style.row}`}>
                 <div className={`${style.col} ${style.numberInput}`}>
-                    <label>Number of digit <span>(Max. 10)</span></label>
+                    <label>{i18n.t('number.numberOfDigit')}</label>
                     <input type="text" onChange={onInputChange} maxLength="2" value={curVal} />
                 </div>
                 <div className={`${style.col} ${style.numberTrigger}`}>
-                    <Button label="Generate" primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
+                    <Button label={i18n.t('number.generate')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
                 </div>
             </div>
         </div>

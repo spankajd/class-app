@@ -1,5 +1,5 @@
-
 import React, { useState, useRef, useEffect } from 'react';
+import i18n from '../../i18n';
 import Button from '../../elements/Button/Button';
 
 import style from './Dice.module.scss';
@@ -94,11 +94,11 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
             </div>)}
             <div className={`${style.row}`}>
             <div className={`${style.col} ${style.diceInput}`}>
-                <label>Number of dice <span>(Max. 5)</span></label>
+                <label>{i18n.t('number.numberOfDice')}</label>
                 <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
             </div>
             <div className={`${style.col} ${style.diceTrigger}`}>
-                <Button label="Roll" primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
+                <Button label={i18n.t('number.roll')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
             </div>
             </div>
             

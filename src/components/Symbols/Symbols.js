@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import i18n from '../../i18n';
 
 import Holder from '../../elements/Holder/Holder';
 import Tile from '../../elements/Tile/Tile';
@@ -42,24 +43,24 @@ const Symbols = ({ onCompClick, onCompClose }) => {
     return (
         <Holder className={style.symbols} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.symbolsRow}>
-                <Tile disabled={validate(1)} label="Individual Work" onClick={onTileClick} id={1}>
+                <Tile disabled={validate(1)} label={i18n.t('symbol.individualwork')} onClick={onTileClick} id={1}>
                     <IndividualWork />
                 </Tile>
-                <Tile disabled={validate(2)} label="Partner work" onClick={onTileClick} id={2}>
+                <Tile disabled={validate(2)} label={i18n.t('symbol.partnerwork')} onClick={onTileClick} id={2}>
                     <PartnerWork />
                 </Tile>
-                <Tile disabled={validate(3)} label="Work in groups" onClick={onTileClick} id={3}>
+                <Tile disabled={validate(3)} label={i18n.t('symbol.workingroups')} onClick={onTileClick} id={3}>
                     <WorkInGroup />
                 </Tile>
             </div>
             <div className={style.symbolsRow}>
-                <Tile disabled={validate(4)} label="Entire class moving" onClick={onTileClick} id={4}>
+                <Tile disabled={validate(4)} label={i18n.t('symbol.entireclassmoving')} onClick={onTileClick} id={4}>
                     <EntireClass />
                 </Tile>
-                <Tile label="Teacher up front" onClick={onTileClick} id={5}>
+                <Tile label={i18n.t('symbol.teacherupfront')} onClick={onTileClick} id={5}>
                     <TeacherUpFront />
                 </Tile>
-                <Tile label="Silence" onClick={onTileClick} id={6}>
+                <Tile label={i18n.t('symbol.silence')} onClick={onTileClick} id={6}>
                     <Silence />
                 </Tile>
             </div>

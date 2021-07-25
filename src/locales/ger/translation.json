@@ -1,0 +1,89 @@
+{
+  "widgetbar.symbols": "Sozialform",
+  "widgetbar.teacher": "Lehrer",
+  "widgetbar.whoisnext": "Nächste:r bitte!",
+  "widgetbar.groupbuilder": "Gruppen-Generator",
+  "widgetbar.noiselevel": "Gruppen-Generator",
+  "widgetbar.timer": "Timer",
+  "widgetbar.easytext": "Text-Editor",
+  "widgetbar.number": "Würfel und Zahl",
+  "widgetbar.webcam": "Webcam",
+  "widgetbar.qrcode": "QR Code",
+  "widgetbar.postbox": "Screenshot",
+  "widgetbar.background": "Hintergründe",
+
+  "symbol.individualwork":"Einzelarbeit",
+  "symbol.partnerwork":"Partnerarbeit",
+  "symbol.workingroups":"Gruppenarbeit",
+  "symbol.teacherupfront":"Lehrer:in im Fokus",
+  "symbol.silence":"Stille",
+  "symbol.entireclassmoving":"Klasse aktiv",
+
+
+
+  "teacher.notavailable":"Nicht verfügbar",
+  "teacher.ifveryurgent":"Wenn dringend",
+  "teacher.available":"Verfügbar",
+
+
+  "whoisnext.chooseformat":"Format wählen",
+  "whoisnext.nicknames":"Spitznamen",
+  "whoisnext.numbers":"Zahlen",
+  "whoisnext.symbols":"Symbole",
+  "whoisnext.enterorimportdata":"Spitznamen eingeben",
+  "whoisnext.import":"Importieren",
+  "whoisnext.clear":"Löschen",
+  "whoisnext.print":"Drucken",
+  "whoisnext.submit":"Übernehmen",
+  "whoisnext.resetWarning":"Wirklich alle Eingaben zu ihren Schüler:innen (z.B. Spitznamen, Anzahl) zurücksetzen?",
+  "whoisnext.reset":"Zurücksetzen",
+  "whoisnext.choosenext":"Nächste:r bitte!",
+  "whoisnext.cancel":"Abbrechen",
+  "whoisnext.yes":"OK",
+  "whoisnext.howmanystudent":"Anzahl der Schüler:innen eingeben",
+  
+  "groupbuilder.numberofgroups":"Anzahl der Gruppen",
+  "groupbuilder.creategroups":"Gruppen erzeugen",
+  "groupbuilder.shufflegroups":"Neu mischen",
+
+
+  "noiselevel.maximumnoise":"Max. Pegel",
+  "noiselevel.noiselimit":"Wie oft überschreitbar?",
+  "noiselevel.sensitivity":"Empfindlichkeit",
+  "noiselevel.low":"gering",
+  "noiselevel.medium":"mittel",
+  "noiselevel.high":"hoch",
+  "noiselevel.start":"Start",
+  "noiselevel.stop":"Stop",
+  "noiselevel.counter":"Zähler",
+
+  "timer.standardtimer":"Timer (Standard)",
+  "timer.countdowntimer":"Timer (Countdown)",
+  "timer.hours":"Stunden",
+  "timer.minutes":"Minuten",
+  "timer.seconds":"Sekunden",
+  "timer.reset":"löschen",
+  "timer.start":"Start",
+  "timer.stop":"Stopp",
+
+  "easytext.title":"Text",
+
+  "number.dice":"Würfel",
+  "number.digit":"Zahl",
+  "number.numberOfDice":"Anzahl der Würfel (max. 5)",
+  "number.roll":"Würfeln",
+  "number.numberOfDigit":"Anzahl der Ziffern (max. 10)",
+  "number.generate":"Erzeugen",
+
+
+  "qrcode.instruction":"URL einer Website eingeben",
+  
+  "background.category":"Kategorie:",
+  "background.color":"Farben",
+  "background.pickcolors":"Farbe wählen",
+  "background.more":"Mehr"
+  
+  
+
+
+}

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import i18n from '../../i18n';
 import Holder from '../../elements/Holder/Holder';
 import Dice from '../Dice/Dice';
 import RandomNumber from '../RandomNumber/RandomNumber';
@@ -24,9 +25,9 @@ const Number = ({ onCompClick, onCompClose }) => {
         <Holder className={`${style.number}`} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.labelRow}>
                 <div className={style.labelContainer}>
-                    <label className={!selectedFlag ? style.active : ''}>Dice</label>
+                    <label className={!selectedFlag ? style.active : ''}>{i18n.t('number.dice')}</label>
                     <ToggleButton onChange={onRadioChange} />
-                    <label className={selectedFlag ? style.active : ''}>Digit</label>
+                    <label className={selectedFlag ? style.active : ''}>{i18n.t('number.digit')}</label>
                 </div>
             </div>
             <div className={style.row}>

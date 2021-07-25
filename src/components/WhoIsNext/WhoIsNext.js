@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
+import i18n from '../../i18n';
 import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
@@ -17,6 +17,10 @@ import * as Symbols from "../../assets/symbols";
 // 2. confirmation for random output ( Yes - 3 / Reset - 4)
 // 3. next random ( Yes - 3 / Reset - 4)
 // 4. reset ( Yes - 1 / Cancel - 4)
+
+const NICKNAME = 'nickname';
+const NUMBER = 'number';
+const SYMBOLS = 'symbols';
 
 const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
@@ -131,7 +135,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
     const getRandomFromList = () => {
         const random = Math.floor(Math.random() * (list.length));
-        if( inputStage == 'symbols') 
+        if( inputStage == SYMBOLS) 
             setOutput( React.createElement(Symbols[list.splice(random, 1)]) );
         else
             setOutput(list.splice(random, 1));
@@ -143,18 +147,18 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
     const generateRadomList = () => {
 
-        if (inputStage == 'nickname') {
+        if (inputStage == NICKNAME) {
             let arr = textAreaVal.split("\n");
             _.without(arr, ['', ' ']);
             setNumberOfStudent(arr.length);
             setList(arr);
-        } else if (inputStage == 'number') {
+        } else if (inputStage == NUMBER) {
             let tempArr = [];
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(`${inputStage} ${i + 1}`);
             }
             setList(tempArr);
-        } else if (inputStage == 'symbols'){
+        } else if (inputStage == SYMBOLS){
             let tempArr = [];
             let keys = _.keys(Symbols);
             for (let i = 0; i < numberOfStudent; i++) {
@@ -170,21 +174,21 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                 (<>
                     <div className={style.panel}>
                         <div className={style.step}>1</div>
-                        <div className={style.title}>Choose format</div>
+                        <div className={style.title}>{i18n.t('whoisnext.chooseformat')}</div>
                         <div className={style.controls}>
                             <label>
-                                <RadioButton name="step" id="nickname" value="nickname" onChange={onSelectStage} checked={inputStage == 'nickname'}></RadioButton>
-                                <span className={style.label}>Nickname</span>
+                                <RadioButton name="step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
+                                <span className={style.label}>{i18n.t('whoisnext.nicknames')}</span>
                             </label>
 
                             <label>
-                                <RadioButton name="step" id="number" value="number" onChange={onSelectStage} checked={inputStage == 'number'}></RadioButton>
-                                <span className={style.label}>Numbers</span>
+                                <RadioButton name="step" id={NUMBER} value={NUMBER} onChange={onSelectStage} checked={inputStage == NUMBER}></RadioButton>
+                                <span className={style.label}>{i18n.t('whoisnext.numbers')}</span>
                             </label>
 
                             <label>
-                                <RadioButton name="step" id="symbols" value="symbols" onChange={onSelectStage} checked={inputStage == 'symbols'}></RadioButton>
-                                <span className={style.label}>Symbols</span>
+                                <RadioButton name="step" id={SYMBOLS} value={SYMBOLS} onChange={onSelectStage} checked={inputStage == SYMBOLS}></RadioButton>
+                                <span className={style.label}>{i18n.t('whoisnext.symbols')}</span>
                             </label>
                         </div>
                     </div>
@@ -192,19 +196,19 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                         {inputStage &&
                             (<>
                                 <div className={style.step}>2</div>
-                                <div className={style.title}>{inputStage == 'nickname' ? 'Enter or import data' : 'Enter data'}</div>
+                                <div className={style.title}>{inputStage == NICKNAME ? i18n.t('whoisnext.enterorimportdata') : 'Enter data'}</div>
 
-                                {inputStage == 'nickname' ? (
+                                {inputStage == NICKNAME ? (
                                     <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
                                     (<>
-                                        <label className={style.question}> How many students in your class? </label>
+                                        <label className={style.question}>{i18n.t('whoisnext.howmanystudent')}</label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
                                 <div className={`${style.buttomWrapper} `}  >
-                                    {inputStage == 'nickname' && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    <Button primary label="Clear" onClick={onClearClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
-                                    <Button primary label="Print" onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
-                                    <Button primary label="Submit" onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
+                                    {inputStage == NICKNAME && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />{i18n.t('whoisnext.import')}</label>)}
+                                    <Button primary label={i18n.t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={i18n.t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={i18n.t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -214,9 +218,9 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want me to give you a random student who is next now?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Yes" onClick={onSubmitConfirm}></Button>
-                            <Button primary label="Cancel" onClick={() => onCancel(1)}></Button>
-                            <Button primary label="Reset" onClick={() => onReset(2)}></Button>
+                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onSubmitConfirm}></Button>
+                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
+                            <Button primary label={i18n.t('whoisnext.reset')} onClick={() => onReset(2)}></Button>
                         </div>
                     </>
                 )
@@ -226,9 +230,9 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>{output}</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Reset" onClick={() => onReset(3)}></Button>
-                            <Button primary label="Print" onClick={() => onPrintClick(3)}></Button>
-                            <Button primary label="Choose Next" onClick={onChooseNext}></Button>
+                            <Button primary label={i18n.t('whoisnext.reset')} onClick={() => onReset(3)}></Button>
+                            <Button primary label={i18n.t('whoisnext.print')} onClick={() => onPrintClick(3)}></Button>
+                            <Button primary label={i18n.t('whoisnext.choosenext')} onClick={onChooseNext}></Button>
                         </div>
                     </>
                 )
@@ -238,8 +242,8 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Cancel" onClick={onCancel}></Button>
-                            <Button primary label="Yes" onClick={onResetConfirm}></Button>
+                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onResetConfirm}></Button>
                         </div>
                     </>
                 )
@@ -249,8 +253,8 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Cancel" onClick={onCancel}></Button>
-                            <Button primary label="Yes" onClick={onOverride}></Button>
+                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onOverride}></Button>
                         </div>
                     </>
                 )
@@ -295,7 +299,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                                             border: "1px solid #aab0ba",
                                             padding: "8px",
                                             textAlign: "center"
-                                        }}>{ inputStage === 'symbols' ? React.createElement(Symbols[item]) : item}</td>
+                                        }}>{ inputStage === SYMBOLS ? React.createElement(Symbols[item]) : item}</td>
                                         <td style={{
                                             border: "1px solid #aab0ba",
                                             padding: "8px",

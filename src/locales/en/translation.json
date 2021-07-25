@@ -1,0 +1,85 @@
+{
+  "widgetbar.symbols": "symbols",
+  "widgetbar.teacher": "teacher",
+  "widgetbar.whoisnext": "who is next?",
+  "widgetbar.groupbuilder": "group builder",
+  "widgetbar.noiselevel": "noise level",
+  "widgetbar.timer": "timer",
+  "widgetbar.easytext": "easy text",
+  "widgetbar.number": "number",
+  "widgetbar.webcam": "webcam",
+  "widgetbar.qrcode": "qr code",
+  "widgetbar.postbox": "postbox",
+  "widgetbar.background": "background",
+
+  "symbol.individualwork":"individual work",
+  "symbol.partnerwork":"partner work",
+  "symbol.workingroups":"work in groups",
+  "symbol.teacherupfront":"teacher up front",
+  "symbol.silence":"silence",
+  "symbol.entireclassmoving":"entire class moving",
+
+
+
+  "teacher.notavailable":"Not available",
+  "teacher.ifveryurgent":"If very urgent",
+  "teacher.available":"Available",
+
+
+  "whoisnext.chooseformat":"Choose format",
+  "whoisnext.nicknames":"Nicknames",
+  "whoisnext.numbers":"Numbers",
+  "whoisnext.symbols":"Symbols",
+  "whoisnext.enterorimportdata":"Enter or import data",
+  "whoisnext.import":"Import",
+  "whoisnext.clear":"Clear",
+  "whoisnext.print":"Print",
+  "whoisnext.submit":"Submit",
+  "whoisnext.resetWarning":"Do you want to reset all information on students you have entered?",
+  "whoisnext.reset":"Reset",
+  "whoisnext.choosenext":"Choose next",
+  "whoisnext.cancel":"Cancel",
+  "whoisnext.yes":"Yes",
+  "whoisnext.howmanystudent":"How many students in your class",
+  
+  "groupbuilder.numberofgroups":"Number of groups",
+  "groupbuilder.creategroups":"Create groups",
+  "groupbuilder.shufflegroups":"Shuffle groups",
+
+
+  "noiselevel.maximumnoise":"Maximum Noise",
+  "noiselevel.noiselimit":"Noise limit",
+  "noiselevel.sensitivity":"Sensitivity",
+  "noiselevel.low":"Low",
+  "noiselevel.medium":"Medium",
+  "noiselevel.high":"High",
+  "noiselevel.start":"Start",
+  "noiselevel.stop":"Stop",
+  "noiselevel.counter":"Counter",
+
+  "timer.standardtimer":"Standard Timer",
+  "timer.countdowntimer":"Countdown timer",
+  "timer.hours":"Hours",
+  "timer.minutes":"Minutes",
+  "timer.seconds":"Seconds",
+  "timer.reset":"Reset",
+  "timer.start":"Start",
+  "timer.stop":"Stopp",
+
+  "easytext.title":"Title",
+
+  "number.dice":"Dice",
+  "number.digit":"Digit",
+  "number.numberOfDice":"Number of dice (Max 5)",
+  "number.roll":"Roll",
+  "number.numberOfDigit":"Number of digit (Max 10)",
+  "number.generate":"Generate",
+
+
+  "qrcode.instruction":"If you find a website of interest, please insert the URL here. A QR code will be generated for your students to scan.",
+  
+  "background.category":"Category",
+  "background.color":"Colors",
+  "background.pickcolors":"Pick colors",
+  "background.more":"More"
+}

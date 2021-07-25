@@ -1,5 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
+import i18n from '../../i18n';
+
 import TimeUnit from '../../elements/TimeUnit/TimeUnit';
 import { calculateTime } from '../../helper';
 
@@ -112,17 +114,17 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate }) => {
             </div> */}
             <div className={`${style.group} ${style.hour}`}>
                 <input type="text" name="hour" value={hourStr} onChange={onChange} readOnly={!editMode} />
-                <label>hours</label>
+                <label>{i18n.t('timer.hours')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.minute}`}>
                 <input type="text" name="minute" value={minuteStr} onChange={onChange} readOnly={!editMode}/>
-                <label>minutes</label>
+                <label>{i18n.t('timer.minutes')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.second}`}>
                 <input type="text" name="second" value={secondStr} onChange={onChange} readOnly={!editMode} />
-                <label>seconds</label>
+                <label>{i18n.t('timer.seconds')}</label>
             </div>
 
         </div>

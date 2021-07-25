@@ -1,5 +1,6 @@
 
 import React, { useRef, useState } from 'react';
+import i18n from '../../i18n';
 
 import style from './ColorPicker.module.scss';
 import colorPickerImage from '../../assets/images/img_colormap.gif';
@@ -135,9 +136,9 @@ const ColorPicker = ({ onChange }) => {
 
     return (
         <div className={style.colorPicker}>
-            <div className={style.title}>Colors</div>
+            <div className={style.title}>{i18n.t("background.color")}</div>
             <div className={style.pickColorWrapper}>
-                <div className={style.subtitle}>Pick color</div>
+                <div className={style.subtitle}>{i18n.t("background.pickcolors")}</div>
                 <img src={colorPickerImage} useMap="#colormap" alt="colormap" />
                 <map id="colormap" name="colormap" onMouseOut={mouseOutMap}>
                     <area shape="poly" coords="63,0,72,4,72,15,63,19,54,15,54,4" onClick={() => clickColor("#003366", -200, 54)} onMouseOver={() => mouseOverColor("#003366")} alt="#003366" />
@@ -272,7 +273,7 @@ const ColorPicker = ({ onChange }) => {
                 {/* <div id="divpreview" ref={divpreview} className={style.divpreview}></div> */}
             </div>
             <div className={style.html5ColorWrapper}>
-                <div className={style.subtitle}>More</div>
+                <div className={style.subtitle}>{i18n.t("background.more")}</div>
                 <input type="color" id="html5colorpicker" onChange={e => clickColor(e, -1, -1, 5)} value={html5colorpicker} />
             </div>
         </div>

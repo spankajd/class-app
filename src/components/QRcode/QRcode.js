@@ -1,5 +1,6 @@
 
 import React, { useState, useRef } from 'react';
+import i18n from '../../i18n';
 import { useReactToPrint } from 'react-to-print';
 import QRCode from 'qrcode.react';
 
@@ -32,12 +33,12 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
     return (
         <Holder className={style.qrcode} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.title}>Title {count}</div>
-            <div className={style.subtitle}>If you find a website of interest, please insert the URL here. QR code will be generated for your students to scan.</div>
+            <div className={style.subtitle}>{i18n.t('qrcode.instruction')}</div>
             <input className={style.input} type="text" placeholder={placeHolder} value={inputVal} onChange={onInputChange}></input>
             <div className={style.qrContainer} ref={componentRef}>
                 <QRCode value={qrInput} renderAs="svg"></QRCode>
             </div>
-            <Button primary label="Print" onClick={print} />
+            <Button primary label={i18n.t("whoisnext.print")} onClick={print} />
         </Holder>
     );
 };

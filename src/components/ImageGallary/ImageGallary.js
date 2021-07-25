@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import i18n from '../../i18n';
 import Slider from "react-slick";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -89,7 +90,7 @@ const ImageGallary = ({ dataset, onSelect }) => {
     return (
         <div className={style.imageGallary}>
             <div className={style.dropdownWrapper}>
-                <label>Category:</label>
+                <label>{i18n.t("background.category")}</label>
                 {dropdownOptions && (<Dropdown options={dropdownOptions} onChange={onDropdownSelect} value={selectedOption} className={style.dropdown} placeholder="Select an option" />)}
             </div>
             

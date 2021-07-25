@@ -1,5 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import i18n from '../../i18n';
+
 import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
@@ -16,6 +18,10 @@ import * as Symbols from "../../assets/symbols";
 // 2. Number of group input (  create group - 3 / Reset - 4)
 // 3. Group Created ( create group - 3 / Reset - 4)
 // 4. reset ( Yes - 1 / Cancel - 3)
+
+const NICKNAME = 'nickname';
+const NUMBER = 'number';
+const SYMBOLS = 'symbols';
 
 const GroupBuilder = ({ onCompClick, onCompClose }) => {
 
@@ -170,18 +176,18 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }
 
     const generateRadomList = () => {
-        if (inputStage == 'nickname') {
+        if (inputStage == NICKNAME) {
             let arr = textAreaVal.split("\n");
             _.without(arr, ['', ' '])
             setNumberOfStudent(arr.length);
             setList(arr);
-        } else if (inputStage == 'number') {
+        } else if (inputStage == NUMBER) {
             let tempArr = [];
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(`${inputStage} ${i + 1}`);
             }
             setList(tempArr);
-        } else if (inputStage == 'symbols'){
+        } else if (inputStage == SYMBOLS){
             let tempArr = [];
             let keys = _.keys(Symbols);
             for (let i = 0; i < numberOfStudent; i++) {
@@ -200,7 +206,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                 <div key={'1_1_'+counter} className={style.groupCol}>
                     <div key={'1_'+counter} className={style.groupTitle}>{key}</div>
                     <ul className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li key={counter++} className={`${style.groupDataItem} ${style.symbols}`}>{
-                        inputStage == 'symbols' ? React.createElement(Symbols[element]) : element
+                        inputStage == SYMBOLS ? React.createElement(Symbols[element]) : element
                         }</li>) : '')}</ul>
                 </div>
             )
@@ -215,21 +221,21 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                 (<>
                     <div className={style.panel}>
                         <div className={style.step}>1</div>
-                        <div className={style.title}>Choose format</div>
+                        <div className={style.title}>{i18n.t('whoisnext.chooseformat')}</div>
                         <div className={style.controls}>
                             <label>
-                                <RadioButton name="group_step" id="nickname" value="nickname" onChange={onSelectStage} checked={inputStage == 'nickname'}></RadioButton>
-                                <span className={style.label}>Nickname</span>
+                                <RadioButton name="group_step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
+                                <span className={style.label}>{i18n.t('whoisnext.nicknames')}</span>
                             </label>
 
                             <label>
-                                <RadioButton name="group_step" id="number" value="number" onChange={onSelectStage} checked={inputStage == 'number'}></RadioButton>
-                                <span className={style.label}>Numbers</span>
+                                <RadioButton name="group_step" id={NUMBER} value={NUMBER} onChange={onSelectStage} checked={inputStage == NUMBER}></RadioButton>
+                                <span className={style.label}>{i18n.t('whoisnext.numbers')}</span>
                             </label>
 
                             <label>
-                                <RadioButton name="group_step" id="symbols" value="symbols" onChange={onSelectStage} checked={inputStage == 'symbols'}></RadioButton>
-                                <span className={style.label}>Symbols</span>
+                                <RadioButton name="group_step" id={SYMBOLS} value={SYMBOLS} onChange={onSelectStage} checked={inputStage == SYMBOLS}></RadioButton>
+                                <span className={style.label}>{i18n.t('whoisnext.symbols')}</span>
                             </label>
                         </div>
                     </div>
@@ -237,19 +243,19 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                         {inputStage &&
                             (<>
                                 <span className={style.step}>2</span>
-                                <div className={style.title}>{inputStage == 'nickname' ? 'Enter or import data' : 'Enter data'}</div>
+                                <div className={style.title}>{inputStage == NICKNAME ? i18n.t('whoisnext.enterorimportdata') : 'Enter data'}</div>
 
-                                {inputStage == 'nickname' ? (
+                                {inputStage == NICKNAME ? (
                                     <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
                                     (<>
-                                        <label className={style.question}> How many students in your class? </label>
+                                        <label className={style.question}>{i18n.t('whoisnext.howmanystudent')}</label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                     </>)}
                                 <div className={`${style.buttomWrapper}`}>
-                                    {inputStage == 'nickname' && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    <Button primary label="Clear" onClick={onClearClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
-                                    <Button primary label="Print" onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
-                                    <Button primary label="Submit" onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == 'nickname' ) || (!numberOfStudent && inputStage != 'nickname')}></Button>
+                                    {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
+                                    <Button primary label={i18n.t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={i18n.t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={i18n.t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -258,11 +264,11 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                 currentStep == 2 && (
                     <>
                         <div className={style.numberOfGroupWrapper}>
-                            <div className={style.numberOfGroup}><label>Number of Groups</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
+                            <div className={style.numberOfGroup}><label>{i18n.t('groupbuilder.numberofgroups')}</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
                             <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
-                                <Button primary label="Reset" onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
-                                <Button primary label="Print" onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
-                                <Button primary label={output ? "Shuffle group" : "Create groups"} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
+                                <Button primary label={i18n.t('whoisnext.reset')} onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
+                                <Button primary label={i18n.t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
+                                <Button primary label={output ? i18n.t('groupbuilder.shufflegroups') : i18n.t('groupbuilder.creategroups')} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
                                 {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
                             </div>
                         </div>
@@ -277,8 +283,8 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to re-shuffle the group?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Yes" onClick={onConfirmShuffle}></Button>
-                            <Button primary label="Cancel" onClick={() => onCancel(2)}></Button>
+                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
+                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
                         </div>
                     </>
                 )
@@ -288,8 +294,8 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Yes" onClick={onResetConfirm}></Button>
-                            <Button primary label="Cancel" onClick={onCancel}></Button>
+                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onResetConfirm}></Button>
+                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={onCancel}></Button>
                         </div>
                     </>
                 )
@@ -299,8 +305,8 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                     <>
                         <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label="Yes" onClick={onOverride}></Button>
-                            <Button primary label="Cancel" onClick={onCancel}></Button>
+                            <Button primary label={i18n.t('whoisnext.yes')} onClick={onOverride}></Button>
+                            <Button primary label={i18n.t('whoisnext.cancel')} onClick={onCancel}></Button>
                         </div>
                     </>
                 )
@@ -350,7 +356,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                                                     border: "1px solid #aab0ba",
                                                     padding: "8px",
                                                     textAlign: "center"
-                                                }}>{inputStage == 'symbols' ? React.createElement(Symbols[element]) : element}</td>
+                                                }}>{inputStage == SYMBOLS ? React.createElement(Symbols[element]) : element}</td>
                                                 <td style={{
                                                     border: "1px solid #aab0ba",
                                                     padding: "8px",
