@@ -3,8 +3,6 @@
 
     flex-direction: row;
 
-    width: 700px;
-    height: 350px;
     padding: 10px;
     background: var(--color-white_4);
     gap: 10px;
@@ -15,6 +13,9 @@
         border-radius: 10px;
     }
 
+    &.active {
+        padding: 0px;
+    }
     
     // global {
     //     .slick-prev:before,

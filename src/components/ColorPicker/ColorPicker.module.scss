@@ -1,3 +1,40 @@
 .colorPicker {
     display: inline-flex;
+    flex-direction: column;
+    padding: 25px;
+    gap:20px;
+    
+    .title {
+        font-size: 20px;
+    }
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .pickColorWrapper {
+        margin: 10px 0 0;
+
+        img {
+            margin: 20px;
+        }
+    }
+
+    .html5ColorWrapper {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+
+        input {
+            flex-grow: 2;
+        }
+    }
+
+    .divpreview {
+        border: 1px solid #e3e3e3;
+        width: 80px;
+        height: 20px;
+        margin: auto;
+        visibility: hidden;
+    }
 }

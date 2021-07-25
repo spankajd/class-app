@@ -1,0 +1,46 @@
+@import '../../style/mixin.scss';
+
+.imageGallary {
+    position: relative;
+    width: 550px;
+    padding: 10px;
+    
+    .dropdownWrapper {
+        @include flexAlignCenter;
+        gap: 20px;
+        margin: 20px 15px 0;
+
+        .dropdown {
+            flex-grow: 2;
+        }
+    }
+
+    .imageWrapper {
+        position: relative;
+        width: 100%;
+        display: inline-flex;
+        flex-direction: column;
+
+
+        img {
+            width: 100%;
+        }
+    
+        .frameWrapper {
+            width: 100px;
+        }
+    
+        .frameImage {
+            position: relative;
+            width: auto !important;
+            // padding-top: 62.5%;
+            margin: 2%;
+        }
+    
+        .frameColor {
+            position: relative;
+            padding-top: 62.5%;
+            margin: 2%;
+        }
+    }
+}
