@@ -9,111 +9,148 @@ import RadioButton from '../../elements/RadioButton/RadioButton';
 
 import style from './NoiseLevel.module.scss';
 
-let audioContext, analyser, microphone, javascriptNode;
-
-
+let audioContext, analyser, microphone, javascriptNode, streamObj;
+let volume = 0;
+let lastClip = 0;
+let clipLevel = 0.98;
+let clipLag = 750;
+const averaging = 0.95;
+let clipping = false;
+var MAX = 100;
+var sensitivity = 1.5;
 const NoiseLevel = ({ onCompClick, onCompClose }) => {
 
     const [maxNoise, setMaxNoise] = useState(75);
+    const [currentNoise, setCurrentNoise] = useState(0);
     const [noiseLimit, setNoiseLimit] = useState(4);
     const [noiseCounter, setNoiseCounter] = useState(0);
+    const [startMic, setStartMic] = useState(false);
+    // const [sensitivity, setSensitivity] = useState(1.5);
 
-    // useEffect(() => {
-    //     navigator.getUserMedia = navigator.getUserMedia ||
-    //         navigator.webkitGetUserMedia ||
-    //         navigator.mozGetUserMedia;
-    //     if (navigator.getUserMedia) {
-    //         navigator.getUserMedia({
-    //             audio: true
-    //         },
-    //             function (stream) {
-    //                 audioContext = new AudioContext();
-    //                 analyser = audioContext.createAnalyser();
-    //                 microphone = audioContext.createMediaStreamSource(stream);
-    //                 javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
-    //                 let volume = 0; 
-    //                 let lastClip = 0;
-    //                 let clipLevel = 0.98;
-    //                 let clipLag = 750;
-    //                 const averaging = 0.95;
-    //                 let clipping = false;
-    //                 var MAX = 100;
+    useEffect(() => {
+        // maxLevel = maxNoise;
 
-    //                 analyser.smoothingTimeConstant = 0.8;
-    //                 analyser.fftSize = 1024;
+        navigator.getUserMedia = navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia;
 
-    //                 microphone.connect(analyser);
-    //                 analyser.connect(javascriptNode);
-    //                 javascriptNode.connect(audioContext.destination);
+        return () => {
+            if(startMic) stoppingMic();
 
-    //                 javascriptNode.onaudioprocess = function (event) {
-    //                     // var array = new Uint8Array(analyser.frequencyBinCount);
-    //                     // analyser.getByteFrequencyData(array);
-    //                     // var values = 0;
+        }
+    }, []);
 
-    //                     // var length = array.length;
-    //                     // for (var i = 0; i < length; i++) {
-    //                     //     values += (array[i]);
-    //                     // }
+    useEffect(() => {
+        if (startMic && navigator.getUserMedia) {
+            navigator.getUserMedia({
+                audio: true
+            },
+                function (stream) {
+                    streamObj = stream;
+                    audioContext = new AudioContext();
+                    analyser = audioContext.createAnalyser();
+                    microphone = audioContext.createMediaStreamSource(stream);
+                    javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
 
-    //                     // var average = values / length;
 
-    //                     // //          console.log(Math.round(average - 40));
+                    analyser.smoothingTimeConstant = 0.8;
+                    analyser.fftSize = 1024;
 
-    //                     // // canvasContext.clearRect(0, 0, 150, 300);
-    //                     // // canvasContext.fillStyle = '#BadA55';
-    //                     // // canvasContext.fillRect(0, 300 - average, 150, 300);
-    //                     // // canvasContext.fillStyle = '#262626';
-    //                     // // canvasContext.font = "48px impact";
-    //                     // // canvasContext.fillText(Math.round(average - 40), -2, 300);
-    //                     // console.log('output >>>> ' , Math.round(average - 40) , average);
+                    microphone.connect(analyser);
+                    analyser.connect(javascriptNode);
+                    javascriptNode.connect(audioContext.destination);
 
-    //                     var buf = event.inputBuffer.getChannelData(0);
-    //                     var bufLength = buf.length;
-    //                     var sum = 0;
-    //                     var x;
+                    javascriptNode.onaudioprocess = onStreaming;
 
-    //                     // Do a root-mean-square on the samples: sum up the squares...
-    //                     for (var i = 0; i < bufLength; i++) {
-    //                         x = buf[i];
-    //                         if (Math.abs(x) >= clipLevel) {
-    //                             clipping = true;
-    //                             lastClip = window.performance.now();
-    //                         }
-    //                         sum += x * x;
-    //                     }
+                    javascriptNode.onended = function () {
+                        stoppingMic();
+                    }
+                },
+                function (err) {
+                    console.log("The following error occured: " + err.name)
+                });
+        } else if (startMic) {
+            alert("getUserMedia not supported");
+        } else {
+            stoppingMic();
+        }
 
-    //                     // ... then take the square root of the sum.
-    //                     var rms = Math.sqrt(sum / bufLength);
 
-    //                     // Now smooth this out with the averaging factor applied
-    //                     // to the previous sample - take the max here because we
-    //                     // want "fast attack, slow release."
-    //                     volume = Math.max(rms, volume * averaging);
-    //                     console.log( '>>> ' , volume*1.4*MAX);
+    }, [startMic]);
 
-    //                 } // end fn stream
+    useEffect(() => {
+        if (currentNoise > maxNoise) {
+            setNoiseCounter(noiseCounter + 1);
+        }
+    }, [currentNoise]);
 
-    //                 javascriptNode.onended = function() {
-    //                     // javascriptNode.disconnect(scriptNode);
-    //                     // scriptNode.disconnect(audioCtx.destination);
-    //                   }
-    //             },
-    //             function (err) {
-    //                 console.log("The following error occured: " + err.name)
-    //             });
-    //     } else {
-    //         console.log("getUserMedia not supported");
-    //     }
+    const stoppingMic = () => {
 
-    //     return () => {
-    //         microphone.disconnect();
-    //         analyser.disconnect();
-    //         javascriptNode.disconnect();
-    //         javascriptNode.onaudioprocess = null;
-    //         audioContext.close();
-    //     }
-    // }, [])
+        setCurrentNoise(0);
+        setNoiseCounter(0);
+        microphone && microphone.disconnect();
+        analyser && analyser.disconnect();
+        if (javascriptNode) {
+            javascriptNode.disconnect();
+            javascriptNode.onaudioprocess = null;
+        }
+        audioContext && audioContext.close();
+        streamObj && streamObj.getTracks().forEach(function (track) {
+            if (track.readyState == 'live' && track.kind === 'audio') {
+                track.stop();
+            }
+        });
+    }
+
+    const onStreaming = (event) => {
+        // var array = new Uint8Array(analyser.frequencyBinCount);
+        // analyser.getByteFrequencyData(array);
+        // var values = 0;
+
+        // var length = array.length;
+        // for (var i = 0; i < length; i++) {
+        //     values += (array[i]);
+        // }
+
+        // var average = values / length;
+
+        // //          console.log(Math.round(average - 40));
+
+        // // canvasContext.clearRect(0, 0, 150, 300);
+        // // canvasContext.fillStyle = '#BadA55';
+        // // canvasContext.fillRect(0, 300 - average, 150, 300);
+        // // canvasContext.fillStyle = '#262626';
+        // // canvasContext.font = "48px impact";
+        // // canvasContext.fillText(Math.round(average - 40), -2, 300);
+        // console.log('output >>>> ' , Math.round(average - 40) , average);
+
+        var buf = event.inputBuffer.getChannelData(0);
+        var bufLength = buf.length;
+        var sum = 0;
+        var x;
+
+        // Do a root-mean-square on the samples: sum up the squares...
+        for (var i = 0; i < bufLength; i++) {
+            x = buf[i];
+            if (Math.abs(x) >= clipLevel) {
+                clipping = true;
+                lastClip = window.performance.now();
+            }
+            sum += x * x;
+        }
+
+        // ... then take the square root of the sum.
+        var rms = Math.sqrt(sum / bufLength);
+
+        // Now smooth this out with the averaging factor applied
+        // to the previous sample - take the max here because we
+        // want "fast attack, slow release."
+        volume = Math.max(rms, volume * averaging);
+        let newNoise = volume * sensitivity * MAX;
+        // console.log('sensitivity ' , sensitivity);
+        setCurrentNoise(newNoise);
+
+    } // end fn stream
 
     const onCloseClick = e => {
         onCompClose(e);
@@ -135,16 +172,30 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
         const val = e.target.value;
         let curVal = val ? Math.min(Math.max(val, 1), 100) : '';
         setMaxNoise(curVal);
+        setNoiseCounter(0);
     }
 
     const onNoiseLimitUpdate = e => {
         const val = e.target.value;
         let curVal = val ? Math.min(Math.max(val, 1), 100) : '';
         setNoiseLimit(curVal);
+        setNoiseCounter(0);
+    }
+
+    const onStartClick = () => {
+        setStartMic(!startMic);
     }
 
     const onRadioChange = id => {
-
+        setNoiseCounter(0);
+        switch (id) {
+            case "low": sensitivity = 1;
+                break;
+            case "medium": sensitivity = 1.5;
+                break;
+            case "high": sensitivity = 2;
+                break;
+        }
     }
 
     return (
@@ -152,11 +203,11 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
             <div className={`${style.col} ${style.leftPanel}`}>
                 <div className={style.row}>
                     <span className={style.label}>Maximum Noise</span>
-                    <input className={style.input} type="text" onChange={onMaxNoiseUpdate} value={maxNoise}/>
+                    <input className={style.input} type="text" onChange={onMaxNoiseUpdate} value={maxNoise} />
                 </div>
                 <div className={style.row}>
                     <div className={style.label}>Noise limit</div>
-                    <input className={style.input} type="text" onChange={onNoiseLimitUpdate} value={noiseLimit}/>
+                    <input className={style.input} type="text" onChange={onNoiseLimitUpdate} value={noiseLimit} />
                 </div>
                 <div className={`${style.col} ${style.sensitivityWrapper}`}>
                     <div className={style.label}> Sensitivity</div>
@@ -176,16 +227,16 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                     </div>
                 </div>
                 <div className={`${style.row} ${style.warningInputWrapper}`}>
-                    <input className={style.input} type="text" />
+                    <input className={style.input} type="text" placeholder={'The noise level is being exceeded'} />
                 </div>
                 <div className={`${style.row} ${style.bottomPanel}`}>
-                    <Button primary label="Start"></Button>
+                    <Button primary label={startMic ? "Stop" : "Start"} onClick={onStartClick}></Button>
                 </div>
             </div>
             <div className={`${style.col} ${style.progressWrapper}`}>
                 <div className={style.progressBar}>
-                    <div className={`${style.bar} ${style.secondaryBar}`} style={{height:`${maxNoise}%`}}></div>
-                    <div className={`${style.bar} ${style.primaryBar}`}></div>
+                    <div className={`${style.bar} ${style.secondaryBar}`} style={{ height: `${maxNoise}%` }}></div>
+                    <div className={`${style.bar} ${style.primaryBar}`} style={{ height: `${currentNoise}%` }}></div>
                 </div>
                 <label className={style.counterWrapper}>
                     <input type="text" readyonly value={noiseCounter} />
