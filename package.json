@@ -73,6 +73,7 @@
     "react-screen-capture": "^1.0.0",
     "react-slick": "^0.28.1",
     "react-to-print": "^2.12.6",
+    "react-tooltip": "^4.2.21",
     "react-webcam": "^5.2.3",
     "redux": "^4.1.0",
     "resolve": "1.18.1",

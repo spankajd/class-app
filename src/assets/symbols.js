@@ -1,44 +1,37 @@
+import symbol_1 from './images/symbols/Aeroplane.png';
+import symbol_2 from './images/symbols/Anchor.png';
+import symbol_3 from './images/symbols/Apple.png';
+import symbol_4 from './images/symbols/Baby_Chick.png';
+import symbol_5 from './images/symbols/Blossom.png';
+import symbol_6 from './images/symbols/Burger.png';
+import symbol_7 from './images/symbols/Bovinae.png';
+import symbol_8 from './images/symbols/Burger.png';
+import symbol_9 from './images/symbols/Cow.png';
+import symbol_10 from './images/symbols/Crown.png';
+import symbol_11 from './images/symbols/Dolphin.png';
+import symbol_12 from './images/symbols/Earth.png';
+import symbol_13 from './images/symbols/Elephant.png';
+import symbol_14 from './images/symbols/Fire.png';
+import symbol_15 from './images/symbols/Game_Die.png';
+import symbol_16 from './images/symbols/Guitar.png';
+import symbol_17 from './images/symbols/Icecream.png';
+import symbol_18 from './images/symbols/Key.png';
+import symbol_19 from './images/symbols/Lock.png';
+import symbol_20 from './images/symbols/Monkey.png';
+import symbol_21 from './images/symbols/Moon.png';
+import symbol_22 from './images/symbols/Pizza.png';
+import symbol_23 from './images/symbols/Rabbit.png';
+import symbol_24 from './images/symbols/Rainbow.png';
+import symbol_25 from './images/symbols/Rooster.png';
+import symbol_26 from './images/symbols/Rose.png';
+import symbol_27 from './images/symbols/Santa.png';
+import symbol_28 from './images/symbols/Snowman.png';
+import symbol_29 from './images/symbols/Soccer.png';
+import symbol_30 from './images/symbols/Tangerine.png';
+import symbol_31 from './images/symbols/Train.png';
+import symbol_32 from './images/symbols/violin.png';
+import symbol_33 from './images/symbols/Watch.png';
 
+const Symbols = [symbol_1,symbol_2,symbol_3,symbol_4,symbol_5,symbol_6,symbol_7,symbol_8,symbol_9,symbol_10,symbol_11,symbol_12,symbol_13,symbol_14,symbol_15,symbol_16,symbol_17,symbol_18,symbol_19,symbol_20,symbol_21,symbol_22,symbol_23,symbol_24,symbol_25,symbol_26,symbol_27,symbol_28,symbol_29,symbol_30,symbol_31,symbol_32,symbol_33];
 
-export const Symbol1 = ({className, stroke = '#000'}) => {
-    return (
-      <svg viewBox="0 0 40 40" className={className}>
-        <line x1="12" y1="12" x2="28" y2="28" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" strokeMiterlimit="10"></line>
-        <line x1="28" y1="12" x2="12" y2="28" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" strokeMiterlimit="10"></line>    
-      </svg>
-    );
-  }
-  
-  export const Symbol2 = ({className, stroke = '#000'}) => {
-    return (
-      <svg viewBox="0 0 40.16 31.189" className={className}>
-          <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M29.3,29.6v-9.4c0-0.8-0.6-1.4-1.4-1.4c0,0-0.1,0-0.1,0H12.4c-0.8,0-1.5,0.6-1.5,1.4c0,0,0,0,0,0v9.4"/>
-          <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M20.1,10.8c-2.3,0-4.2-1.9-4.2-4.2s1.9-4.2,4.2-4.2s4.2,1.9,4.2,4.2c0,0,0,0,0,0C24.2,8.9,22.4,10.8,20.1,10.8
-            z"/>
-          <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M26.2,16.8c-0.1-2.3-2.8-4.1-6.1-4.1s-6,1.9-6.1,4.1"/>
-      </svg>
-    );
-  }
-  
-  export const Symbol3 = ({className, stroke = '#000'}) => {
-    return (
-      <svg viewBox="0 0 40.16 31.189" className={className}>
-        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M20.1,8.7c-1.9,0-3.5-1.6-3.5-3.5c0-1.9,1.6-3.5,3.5-3.5c1.9,0,3.5,1.6,3.5,3.5c0,0,0,0,0,0
-          C23.6,7.1,22,8.7,20.1,8.7z"/>
-        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M25.2,14.3c-0.1-2-2.3-3.5-5.1-3.5c-2.7,0-5,1.6-5.1,3.5"/>
-        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M32.9,23.9c-1.9,0-3.5-1.6-3.5-3.5c0-1.9,1.6-3.5,3.5-3.5s3.5,1.6,3.5,3.5c0,0,0,0,0,0
-          C36.4,22.4,34.8,23.9,32.9,23.9z"/>
-        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M37.9,29.5c-0.1-2-2.3-3.5-5.1-3.5c-2.7,0-5,1.6-5.1,3.5"/>
-        <path fill="none" stroke={stroke} strokeMiterlimit="10"  d="M7.3,23.9c-1.9,0-3.5-1.6-3.5-3.5c0-1.9,1.6-3.5,3.5-3.5c1.9,0,3.5,1.6,3.5,3.5c0,0,0,0,0,0
-          C10.8,22.4,9.2,23.9,7.3,23.9C7.3,23.9,7.3,23.9,7.3,23.9z"/>
-        <path  fill="none" stroke={stroke} strokeMiterlimit="10"  d="M12.4,29.5c-0.1-2-2.3-3.5-5.1-3.5c-2.7,0-5,1.6-5.1,3.5"/>
-        <polyline fill="none" stroke={stroke} strokeWidth="0.75" points="17,21.7 15.5,23.3 17.1,24.9 "/>
-        <line  fill="none" stroke={stroke} strokeMiterlimit="10"  x1="16" y1="23.3" x2="24.8" y2="23.3"/>
-        <polyline fill="none" stroke={stroke} strokeWidth="0.75" points="10.2,7.2 11.7,5.7 10.2,4.1 "/>
-        <polyline  fill="none" stroke={stroke} strokeMiterlimit="10"  points="11.2,5.6 3.7,5.6 3.7,13.2 "/>
-        <polyline fill="none" stroke={stroke} strokeWidth="0.75" points="33.1,12.1 34.7,13.6 36.3,12 "/>
-        <polyline fill="none" stroke={stroke} strokeMiterlimit="10" points="34.7,13.1 34.7,5.5 27.9,5.5 "/>
-      </svg>
-    );
-  }
-  
+export default Symbols;

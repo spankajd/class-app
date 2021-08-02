@@ -81,5 +81,15 @@
   "background.category":"Category",
   "background.color":"Colors",
   "background.pickcolors":"Pick colors",
-  "background.more":"More"
+  "background.more":"More",
+
+
+  "tooltip.whoisnext.step_1":" If you select “Nicknames” you will need to enter or import nicknames for your students. If you select “Numbers” or “Symbols” you will be asked to enter the amount of students in your class.",
+  "tooltip.whoisnext.step_2_nickname":"Please separate nicknames with a return. You can also choose to import a txt file. Print the list in order to match the nicknames with your students’ real names.",
+  "tooltip.whoisnext.step_2_number":"Print the list in order to match the numbers with your students’ real names.",
+  "tooltip.whoisnext.step_2_symbols":"Print the list in order to match the symbols with your students’ real names.",
+  
+  "tooltip.noiselevel":"For “Maximum noise” please enter the maximum level of noise acceptable to you. In “Noise limit” indicate the number of times the noise level may be exceeded. At this time the text you enter in the box will pop up. Change the microphone’s “Sensitivity” according to the background noise.",
+  "tooltip.timer":"For the “Countdown timer” please enter a time. It will then be counted down to zero.",
+  "tooltip.webcam":"For (re-)starting your webcam, use the webcam button. For an XL cursor, use the arrow button. For taking a snapshot, use the viewfinder button."
 }

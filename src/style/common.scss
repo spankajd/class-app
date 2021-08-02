@@ -14,13 +14,16 @@
     --color-alto: #DEDEDE;
     --color-gallery: #EAEAEA;
     --color-burntUmber: #91342A;
-    --color-bourbon: #C3791D;
+    --color-red : #F30102;
+    --color-bourbon: #C3791A;
     --color-greenLea: #387309;
     --color-scarlet: #FF3314;
     --color-mySin: #FDB62D;
     --color-teaGreen : #C5E9B3;
     --color-chartreuse : #7BFF14;
     --color-limeade : #3FB500;
+    --color-sushi : #85b23b;
+
     --color-blackSqueeze : #F1F7FA;
     --color-concrete : #F2F2F2;
     --color-mercury : #E8E8E8;
@@ -67,9 +70,9 @@
 
     --color-symbolBorder: 5px solid var(--color-gallery);
     
-    --color-redSignal: var(--color-burntUmber);
+    --color-redSignal: var(--color-red);
     --color-yellowSignal: var(--color-bourbon);
-    --color-greenSignal: var(--color-greenLea);
+    --color-greenSignal: var(--color-sushi);
     --color-redSignalActive: var(--color-scarlet);
     --color-yellowSignalActive: var(--color-mySin);
     --color-greenSignalActive: var(--color-chartreuse);
@@ -91,4 +94,12 @@ input {
     text-align: center;
     font-weight: bold;
     color: var(--color-dustyGray);
+}
+
+@media print {
+  html, body {
+    height: initial !important;
+    overflow: initial !important;
+    -webkit-print-color-adjust: exact;
+  }
 }

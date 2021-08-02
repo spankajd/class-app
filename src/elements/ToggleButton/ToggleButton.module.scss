@@ -57,4 +57,9 @@
   .slider:before {
     border-radius: 50%;
   }
+
+  &.disabled {
+    opacity: .45;
+    pointer-events: none;
+  }
 }

@@ -10,14 +10,14 @@
 
     .menuTriggerWrapper {
         position: absolute;
-        top: -124px;
+        top: -121px;
         left: 50%;
         width: 60px;
         height: 30px;
         margin-left: -30px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
-        opacity: 0.6;
+        // opacity: 0.6;
         transition: .35s all;
         overflow: hidden;
 
@@ -63,7 +63,7 @@
         flex-direction: row;
         background: var(--color-primary_background);
         // padding: 10px 0;
-        margin: 0 1px;
+        margin: 0 2px;
         overflow: hidden;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -73,7 +73,7 @@
         // box-shadow: 0px 0px 10px 0px var(--color-boxShadow);
 
         &.open {
-            top: -90px;
+            top: -88px;
         }
     }
 

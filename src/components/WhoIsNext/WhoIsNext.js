@@ -8,7 +8,7 @@ import _ from "lodash";
 
 import style from './WhoIsNext.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
-import * as Symbols from "../../assets/symbols"; 
+import Symbols from "../../assets/symbols"; 
 
 
 // Steps 
@@ -21,12 +21,14 @@ import * as Symbols from "../../assets/symbols";
 const NICKNAME = 'nickname';
 const NUMBER = 'number';
 const SYMBOLS = 'symbols';
+const MAXLIMIT = 32;
 
-const WhoIsNext = ({ onCompClick, onCompClose }) => {
+const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage  }) => {
 
     const { t, i18n } = useTranslation();
     const popUpSteps = [2, 3, 4, 5];
     const [inputStage, setInputStage] = useState('');
+    const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
     const [numberOfStudent, setNumberOfStudent] = useState('');
     const [currentStep, setCurrentStep] = useState(1);
@@ -36,14 +38,34 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     const [list, setList] = useState([]);
     const componentRef = useRef();
 
+   
     useEffect(() => {
-        if (currentStep === 6) {
+        if(sharedList.length > 0) {
+            setInputStage(sharedInputStage);
+            setList(sharedList);
+            setNumberOfStudent(sharedList.length);
+            getRandomFromList();
+            setCurrentStep(2);
+        }
+    },[sharedList]);
+
+    useEffect(() => {
+        if(currentStep === 1) {
+            setTooltip( t('tooltip.whoisnext.step_1') );
+        } else if( currentStep === 2) {
+            setTooltip( t('tooltip.whoisnext.step_2_'+inputStage) );
+        } else {
+            setTooltip(null);
+        }
+        if (currentStep === 3) {
+            getRandomFromList();
+        } else  if (currentStep === 6) {
             setTimeout( () => {
                 setCurrentStep(previousStep);
             }, 500);
             handlePrint();
         }
-    }, [currentStep])
+    }, [currentStep]);
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
@@ -55,6 +77,10 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
     const onSelectStage = id => {
         setInputStage(id);
+        onRandomStudentUpdate({
+            type:'inputStage',
+            data: id
+        });
     }
 
     const onBrowse = e => {
@@ -78,7 +104,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
         let val = e.target.value;
         const re = /^[0-9\b]+$/;
         val = re.test(val) || val === '' ? val : numberOfStudent;
-        val = val ? Math.min(Math.max(val, 1), 30) : '';
+        val = val ? Math.min(Math.max(val, 1), MAXLIMIT) : '';
         setNumberOfStudent(val);
     }
 
@@ -89,7 +115,8 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
     const onSubmitClick = e => {
         generateRadomList();
-        setCurrentStep(2);
+        // setCurrentStep(2);
+        onSubmitConfirm();
     }
 
     const onPrintClick = e => {
@@ -100,7 +127,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
     const onSubmitConfirm = e => {
         setCurrentStep(3);
-        getRandomFromList();
+        // getRandomFromList();
     }
 
     const onCancel = (val) => {
@@ -116,8 +143,10 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
 
 
     const onReset = val => {
-        setCurrentStep(4);
-        setPreviousStep(val);
+        // setCurrentStep(4);
+        // setPreviousStep(val);
+        
+        onResetConfirm();
     }
 
     const onResetConfirm = () => {
@@ -137,7 +166,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     const getRandomFromList = () => {
         const random = Math.floor(Math.random() * (list.length));
         if( inputStage == SYMBOLS) 
-            setOutput( React.createElement(Symbols[list.splice(random, 1)]) );
+            setOutput( <img src={Symbols[list.splice(random, 1)]} /> ) ;
         else
             setOutput(list.splice(random, 1));
         if (list.length == 0) {
@@ -147,30 +176,33 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
     }
 
     const generateRadomList = () => {
-
+        let tempArr = [];
         if (inputStage == NICKNAME) {
-            let arr = textAreaVal.split("\n");
-            _.without(arr, ['', ' ']);
-            setNumberOfStudent(arr.length);
-            setList(arr);
+            tempArr = textAreaVal.split("\n");
+            _.without(tempArr, ['', ' ','\n']);
+            setNumberOfStudent(tempArr.length);
+            setList(tempArr);
         } else if (inputStage == NUMBER) {
-            let tempArr = [];
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(`${inputStage} ${i + 1}`);
             }
             setList(tempArr);
         } else if (inputStage == SYMBOLS){
-            let tempArr = [];
-            let keys = _.keys(Symbols);
+            
+            let keys = _.shuffle(_.keys(Symbols));
             for (let i = 0; i < numberOfStudent; i++) {
-                tempArr.push(keys[Math.floor(Math.random() * keys.length)] );
+                tempArr.push(keys[i]);
             }
             setList(tempArr);
         }
+        onRandomStudentUpdate({
+            type:'list',
+            data: tempArr.slice(0)
+        });
     }
 
     return (
-        <Holder className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${!inputStage ? style.firstStep : ''} ${currentStep === 6 ? style.printPreview : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder help={tooltip} className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${!inputStage ? style.firstStep : ''} ${currentStep === 6 ? style.printPreview : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
@@ -229,7 +261,7 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
             {
                 currentStep == 3 && output && (
                     <>
-                        <div className={style.subtitle}>{output}</div>
+                        <div className={`${style.subtitle} ${style.output}`}>{output}</div>
                         <div className={style.actionWrapper}>
                             <Button primary label={t('whoisnext.reset')} onClick={() => onReset(3)}></Button>
                             <Button primary label={t('whoisnext.print')} onClick={() => onPrintClick(3)}></Button>
@@ -271,9 +303,13 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                             width: "calc(100% - 50px)",
                             background: "#e2ebf8",
                             color: "#9ea5ad",
-                            margin: "25px"
+                            margin: "25px",
+                            pageBreakInside:"auto"
                         }}>
-                            <tr>
+                            <tr style={{
+                                pageBreakInside:"avoid",
+                                pageBreakAfter:"auto"
+                            }}>
                                 <th style={{
                                     paddingTop: "12px",
                                     paddingBottom: "12px",
@@ -295,12 +331,19 @@ const WhoIsNext = ({ onCompClick, onCompClose }) => {
                             </tr>
                             {
                                 list.map((item, index) =>
-                                    <tr key={index}>
+                                    <tr key={index}
+                                    // style={{
+                                    //     // pageBreakInside:"avoid",
+                                    //     // pageBreakAfter:"auto"
+                                    //     pageBreakBefore: index%10 == 0 ? "always" : "avoid"
+                                    // }}
+                                    className={index%10 == 0 ? style.tableBreak : style.tableRow}
+                                    >
                                         <td style={{
                                             border: "1px solid #aab0ba",
                                             padding: "8px",
                                             textAlign: "center"
-                                        }}>{ inputStage === SYMBOLS ? React.createElement(Symbols[item]) : item}</td>
+                                        }}>{ inputStage === SYMBOLS ? <img src={Symbols[item]} /> : item}</td>
                                         <td style={{
                                             border: "1px solid #aab0ba",
                                             padding: "8px",

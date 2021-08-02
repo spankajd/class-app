@@ -206,7 +206,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={style.noiseLevel} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder help={ t('tooltip.noiselevel') } className={style.noiseLevel} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={`${style.col} ${style.leftPanel}`}>
                 <div className={style.row}>
                     <span className={style.label}>{t('noiselevel.maximumnoise')}</span>

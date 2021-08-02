@@ -32,7 +32,8 @@ class MainContainer extends Component {
         stageItems: [],
         openedItems: [],
         screenCapture: '',
-
+        randomStudentInput: '',
+        randomStudentList: [],
         background: {
             // type:'color',
             // data:'orange'
@@ -63,65 +64,108 @@ class MainContainer extends Component {
         })
     }
 
-    onCompClose = (index) => {
+    onCompClose = (index, dataId) => {
         const { stageItems, openedItems } = this.state;
-        let newOpenItems,
+
+        let newOpenItems, curItemName,
             newStageItems = stageItems.filter(comp => {
-            if (comp.key == index) {
-                newOpenItems = openedItems.filter(name => {
-                    return name != comp.props['data-id']
+                curItemName = comp.props['dataId'];
+                if (comp.key == index) {
+                    newOpenItems = openedItems.filter(name => {
+                        return name != curItemName;
+                    });
+                }
+                return comp.key != index;
+            });
+
+        if (curItemName == 'whoisnext' || curItemName == 'groupbuilder') {
+            this.setState({
+                stageItems: newStageItems,
+                openedItems: newOpenItems,
+                randomStudentInput: '',
+                randomStudentList: []
+            });
+
+        } else {
+            this.setState({
+                stageItems: newStageItems,
+                openedItems: newOpenItems
+            });
+
+        }
+    }
+
+    randomStudentUpdate = ({ type, data }) => {
+        let tempObj = {};
+        tempObj[type == 'inputStage' ? 'randomStudentInput' : 'randomStudentList'] = data;
+        this.setState(tempObj);
+    }
+
+    checkRandomStudentTask = (stageItems, openedItems, closeTask) => {
+        let curItemName;
+        stageItems = stageItems.filter(comp => {
+            curItemName = comp.props['dataId'];
+            if (closeTask == curItemName) {
+                openedItems = openedItems.filter(name => {
+                    return name != curItemName;
                 });
             }
-            return comp.key != index;
+            return closeTask != curItemName;
         });
-
-        this.setState({
-            stageItems: newStageItems,
-            openedItems : newOpenItems
-        });
+        return {
+            newStageItems: stageItems,
+            newOpenedItems: openedItems
+        };
     }
 
     onItemClick = (menuName) => {
-        const { stageItems, openedItems } = this.state;
-        if( limitedItems.includes(menuName) && openedItems.includes(menuName) )
+        let { stageItems, openedItems, randomStudentList, randomStudentInput } = this.state;
+        if (limitedItems.includes(menuName) && openedItems.includes(menuName))
             return false;
         const key = stageItems.length;
+        let proccessedArr;
         openedItems.push(menuName);
         let count = 0;
-        openedItems.forEach( i => i === menuName ? count++ : null);
+        openedItems.forEach(i => i === menuName ? count++ : null);
         switch (menuName) {
             case 'symbols':
-                stageItems.push(<Symbols data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
+                stageItems.push(<Symbols dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
                 break;
             case 'number':
-                stageItems.push(<Number data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Number>)
+                stageItems.push(<Number dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Number>)
                 break;
             case 'whoisnext':
-                stageItems.push(<WhoIsNext data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WhoIsNext>)
+                stageItems.push(<WhoIsNext dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></WhoIsNext>)
+                proccessedArr = this.checkRandomStudentTask(stageItems, openedItems, 'groupbuilder');
+                stageItems = proccessedArr.newStageItems;
+                openedItems = proccessedArr.newOpenedItems;
                 break;
             case 'groupbuilder':
-                stageItems.push(<GroupBuilder data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></GroupBuilder>)
+                stageItems.push(<GroupBuilder dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></GroupBuilder>)
+                proccessedArr = this.checkRandomStudentTask(stageItems, openedItems, 'whoisnext');
+                stageItems = proccessedArr.newStageItems;
+                openedItems = proccessedArr.newOpenedItems;
                 break;
             case 'noiselevel':
-                stageItems.push(<NoiseLevel data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></NoiseLevel>)
+                stageItems.push(<NoiseLevel dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></NoiseLevel>)
                 break;
             case 'teacher':
-                stageItems.push(<Teacher data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
+                stageItems.push(<Teacher dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
                 break;
             case 'timer':
-                stageItems.push(<Timer count={count} data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Timer>)
+                stageItems.push(<Timer count={count} dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Timer>)
                 break;
             case 'text':
-                stageItems.push(<Text count={count} data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)
+                stageItems.push(<Text count={count} dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Text>)
                 break;
             case 'qrcode':
-                stageItems.push(<QRcode count={count} data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
+                stageItems.push(<QRcode count={count} dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
                 break;
             case 'webcam':
-                stageItems.push(<WebCam data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
+                stageItems.push(<WebCam dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
                 break;
             case 'background':
-                stageItems.push(<Background data-id={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)} dataset={backgroundPath} onChange={e => this.onBackgroundChange(e)}></Background>)
+                stageItems.push(<Background dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)} dataset={backgroundPath} onChange={e => this.onBackgroundChange(e)}></Background>)
                 break;
         }
 
@@ -134,6 +178,7 @@ class MainContainer extends Component {
 
     renderItems = () => {
         const { stageItems } = this.state;
+        console.log('renderItems ', stageItems);
         return stageItems.map(comp => {
             return comp
         })
@@ -161,7 +206,12 @@ class MainContainer extends Component {
     onStartCapture = () => {
         const _thisRef = this;
         // console.log('this.mainContainerRef.current ' , this.mainContainerRef.current)
-        html2canvas(this.mainContainerRef.current, {useCORS : true}).then(function (canvas) {
+        html2canvas(this.mainContainerRef.current, {
+            useCORS: true, ignoreElements: (element) => {
+                if (element.id === "player" || element.id === "sidecontrols")
+                    return true;
+            }
+        }).then(function (canvas) {
             // console.log('>>>>',canvas,canvas.toDataURL('image/jpeg', 0.5));
             _thisRef.handleScreenCapture(canvas.toDataURL('image/jpeg', 0.5));
             // document.body.appendChild(canvas);
@@ -186,8 +236,8 @@ class MainContainer extends Component {
         return (
             <div className={style.mainContainer} style={inlineStyle} ref={this.mainContainerRef}>
                 {this.renderItems()}
-                <Player openedItems={openedItems} onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture()}></Player>
-                <SideControls clearAll={() => this.onClearAll()}></SideControls>
+                <Player openedItems={openedItems} onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture()} id="player"></Player>
+                <SideControls clearAll={() => this.onClearAll()} disableClearButton={openedItems.length == 0} id="sidecontrols"></SideControls>
                 {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}
             </div>
         )

@@ -10,7 +10,7 @@ import _ from "lodash";
 
 import style from './GroupBuilder.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
-import * as Symbols from "../../assets/symbols"; 
+import Symbols from "../../assets/symbols"; 
 
 // Steps 
 // 1. choose format
@@ -23,11 +23,12 @@ const NICKNAME = 'nickname';
 const NUMBER = 'number';
 const SYMBOLS = 'symbols';
 
-const GroupBuilder = ({ onCompClick, onCompClose }) => {
+const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
     const { t, i18n } = useTranslation();
 
     const popUpSteps = [3, 4, 5];
     const [inputStage, setInputStage] = useState('');
+    const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
     const [numberOfStudent, setNumberOfStudent] = useState('');
     const [numberOfGroup, setNumberOfGroup] = useState('');
@@ -38,6 +39,25 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     const [list, setList] = useState([]);
     const componentRef = useRef();
 
+    useEffect(() => {
+        if(currentStep === 1) {
+            setTooltip( t('tooltip.whoisnext.step_1') );
+        } else if( currentStep === 2) {
+            setTooltip( t('tooltip.whoisnext.step_2_'+inputStage) );
+        } else {
+            setTooltip(null);
+        }
+    },[currentStep]);
+
+    useEffect(() => {
+        if(sharedList.length > 0) {
+            setInputStage(sharedInputStage);
+            setList(sharedList);
+            setNumberOfStudent(sharedList.length);
+            getRandomFromList();
+            setCurrentStep(2);
+        }
+    },[sharedList]);
 
     useEffect(() => {
         if (currentStep === 6) {
@@ -66,6 +86,10 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
 
     const onSelectStage = e => {
         setInputStage(e);
+        onRandomStudentUpdate({
+            type:'inputStage',
+            data: e
+        });
     }
 
     const onBrowse = e => {
@@ -177,25 +201,32 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }
 
     const generateRadomList = () => {
+        let tempArr = [];
         if (inputStage == NICKNAME) {
-            let arr = textAreaVal.split("\n");
-            _.without(arr, ['', ' '])
-            setNumberOfStudent(arr.length);
-            setList(arr);
+            tempArr = textAreaVal.split("\n");
+            _.without(tempArr, ['', ' ','\n'])
+            setNumberOfStudent(tempArr.length);
+            setList(tempArr);
         } else if (inputStage == NUMBER) {
-            let tempArr = [];
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(`${inputStage} ${i + 1}`);
             }
             setList(tempArr);
+            onRandomStudentUpdate({
+                type:'list',
+                data: tempArr
+            });
         } else if (inputStage == SYMBOLS){
-            let tempArr = [];
-            let keys = _.keys(Symbols);
+            let keys = _.shuffle(_.keys(Symbols));
             for (let i = 0; i < numberOfStudent; i++) {
-                tempArr.push(keys[Math.floor(Math.random() * keys.length)] );
+                tempArr.push(keys[i]);
             }
             setList(tempArr);
         }
+        onRandomStudentUpdate({
+            type:'list',
+            data: tempArr
+        });
     }
 
     const renderGroup = () => {
@@ -203,11 +234,12 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
 
         for (var key in output) {
             let counter = 0;
+            let keyFactor = counter+Math.random();
             arr.push(
-                <div key={'1_1_'+counter} className={style.groupCol}>
-                    <div key={'1_'+counter} className={style.groupTitle}>{key}</div>
+                <div key={'1_1_'+keyFactor} className={style.groupCol}>
+                    <div key={'1_'+keyFactor} className={style.groupTitle}>{key}</div>
                     <ul className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li key={counter++} className={`${style.groupDataItem} ${style.symbols}`}>{
-                        inputStage == SYMBOLS ? React.createElement(Symbols[element]) : element
+                        inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element
                         }</li>) : '')}</ul>
                 </div>
             )
@@ -217,7 +249,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={`${style.groupbuilder} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''} ${!inputStage ? style.firstStep : ''} ${currentStep == 2 ? style.groupOutPut : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder help={tooltip} className={`${style.groupbuilder} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''} ${!inputStage ? style.firstStep : ''} ${currentStep == 2 ? style.groupOutPut : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
                     <div className={style.panel}>
@@ -357,7 +389,7 @@ const GroupBuilder = ({ onCompClick, onCompClose }) => {
                                                     border: "1px solid #aab0ba",
                                                     padding: "8px",
                                                     textAlign: "center"
-                                                }}>{inputStage == SYMBOLS ? React.createElement(Symbols[element]) : element}</td>
+                                                }}>{inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element}</td>
                                                 <td style={{
                                                     border: "1px solid #aab0ba",
                                                     padding: "8px",

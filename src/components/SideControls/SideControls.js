@@ -5,11 +5,11 @@ import Draggable from 'react-draggable';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-import { DownArrow, ClearScreenIcon, CopyRightIcon, ScreenLockIcon } from '../../elements/Icon/Icon';
+import { DoubleArrow, ClearScreenIcon, CopyRightIcon, ScreenLockIcon } from '../../elements/Icon/Icon';
 
 import style from './SideControls.module.scss';
 
-const SideControls = ({ onItemClick, clearAll }) => {
+const SideControls = ({ id, onItemClick, clearAll, disableClearButton }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dropdownOptions = ['en', 'ger'];
@@ -17,7 +17,7 @@ const SideControls = ({ onItemClick, clearAll }) => {
     const [selectedOption, setSelectedOption] = useState(i18n.language);
 
     const onDropdownSelect = e => {
-      i18n.changeLanguage(e.value)
+        i18n.changeLanguage(e.value)
     }
 
     const onTriggerClick = () => {
@@ -40,24 +40,32 @@ const SideControls = ({ onItemClick, clearAll }) => {
 
     return (
         <Draggable defaultPosition={initialPos} handle={"." + style.handle} axis="y" defaultClassNameDragging={style.dragging}>
-            <div className={`${style.sideControls} ${isMenuOpen ? style.open : ''}`}>
+            <div id={id} className={`${style.sideControls} ${isMenuOpen ? style.open : ''}`}>
                 <div className={style.trigger} onClick={onTriggerClick}>
                     <div className={style.triggerBG}>
-                        <DownArrow />
+                        <DoubleArrow />
                     </div>
                 </div>
                 <div className={style.itemWrapper}>
                     <div className={`${style.item} ${style.dropdownWrapper}`}>
-                        <Dropdown options={dropdownOptions} onChange={onDropdownSelect} value={selectedOption} className={style.dropdown} placeholder="Language" />
+                        <div className={style.inner}>
+                            <Dropdown options={dropdownOptions} onChange={onDropdownSelect} value={selectedOption} className={style.dropdown} placeholder="Language" />
+                        </div>
                     </div>
                     <div className={`${style.item} ${style.copyRight}`} onClick={onCopyRightClick}>
-                        <CopyRightIcon />
+                        <div className={style.inner}>
+                            <CopyRightIcon />
+                        </div>
                     </div>
-                    <div className={style.item} onClick={onClearAllClick}>
-                        <ClearScreenIcon />
+                    <div className={`${style.item} ${disableClearButton ? style.disabled : ''}`} onClick={onClearAllClick}>
+                        <div className={style.inner}>
+                            <ClearScreenIcon />
+                        </div>
                     </div>
                     <div className={`${style.item} ${style.screenLock}`} onClick={onScreenLockClick}>
-                        <ScreenLockIcon />
+                        <div className={style.inner}>
+                            <ScreenLockIcon />
+                        </div>
                     </div>
                 </div>
             </div >

@@ -50,7 +50,7 @@ const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, 
 
     return (
         <div className={`${style.countDownTimer}`}>
-            <CommonTimer editMode={currentMode} timeInSeconds={currentTime} onTimeUpdate={onTimeUpdate}/>
+            <CommonTimer warningClass={(11 <= currentSecond && currentSecond <= 20) ?  style.orangeWarning : (0 <= currentSecond && currentSecond <= 10) ? style.redWarning :'' } editMode={currentMode} timeInSeconds={currentTime} onTimeUpdate={onTimeUpdate}/>
         </div>
     );
 };

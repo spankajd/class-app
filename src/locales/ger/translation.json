@@ -3,7 +3,7 @@
   "widgetbar.teacher": "Lehrer",
   "widgetbar.whoisnext": "Nächste:r bitte!",
   "widgetbar.groupbuilder": "Gruppen-Generator",
-  "widgetbar.noiselevel": "Gruppen-Generator",
+  "widgetbar.noiselevel": "Geräuschpegel",
   "widgetbar.timer": "Timer",
   "widgetbar.easytext": "Text-Editor",
   "widgetbar.number": "Würfel und Zahl",
@@ -81,9 +81,15 @@
   "background.category":"Kategorie:",
   "background.color":"Farben",
   "background.pickcolors":"Farbe wählen",
-  "background.more":"Mehr"
-  
-  
+  "background.more":"Mehr",
 
 
+  "tooltip.whoisnext.step_1":"Bei Auswahl von “Spitznamen” geben Sie im nächsten Schritt Spitznamen für Ihre Schüler ein oder importieren diese. Bei Auswahl von „Zahlen“ oder „Symbolen“ geben Sie anschließend lediglich die Anzahl Ihrer Schüler ein.",
+  "tooltip.whoisnext.step_2_nickname":"Trennen Sie die Spitznamen mit einem Return voneinander. Alternativ können Sie eine txt-Datei mit Spitznamen importieren. Nutzen Sie die Druckfunktion, um den Spitznamen die echten Namen Ihrer Schüler zuzuordnen.",
+  "tooltip.whoisnext.step_2_numbers":"Nutzen Sie die Druckfunktion, um den Zahlen die echten Namen Ihrer Schüler zuzuordnen.",
+  "tooltip.whoisnext.step_2_students":"Nutzen Sie die Druckfunktion, um den Symbolen die echten Namen Ihrer Schüler zuzuordnen.",
+  
+  "tooltip.noiselevel":"Wählen Sie einen Wert zwischen 0 und 100 für den maximal tolerierbaren Geräuschpegel in Ihrer Klasse. Geben Sie ein, wie oft dieser Pegel überschritten werden darf. Ist dieser Wert erreicht, erscheint der von Ihnen eingegebene Text. Mit „Sensitivität“ steuern Sie die Empfindlichkeit Ihres Mikrofons.",
+  "tooltip.timer":"Geben Sie im Timer (Countdown) eine Zeit an, die anschließend heruntergezählt wird.",
+  "tooltip.webcam":"Nutzen Sie den Webcam-Button, um die Webcam (neu) zu starten. Um einen extra großen Cursor zu bekommen, nutzen Sie den Pfeil-Button. Nutzen Sie den Sucher-Button, um das Bild anzuhalten."
 }

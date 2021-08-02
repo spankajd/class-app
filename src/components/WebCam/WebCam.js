@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Holder from '../../elements/Holder/Holder';
 import Webcam from "react-webcam";
@@ -11,6 +12,8 @@ import { WebCamIcon, CursorIcon, ScreenShotIcon } from '../../elements/Icon/Icon
 
 
 const WebCam = ({ onCompClick, onCompClose }) => {
+
+    const { t, i18n } = useTranslation();
 
     const [imageData, setImageData] = useState(null);
     const [startWebCam, setStartWebCam] = useState(false);
@@ -65,7 +68,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
 
 
     return (
-        <Holder className={`${style.webcam} ${startWebCam ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
+        <Holder help={ t('tooltip.webcam') } className={`${style.webcam} ${startWebCam ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
 
 
             <div className={style.controlPanel}>

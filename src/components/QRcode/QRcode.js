@@ -7,6 +7,7 @@ import Holder from '../../elements/Holder/Holder';
 
 import style from './QRcode.module.scss';
 import Button from '../../elements/Button/Button';
+import TitleInput from '../../elements/TitleInput/TitleInput';
 
 
 const QRcode = ({ onCompClick, onCompClose, count }) => {
@@ -32,13 +33,23 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
 
     return (
         <Holder className={style.qrcode} onCompClick={onCompClick} onClose={onCloseClick}>
-            <div className={style.title}>Title {count}</div>
+            <div className={style.title}><TitleInput defaultVal={`Title ${count}`} /></div>
             <div className={style.subtitle}>{t('qrcode.instruction')}</div>
             <input className={style.input} type="text" placeholder={placeHolder} value={inputVal} onChange={onInputChange}></input>
-            <div className={style.qrContainer} ref={componentRef}>
+            <div className={style.qrContainer} >
                 <QRCode value={qrInput} renderAs="svg"></QRCode>
             </div>
             <Button primary label={t("whoisnext.print")} onClick={print} />
+
+            <div className={style.printWrapper}>
+                <div className={style.printPage} ref={componentRef}>
+                    <center>
+                        <h1>QR Code</h1>
+                        <h3>For : {inputVal}</h3>
+                        <QRCode value={qrInput} renderAs="svg"></QRCode>
+                    </center>
+                </div>
+            </div>
         </Holder>
     );
 };

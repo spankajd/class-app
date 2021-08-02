@@ -6,6 +6,7 @@ import Holder from '../../elements/Holder/Holder';
 import RadioButton from '../../elements/RadioButton/RadioButton';
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
 import StandardTimer from '../StandardTimer/StandardTimer';
+import TitleInput from '../../elements/TitleInput/TitleInput';
 
 import style from './Timer.module.scss';
 import ToggleButton from '../../elements/ToggleButton/ToggleButton';
@@ -61,13 +62,13 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={`${style.timer}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder help={ t('tooltip.timer') } className={`${style.timer}`} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.titleRow}>
-                Timer {count}
+                <TitleInput defaultVal={`Timer ${count}`}/>
             </div>
             <div className={style.labelRow}>
                 <label className={!selectedTimer ? style.active : ''}>{t('timer.standardtimer')}</label>
-                <ToggleButton onChange={onRadioChange} />
+                <ToggleButton disabled={intervalStarted} onChange={onRadioChange} />
                 <label className={selectedTimer ? style.active : ''}>{t('timer.countdowntimer')}</label>
             </div>
             <div className={style.row}>

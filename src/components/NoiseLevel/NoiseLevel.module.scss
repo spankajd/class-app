@@ -36,7 +36,7 @@
 
         display: inline-flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
         
         .progressBar {
             display: inline-block;
@@ -64,6 +64,7 @@
             margin-top: 18px;
             display: inline-flex;
             flex-direction: column;
+            align-items: center;
 
             span {
                 display: inline-block;

@@ -12,7 +12,7 @@
         position: absolute;
         width: 8%;
         height: 50%;
-        border: 3px solid var(--color-gray);
+        border: 5px solid var(--color-gray);
         border-bottom: none;
         bottom: 0px;
         left: 46%;
@@ -23,13 +23,13 @@
 
     .signalWrapper {
         position: absolute;
-        width: 70%;
-        height: 86%;
+        width: 58%;
+        height: 80%;
         background: var(--color-white);
-        left: 15%;
+        left: 21%;
         top: 7%;
 
-        border: 3px solid var(--color-gray);
+        border: 5px solid var(--color-gray);
         border-radius: 35px;
         display: inline-flex;
         flex-direction: column;

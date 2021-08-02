@@ -151,4 +151,18 @@
             }
         }
     }
+
+    .tableBreak {
+        page-break-before: always,
+    }
+    
+    .tableRow {
+        page-break-before: avoid,
+    }
+
+    .output{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }

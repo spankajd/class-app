@@ -7,7 +7,7 @@ import { calculateTime } from '../../helper';
 import style from './CommonTimer.module.scss';
 
 
-const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate }) => {
+const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }) => {
 
     const { t, i18n } = useTranslation();
     const [hourStr, setHourStr] = useState('00');
@@ -94,7 +94,7 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate }) => {
     }
 
     return (
-        <div className={`${style.commonTimer}`}>
+        <div className={`${style.commonTimer} ${warningClass}`}>
             {/* <div className={`${style.group} ${style.hour}`}>
                 <TimeUnit editMode={editMode} onChange={onChange} num={Math.floor ( time.h / 10)} factorSec={36000}></TimeUnit>
                 <TimeUnit editMode={editMode} onChange={onChange} num={( time.h % 10)} factorSec={3600}></TimeUnit>

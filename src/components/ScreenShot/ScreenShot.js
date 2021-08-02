@@ -5,7 +5,7 @@ import { useReactToPrint } from 'react-to-print';
 
 import style from './ScreenShot.module.scss';
 
-import { IconGroupBuilder, Close } from '../../elements/Icon/Icon';
+import { SaveIcon, PrintIcon, ShareIcon, Close } from '../../elements/Icon/Icon';
 
 const ScreenShot = ({ imgPath = '', onClose }) => {
 
@@ -26,7 +26,9 @@ const ScreenShot = ({ imgPath = '', onClose }) => {
     }
 
     const onPrintClick = useReactToPrint({
+        bodyClass: "printable",
         content: () => componentRef.current,
+        pageStyle: `img { width: 100%; } @media print{@page {size: landscape}}`
     })
 
     return (
@@ -39,7 +41,7 @@ const ScreenShot = ({ imgPath = '', onClose }) => {
                 <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onShareClick}>
                         <span className={style.menuItemContent}>
-                            <IconGroupBuilder className={style.icon}></IconGroupBuilder>
+                            <ShareIcon className={style.icon}></ShareIcon>
                         </span>
                     </button>
                 </div>
@@ -47,7 +49,7 @@ const ScreenShot = ({ imgPath = '', onClose }) => {
                 <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onSaveClick}>
                         <span className={style.menuItemContent}>
-                            <IconGroupBuilder className={style.icon}></IconGroupBuilder>
+                            <SaveIcon className={style.icon}></SaveIcon>
                         </span>
                     </button>
                 </div>
@@ -55,12 +57,12 @@ const ScreenShot = ({ imgPath = '', onClose }) => {
                 <div className={style.menuItemWrapper}>
                     <button type="button" className={style.menuItem} onClick={onPrintClick}>
                         <span className={style.menuItemContent}>
-                            <IconGroupBuilder className={style.icon}></IconGroupBuilder>
+                            <PrintIcon className={style.icon}></PrintIcon>
                         </span>
                     </button>
                 </div>
 
-                <div className={style.menuItemWrapper}>
+                <div className={`${style.menuItemWrapper} ${style.bottomClose}`}>
                     <button type="button" className={`${style.menuItem} ${style.closeMenuItem}`} onClick={onClose}>
                         <span className={style.menuItemContent}>
                             <Close className={style.icon}></Close>

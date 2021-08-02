@@ -47,29 +47,39 @@
 
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+        padding: 10px;
 
     }
 
     
     .menuItemWrapper {
-        min-width: 85px;
-        padding: 0 5px;
+        min-width: 45px;
+        padding: 0;
         text-align: center;
         border-left: 1px solid var(--color-border);
-        &:first-child {
+        &:first-child,
+        &:last-child {
             border-left: none;
         }
+        
 
         &:hover {
-            background: var(--color-hover_background);
+            // background: var(--color-hover_background);
             .menuItem {
                 color: var(--color-hover_font);
             }
-            .icon {
-                transform: scale(1.25);
-                @include svgStroke(var(--color-hover_font));
-            }
+            // .icon {
+            //     transform: scale(1.25);
+            //     @include svgStroke(var(--color-hover_font));
+            // }
             
+        }
+
+        &.bottomClose {
+            width: 20px;
+            .menuItem {
+                margin: 0;
+            }
         }
     }
 
@@ -77,6 +87,7 @@
         @include buttonReset;
         color: var(--color-primary_font);
         cursor: pointer;
+        margin: 0 8px;
 
         &:hover {
             color: var(--color-hover_font);
@@ -85,14 +96,23 @@
 
     .closeMenuItem {
         .icon {
-            width: 25px;
+            width: 24px;
+            position: relative;
+            top: -5px;
+            right: -5px;
         }
     }
 
     .icon {
-        height: var(--icon-size);
-        width: var(--icon-size);
+        height: 30px;
         background: transparent;
         @include svgStroke(var(--color-primary_font));
+        @include svgFill(var(--color-primary_font));
+    }
+}
+
+:global {
+    .printable {
+        width: 100%;
     }
 }

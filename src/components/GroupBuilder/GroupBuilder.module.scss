@@ -202,9 +202,13 @@ $repeat: 20;  // How often you want the pattern to repeat.
         padding: 0 10px;
         overflow: scroll;
         // height: 100%;
+        list-style: none;
     }
     .groupDataItem {
         margin: 5px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &.symbols {
             text-align: center;

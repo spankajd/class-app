@@ -1,3 +1,14 @@
 .countDownTimer {
     position: relative;
+
+    .orangeWarning {
+        input {
+            color: orange;
+        }
+    }
+    .redWarning {
+        input {
+            color: red;
+        }
+    }
 }

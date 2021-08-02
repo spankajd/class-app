@@ -14,7 +14,7 @@
 
         .trigger {
             svg {
-                transform: rotate(-90deg);
+                transform: rotate(90deg);
             }
         }
     }
@@ -24,7 +24,7 @@
         position: absolute;
         width: 32px;
         height: 100%;
-        left: -32px;
+        left: -34px;
         overflow: hidden;
 
         .triggerBG {
@@ -33,13 +33,13 @@
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: var(--color-handle);
+            background: var(--color-primary_background);
         }
         svg {
-            transform: rotate(90deg);
+            transform: rotate(-90deg);
             position: relative;
-            left: -10px;
-            width: 30px;
+            left: -12px;
+            width: 26px;
         }
     }
     .itemWrapper {
@@ -47,25 +47,39 @@
     }
     .item {
         @include flexAlignCenter;
-        padding: 12px 6px;
-        width: 54px;
+        padding: 12px 0;
         height: 40px;
 
         svg {
-            width: 45px;
+            height: 30px;
         }
-        border-right: 1px solid var(--color-border);
+        .inner {
+            text-align: center;
+            border-right: 1px solid var(--color-border);
+            padding: 0 10px;
+            width: 60px;
+        }
         &:last-child {
-            border-right: none;
+
+            .inner {
+                border-right: none;
+            }
         }
+    }
+
+    
+
+    .disabled {
+        opacity: .35;
+        pointer-events: none;
     }
 
     .screenLock {
         display: none;
     }
     .copyRight {
-        svg {
-            width: 6px;
+        .inner {
+            width: 45px;
         }
     }
     .handle {

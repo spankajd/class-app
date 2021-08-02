@@ -4,10 +4,10 @@ import * as Icon from '../../elements/Icon/Icon';
 
 import style from './Player.module.scss';
 
-const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
+const Player = ({ id, openedItems, onItemClick, onScreenCapture }) => {
 
     const { t, i18n } = useTranslation();
-    const [isMenuOpen, setIsMenuOpen] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const onMenuTriggerClick = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -18,14 +18,11 @@ const Player = ({ openedItems, onItemClick, onScreenCapture }) => {
     }
 
     const onPostBoxClick = e => {
-        setIsMenuOpen(false);
-        setTimeout(() => {
-            onScreenCapture && onScreenCapture();
-        }, 400);
+        onScreenCapture && onScreenCapture();
     }
 
     return (
-        <div className={style.menu}>
+        <div id={id} className={style.menu}>
 
             <div className={`${style.menuWrapper} ${isMenuOpen ? style.open : ''}`}>
 
