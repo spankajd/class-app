@@ -1,11 +1,13 @@
+@import "../../style/mixin.scss";
+
 .qrcode {
     display: inline-flex;
     flex-direction: column;
-    min-width: 335px;
-    min-height: 385px;
-    padding: 25px;
-    
-    width: 335px;
+    min-width: 128px;
+    min-height: 82px;
+    padding: 12px;
+    width: 128px;
+    border-radius: 12px;
 
     align-items: center;
     .title {
@@ -14,17 +16,16 @@
         width: 100%;
     }
 
-    .subtitle,
-    .input {
-        margin: 5px 0;
-        padding: 8px 5px;
-        width: 100%;
+    .subtitle {
+        font-size: 7px;
+        margin: 10px 0;
     }
 
-    input {
-        font-size: 16px;
-        text-align: left;
+    .input {
+        width: 100%;
+        font-size: 12px;
     }
+
     .qrContainer {
         margin: 10px 0;
         width: 65%;
@@ -45,4 +46,37 @@
         display: none;
     }
 
+    @include breakpoint(medium) {
+        min-width: 196px;
+        min-height: 130px;
+        padding: 18px 22px;
+        width: 196px;
+        border-radius: 15px;
+
+        .subtitle {
+            font-size: 13px;
+            margin: 16px 0;
+        }
+    
+        .input {
+            font-size: 18px;
+        }
+    }
+
+    @include breakpoint(large) {
+        min-width: 248px;
+        min-height: 160px;
+        padding: 22px 26px;
+        width: 248px;
+
+        .subtitle {
+            font-size: 16px;
+            margin: 21px 0;
+        }
+    
+        .input {
+            font-size: 22px;
+        }
+
+    }
 }

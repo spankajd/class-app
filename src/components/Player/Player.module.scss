@@ -8,13 +8,29 @@
     text-align: center;
     height: 0;
 
+    .bottomBar {
+        width: 100%;
+        display: flex;
+    }
+
+    .bottomColoum {
+        width: 50%;
+        display: inline-flex;
+        justify-content: flex-end;
+        position: relative;
+        &:last-child {
+            justify-content: flex-start;
+        }
+
+    }
+
     .menuTriggerWrapper {
         position: absolute;
-        top: -121px;
+        top: -94px;
         left: 50%;
-        width: 60px;
-        height: 30px;
-        margin-left: -30px;
+        width: 50px;
+        height: 25px;
+        margin-left: -25px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
         // opacity: 0.6;
@@ -23,8 +39,8 @@
 
         .menuTriggerContainer {
             position: relative;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: var(--color-primary_background);
             border-radius: 50%;
         }
@@ -39,7 +55,7 @@
         }
 
         &.open {
-            top: -30px;
+            top: -25px;
             svg {
                 transform: rotate(180deg);
             }
@@ -48,7 +64,7 @@
 
     .menuTrigger {
         @include buttonReset;
-        width: 50px;
+        width:  38px;
         position: relative;
         top: 5px;
         z-index: 1;
@@ -63,7 +79,7 @@
         flex-direction: row;
         background: var(--color-primary_background);
         // padding: 10px 0;
-        margin: 0 2px;
+        margin: 0 1px;
         overflow: hidden;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -73,14 +89,13 @@
         // box-shadow: 0px 0px 10px 0px var(--color-boxShadow);
 
         &.open {
-            top: -88px;
+            top: -66px;
         }
     }
 
     .menuItemWrapper {
-        padding: 0 5px;
         text-align: center;
-        padding: 10px 0;
+        padding: 6px 0;
 
         &:hover {
             background: var(--color-hover_background);
@@ -100,7 +115,7 @@
     }
 
     .menuItemContainer {
-        min-width: 90px;
+        min-width: 62px;
         border-left: 1px solid var(--color-border);
     }
 
@@ -108,6 +123,7 @@
         @include buttonReset;
         color: var(--color-primary_font);
         cursor: pointer;
+        font-size: 8px;
 
         &:hover {
             color: var(--color-hover_font);
@@ -119,5 +135,91 @@
         width: var(--icon-size);
         background: transparent;
         @include svgStroke(var(--color-primary_font));
+    }
+
+    .menuItemLabel {
+        word-break: break-all;
+    }
+
+
+    @include breakpoint(medium) {
+        .menuWrapper {
+            &.open {
+                top: -75px;
+            }
+        }
+        // .menuTriggerWrapper {
+        //     top: -108px;
+        // }
+
+
+        .menuTriggerWrapper {
+            top: -108px;
+            width: 60px;
+            height: 30px;
+            margin-left: -30px;
+
+            .menuTriggerContainer {
+                width: 60px;
+                height: 60px;
+            }
+            &.open {
+                top: -30px;
+            }
+        }
+        .menuTrigger {
+            width: 50px;
+            top: 5px;
+        }
+
+        .menuItem {
+            font-size: 13px;
+        }
+        .menuItemWrapper {
+            padding: 10px 0;
+        }
+        .menuItemContainer { 
+            min-width: 75px;
+        }
+    }
+
+    @include breakpoint(large) {
+        .menuWrapper {
+            &.open {
+                top: -126px;
+            }
+        }
+        .menuTriggerWrapper {
+            top: -175px;
+            margin-left: -45px;
+            width: 90px;
+            height: 45px;
+
+            .menuTriggerContainer {
+                width: 90px;
+                height: 90px;
+            }
+            &.open {
+                top: -45px;
+            }
+        }
+        .menuTrigger {
+            width: 65px;
+            top: 10px;
+        }
+        .menuItem {
+            font-size: 16px;
+        }
+        .icon {
+            width: 72px;
+            height: 72px;
+        }
+        .menuItemWrapper {
+            padding: 15px 0;
+        }
+        .menuItemContainer { 
+            min-width: 120px;
+            border-width: 2px;
+        }
     }
 }

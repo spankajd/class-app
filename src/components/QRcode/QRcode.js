@@ -12,7 +12,7 @@ import TitleInput from '../../elements/TitleInput/TitleInput';
 
 const QRcode = ({ onCompClick, onCompClose, count }) => {
     const { t, i18n } = useTranslation();
-    const placeHolder = "https://www.klett-sprachen.de/";
+    const placeHolder = ""; // "https://www.klett-sprachen.de/";
     const [inputVal, setInputVal] = useState("");
     const [qrInput, setQrInput] = useState(placeHolder);
     const componentRef = useRef();
@@ -36,10 +36,12 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
             <div className={style.title}><TitleInput defaultVal={`Title ${count}`} /></div>
             <div className={style.subtitle}>{t('qrcode.instruction')}</div>
             <input className={style.input} type="text" placeholder={placeHolder} value={inputVal} onChange={onInputChange}></input>
+            { qrInput && (<>
             <div className={style.qrContainer} >
                 <QRCode value={qrInput} renderAs="svg"></QRCode>
             </div>
             <Button primary label={t("whoisnext.print")} onClick={print} />
+            </>)}
 
             <div className={style.printWrapper}>
                 <div className={style.printPage} ref={componentRef}>

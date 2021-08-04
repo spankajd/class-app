@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import DigitRoll from 'digit-roll-react';
 
@@ -11,8 +11,26 @@ import style from './RandomNumber.module.scss';
 const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
     const { t, i18n } = useTranslation();
     const numArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const [ size, setSize] = useState({w:1.5, h:2});
 
     const [curVal, setCurrentVal] = useState(1);
+
+    useEffect( () => {
+        window.addEventListener('resize',onResize);
+        return () => {
+            window.removeEventListener('resize',onResize);
+        }
+    },[]);
+
+    const onResize = e => {
+        if(window.innerWidth < 1280) {
+            setSize({w:1.5, h:2});
+        } else if (window.innerWidth < 2048){
+            setSize({w:2, h:2.5});
+        } else {
+            setSize({w:2.5, h:3});
+        }
+    }
 
     const onInputChange = (e) => {
         const val = e.target.value;
@@ -39,7 +57,7 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
             )
         }
         if (output) {
-            return (<DigitRoll num={output} length={curVal} className={style.numberBox} divider="" delay="1" />)
+            return (<DigitRoll num={output} length={curVal} className={style.numberBox} divider="" delay="1" width={size.w} height={size.h}/>) 
         }
         return arr;
     }
@@ -47,7 +65,7 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
     return (
         <div className={`${style.randomNumber}`}>
             <div className={`${style.row} ${style.numberOutput}`}>{renderOutput()}</div>
-            <div className={`${style.row}`}>
+            <div className={`${style.row} ${style.numberBottom}`}>
                 <div className={`${style.col} ${style.numberInput}`}>
                     <label>{t('number.numberOfDigit')}</label>
                     <input type="text" onChange={onInputChange} maxLength="2" value={curVal} />

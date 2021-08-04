@@ -23,3 +23,39 @@
     fill: $color;
   }
 }
+
+
+/*********************
+BREAKPOINTS
+*********************/
+
+// @mixin breakpoint($point) {
+//   @if $point == extralargedesktop {
+//     @media (min-width: 2048px) { @content ; }
+//  }
+//   @else if $point == largedesktop {
+//     @media (min-width: 1920px) { @content ; }
+//  }
+//    @else if $point == mediumdesktop {
+//     @media (min-width: 1280px) { @content ; }
+//  }
+//   @else if $point == desktop {
+//     @media (min-width: 1024px)  { @content ; }
+//  }
+//  @else if $point == ipad {
+//     @media (max-width: 1023px)  { @content ; }
+//  }
+// }
+
+
+@mixin breakpoint($point) {
+  @if $point == large {
+    @media (min-width: 2048px) { @content ; }
+ }
+  @else if $point == medium {
+    @media (min-width: 1280px) { @content ; }
+ }
+   @else if $point == small {
+    @media (min-width: 1024px) { @content ; }
+ }
+}

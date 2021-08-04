@@ -1,37 +1,77 @@
+@import "../../style/mixin.scss";
+
 .commonTimer {
     display: inline-flex;
     width: 100%;
     background: var(--color-blackSqueeze);
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 12px;
+    padding: 5px;
+
     .group {
         display: inline-flex;
         justify-content: center;
         flex-direction: column;
         label {
-            margin-top: 10px;
+            margin-top: 3.5px;
             text-align: center;
+            font-size: 8px;
         }
 
         input {
-            width: 76px;
-            height: 68px;
+            width: 31px;
+            height: 27px;
             text-align: center;
-            font-size: 52px;
-            border-radius: 15px;
+            font-size: 21px;
+            border-radius: 7px;
             border:none;
             font-weight: bold;
         }
     }
     .separator {
-        font-size: 4.5rem;
+        font-size: 21px;
         margin: 0 5px;
-        line-height: 8rem;
+        line-height: 21px;
         color: var(--color-hippieBlue);
         span {
-            margin-bottom: 30px;
             display: inline-block;
+            margin-bottom: 12px;
+        }
+    }
+
+    @include breakpoint(medium) {
+        padding: 10px 0;
+        .group {
+            label {
+                font-size: 13px;
+            }
+    
+            input {
+                width: 50px;
+                height: 42px;
+                font-size: 36px;
+            }
+        }
+        .separator {
+            font-size: 38px;
+        }
+    }
+    @include breakpoint(large) {
+        padding: 12px 0;
+        .group {
+            label {
+                font-size: 16px;
+            }
+    
+            input {
+                width: 62px;
+                height: 52px;
+                font-size: 45px;
+            }
+        }
+        .separator {
+            font-size: 45px;
         }
     }
 }

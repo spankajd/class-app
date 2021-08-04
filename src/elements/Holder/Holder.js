@@ -26,7 +26,9 @@ const Holder = ({ help, onCompClick, onClose, className, activeClassName, width 
     }, []);
 
     const handleDocClick = (e) => {
-        setFocused(holderNodeRef.current.contains(e.target));
+        if (holderNodeRef && holderNodeRef.current) {
+            setFocused(holderNodeRef.current.contains(e.target));
+        }
     }
 
     const onMouseDown = (e) => {
@@ -38,12 +40,20 @@ const Holder = ({ help, onCompClick, onClose, className, activeClassName, width 
             allowToDrag = false;
         }
         onCompClick && onCompClick();
-        document.body.click(e);
+        try {
+            if (e.type == 'touchstart') {
+                e.srcElement.click(e);
+            } else {
+                // document.body.click(e);
+            }
+        } catch (e) {
+            // console.log('eerrrrr',e);
+        }
         setFocused(true);
     }
 
     const onStart = (e) => {
-        return allowToDrag;
+        return true //allowToDrag;
     }
 
     const onCloseClick = (e) => {
@@ -51,7 +61,7 @@ const Holder = ({ help, onCompClick, onClose, className, activeClassName, width 
     }
 
     return (
-        <Draggable onMouseDown={onMouseDown} onStart={onStart} positionOffset={{ x: '-50%', y: '-50%' }} defaultClassNameDragging={style.dragging}>
+        <Draggable onTouchStart={onMouseDown} onMouseDown={onMouseDown} onStart={onStart} positionOffset={{ x: '-50%', y: '-50%' }} defaultClassNameDragging={style.dragging}>
             <div style={spanStyles} className={`${style.holder} ${className ? className : ''} ${focused ? style.active : ''} ${focused && activeClassName ? activeClassName : ''}`} ref={holderNodeRef}>
                 {children}
                 {help && (

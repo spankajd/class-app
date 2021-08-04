@@ -66,9 +66,12 @@
     --color-border:var(--color-silverChalice);
     --color-handle:var(--color-grayNurse);
     --color-close_background: var(--color-alto);
-    --icon-size : 48px;
+    --icon-size : 35px;
 
-    --color-symbolBorder: 5px solid var(--color-gallery);
+    --font-size-small: 8px;
+    --font-size-medium: 13px;
+    --font-size-large: 16px;
+
     
     --color-redSignal: var(--color-red);
     --color-yellowSignal: var(--color-bourbon);
@@ -76,7 +79,6 @@
     --color-redSignalActive: var(--color-scarlet);
     --color-yellowSignalActive: var(--color-mySin);
     --color-greenSignalActive: var(--color-chartreuse);
-
 }
 
 body {
@@ -89,11 +91,14 @@ body {
     color: var(--color-primary_font);
 }
 
-input {
-    font-size: 18px;
-    text-align: center;
-    font-weight: bold;
+svg {
+    pointer-events: none;
+}
+
+input, textarea {
     color: var(--color-dustyGray);
+    border: 1px solid var(--color-silverChalice);
+    border-radius: 5px;
 }
 
 @media print {

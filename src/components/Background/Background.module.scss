@@ -1,3 +1,5 @@
+@import "../../style/mixin.scss";
+
 .background {
     display: inline-flex;
 
@@ -23,5 +25,10 @@
     //         color: black;
     //     }
     // }
-    
+    @include breakpoint(medium) {
+
+    }
+    @include breakpoint(large) {
+           
+    }
 }

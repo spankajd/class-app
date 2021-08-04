@@ -1,36 +1,54 @@
+@import "../../style/mixin.scss";
+
 .noiseLevel {
-    min-width: 296px;
-    min-height: 324px;
-    
+    min-width: 152px;
+    min-height: 208px;
+    border-radius: 12px;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 40px 35px;
-    gap: 35px;
+    padding: 20px 15px;
+
+    gap: 12px;
+
+    font-size: 8px;
 
     .row{
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 5px;
+        margin: 2px 0;
     }
 
     .col {
         display: flex;
         flex-direction: column;
+        margin: 0;
+        padding: 0;
     }
 
-    .leftPanel {
-        flex-grow: 2;
-    }
+    
 
-    input[type="text"] {
-        width: 45px;
-        height: 32px;
-        border-radius: 5px;
-        border-width: 1px;
+    .input {
+        font-size: 9px;
         text-align: center;
+        resize: none;
+    }
+    .textarea {
+        font-family: 'Myriad Web Pro';
+        padding: 8px 12px;
+        letter-spacing: .5px;
+        width: 100%;
+    }
+    input[type="text"] {
+        width: 22px;
+        height: 18px;
+        text-align: center;
+    }
+    .label {
+        font-weight: bold;
     }
     .progressWrapper {
 
@@ -40,7 +58,7 @@
         
         .progressBar {
             display: inline-block;
-            width: 45px;
+            width: 22px;
             height: 76%;
             border: 1px solid var(--color-border);
             border-radius: 5px;
@@ -53,15 +71,19 @@
             .primaryBar {
                 height: 20%;
                 background: var(--color-limeade);
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
             }
             .secondaryBar {
                 height: 80%;
                 background: var(--color-teaGreen);
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
             }
         }
         .counterWrapper {
             position: relative;
-            margin-top: 18px;
+            margin-top: 8px;
             display: inline-flex;
             flex-direction: column;
             align-items: center;
@@ -75,35 +97,106 @@
     }
 
     .sensitivityWrapper {
-        padding: 5px;
-        
+        margin: 15px 0;
         .optionWrapper {
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         label {
-            position: relative;
-            // margin-right: 55px;
-        }
-        span {
-            position: absolute;
-            top: 120%;
-            left : 50%;
-            transform: translate(-50%, 0);
+            @include flexAlignCenter;
+            flex-direction: column;
+            gap: 3px;
         }
     }
 
     .warningInputWrapper {
-        margin: 45px 0 25px;
+        margin: 0 0 8px;
         input {
-            width: 100%;
-            font-size: 12px;
-            min-width: 205px;
+            font-size: 9px;
+            min-width: 96px;
         }
     }
+    
 
     .bottomPanel {
         justify-content: center;
         padding-bottom: 0px;
+    }
+
+    @include breakpoint(medium) {
+        min-width: 200px;
+        min-height: 328px;
+
+        padding: 30px 38px 30px 24px;
+        font-size: 13px;
+
+        .row{
+            margin: 3px 0;
+        }
+        .leftPanel {
+            width: 170px;
+        }
+        input[type="text"] {
+            width: 35px;
+            height: 30px;
+        }
+        .input {
+            font-size: 16px;
+        }
+        .textarea {
+            padding: 12px 18px;
+        }
+
+        .progressWrapper {
+            .progressBar {
+                width: 35px;
+                height: 80%;
+            }
+            .counterWrapper {
+                margin-top: 12px;
+            }
+        }
+        .sensitivityWrapper {
+            margin: 22px 0 18px;
+
+            .optionWrapper {
+                margin-top: 12px;
+            }
+        }
+        .bottomPanel {
+            margin-top: 20px;
+        }
+    }
+
+    @include breakpoint(large) {
+        min-width: 258px;
+        min-height: 375px;
+        font-size: 16px;
+        gap:25px;
+
+        padding: 38px 48px 38px 30px;
+
+        input[type="text"] {
+            width: 45px;
+            height: 36px;
+        }
+        .leftPanel {
+            width: 186px;
+        }
+        .sensitivityWrapper {
+            margin: 22px 0;
+
+            .optionWrapper {
+                margin-top: 15px;
+            }
+        }
+        .progressWrapper {
+            .progressBar {
+                width: 45px;
+            }
+            .counterWrapper {
+                margin-top: 12px;
+            }
+        }
     }
 }

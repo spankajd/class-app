@@ -46,34 +46,34 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
         const refArr = [dice_1, dice_2, dice_3, dice_4, dice_5];
         for (let i = 1; i <= curVal; i++) {
             arr.push(
-                <div key={i+"_dice"} className={style.dice}>
-                    <ol key={i+"_ol"} className={`${style['die-list']} ${style[flag ? 'even-roll' : 'odd-roll']}`} dataroll="1" ref={refArr[i - 1]}>
-                        <li key={i+"_1"} className={style['die-item']} data-side="1">
+                <div key={i + "_dice"} className={style.dice}>
+                    <ol key={i + "_ol"} className={`${style['die-list']} ${style[flag ? 'even-roll' : 'odd-roll']}`} dataroll="1" ref={refArr[i - 1]}>
+                        <li key={i + "_1"} className={style['die-item']} data-side="1">
                             <span className={style['dot']}></span>
                         </li>
-                        <li key={i+"_2"} className={style['die-item']} data-side="2">
-                            <span className={style['dot']}></span>
-                            <span className={style['dot']}></span>
-                        </li>
-                        <li key={i+"_3"} className={style['die-item']} data-side="3">
-                            <span className={style['dot']}></span>
+                        <li key={i + "_2"} className={style['die-item']} data-side="2">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                         </li>
-                        <li key={i+"_4"} className={style['die-item']} data-side="4">
-                            <span className={style['dot']}></span>
+                        <li key={i + "_3"} className={style['die-item']} data-side="3">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                         </li>
-                        <li key={i+"_5"} className={style['die-item']} data-side="5">
-                            <span className={style['dot']}></span>
+                        <li key={i + "_4"} className={style['die-item']} data-side="4">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                         </li>
-                        <li key={i+"_6"} className={style['die-item']} data-side="6">
+                        <li key={i + "_5"} className={style['die-item']} data-side="5">
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                            <span className={style['dot']}></span>
+                        </li>
+                        <li key={i + "_6"} className={style['die-item']} data-side="6">
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
                             <span className={style['dot']}></span>
@@ -93,16 +93,16 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
             {(<div className={`${style.row} ${style.diceOutput}`}>
                 {renderDice()}
             </div>)}
-            <div className={`${style.row}`}>
-            <div className={`${style.col} ${style.diceInput}`}>
-                <label>{t('number.numberOfDice')}</label>
-                <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
+            <div className={`${style.row} ${style.diceBottom}`}>
+                <div className={`${style.col} ${style.diceInput}`}>
+                    <label>{t('number.numberOfDice')}</label>
+                    <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
+                </div>
+                <div className={`${style.col} ${style.diceTrigger}`}>
+                    <Button label={t('number.roll')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
+                </div>
             </div>
-            <div className={`${style.col} ${style.diceTrigger}`}>
-                <Button label={t('number.roll')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>
-            </div>
-            </div>
-            
+
         </div>
     );
 };

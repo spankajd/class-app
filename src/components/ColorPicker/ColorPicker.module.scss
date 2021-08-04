@@ -1,3 +1,5 @@
+@import "../../style/mixin.scss";
+
 .colorPicker {
     display: inline-flex;
     flex-direction: column;
@@ -36,5 +38,11 @@
         height: 20px;
         margin: auto;
         visibility: hidden;
+    }
+    @include breakpoint(medium) {
+
+    }
+    @include breakpoint(large) {
+           
     }
 }

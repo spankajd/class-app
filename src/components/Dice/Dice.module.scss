@@ -1,3 +1,5 @@
+@import "../../style/mixin.scss";
+
 .diceWrapper {
     display: inline-flex;
     flex-direction: column;
@@ -9,15 +11,19 @@
 
     .row {
         flex-grow: 1;
-        margin: 15px 0;
+        margin: 0;
         display: inline-flex;
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
     }
-    .col {
-        margin: 0 15px;
+    .diceBottom {
+        display: inline-flex;
+        flex-direction: column;
+        margin-top: 8px;
+        gap: 8px;
     }
+
 
     .diceImg {
         flex-grow: 2;
@@ -30,24 +36,25 @@
     .diceInput {
         label {
             font-weight: bold;
-            font-size: 18px;
+            font-size: 10px;
             color: var(--color-dustyGray);
         }
         span {
             font-weight: 400;
         }
         input {
-            width: 40px;
-            height: 30px;
+            width: 30px;
+            height: 24px;
             margin-left: 15px;
             text-align: center;
+            padding: 0;
         }
     }
 
     .diceOutput {
-        width: 1500px;
-        transform: scale(.3) translate(-123%, -50%);
-        height: 65px;
+        width: 1286px;
+        transform: scale(0.135) translate(-310%, 0%);
+        height: 24px;
     }
 
     .dice {
@@ -224,5 +231,48 @@
     }
     [data-side="6"] .dot:nth-of-type(6) {
         grid-area: nine;
+    }
+    @include breakpoint(medium) {
+        .diceOutput {
+            width: 1100px;
+            transform: scale(0.2) translate(-175%, 0%);
+            height: 55px;
+        }
+        .diceInput {
+            label {
+                font-size: 17px;
+            }
+            input {
+                width: 42px;
+                height: 35px;
+                margin-left: 15px;
+                font-size: 20px;
+            }
+        }
+        .diceBottom {
+            gap: 14px;
+        }
+
+    }
+    @include breakpoint(large) {
+        .diceOutput {
+            width: 1335px;
+            transform: scale(0.28) translate(-121%, 0%);
+            height: 85px;
+        }
+        .diceInput {
+            label {
+                font-size: 21px;
+            }
+            input {
+                width: 56px;
+                height: 45px;
+                margin-left: 15px;
+                font-size: 27px;
+            }
+        }
+        .diceBottom {
+            gap: 20px;
+        }
     }
 }

@@ -1,11 +1,14 @@
+@import "../../style/mixin.scss";
+
 .number {
     
-    padding: 25px;
+    width: 215px;
+    height: 170px;
 
-    width: 465px;
-    height:235px;
+    border-radius: 12px;
     
     .labelRow {
+        margin-top: 15px;
         text-align: center;
 
         .labelContainer {
@@ -18,7 +21,7 @@
 
             label {
                 color: var(--color-silver); 
-                font-size: 22px;
+                font-size: 13px;
                 &.active {
                     color: var(--color-tundora);
                 }
@@ -29,5 +32,30 @@
     .row {
         margin-top: 15px;
         width: 100%;
+    }
+    @include breakpoint(medium) {
+        width: 335px;
+        height: 265px;
+        border-radius: 15px;
+        .labelRow {
+            .labelContainer {
+            label {
+                font-size: 20px;
+            }
+        }
+        }
+
+    }
+    @include breakpoint(large) {
+        width: 422px;
+        height: 332px;
+        .labelRow {
+            .labelContainer {
+            label {
+                font-size: 25px;
+            }
+        }
+        }
+        
     }
 }

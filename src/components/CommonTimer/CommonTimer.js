@@ -36,10 +36,28 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }
     // const onChange = (factor) => {
     const onChange = e => {
         let { total } = time;
+        const regexp = /^[0-9\b]+$/;
         // let newTotal = total + factor;
         // total = Math.max(newTotal, 0) || total;
         // update(total);
         // onTimeUpdate && onTimeUpdate(total);
+        let val = e.target.value;
+        if (val === '' || regexp.test(val)) {
+
+
+            switch (e.target.name) {
+                case "hour": setHourStr(val);
+                    break;
+                case "minute": setMinuteStr(val);
+                    break;
+                case "second": setSecondStr(val);
+                    break;
+            }
+        }
+    }
+
+    const onBlur = e => {
+        let { total } = time;
         let val = Number(e.target.value);
         let curVal;
         let newTotal = 0;
@@ -47,22 +65,22 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }
             case "hour":
                 curVal = !isNaN(val) ? Math.min(Math.max(val, 0), 12) : Number(hourStr);
                 setHourStr(updateTime(curVal));
-                newTotal += curVal*60*60;
-                newTotal += Number(minuteStr)*60;
+                newTotal += curVal * 60 * 60;
+                newTotal += Number(minuteStr) * 60;
                 newTotal += Number(secondStr);
                 break;
             case "minute":
                 curVal = !isNaN(val) ? Math.min(Math.max(val, 0), 59) : Number(minuteStr);
                 setMinuteStr(updateTime(curVal));
-                newTotal += Number(hourStr)*60*60;
-                newTotal += curVal*60;
+                newTotal += Number(hourStr) * 60 * 60;
+                newTotal += curVal * 60;
                 newTotal += Number(secondStr);
                 break;
             case "second":
                 curVal = !isNaN(val) ? Math.min(Math.max(val, 0), 59) : Number(secondStr);
                 setSecondStr(updateTime(curVal));
-                newTotal += Number(hourStr)*60*60;
-                newTotal += Number(minuteStr)*60;
+                newTotal += Number(hourStr) * 60 * 60;
+                newTotal += Number(minuteStr) * 60;
                 newTotal += curVal;
                 break;
         }
@@ -113,17 +131,17 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }
                 <label>seconds</label>
             </div> */}
             <div className={`${style.group} ${style.hour}`}>
-                <input type="text" name="hour" value={hourStr} onChange={onChange} readOnly={!editMode} />
+                <input type="text" name="hour" value={hourStr} onChange={onChange} onBlur={onBlur} readOnly={!editMode} />
                 <label>{t('timer.hours')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.minute}`}>
-                <input type="text" name="minute" value={minuteStr} onChange={onChange} readOnly={!editMode}/>
+                <input type="text" name="minute" value={minuteStr} onChange={onChange} onBlur={onBlur} readOnly={!editMode} />
                 <label>{t('timer.minutes')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.second}`}>
-                <input type="text" name="second" value={secondStr} onChange={onChange} readOnly={!editMode} />
+                <input type="text" name="second" value={secondStr} onChange={onChange} onBlur={onBlur} readOnly={!editMode} />
                 <label>{t('timer.seconds')}</label>
             </div>
 

@@ -57,8 +57,8 @@
   "noiselevel.stop":"Stop",
   "noiselevel.counter":"Counter",
 
-  "timer.standardtimer":"Standard Timer",
-  "timer.countdowntimer":"Countdown timer",
+  "timer.standardtimer":"Standard",
+  "timer.countdowntimer":"Countdown",
   "timer.hours":"Hours",
   "timer.minutes":"Minutes",
   "timer.seconds":"Seconds",

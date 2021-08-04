@@ -1,8 +1,14 @@
+@import "../../style/mixin.scss";
+
 .teacher {
     display: inline-flex;
     flex-direction: row;
-    min-width: 276px;
-    min-height: 268px;
+    min-width: 136px;
+    min-height: 128px;
+    border-radius: 12px;
+
+    font-size: 8px;
+
     .col {
         flex-grow: 1;
         position: relative;
@@ -12,7 +18,7 @@
         position: absolute;
         width: 8%;
         height: 50%;
-        border: 5px solid var(--color-gray);
+        border: 3px solid var(--color-gray);
         border-bottom: none;
         bottom: 0px;
         left: 46%;
@@ -24,13 +30,13 @@
     .signalWrapper {
         position: absolute;
         width: 58%;
-        height: 80%;
+        height: 108px;
         background: var(--color-white);
         left: 21%;
-        top: 7%;
+        top: 11px;
 
-        border: 5px solid var(--color-gray);
-        border-radius: 35px;
+        border: 3px solid var(--color-gray);
+        border-radius: 15px;
         display: inline-flex;
         flex-direction: column;
         justify-content: space-around;
@@ -38,7 +44,7 @@
     }
 
     .lightWrapper {
-        min-width: 140px;
+        min-width: 80px;
         // flex-grow: 2;
     }
 
@@ -49,16 +55,16 @@
     .labelContainer {
         position: absolute;
         width: 100%;
-        height: 86%;
-        top: 7%;
+        height: 108px;
+        top: 16px;
         display: inline-flex;
         flex-direction: column;
         justify-content: space-around;
 
         div {
-            border-bottom: 1px solid var(--color-border); 
-            padding: 20px 10px;
-            margin: 0 10px;
+            // border-bottom: 1px solid var(--color-border); 
+            // padding: 20px 10px;
+            // margin: 0 10px;
             &:last-child {
                 border: none;
             }
@@ -73,5 +79,41 @@
     }
     .greenActive {
         color: var(--color-greenSignalActive);
+    }
+
+    @include breakpoint(medium) {
+        min-width: 212px;
+        min-height: 198px;
+        border-radius: 15px;
+
+        font-size: 13px;
+
+        .lightWrapper {
+            width: 105px;
+        }
+        .signalWrapper {
+            border-radius: 25px;
+            height: 168px;
+        }
+        .labelContainer {
+            height: 168px;
+        }
+    }
+
+    @include breakpoint(large) {
+        min-width: 265px;
+        min-height: 248px;
+
+        font-size: 16px;
+
+        .lightWrapper {
+            width: 145px;
+        }
+        .signalWrapper {
+            height: 212px;
+        }
+        .labelContainer {
+            height: 212px;
+        }
     }
 }

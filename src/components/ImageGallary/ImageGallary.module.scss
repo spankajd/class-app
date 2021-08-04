@@ -2,7 +2,7 @@
 
 .imageGallary {
     position: relative;
-    width: 550px;
+    width: 376px;
     padding: 10px;
     
     .dropdownWrapper {
@@ -42,5 +42,33 @@
             padding-top: 62.5%;
             margin: 2%;
         }
+    }
+
+    .previewImage {
+        margin: 15px 0;
+    }
+
+    @include breakpoint(medium) {
+        width: 550px;
+    }
+    @include breakpoint(large) {
+        width: 765px;
+    }
+}
+
+:global {
+    .slick-prev, .slick-next {
+        border-radius: 50%;
+        background: var(--color-black);
+        z-index: 11;
+    }
+    .slick-prev:before, .slick-next:before {
+        color: var(--color-blazeOrange);
+    }
+    .slick-prev {
+        left: 0px;
+    }
+    .slick-next {
+        right: 0px;
     }
 }

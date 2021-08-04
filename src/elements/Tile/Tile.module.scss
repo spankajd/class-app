@@ -2,12 +2,16 @@
 
 .tile {
     position: relative;
-    width: 150px;
-    padding: 5px;
-    margin: 15px;
+    width: 100px;
+    padding: 0px;
+    margin: 10px;
     text-align: center;
     cursor: pointer;
-    
+
+    @include flexAlignCenter;
+    flex-direction: column;
+
+
     &.active {
         .tileButton {
             background: var(--color-hover_background);
@@ -23,14 +27,13 @@
 
     .tileButton {
         @include buttonReset;
-        
-        border: var(--color-symbolBorder);
+        border: 6px solid var(--color-gallery);
         border-radius: 15px;
 
         svg {
             @include svgStroke(var(--color-primary_font));
-            height: 86px;
-            width: 86px;
+            height: 66px;
+            width: 66px;
         }
     }
 
@@ -41,5 +44,28 @@
     &.disabled {
         opacity: 0.5;
         pointer-events: none;
+    }
+
+    @include breakpoint(extralargedesktop) {
+        width: 105px;
+        .tileButton {
+            svg {
+                height: 96px;
+                width: 96px;
+            }
+        }
+    }
+
+    @include breakpoint(desktop) {
+        width: 50px;
+        margin: 4px;
+        .tileButton {
+            border-width: 3px;
+            border-radius: 12px;
+            svg {
+                height: 38px;
+                width: 38px;
+            }
+        }
     }
 }
