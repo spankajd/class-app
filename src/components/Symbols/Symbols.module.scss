@@ -3,40 +3,38 @@
 .symbols {
     display: flex;
     flex-direction: column;
+    left: 34.5%;
+    top: 2%;
+    gap:12px;
+    min-width: 198px;
+    min-height: 175px;
+    padding: 13px 25px;
     
-    min-width: 388px;
-    min-height: 298px;
-    padding: 20px 40px;
     
-    font-size: 13px;
-
     .symbolsRow {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         align-items: flex-start;
         margin: 0;
+        gap: 12px;
     }
 
-    @include breakpoint(extralargedesktop) {
-        min-width: 488px;
-        min-height: 372px;
+    @include breakpoint(medium) {
+        left: 41%;
+        top: 1.5%;
+        min-width: 305px;
+        min-height: 260px;
+        padding: 20px 40px;
+        gap:15px;
+    }
+
+    @include breakpoint(large) {
+        left: 54.2%;
+        top: 1%;
+        gap: 20px;
+        min-width: 385px;
+        min-height: 320px;
         padding: 25px 50px;
-        font-size: 16px;
-
-        .symbolsRow {
-            gap: 25px;
-        }
-    }
-
-    @include breakpoint(desktop) {
-        min-width: 202px;
-        min-height: 178px;
-        padding: 14px 24px;
-        font-size: 8px;
-
-        .symbolsRow {
-            gap: 14px;
-        }
     }
 }

@@ -1,5 +1,6 @@
 @import-normalize;
 @import '../assets/fonts/index.css';
+@import './mixin.scss';
 
 :root{
     --color-blumine: #15617C;
@@ -68,9 +69,9 @@
     --color-close_background: var(--color-alto);
     --icon-size : 35px;
 
-    --font-size-small: 8px;
-    --font-size-medium: 13px;
-    --font-size-large: 16px;
+    --font-size-normal: 8px;
+    --font-size-label: 12px;
+    --font-size-button: 10px;
 
     
     --color-redSignal: var(--color-red);
@@ -79,6 +80,18 @@
     --color-redSignalActive: var(--color-scarlet);
     --color-yellowSignalActive: var(--color-mySin);
     --color-greenSignalActive: var(--color-chartreuse);
+
+
+    @include breakpoint(medium) {
+        --font-size-normal: 13px;
+        --font-size-label: 20px;
+        --font-size-button: 16px;
+    }
+    @include breakpoint(large) {
+        --font-size-normal: 16px;
+        --font-size-label: 24px;
+        --font-size-button: 19px;
+    }
 }
 
 body {
