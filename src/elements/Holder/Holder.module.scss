@@ -9,7 +9,7 @@
     transform: translate(-50%, -50%);
     cursor: -webkit-grab;
     cursor: grab;
-    border-radius: 16px;
+    border-radius: 10px;
     
     &.dragging {
         cursor: -webkit-grabbing;
@@ -36,17 +36,29 @@
         }
     }
 
-    &:before{
-        // content: ' ';
-        position: absolute;
-        bottom: 1px;
-        right: 1px;
-        width: 0;
-        height: 0;
-        border-bottom: 15px solid var(--color-black);
-        border-left: 15px solid transparent;
-        z-index: 1;
-        pointer-events: none;
+    // &:before{
+    //     // content: ' ';
+    //     position: absolute;
+    //     bottom: 1px;
+    //     right: 1px;
+    //     width: 0;
+    //     height: 0;
+    //     border-bottom: 15px solid var(--color-black);
+    //     border-left: 15px solid transparent;
+    //     z-index: 1;
+    //     pointer-events: none;
+    // }
+
+    .resizeHandle {
+        position: fixed;
+        bottom: 0px;
+        right: 3px;
+        cursor: se-resize;
+        svg {
+            width: 11px;
+            @include svgStroke(var(--color-dustyGray));
+            @include svgFill(var(--color-dustyGray));
+        }
     }
 
     &:focus {
@@ -69,14 +81,14 @@
         padding: 0px;
         svg {
             display: block;
-            width: 100%;
+            width: 90%;
           } 
     }
 
     .helpButton {
         right: 24px;
         svg {
-            width: 15px;
+            width: 9px;
         }
     }
 
@@ -85,6 +97,7 @@
     }
 
     @include breakpoint(medium) {
+        border-radius: 15px;
         &.active {
             &::after {
                 width: calc(100% + 20px);
@@ -104,6 +117,15 @@
         }
         .helpButton {
             right: 40px;
+            svg {
+                width: 15px;
+            }
+        }
+        .resizeHandle {
+            right: 4px;
+            svg {
+                width: 17.5px;
+            }
         }
     }
     @include breakpoint(large) {
@@ -128,6 +150,12 @@
             right: 50px;
             svg {
                 width: 20px;
+            }
+        }
+        .resizeHandle {
+            right: 5px;
+            svg {
+                width: 22px;
             }
         }
     }

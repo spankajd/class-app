@@ -4,14 +4,21 @@ import ReactTooltip from "react-tooltip";
 
 import Button from '../Button/Button';
 import style from './Holder.module.scss';
-import { Close, HelpIcon } from '../Icon/Icon';
+import { Close, HelpIcon, ExpandIcon } from '../Icon/Icon';
 
 let allowToDrag = false;
+let allowToResize = false;
 
-const Holder = ({ help, onCompClick, onClose, className, activeClassName, width = "250", height = "250", minWidth = "250", minHeight = "250", resizable = true, children }) => {
+var initialSize = null;
+var currentSize = null;
+
+const Holder = ({ help, onCompClick, onClose, className = '', activeClassName, width = 250, height = 250, minWidth = "250", minHeight = "250", resizable = true, children }) => {
 
     const [focused, setFocused] = useState(true);
+    const [isMouseDown, setIsMouseDown] = useState(false);
+    const [size, setSize] = useState(null);
     const holderNodeRef = useRef();
+    const resizeHandleRef = useRef();
 
     const spanStyles = {
         resize: resizable ? 'both' : '',
@@ -53,16 +60,65 @@ const Holder = ({ help, onCompClick, onClose, className, activeClassName, width 
     }
 
     const onStart = (e) => {
-        return true //allowToDrag;
+        if (e.target == resizeHandleRef.current)
+            return false;
+
+        return true;// allowToDrag;
     }
 
     const onCloseClick = (e) => {
         onClose && onClose(e);
     }
 
+    const onResizeHandleMouseDown = e => {
+        if (e.type == 'touchstart') {
+            e.pageX = e.touches[0].pageX;
+            e.pageY = e.touches[0].pageY;
+        }
+        const node = holderNodeRef.current;
+        initialSize = {
+            w: node.offsetWidth,
+            h: node.offsetHeight,
+            x: e.pageX,
+            y: e.pageY
+        }
+        allowToResize = true;
+
+        document.addEventListener('mousemove', onDocumentMouseMove);
+        document.addEventListener('touchmove', onDocumentMouseMove);
+        document.addEventListener('mouseup', onDocumentMouseUp);
+        document.addEventListener('touchend', onDocumentMouseUp);
+    }
+
+    const onDocumentMouseMove = e => {
+        if (e.type == 'touchmove') {
+            e.pageX = e.touches[0].pageX;
+            e.pageY = e.touches[0].pageY;
+        }
+        const node = holderNodeRef.current;
+        const tempSize = {
+            width: (initialSize.w + (e.pageX - initialSize.x)),
+            height: (initialSize.h + (e.pageY - initialSize.y))
+        }
+        setSize(tempSize);
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    const onDocumentMouseUp = e => {
+        initialSize = null;
+        allowToResize = false;
+        document.removeEventListener('mousemove', onDocumentMouseMove);
+        document.removeEventListener('touchmove', onDocumentMouseMove);
+        document.removeEventListener('mouseup', onDocumentMouseUp);
+        document.removeEventListener('touchend', onDocumentMouseUp);
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
     return (
-        <Draggable onTouchStart={onMouseDown} onMouseDown={onMouseDown} onStart={onStart} positionOffset={{ x: '-50%', y: '-50%' }} defaultClassNameDragging={style.dragging}>
-            <div style={spanStyles} className={`${style.holder} ${className ? className : ''} ${focused ? style.active : ''} ${focused && activeClassName ? activeClassName : ''}`} ref={holderNodeRef}>
+        <Draggable calcel={style.resizeHandle} onTouchStart={onMouseDown} onMouseDown={onMouseDown} onStart={onStart} defaultClassNameDragging={style.dragging}>
+            <div style={size} className={`${style.holder} ${className ? className : ''} ${focused ? style.active : ''} ${focused && activeClassName ? activeClassName : ''}`} ref={holderNodeRef}>
                 {children}
                 {help && (
                     <>
@@ -83,6 +139,10 @@ const Holder = ({ help, onCompClick, onClose, className, activeClassName, width 
                 <button className={`${style.button} ${style.closeButton}`} onClick={onCloseClick}>
                     <Close></Close>
                 </button>
+                {resizable && (
+                    <div className={style.resizeHandle} onMouseDown={onResizeHandleMouseDown} onTouchStart={onResizeHandleMouseDown} ref={resizeHandleRef}>
+                        <ExpandIcon />
+                    </div>)}
             </div>
         </Draggable>
     )
