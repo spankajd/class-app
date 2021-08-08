@@ -2,8 +2,8 @@
 
 .signal {
     position: relative;
-    width: 26px;
-    height: 26px;
+    width: 55%;
+    height: 24%;
     border-radius: 50%;
     border: 2px solid var(--color-gray);
     cursor: pointer;
@@ -54,13 +54,13 @@
         }
     }
 
-    @include breakpoint(medium) {
-        width: 42px;
-        height: 42px;
-    }
+    // @include breakpoint(medium) {
+    //     width: 42px;
+    //     height: 42px;
+    // }
 
-    @include breakpoint(large) {
-        width: 53px;
-        height: 53px;
-    }
+    // @include breakpoint(large) {
+    //     width: 53px;
+    //     height: 53px;
+    // }
 }
