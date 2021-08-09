@@ -4,7 +4,7 @@
     padding: 8px 20px 8px 14px;
 
     min-width: 145px;
-    min-height:120px;
+    min-height:152px;
 
 
     .titleRow {
@@ -21,7 +21,7 @@
 
         label {
             color: var(--color-silver);
-            font-size: 12px;
+            font-size: var(--font-size-label);
             &.active {
                 color: var(--color-tundora);
             }

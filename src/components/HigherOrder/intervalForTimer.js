@@ -1,9 +1,10 @@
 import React from 'react';
 
-let intervalObj;
+
 
 export const intervalForTimer = Comp => {
-
+    let intervalObj;
+    
     return class extends React.Component {
         state = {
             startSec: 0,

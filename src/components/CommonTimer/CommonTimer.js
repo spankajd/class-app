@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import TimeUnit from '../../elements/TimeUnit/TimeUnit';
-import { calculateTime } from '../../helper';
+import { calculateTime, validateNumnerInput } from '../../helper';
 
 import style from './CommonTimer.module.scss';
 
@@ -35,22 +35,14 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }
 
     // const onChange = (factor) => {
     const onChange = e => {
-        let { total } = time;
-        const regexp = /^[0-9\b]+$/;
-        // let newTotal = total + factor;
-        // total = Math.max(newTotal, 0) || total;
-        // update(total);
-        // onTimeUpdate && onTimeUpdate(total);
-        let val = e.target.value;
-        if (val === '' || regexp.test(val)) {
-
-
+        let val = validateNumnerInput(e.target.value);
+        if (val != null) {
             switch (e.target.name) {
-                case "hour": setHourStr(val);
+                case "hour": setHourStr(val === '' ? val : Math.min(val, 24));
                     break;
-                case "minute": setMinuteStr(val);
+                case "minute": setMinuteStr(val === '' ? val : Math.min(val, 59));
                     break;
-                case "second": setSecondStr(val);
+                case "second": setSecondStr(val === '' ? val : Math.min(val, 59));
                     break;
             }
         }
@@ -84,7 +76,7 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }
                 newTotal += curVal;
                 break;
         }
-        total = Math.max(newTotal, 0) || total;
+        total = Math.max(newTotal, 0);
         update(total);
         onTimeUpdate && onTimeUpdate(total);
     }

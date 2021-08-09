@@ -18,6 +18,7 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
     const [intervalStarted, setIntervalStarted] = useState(false);
     const [resetFlag, setResetFlag] = useState(false);
     const [pauseFlag, setPauseFlag] = useState(false);
+    const [completeFlag, setCompleteFlag] = useState(false);
     const [selectedTimer, setSelectedTimer] = useState(false);
     const standardRef = useRef();
     const countDownRef = useRef();
@@ -53,12 +54,18 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
         setIntervalStarted(false);
         setResetFlag(false);
         setPauseFlag(false);
+        setCompleteFlag(false);
         if(standardRef && standardRef.current) standardRef.current.state.currentTime = 0;
         if(countDownRef && countDownRef.current) countDownRef.current.state.currentTime = countDownRef.current.state.startSec;
     }
 
     const onRadioChange = flag => {
+        onResetClick();
         setSelectedTimer(flag);
+    }
+
+    const onCountDownEnd = () => {
+        setCompleteFlag(true);
     }
 
     return (
@@ -73,15 +80,15 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
             </div>
             <div className={style.row}>
                 {selectedTimer ?
-                    <CountDownTimer ref={countDownRef} editMode={true} intervalStarted={intervalStarted} ></CountDownTimer>
+                    <CountDownTimer ref={countDownRef} editMode={true} intervalStarted={intervalStarted} onCountDownEnd={onCountDownEnd} ></CountDownTimer>
                     :
                     <StandardTimer ref={standardRef} intervalStarted={intervalStarted}></StandardTimer>
                 }
             </div>
             <div className={style.controlPanel}>
                 {intervalStarted || resetFlag ? (<>
-                    {pauseFlag ? (<Button primary label="Resume" onClick={onResumeClick}></Button>) :
-                        (<Button primary label="Pause" onClick={onPauseClick}></Button>)}
+                     { !completeFlag && (pauseFlag ? (<Button primary label="Resume" onClick={onResumeClick}></Button>) :
+                        (<Button primary label="Pause" onClick={onPauseClick}></Button>))}
                     <Button primary label={t('timer.reset')} onClick={onResetClick}></Button>
                 </>) :
                     (<Button primary label={t('timer.start')} onClick={onStartClick}></Button>)}

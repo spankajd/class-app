@@ -6,7 +6,7 @@ import { intervalForTimer } from '../HigherOrder/intervalForTimer';
 import style from './CountDownTimer.module.scss';
 
 
-const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, setParams, startInterval, stopInterval }) => {
+const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, setParams, startInterval, stopInterval, onCountDownEnd }) => {
 
     const [currentTime , setCurrentTime] = useState(currentSecond);
     const [currentMode , setCurrentMode] = useState(editMode);
@@ -30,6 +30,9 @@ const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, 
 
     useEffect( () => { 
         setCurrentTime(currentSecond);
+        if(intervalStarted && currentSecond == 0) {
+            if(onCountDownEnd)  onCountDownEnd();
+        }
     },[currentSecond]);
 
     useEffect( () => { 
