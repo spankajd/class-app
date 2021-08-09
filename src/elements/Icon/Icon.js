@@ -465,7 +465,7 @@ export const HelpIcon = ({className, stroke = '#000', fill = '#000'}) => {
 export const ExpandIcon = ({ className,stroke = '#000', fill = '#000' }) => {
   return (
     <svg className={className} viewBox="0 0 17.5 17.5">
-      <path stroke={stroke} fill={fill} class="st0" d="M17.5,0v6.09c0,6.3-5.11,11.41-11.41,11.41H0L17.5,0z"/>
+      <path stroke={stroke} fill={fill} d="M17.5,0v6.09c0,6.3-5.11,11.41-11.41,11.41H0L17.5,0z"/>
     </svg>
   );
 }
