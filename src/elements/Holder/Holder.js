@@ -48,8 +48,9 @@ const Holder = ({ help, onCompClick, onClose, className = '', activeClassName, w
         }
         onCompClick && onCompClick();
         try {
-            if (e.type == 'touchstart') {
+            if (e.type == 'touchstart' || e.type == 'tap') {
                 e.srcElement.click(e);
+                e.srcElement.focus();
             } else {
                 // document.body.click(e);
             }
@@ -112,8 +113,8 @@ const Holder = ({ help, onCompClick, onClose, className = '', activeClassName, w
         document.removeEventListener('touchmove', onDocumentMouseMove);
         document.removeEventListener('mouseup', onDocumentMouseUp);
         document.removeEventListener('touchend', onDocumentMouseUp);
-        e.preventDefault();
-        e.stopPropagation();
+        // e.preventDefault();
+        // e.stopPropagation();
     }
 
     return (

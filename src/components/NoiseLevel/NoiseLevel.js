@@ -7,6 +7,8 @@ import Signal from '../../elements/Signal/Signal';
 import Button from '../../elements/Button/Button';
 import RadioButton from '../../elements/RadioButton/RadioButton';
 
+import { validateNumnerInput } from '../../helper';
+
 import style from './NoiseLevel.module.scss';
 
 let audioContext, analyser, microphone, javascriptNode, streamObj;
@@ -42,8 +44,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
             navigator.mozGetUserMedia;
 
         return () => {
-            if(startMic) stoppingMic();
-
+            stoppingMic();
         }
     }, []);
 
@@ -153,13 +154,14 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
         // to the previous sample - take the max here because we
         // want "fast attack, slow release."
         volume = Math.max(rms, volume * averaging);
-        let newNoise = volume * sensitivity * MAX;
+        let newNoise = Math.min(volume * sensitivity * MAX, 100);
         // console.log('sensitivity ' , sensitivity);
         setCurrentNoise(newNoise);
 
     } // end fn stream
 
     const onCloseClick = e => {
+        setStartMic(false);
         onCompClose(e);
     }
 
@@ -176,17 +178,21 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     };
 
     const onMaxNoiseUpdate = e => {
-        const val = e.target.value;
-        let curVal = val ? Math.min(Math.max(val, 1), 100) : '';
-        setMaxNoise(curVal);
-        setNoiseCounter(0);
+        const val = validateNumnerInput(e.target.value);
+        if (val != null) {
+            const curVal = val === '' ? val : Math.min(val, 100);
+            setMaxNoise(curVal);
+            setNoiseCounter(0);
+        }
     }
 
     const onNoiseLimitUpdate = e => {
-        const val = e.target.value;
-        let curVal = val ? Math.min(Math.max(val, 1), 100) : '';
-        setNoiseLimit(curVal);
-        setNoiseCounter(0);
+        const val = validateNumnerInput(e.target.value);
+        if (val != null) {
+            const curVal = val === '' ? val : Math.min(val, 100);
+            setNoiseLimit(curVal);
+            setNoiseCounter(0);
+        }
     }
 
     const onStartClick = () => {
@@ -206,15 +212,15 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder help={ t('tooltip.noiselevel') } className={style.noiseLevel} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder help={t('tooltip.noiselevel')} className={style.noiseLevel} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={`${style.col} ${style.leftPanel}`}>
                 <div className={style.row}>
                     <span className={style.label}>{t('noiselevel.maximumnoise')}</span>
-                    <input className={style.input} type="text" onChange={onMaxNoiseUpdate} value={maxNoise} />
+                    <input className={style.input} type="text" onChange={onMaxNoiseUpdate} value={maxNoise} disabled={startMic} />
                 </div>
                 <div className={style.row}>
                     <div className={style.label}>{t('noiselevel.noiselimit')}</div>
-                    <input className={style.input} type="text" onChange={onNoiseLimitUpdate} value={noiseLimit} />
+                    <input className={style.input} type="text" onChange={onNoiseLimitUpdate} value={noiseLimit} disabled={startMic} />
                 </div>
                 <div className={`${style.col} ${style.sensitivityWrapper}`}>
                     <div className={style.label}>{t('noiselevel.sensitivity')}</div>
@@ -224,7 +230,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                             <span className={style.label}>{t('noiselevel.low')}</span>
                         </label>
                         <label>
-                            <RadioButton name="sensitivity" id="medium" value="medium" onChange={onRadioChange}></RadioButton>
+                            <RadioButton checked name="sensitivity" id="medium" value="medium" onChange={onRadioChange}></RadioButton>
                             <span className={style.label}>{t('noiselevel.medium')}</span>
                         </label>
                         <label>
@@ -234,7 +240,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                     </div>
                 </div>
                 <div className={`${style.row} ${style.warningInputWrapper}`}>
-                    <textarea className={`${style.input} ${style.textarea}`} type="text" placeholder={'The noise level is being exceeded'} />
+                    <textarea disabled={startMic} className={`${style.input} ${style.textarea}`} type="text" placeholder={'The noise level is being exceeded'} />
                 </div>
                 <div className={`${style.row} ${style.bottomPanel}`}>
                     <Button primary label={startMic ? t('noiselevel.stop') : t('noiselevel.start')} onClick={onStartClick}></Button>
@@ -244,9 +250,10 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                 <div className={style.progressBar}>
                     <div className={`${style.bar} ${style.secondaryBar}`} style={{ height: `${maxNoise}%` }}></div>
                     <div className={`${style.bar} ${style.primaryBar}`} style={{ height: `${currentNoise}%` }}></div>
+                    <div className={`${style.indicator}`}>{currentNoise.toFixed()}</div>
                 </div>
                 <label className={style.counterWrapper}>
-                    <input className={style.input} type="text" readyonly value={noiseCounter} />
+                    <input className={style.input} type="text" readyonly value={noiseCounter} disabled={true} />
                     <span className={style.label}>{t('noiselevel.counter')}</span>
                 </label>
             </div>
