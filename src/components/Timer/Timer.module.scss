@@ -6,6 +6,8 @@
     min-width: 145px;
     min-height:152px;
 
+    left: calc( 95% - 180px);
+    top: 2%;
 
     .titleRow {
         font-weight: bold;
@@ -44,6 +46,8 @@
     @include breakpoint(medium) {
         min-width: 236px;
         min-height:210px;
+        left: calc( 89% - 180px);
+        top: 2%;
         .labelRow {
             label {
                 font-size: 20px;

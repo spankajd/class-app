@@ -5,7 +5,9 @@
     width: 215px;
     height: 170px;
 
-    border-radius: 12px;
+    top: 20%;
+    left: 3%;
+    
     
     .labelRow {
         margin-top: 15px;
@@ -51,10 +53,10 @@
         height: 332px;
         .labelRow {
             .labelContainer {
-            label {
-                font-size: 25px;
+                label {
+                    font-size: 25px;
+                }
             }
-        }
         }
         
     }

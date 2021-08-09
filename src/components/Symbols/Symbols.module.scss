@@ -21,7 +21,7 @@
     }
 
     @include breakpoint(medium) {
-        left: 41%;
+        left: 36%;
         top: 1.5%;
         min-width: 305px;
         min-height: 260px;
@@ -30,7 +30,7 @@
     }
 
     @include breakpoint(large) {
-        left: 54.2%;
+        left: 36%;
         top: 1%;
         gap: 20px;
         min-width: 385px;

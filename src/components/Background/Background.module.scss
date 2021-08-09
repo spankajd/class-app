@@ -4,10 +4,15 @@
     display: inline-flex;
 
     flex-direction: row;
-
+    min-width: 730px;
+    min-height: 412px;
     padding: 10px;
     background: var(--color-white_4);
     gap: 10px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
 
     .panel {
         background: var(--color-white);
@@ -26,9 +31,11 @@
     //     }
     // }
     @include breakpoint(medium) {
-
+        min-width: 905px;
+        min-height: 490px;
     }
     @include breakpoint(large) {
-           
+        min-width: 1120px;
+        min-height: 640px;
     }
 }

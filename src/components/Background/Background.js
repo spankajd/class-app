@@ -26,7 +26,7 @@ const Background = ({ onCompClick, onCompClose, dataset, onChange }) => {
     }
 
     return (
-        <Holder className={`${style.background}`} activeClassName={style.active} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder resizable={false} className={`${style.background}`} activeClassName={style.active} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={`${style.panel} ${style.leftPanel}`}>
                 <ImageGallary dataset={dataset} onSelect={onImageChoose} />
             </div>

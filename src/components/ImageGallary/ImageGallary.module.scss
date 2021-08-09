@@ -24,6 +24,7 @@
 
         img {
             width: 100%;
+            border-radius: 10px;
         }
     
         .frameWrapper {
@@ -58,12 +59,15 @@
 
 :global {
     .slick-prev, .slick-next {
-        border-radius: 50%;
-        background: var(--color-black);
+        background: var(--color-black_5);
         z-index: 11;
+        width: 25px;
+        height: 100%;
     }
     .slick-prev:before, .slick-next:before {
-        color: var(--color-blazeOrange);
+        background: var(--color-black_5);
+        color: var(--color-white);
+        opacity: 1;
     }
     .slick-prev {
         left: 0px;

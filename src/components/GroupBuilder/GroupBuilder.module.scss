@@ -9,6 +9,8 @@ $repeat: 20;  // How often you want the pattern to repeat.
     padding: 35px 45px;
     display: inline-flex;
     flex-direction: row;
+    top: 29%;
+    left: 33%;
 
     &.groupOutPut {
         flex-direction: column;
