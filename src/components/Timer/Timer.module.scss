@@ -1,7 +1,7 @@
 @import "../../style/mixin.scss";
 
 .timer {
-    padding: 8px 20px 8px 14px;
+    padding: 3px 20px 11px 14px;
 
     min-width: 145px;
     min-height:152px;
@@ -44,6 +44,7 @@
 
 
     @include breakpoint(medium) {
+        padding: 12px 20px 15px;
         min-width: 236px;
         min-height:210px;
         left: calc( 89% - 180px);
@@ -56,6 +57,7 @@
     }
 
     @include breakpoint(large) {
+        padding: 15px 25px;
         min-width: 298px;
         min-height:264px;
 

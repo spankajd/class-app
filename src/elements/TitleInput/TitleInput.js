@@ -11,7 +11,7 @@ const TitleInput = ({ defaultVal='', onChange, className }) => {
     const onInputChange = e => {
         const val = e.target.value;
         setValue(val);
-        onChange && onChange();
+        onChange && onChange(val);
     }
 
     return (

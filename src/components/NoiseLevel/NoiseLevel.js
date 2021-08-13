@@ -214,11 +214,11 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     return (
         <Holder help={t('tooltip.noiselevel')} className={style.noiseLevel} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={`${style.col} ${style.leftPanel}`}>
-                <div className={style.row}>
+                <div className={`${style.row} ${style.inputRow}`}>
                     <span className={style.label}>{t('noiselevel.maximumnoise')}</span>
                     <input className={style.input} type="text" onChange={onMaxNoiseUpdate} value={maxNoise} disabled={startMic} />
                 </div>
-                <div className={style.row}>
+                <div className={`${style.row} ${style.inputRow}`}>
                     <div className={style.label}>{t('noiselevel.noiselimit')}</div>
                     <input className={style.input} type="text" onChange={onNoiseLimitUpdate} value={noiseLimit} disabled={startMic} />
                 </div>

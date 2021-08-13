@@ -16,6 +16,7 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
     const [inputVal, setInputVal] = useState("");
     const [qrInput, setQrInput] = useState(placeHolder);
     const componentRef = useRef();
+    const [title, setTitle] = useState(`Title ${count}`);
 
     const onCloseClick = e => {
         onCompClose(e);
@@ -31,9 +32,13 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
         content: () => componentRef.current,
     })
 
+    const onTitleInputChange = val => {
+        setTitle(val);
+    }
+
     return (
         <Holder className={style.qrcode} onCompClick={onCompClick} onClose={onCloseClick}>
-            <div className={style.title}><TitleInput defaultVal={`Title ${count}`} /></div>
+            <div className={style.title}><TitleInput onChange={onTitleInputChange} defaultVal={title} /></div>
             <div className={style.subtitle}>{t('qrcode.instruction')}</div>
             <input className={style.input} type="text" placeholder={placeHolder} value={inputVal} onChange={onInputChange}></input>
             { qrInput && (<>
@@ -45,11 +50,12 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
 
             <div className={style.printWrapper}>
                 <div className={style.printPage} ref={componentRef}>
-                    <center>
-                        <h1>QR Code</h1>
-                        <h3>For : {inputVal}</h3>
-                        <QRCode value={qrInput} renderAs="svg"></QRCode>
-                    </center>
+                    <div style={{border:'1px solid', padding: '30px', margin: '30px', display:'inline-block'}}>
+                        {/* <h1>QR Code</h1> */}
+                        <h4>Title : {title}</h4>
+                        <h4>URL : {inputVal}</h4>
+                        <QRCode width={'300px'} height={'300px'} value={qrInput} renderAs="svg"></QRCode>
+                    </div>
                 </div>
             </div>
         </Holder>

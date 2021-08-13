@@ -12,7 +12,7 @@ let allowToResize = false;
 var initialSize = null;
 var currentSize = null;
 
-const Holder = ({ help, onCompClick, onClose, className = '', activeClassName, width = 250, height = 250, minWidth = "250", minHeight = "250", resizable = true, children }) => {
+const Holder = ({ help, resizeDirect='ltr', onCompClick, onClose, className = '', activeClassName, width = 250, height = 250, minWidth = "250", minHeight = "250", resizable = true, children }) => {
 
     const [focused, setFocused] = useState(true);
     const [isMouseDown, setIsMouseDown] = useState(false);
@@ -98,7 +98,7 @@ const Holder = ({ help, onCompClick, onClose, className = '', activeClassName, w
         }
         const node = holderNodeRef.current;
         const tempSize = {
-            width: (initialSize.w + (e.pageX - initialSize.x)),
+            width: resizeDirect == 'ltr' ? (initialSize.w + (e.pageX - initialSize.x)) : (initialSize.w - (e.pageX - initialSize.x)),
             height: (initialSize.h + (e.pageY - initialSize.y))
         }
         setSize(tempSize);
@@ -130,6 +130,7 @@ const Holder = ({ help, onCompClick, onClose, className = '', activeClassName, w
                             <HelpIcon />
                         </div>
                         <ReactTooltip
+                            clickable={true}
                             id="helper"
                             className="extraClass"
                             delayHide={1000}
@@ -141,7 +142,7 @@ const Holder = ({ help, onCompClick, onClose, className = '', activeClassName, w
                     <Close></Close>
                 </button>
                 {resizable && (
-                    <div className={style.resizeHandle} onMouseDown={onResizeHandleMouseDown} onTouchStart={onResizeHandleMouseDown} ref={resizeHandleRef}>
+                    <div className={`${style.resizeHandle} ${resizeDirect == 'rtl' ? style.leftSide : ''}`} onMouseDown={onResizeHandleMouseDown} onTouchStart={onResizeHandleMouseDown} ref={resizeHandleRef}>
                         <ExpandIcon />
                     </div>)}
             </div>

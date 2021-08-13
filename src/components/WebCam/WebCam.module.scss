@@ -1,4 +1,6 @@
 .webcam {
+    min-width: 80px;
+    min-height: 290px;
     display: inline-flex;
     flex-direction: row;
     direction: rtl;
@@ -22,6 +24,10 @@
         flex-grow: 2;
         height:480px;
         position: relative;
+
+        &.cursorModeOn {
+            cursor: none;
+        }
     }
 
     .controlPanel {

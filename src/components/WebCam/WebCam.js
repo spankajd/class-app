@@ -25,15 +25,24 @@ const WebCam = ({ onCompClick, onCompClose }) => {
     useEffect(() => {
         if(stageRef.current && cursorRef.current) {
             stageRef.current.addEventListener('mousemove',onMouseMove);
+            stageRef.current.addEventListener('touchmove',onMouseMove);
+            stageRef.current.addEventListener('touchstart',onMouseMove);
         }
         return () => {
             stageRef.current && stageRef.current.removeEventListener('mousemove',onMouseMove)
+            stageRef.current && stageRef.current.removeEventListener('touchmove',onMouseMove);
+            stageRef.current && stageRef.current.removeEventListener('touchstart',onMouseMove);
         };
     }, [cursorMode])
 
     const onMouseMove = e => {
-        // console.log('mouse move' ,e, stageRef.current.offsetWidth, stageRef.current.offsetLeft, stageRef.current.offsetRight);
-        // const x = e.x - (window.innerWidth - stageRef.current.offsetWidth - stageRef.current.style.right )
+        if(e.type == 'touchmove' || e.type == 'touchstart') {
+            e.pageX = e.touches[0].pageX;
+            e.pageY = e.touches[0].pageY;
+        }
+        const {left, top} = stageRef.current.getBoundingClientRect();
+        cursorRef.current.style.left = `${e.pageX - left}px`;
+        cursorRef.current.style.top = `${e.pageY - top}px`;
     }
 
 
@@ -42,6 +51,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
     }
 
     const onStartWebcam = () => {
+        setImageData(null);
         setStartWebCam(true);
     }
 
@@ -68,12 +78,12 @@ const WebCam = ({ onCompClick, onCompClose }) => {
 
 
     return (
-        <Holder help={ t('tooltip.webcam') } className={`${style.webcam} ${startWebCam ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
+        <Holder help={ t('tooltip.webcam') } resizeDirect={'rtl'} className={`${style.webcam} ${startWebCam ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
 
 
             <div className={style.controlPanel}>
                 <div onClick={onStartWebcam}>
-                    <WebCamIcon className={`${style.icon} ${style.webCamIcon} ${startWebCam ? style.active : ''}`} />
+                    <WebCamIcon className={`${style.icon} ${style.webCamIcon} ${(startWebCam && !imageData) ? style.active : ''}`} />
                 </div>
                 <div onClick={onCursorClick} className={!startWebCam ? style.disable : ''}>
                     <CursorIcon className={`${style.icon} ${style.cursorIcon} ${cursorMode ? style.active : ''}`} />
@@ -83,7 +93,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
                 </div>
             </div>
 
-            {startWebCam && (<div className={style.screen} ref={stageRef} >
+            {startWebCam && (<div className={`${style.screen} ${cursorMode ? style.cursorModeOn : ''}`} ref={stageRef} >
 
                 {imageData ? (<img src={imageData}></img>) : (<Webcam
                     audio={false}
@@ -91,6 +101,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
                     width={'100%'}
+                    mirrored = {false}
                 />)}
                 {cursorMode && <div className={style.cursor} ref={cursorRef}>
                     <CursorIcon />

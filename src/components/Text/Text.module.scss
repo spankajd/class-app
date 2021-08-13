@@ -18,7 +18,7 @@
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
         background: var(--color-concrete);
-        padding: 8.5px 12px 14px;
+        padding: 5.5px 12px 16px;
         font-weight: bold;
         font-size: var(--font-size-label);
     }
@@ -43,7 +43,7 @@
     @include breakpoint(medium) {
         width: 350px;
         .title {
-            padding: 12px 18px;
+            padding: 9px 18px 15px;
         }
         .wrapper {
             height: calc( 100% - 50px);
@@ -52,7 +52,7 @@
     @include breakpoint(large) {
         width: 440px;
         .title {
-            padding: 15px 24px;
+            padding: 13px 24px 18px;
         }
         .wrapper {
             height: calc( 100% - 60px);

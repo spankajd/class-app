@@ -62,7 +62,7 @@
         
         .progressBar {
             display: inline-block;
-            width: 22px;
+            width: 24px;
             height: 76%;
             border: 1px solid var(--color-border);
             border-radius: 5px;
@@ -99,9 +99,12 @@
         }
 
     }
-
+    .inputRow {
+        width: 88%;
+    }
     .sensitivityWrapper {
         margin: 15px 0;
+        width: 100%;
         .optionWrapper {
             margin-top: 8px;
         }

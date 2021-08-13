@@ -86,12 +86,13 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     const onBrowse = e => {
         var fr = new FileReader();
         fr.onload = function () {
-            if (textAreaVal) {
-                setCurrentStep(5);
-                setBuffer(fr.result);
-            } else {
-                setTextAreaVal(fr.result);
-            }
+            // if (textAreaVal) {
+            //     setCurrentStep(5);
+            //     setBuffer(fr.result);
+            // } else {
+            //     setTextAreaVal(fr.result);
+            // }
+            setTextAreaVal(fr.result);
         }
         fr.readAsText(e.target.files[0]);
     }
@@ -205,7 +206,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         <Holder help={tooltip} className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${!inputStage ? style.firstStep : ''} ${currentStep === 6 ? style.printPreview : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
             {currentStep == 1 &&
                 (<>
-                    <div className={style.panel}>
+                    <div className={`${style.panel} ${style.controlPanel}`}>
                         <div className={style.step}>1</div>
                         <div className={style.title}>{t('whoisnext.chooseformat')}</div>
                         <div className={style.controls}>
@@ -239,8 +240,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                                     </>)}
                                 <div className={`${style.buttomWrapper} `}  >
                                     {inputStage == NICKNAME && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
-                                    <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                    <Button primary label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
+                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                     <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                 </div>
                             </>)}
@@ -252,8 +253,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                         <div className={style.subtitle}>Do you want me to give you a random student who is next now?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label={t('whoisnext.yes')} onClick={onSubmitConfirm}></Button>
-                            <Button primary label={t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
-                            <Button primary label={t('whoisnext.reset')} onClick={() => onReset(2)}></Button>
+                            <Button  label={t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
+                            <Button  label={t('whoisnext.reset')} onClick={() => onReset(2)}></Button>
                         </div>
                     </>
                 )
@@ -263,8 +264,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                     <>
                         <div className={`${style.subtitle} ${style.output}`}>{output}</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label={t('whoisnext.reset')} onClick={() => onReset(3)}></Button>
-                            <Button primary label={t('whoisnext.print')} onClick={() => onPrintClick(3)}></Button>
+                            <Button label={t('whoisnext.reset')} onClick={() => onReset(3)}></Button>
+                            <Button label={t('whoisnext.print')} onClick={() => onPrintClick(3)}></Button>
                             <Button primary label={t('whoisnext.choosenext')} onClick={onChooseNext}></Button>
                         </div>
                     </>
@@ -275,7 +276,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                     <>
                         <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label={t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
                             <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
                         </div>
                     </>
@@ -286,7 +287,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                     <>
                         <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
-                            <Button primary label={t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
                             <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>
                         </div>
                     </>

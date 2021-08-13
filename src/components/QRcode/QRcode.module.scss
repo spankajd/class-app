@@ -5,7 +5,7 @@
     flex-direction: column;
     min-width: 128px;
     min-height: 82px;
-    padding: 12px;
+    padding: 3px 12px 12px;
     width: 128px;
     
     top: 43%;
@@ -48,10 +48,16 @@
         display: none;
     }
 
+    .printPage {
+        margin: 25px;
+        padding: 25px;
+        border : 1px solid;
+    }
+
     @include breakpoint(medium) {
         min-width: 196px;
         min-height: 130px;
-        padding: 18px 22px;
+        padding: 11px 22px 18px;
         width: 196px;
 
         .subtitle {
@@ -67,7 +73,7 @@
     @include breakpoint(large) {
         min-width: 248px;
         min-height: 160px;
-        padding: 22px 26px;
+        padding: 14px 26px 22px;
         width: 248px;
 
         .subtitle {

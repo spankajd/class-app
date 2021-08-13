@@ -1,8 +1,7 @@
 @import '../../style/mixin.scss';
 
 .whoIsNext {
-    // width: 600px;
-    // height: 450px; 
+
     padding: 35px 45px;
     display: inline-flex;
     flex-direction: row;
@@ -12,40 +11,50 @@
 
     &.firstStep {
         .panel {
-            border: none;
+            &::before {
+                display: none;
+            }
         }
     }
+
     .panel {
-        border-top: 1px dashed var(--color-border);
         position: relative;
+    }
+    .controlPanel {
         padding-right: 65px; 
+        &::before {
+            content: ' ';
+            width:100%;
+            height: 13px;
+            border-bottom: 1px dashed;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     }
     .inputPanel {
         flex-grow: 2;
-        border-top: none;
         padding-right: 0;
     }
 
     .step {
         position: absolute;
-        top: -13px;
-        left: -12.5px;
+        top: 0px;
+        left: 0px;
 
-        width: 25px;
-        height: 25px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         background: var(--color-white);
         border: 1px solid var(--color-limeade);
         color: var(--color-limeade);
         text-align: center;
         font-weight: bold;
-
-        line-height: 25px;
-        margin-bottom: 10px;
+        line-height: 28px;
     }
 
     .title {
-        margin: 30px 0 10px;
+        margin: 45px 0 15px;
         font-weight: bold;
         color:var(--color-gray);
     }
@@ -97,13 +106,14 @@
 
     .importButton {
         padding: 10px 15px;
-        border-radius: 25px;
+        border-radius: 18px;
         cursor: pointer;
         display: inline-block;
         line-height: 1;
         font-weight: bold;
         color: var(--color-white);
         background-color: var(--color-cerulean);
+        font-size: var(--font-size-button);
 
         input {
             display: none;
@@ -113,6 +123,10 @@
             color: var(--color-white);
             background-color: var(--color-silver);
             pointer-events: none;
+        }
+
+        @include breakpoint(medium) {
+            padding: 12px 22px;
         }
     }
 
@@ -142,7 +156,7 @@
         font-size: 20px;
         width: 100%;
         display: block;
-        margin: 30px 0;
+        margin: 20px 0;
     }
 
     .actionWrapper {
