@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
 import ReactTooltip from "react-tooltip";
+import Tooltip from "rc-tooltip";
+import 'rc-tooltip/assets/bootstrap.css';
 
 import Button from '../Button/Button';
 import style from './Holder.module.scss';
@@ -12,7 +14,21 @@ let allowToResize = false;
 var initialSize = null;
 var currentSize = null;
 
-const Holder = ({ help, resizeDirect='ltr', onCompClick, onClose, className = '', activeClassName, width = 250, height = 250, minWidth = "250", minHeight = "250", resizable = true, children }) => {
+const Holder = ({ 
+                
+                onCompClick,
+                onClose,
+                children,
+                className = '',
+                activeClassName,
+                resizable = true,
+                resizeDirect = 'ltr',
+                help,
+                toolDirection = 'top',
+                width = 250,
+                height = 250,
+                minWidth = "250",
+                minHeight = "250" }) => {
 
     const [focused, setFocused] = useState(true);
     const [isMouseDown, setIsMouseDown] = useState(false);
@@ -123,19 +139,15 @@ const Holder = ({ help, resizeDirect='ltr', onCompClick, onClose, className = ''
                 {children}
                 {help && (
                     <>
-                        <div
-                            data-for="helper"
-                            data-tip={help}
-                            className={`${style.button} ${style.helpButton}`}>
-                            <HelpIcon />
-                        </div>
-                        <ReactTooltip
-                            clickable={true}
-                            id="helper"
-                            className="extraClass"
-                            delayHide={1000}
-                            effect="solid"
-                        />
+
+                        <Tooltip placement={toolDirection} trigger={['click']} overlay={help}>
+                            <div
+                                data-for="helper"
+                                data-tip={help}
+                                className={`${style.button} ${style.helpButton}`}>
+                                <HelpIcon />
+                            </div>
+                        </Tooltip>
                     </>
                 )}
                 <button className={`${style.button} ${style.closeButton}`} onClick={onCloseClick}>

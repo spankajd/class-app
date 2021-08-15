@@ -5,6 +5,10 @@
     width: 215px;
     height: 170px;
 
+
+    min-width: 215px;
+    min-height: 170px;
+
     top: 20%;
     left: 3%;
     
@@ -38,6 +42,8 @@
     @include breakpoint(medium) {
         width: 335px;
         height: 265px;
+        min-width: 335px;
+        min-height: 265px;
         border-radius: 15px;
         .labelRow {
             .labelContainer {
@@ -51,6 +57,8 @@
     @include breakpoint(large) {
         width: 422px;
         height: 332px;
+        min-width: 422px;
+        min-height: 332px;
         .labelRow {
             .labelContainer {
                 label {

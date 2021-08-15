@@ -21,6 +21,8 @@ let clipping = false;
 var MAX = 100;
 var sensitivity = 1.5;
 
+var checkAudioStatus = false;
+
 // REFERENCES
 // https://makitweb.com/pitch-volume-detection-in-speech-recognition-javascript/
 // https://makitweb.com/pitch-volume-detection-in-speech-recognition-javascript/
@@ -59,7 +61,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                     analyser = audioContext.createAnalyser();
                     microphone = audioContext.createMediaStreamSource(stream);
                     javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
-
+                    checkAudioStatus = true;
 
                     analyser.smoothingTimeConstant = 0.8;
                     analyser.fftSize = 1024;
@@ -102,7 +104,14 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
             javascriptNode.disconnect();
             javascriptNode.onaudioprocess = null;
         }
-        audioContext && audioContext.close();
+        try {
+            if(checkAudioStatus && audioContext) {
+                checkAudioStatus = false;
+                audioContext.close();
+            }
+        } catch(e)  {
+            console.log(e);
+        }
         streamObj && streamObj.getTracks().forEach(function (track) {
             if (track.readyState == 'live' && track.kind === 'audio') {
                 track.stop();
@@ -226,15 +235,15 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                     <div className={style.label}>{t('noiselevel.sensitivity')}</div>
                     <div className={`${style.row} ${style.optionWrapper}`}>
                         <label>
-                            <RadioButton name="sensitivity" id="low" value="low" onChange={onRadioChange}></RadioButton>
+                            <RadioButton name="sensitivity" id="low" value="low" onChange={onRadioChange} disabled={startMic}></RadioButton>
                             <span className={style.label}>{t('noiselevel.low')}</span>
                         </label>
                         <label>
-                            <RadioButton checked name="sensitivity" id="medium" value="medium" onChange={onRadioChange}></RadioButton>
+                            <RadioButton name="sensitivity" id="medium" value="medium" onChange={onRadioChange} disabled={startMic}></RadioButton>
                             <span className={style.label}>{t('noiselevel.medium')}</span>
                         </label>
                         <label>
-                            <RadioButton name="sensitivity" id="high" value="high" onChange={onRadioChange}></RadioButton>
+                            <RadioButton name="sensitivity" id="high" value="high" onChange={onRadioChange} disabled={startMic}></RadioButton>
                             <span className={style.label}>{t('noiselevel.high')}</span>
                         </label>
                     </div>

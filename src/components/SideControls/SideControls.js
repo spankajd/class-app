@@ -59,7 +59,7 @@ const SideControls = ({ id, onItemClick, clearAll, disableClearButton }) => {
                     </div>
                     <div className={`${style.item} ${disableClearButton ? style.disabled : ''}`} onClick={onClearAllClick}>
                         <div className={style.inner}>
-                            <ClearScreenIcon />
+                            <ClearScreenIcon fill={'Var(--color-primary_font)'} />
                         </div>
                     </div>
                     <div className={`${style.item} ${style.screenLock}`} onClick={onScreenLockClick}>

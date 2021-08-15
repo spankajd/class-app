@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import _ from "lodash";
 
 import style from './WhoIsNext.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
-import Symbols from "../../assets/symbols"; 
+import Symbols from "../../assets/symbols";
 
 
 // Steps 
@@ -23,10 +24,10 @@ const NUMBER = 'number';
 const SYMBOLS = 'symbols';
 const MAXLIMIT = 32;
 
-const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage  }) => {
+const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
 
     const { t, i18n } = useTranslation();
-    const popUpSteps = [2, 3, 4, 5];
+    const popUpSteps = [2, 4, 5];
     const [inputStage, setInputStage] = useState('');
     const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
@@ -38,32 +39,36 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     const [list, setList] = useState([]);
     const componentRef = useRef();
 
-   
+
+    // useEffect(() => {
+    //     Symbols = _.shuffle(Symbols);
+    // }, [Symbols]);
+
     useEffect(() => {
-        if(sharedList.length > 0) {
+        if (sharedList.length > 0) {
             setInputStage(sharedInputStage);
             setList(sharedList);
             setNumberOfStudent(sharedList.length);
             getRandomFromList();
             setCurrentStep(2);
         }
-    },[sharedList]);
+    }, [sharedList]);
 
     useEffect(() => {
-        if(currentStep === 1) {
-            setTooltip( t('tooltip.whoisnext.step_1') );
-        } else if( currentStep === 2) {
-            setTooltip( t('tooltip.whoisnext.step_2_'+inputStage) );
+        if (currentStep === 1) {
+            setTooltip(t('tooltip.whoisnext.step_1'));
+        } else if (currentStep === 2) {
+            setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
         } else {
             setTooltip(null);
         }
         if (currentStep === 3) {
             getRandomFromList();
-        } else  if (currentStep === 6) {
-            setTimeout( () => {
-                setCurrentStep(previousStep);
-            }, 500);
-            handlePrint();
+        } else if (currentStep === 6) {
+            // setTimeout(() => {
+            //     setCurrentStep(previousStep);
+            // }, 500);
+            // handlePrint();
         }
     }, [currentStep]);
 
@@ -78,7 +83,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     const onSelectStage = id => {
         setInputStage(id);
         onRandomStudentUpdate({
-            type:'inputStage',
+            type: 'inputStage',
             data: id
         });
     }
@@ -121,9 +126,10 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     }
 
     const onPrintClick = e => {
-        if(e)  setPreviousStep(e);
+        // if (e) setPreviousStep(e);
         generateRadomList();
-        setCurrentStep(6);
+        // setCurrentStep(6);
+        setTimeout(() => { handlePrint(); }, 100);
     }
 
     const onSubmitConfirm = e => {
@@ -146,7 +152,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     const onReset = val => {
         // setCurrentStep(4);
         // setPreviousStep(val);
-        
+
         onResetConfirm();
     }
 
@@ -166,8 +172,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
 
     const getRandomFromList = () => {
         const random = Math.floor(Math.random() * (list.length));
-        if( inputStage == SYMBOLS) 
-            setOutput( <img src={Symbols[list.splice(random, 1)]} /> ) ;
+        if (inputStage == SYMBOLS)
+            setOutput(<img src={Symbols[list.splice(random, 1)]} />);
         else
             setOutput(list.splice(random, 1));
         if (list.length == 0) {
@@ -180,7 +186,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         let tempArr = [];
         if (inputStage == NICKNAME) {
             tempArr = textAreaVal.split("\n");
-            _.without(tempArr, ['', ' ','\n']);
+            _.without(tempArr, ['', ' ', '\n']);
             setNumberOfStudent(tempArr.length);
             setList(tempArr);
         } else if (inputStage == NUMBER) {
@@ -188,22 +194,32 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                 tempArr.push(`${inputStage} ${i + 1}`);
             }
             setList(tempArr);
-        } else if (inputStage == SYMBOLS){
-            
-            let keys = _.shuffle(_.keys(Symbols));
+        } else if (inputStage == SYMBOLS) {
+
+            // let keys = _.shuffle(_.keys(Symbols));
+            let keys = _.keys(Symbols);
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(keys[i]);
             }
             setList(tempArr);
         }
         onRandomStudentUpdate({
-            type:'list',
+            type: 'list',
             data: tempArr.slice(0)
         });
     }
 
     return (
-        <Holder help={tooltip} className={`${style.whoIsNext} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}  ${!inputStage ? style.firstStep : ''} ${currentStep === 6 ? style.printPreview : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder help={tooltip}
+            className={`${style.whoIsNext}
+                        ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}
+                        ${!inputStage ? style.firstStep : ''}
+                        ${currentStep === 1 && inputStage ? style.secondStep : ''}
+                        ${currentStep === 3 ? style.outputWrapper : ''}
+                        ${currentStep === 6 ? style.printPreview : ''}`}
+            onCompClick={onCompClick}
+            onClose={onCloseClick}>
+
             {currentStep == 1 &&
                 (<>
                     <div className={`${style.panel} ${style.controlPanel}`}>
@@ -233,7 +249,10 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                                 <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
 
                                 {inputStage == NICKNAME ? (
-                                    <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
+                                    // <Scrollbars style={{ width: 300, height: 176 }}>
+                                    <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>
+                                    // </Scrollbars>
+                                ) :
                                     (<>
                                         <label className={style.question}>{t('whoisnext.howmanystudent')}</label>
                                         <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
@@ -241,8 +260,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                                 <div className={`${style.buttomWrapper} `}  >
                                     {inputStage == NICKNAME && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
                                     {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
-                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                    <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -253,8 +272,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                         <div className={style.subtitle}>Do you want me to give you a random student who is next now?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label={t('whoisnext.yes')} onClick={onSubmitConfirm}></Button>
-                            <Button  label={t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
-                            <Button  label={t('whoisnext.reset')} onClick={() => onReset(2)}></Button>
+                            <Button label={t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
+                            <Button label={t('whoisnext.reset')} onClick={() => onReset(2)}></Button>
                         </div>
                     </>
                 )
@@ -294,7 +313,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                 )
             }
             {
-                currentStep == 6 && (
+                // currentStep == 6 && (
+                <div className={style.printWrapper}>
                     <div ref={componentRef}>
                         <div style={{
                             margin: "25px"
@@ -305,57 +325,59 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                             background: "#e2ebf8",
                             color: "#9ea5ad",
                             margin: "25px",
-                            pageBreakInside:"auto"
+                            pageBreakInside: "auto"
                         }}>
                             <tr style={{
-                                pageBreakInside:"avoid",
-                                pageBreakAfter:"auto"
+                                pageBreakInside: "avoid",
+                                pageBreakAfter: "auto"
                             }}>
                                 <th style={{
-                                    paddingTop: "12px",
-                                    paddingBottom: "12px",
                                     backgroundColor: "#a1bce6",
                                     color: "#000",
                                     border: "1px solid #aab0ba",
-                                    padding: "8px",
+                                    padding: "12px 8px",
                                     textAlign: "center"
                                 }}>{inputStage}</th>
                                 <th style={{
-                                    paddingTop: "12px",
-                                    paddingBottom: "12px",
                                     backgroundColor: "#a1bce6",
                                     color: "#000",
                                     border: "1px solid #aab0ba",
-                                    padding: "8px",
+                                    padding: "12px 8px",
                                     textAlign: "center"
                                 }}>Real Names</th>
                             </tr>
                             {
                                 list.map((item, index) =>
-                                    <tr key={index}
-                                    // style={{
-                                    //     // pageBreakInside:"avoid",
-                                    //     // pageBreakAfter:"auto"
-                                    //     pageBreakBefore: index%10 == 0 ? "always" : "avoid"
-                                    // }}
-                                    className={index%10 == 0 ? style.tableBreak : style.tableRow}
-                                    >
-                                        <td style={{
-                                            border: "1px solid #aab0ba",
-                                            padding: "8px",
-                                            textAlign: "center"
-                                        }}>{ inputStage === SYMBOLS ? <img src={Symbols[item]} /> : item}</td>
-                                        <td style={{
-                                            border: "1px solid #aab0ba",
-                                            padding: "8px",
-                                            textAlign: "center"
-                                        }}></td>
-                                    </tr>
+                                    <>
+                                        {/* <tr className={'page-break'}></tr> */}
+                                        <tr key={index}
+                                            style={{
+                                                // pageBreakInside:"avoid",
+                                                // pageBreakAfter:"auto"
+                                                // pageBreakBefore: index%10 == 0 ? "always" : "avoid",
+                                                fontSize: '13px'
+                                            }}
+                                            className={index % 10 == 0 ? style.tableBreak : style.tableRow}
+                                        >
+                                            <td style={{
+                                                border: "1px solid #aab0ba",
+                                                padding: "8px",
+                                                textAlign: "center"
+                                            }}>{inputStage === SYMBOLS ? <img src={Symbols[item]} /> : item}</td>
+                                            <td style={{
+                                                border: "1px solid #aab0ba",
+                                                padding: "8px",
+                                                textAlign: "center"
+                                            }}></td>
+                                        </tr>
+                                    </>
                                 )
                             }
                         </table>
                     </div>
-                )
+                </div>
+
+                // )
             }
         </Holder>
     );

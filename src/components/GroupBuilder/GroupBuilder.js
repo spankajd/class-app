@@ -10,7 +10,7 @@ import _ from "lodash";
 
 import style from './GroupBuilder.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
-import Symbols from "../../assets/symbols"; 
+import Symbols from "../../assets/symbols";
 
 // Steps 
 // 1. choose format
@@ -26,7 +26,7 @@ const SYMBOLS = 'symbols';
 const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
     const { t, i18n } = useTranslation();
 
-    const popUpSteps = [3, 4, 5];
+    const popUpSteps = [2, 3, 4, 5];
     const [inputStage, setInputStage] = useState('');
     const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
@@ -40,34 +40,34 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     const componentRef = useRef();
 
     useEffect(() => {
-        if(currentStep === 1) {
-            setTooltip( t('tooltip.whoisnext.step_1') );
-        } else if( currentStep === 2) {
-            setTooltip( t('tooltip.whoisnext.step_2_'+inputStage) );
+        if (currentStep === 1) {
+            setTooltip(t('tooltip.whoisnext.step_1'));
+        } else if (currentStep === 2) {
+            setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
         } else {
             setTooltip(null);
         }
-    },[currentStep]);
+    }, [currentStep]);
 
     useEffect(() => {
-        if(sharedList.length > 0) {
+        if (sharedList.length > 0) {
             setInputStage(sharedInputStage);
             setList(sharedList);
             setNumberOfStudent(sharedList.length);
             getRandomFromList();
             setCurrentStep(2);
         }
-    },[sharedList]);
+    }, [sharedList]);
 
     useEffect(() => {
-        if (currentStep === 6) {
-            setTimeout( () => {
-                setCurrentStep(previousStep);
-            }, 500);
-            print();
-        }
+        // if (currentStep === 6) {
+        //     setTimeout( () => {
+        //         setCurrentStep(previousStep);
+        //     }, 500);
+        //     print();
+        // }
     }, [currentStep]);
-    
+
     useEffect(() => {
         setOutput('');
     }, [numberOfGroup]);
@@ -76,10 +76,6 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         content: () => componentRef.current
     })
 
-    const handlePrint = () => {
-        setCurrentStep(6);
-    };
-
     const onCloseClick = e => {
         onCompClose(e);
     }
@@ -87,7 +83,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     const onSelectStage = e => {
         setInputStage(e);
         onRandomStudentUpdate({
-            type:'inputStage',
+            type: 'inputStage',
             data: e
         });
     }
@@ -134,9 +130,10 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     }
 
     const onPrintClick = e => {
-        if(e)  setPreviousStep(e);
+        // if (e) setPreviousStep(e);
         generateRadomList();
-        setCurrentStep(6);
+        // setCurrentStep(6);
+        setTimeout(() => { print(); }, 100);
     }
 
     const onSubmitConfirm = e => {
@@ -204,7 +201,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         let tempArr = [];
         if (inputStage == NICKNAME) {
             tempArr = textAreaVal.split("\n");
-            _.without(tempArr, ['', ' ','\n'])
+            _.without(tempArr, ['', ' ', '\n'])
             setNumberOfStudent(tempArr.length);
             setList(tempArr);
         } else if (inputStage == NUMBER) {
@@ -213,18 +210,19 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
             }
             setList(tempArr);
             onRandomStudentUpdate({
-                type:'list',
+                type: 'list',
                 data: tempArr
             });
-        } else if (inputStage == SYMBOLS){
-            let keys = _.shuffle(_.keys(Symbols));
+        } else if (inputStage == SYMBOLS) {
+            // let keys = _.shuffle(_.keys(Symbols));
+            let keys = _.keys(Symbols);
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(keys[i]);
             }
             setList(tempArr);
         }
         onRandomStudentUpdate({
-            type:'list',
+            type: 'list',
             data: tempArr
         });
     }
@@ -234,13 +232,13 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
 
         for (var key in output) {
             let counter = 0;
-            let keyFactor = counter+Math.random();
+            let keyFactor = counter + Math.random();
             arr.push(
-                <div key={'1_1_'+keyFactor} className={style.groupCol}>
-                    <div key={'1_'+keyFactor} className={style.groupTitle}>{key}</div>
+                <div key={'1_1_' + keyFactor} className={style.groupCol}>
+                    <div key={'1_' + keyFactor} className={style.groupTitle}>{key}</div>
                     <ul className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li key={counter++} className={`${style.groupDataItem} ${style.symbols}`}>{
                         inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element
-                        }</li>) : '')}</ul>
+                    }</li>) : '')}</ul>
                 </div>
             )
         }
@@ -249,7 +247,18 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     }
 
     return (
-        <Holder help={tooltip} className={`${style.groupbuilder} ${popUpSteps.includes(currentStep) ? style.popUpBox : ''} ${!inputStage ? style.firstStep : ''} ${currentStep == 2 ? style.groupOutPut : ''}`} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder
+            help={tooltip}
+            resizable={!popUpSteps.includes(currentStep)}
+            className={`${style.groupbuilder}
+                        ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}
+                        ${!inputStage ? style.firstStep : ''}
+                        ${currentStep === 1 && inputStage ? style.secondStep : ''}
+                        ${currentStep === 3 ? style.outputWrapper : ''}
+                        ${currentStep == 2 ? style.groupOutPut : ''}`}
+            onCompClick={onCompClick}
+            onClose={onCloseClick}>
+
             {currentStep == 1 &&
                 (<>
                     <div className={`${style.panel} ${style.controlPanel}`}>
@@ -287,8 +296,8 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                                 <div className={`${style.buttomWrapper}`}>
                                     {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
                                     {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
-                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                    <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                 </div>
                             </>)}
                     </div>
@@ -345,7 +354,8 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                 )
             }
             {
-                currentStep == 6 && (
+                // currentStep == 6 && (
+                <div className={style.printWrapper}>
                     <div ref={componentRef}>
                         {Object.keys(output).map(key =>
                             <div key={key} >
@@ -404,7 +414,8 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                         )
                         }
                     </div>
-                )
+                </div>
+                // )
             }
         </Holder>
     );

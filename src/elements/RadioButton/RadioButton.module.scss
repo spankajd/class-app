@@ -6,6 +6,11 @@
     cursor: pointer;
     font-size: 8px;
 
+    &.disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+
     input {
         // position: absolute;
         opacity: 0;
@@ -21,6 +26,7 @@
         &:checked {
             ~ .checkmark {
                 background-color: transparent;
+                border-color: var(--color-blazeOrange);
 
                 &:after {
                     display: block;
@@ -43,10 +49,14 @@
         height: 16px;
         width: 16px;
         background-color: transparent;
-        border-color: var(--color-blazeOrange);
+        border-color: var(--color-border);
         border-width: 2px;
         border-style: solid;
         border-radius: 50%;
+
+        &:hover {
+            border-color: var(--color-blazeOrange);
+        }
 
         &:after {
             content: "";

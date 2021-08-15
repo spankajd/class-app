@@ -1,8 +1,11 @@
 @import '../../style/mixin.scss';
 
 .text {
-    min-width: 220px;
     width: 224px;
+    height: 250px;
+
+    min-width: 224px;
+    min-height: 235px;
 
     left: 40%;
     top: 57%;

@@ -122,7 +122,7 @@ class MainContainer extends Component {
         let { stageItems, openedItems, randomStudentList, randomStudentInput } = this.state;
         if (limitedItems.includes(menuName) && openedItems.includes(menuName))
             return false;
-        const key = stageItems.length;
+        const key = Math.floor((Math.random() * 100000) + 1);
         let proccessedArr;
         openedItems.push(menuName);
         let count = 0;

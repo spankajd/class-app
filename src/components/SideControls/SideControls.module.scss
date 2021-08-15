@@ -40,6 +40,7 @@
             position: relative;
             left: -14px;
             width: 24px;
+            @include svgStroke(Var(--color-primary_font));
         }
     }
     .itemWrapper {
@@ -48,16 +49,18 @@
     .item {
         @include flexAlignCenter;
         padding: 12px 0;
-        height: 32px;
+        height: 31px;
 
         svg {
             height: 30px;
+            // @include svgFill(Var(--color-primary_font));
         }
         .inner {
-            text-align: center;
+            @include flexAlignCenter;
             border-right: 1px solid var(--color-border);
             padding: 0 10px;
             width: 60px;
+            height: 100%;
         }
         &:last-child {
 
@@ -81,6 +84,9 @@
         .inner {
             width: 45px;
         }
+        svg {
+            @include svgFill(Var(--color-primary_font));
+        }
     }
     .handle {
         @include flexAlignCenter;
@@ -96,11 +102,55 @@
         cursor: grabbing;
     }
     .dropdownWrapper {
-        width: 75px;
+        width: 100%;
         // padding: 0;
 
         .dropdown {
             width: 100%;
+        }
+    }
+
+
+
+    @include breakpoint(medium) {
+        .trigger {
+            width: 30px;
+            height: 60px;
+            left: -32.5px;
+            .triggerBG {
+                width: 60px;
+                height: 60px;
+            }
+            svg {
+                width: 28px;
+            }
+        }
+        .item {
+            height: 36px;
+        }
+    }
+
+    @include breakpoint(large) {
+        .trigger {
+            width: 45px;
+            height: 90px;
+            left: -48.5px;
+            .triggerBG {
+                width: 90px;
+                height: 90px;
+            }
+            svg {
+                width: 34px;
+            }
+        }
+        .item {
+            height: 66px;
+            .inner {
+                padding: 0 18px;
+            }
+            svg {
+                height: 42px;
+            }
         }
     }
 

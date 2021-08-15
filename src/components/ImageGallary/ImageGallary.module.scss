@@ -59,18 +59,47 @@
 
 :global {
     .slick-prev, .slick-next {
-        background: var(--color-black_5);
+        background: transparent;
         z-index: 11;
         width: 25px;
         height: 100%;
+        overflow: hidden;
     }
     .slick-prev:before, .slick-next:before {
-        background: var(--color-black_5);
-        color: var(--color-white);
+        background: var(--color-white);
+        width: 50px;
+        height: 90%;
+        position: absolute;
+        left: 0;
+        top: 0;
         opacity: 1;
+        content: ' ';
+        border-radius: 50%;
+    }
+    .slick-prev:after, .slick-next:after {
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px 0 5px 8.7px;
+        border-color: transparent transparent transparent var(--color-primary_font);
+        position: absolute;
+        left: 8px;
+        top: 16px;
     }
     .slick-prev {
         left: 0px;
+        &:before {
+            left: unset;
+            right: 0px;
+        }
+        &:after {
+            border-width: 5px 8.7px 5px 0;
+            border-color: transparent  var(--color-primary_font) transparent transparent;
+            left:unset;
+            right: 8px;
+        }
     }
     .slick-next {
         right: 0px;
