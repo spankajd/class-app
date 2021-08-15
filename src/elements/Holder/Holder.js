@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
-import ReactTooltip from "react-tooltip";
 import Tooltip from "rc-tooltip";
 import 'rc-tooltip/assets/bootstrap.css';
 

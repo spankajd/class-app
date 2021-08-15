@@ -28,6 +28,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
 
     const { t, i18n } = useTranslation();
     const popUpSteps = [2, 4, 5];
+    const helpForSteps = [1];
     const [inputStage, setInputStage] = useState('');
     const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
@@ -186,6 +187,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         let tempArr = [];
         if (inputStage == NICKNAME) {
             tempArr = textAreaVal.split("\n");
+            tempArr = tempArr.filter(i => i.trim() != '');
             _.without(tempArr, ['', ' ', '\n']);
             setNumberOfStudent(tempArr.length);
             setList(tempArr);
@@ -210,7 +212,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     }
 
     return (
-        <Holder help={tooltip}
+        <Holder help={helpForSteps.includes(currentStep) ? tooltip : false}
             className={`${style.whoIsNext}
                         ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}
                         ${!inputStage ? style.firstStep : ''}

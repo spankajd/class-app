@@ -201,7 +201,8 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         let tempArr = [];
         if (inputStage == NICKNAME) {
             tempArr = textAreaVal.split("\n");
-            _.without(tempArr, ['', ' ', '\n'])
+            tempArr = tempArr.filter(i => i.trim() != '');
+            _.without(tempArr, ['', ' ', '\n']);
             setNumberOfStudent(tempArr.length);
             setList(tempArr);
         } else if (inputStage == NUMBER) {

@@ -63,6 +63,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
         if(!imageData) {
             const imageSrc = webcamRef.current.getScreenshot();
             setImageData(imageSrc);
+            setCursorMode(true);
         } else {
             setImageData(null);
         }

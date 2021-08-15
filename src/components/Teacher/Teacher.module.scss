@@ -3,13 +3,13 @@
 .teacher {
     display: inline-flex;
     flex-direction: row;
-    min-width: 136px;
-    min-height: 128px;
+    min-width: 142px;
+    min-height: 130px;
     top: 2%;
     left: 3%;
     font-size: var(--font-size-normal);
 
-    padding: 0; 
+    padding: 0 10px; 
 
     .col {
         flex-grow: 2;
