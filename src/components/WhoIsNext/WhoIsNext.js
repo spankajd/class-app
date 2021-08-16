@@ -327,9 +327,14 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                             background: "#e2ebf8",
                             color: "#9ea5ad",
                             margin: "25px",
-                            pageBreakInside: "auto"
+                            pageBreakInside: "auto",
+                            pageBreakAfter: "auto"
                         }}>
-                            <tr style={{
+
+                            <thead style={{
+                                display: "table-header-group"
+                            }}>
+                                <tr style={{
                                 pageBreakInside: "avoid",
                                 pageBreakAfter: "auto"
                             }}>
@@ -348,6 +353,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                                     textAlign: "center"
                                 }}>Real Names</th>
                             </tr>
+                            </thead>
+                        <tbody>
                             {
                                 list.map((item, index) =>
                                     <>
@@ -375,12 +382,13 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                                     </>
                                 )
                             }
+                        </tbody>
                         </table>
-                    </div>
+                </div>
                 </div>
 
-                // )
-            }
+            // )
+        }
         </Holder>
     );
 };

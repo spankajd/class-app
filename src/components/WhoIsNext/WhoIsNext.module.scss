@@ -193,13 +193,13 @@
         }
     }
 
-    .tableBreak {
-        page-break-before: always,
-    }
+    // .tableBreak {
+    //     page-break-before: always,
+    // }
     
-    .tableRow {
-        page-break-before: avoid,
-    }
+    // .tableRow {
+    //     page-break-before: avoid,
+    // }
 
     .output{
         white-space: nowrap;

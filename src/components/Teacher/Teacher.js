@@ -47,7 +47,7 @@ const Teacher = ({ onCompClick, onCompClose }) => {
 
 
     return (
-        <Holder className={style.teacher} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={style.teacher} onCompClick={onCompClick} onClose={onCloseClick} maintainAspectRatio={true}>
             <div className={`${style.col} ${style.lightWrapper}`}>
                 <div className={style.backRod}></div>
                 <div className={style.signalWrapper}>

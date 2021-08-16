@@ -27,7 +27,8 @@ const Holder = ({
                 width = 250,
                 height = 250,
                 minWidth = "250",
-                minHeight = "250" }) => {
+                minHeight = "250",
+                maintainAspectRatio = false }) => {
 
     const [focused, setFocused] = useState(true);
     const [isMouseDown, setIsMouseDown] = useState(false);
@@ -96,7 +97,8 @@ const Holder = ({
             w: node.offsetWidth,
             h: node.offsetHeight,
             x: e.pageX,
-            y: e.pageY
+            y: e.pageY,
+            aRatio: node.offsetHeight/node.offsetWidth
         }
         allowToResize = true;
 
@@ -116,6 +118,10 @@ const Holder = ({
             width: resizeDirect == 'ltr' ? (initialSize.w + (e.pageX - initialSize.x)) : (initialSize.w - (e.pageX - initialSize.x)),
             height: (initialSize.h + (e.pageY - initialSize.y))
         }
+        if(maintainAspectRatio) {
+            tempSize.height = (tempSize.width * initialSize.aRatio);
+        }
+
         setSize(tempSize);
         e.preventDefault();
         e.stopPropagation();

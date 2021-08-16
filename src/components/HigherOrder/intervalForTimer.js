@@ -3,7 +3,7 @@ import React from 'react';
 
 
 export const intervalForTimer = Comp => {
-    let intervalObj;
+    
     
     return class extends React.Component {
         state = {
@@ -12,6 +12,8 @@ export const intervalForTimer = Comp => {
             currentTime: this.props.currentSecond ||  0,
             factor: 1
         }
+        
+        intervalObj = null;
 
         setParams(param) {
             const {startSec, stopSec, currentTime, factor} = this.state;
@@ -26,14 +28,14 @@ export const intervalForTimer = Comp => {
 
         startInterval() {
             const _thisRef = this;
-            intervalObj && clearInterval(intervalObj);
-            intervalObj = setInterval( () => {
+            this.intervalObj && clearInterval(this.intervalObj);
+            this.intervalObj = setInterval( () => {
                 const {startSec, stopSec, currentTime, factor} = _thisRef.state;
                 let newCurrentSec = currentTime + factor;
                 // console.log('Interval >>>>' , _thisRef.state, newCurrentSec);
                 
                 if( ( startSec < stopSec && stopSec < newCurrentSec) || ( startSec > stopSec && stopSec > newCurrentSec) ) { 
-                    clearInterval(intervalObj);
+                    clearInterval(_thisRef.intervalObj);
                     return false;
                 }
 
@@ -46,7 +48,7 @@ export const intervalForTimer = Comp => {
         }
 
         stopInterval () {
-            intervalObj && clearInterval(intervalObj);
+            this.intervalObj && clearInterval(this.intervalObj);
         }
 
         render() {

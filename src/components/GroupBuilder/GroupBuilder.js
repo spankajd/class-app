@@ -109,7 +109,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         let val = e.target.value;
         const re = /^[0-9\b]+$/;
         val = re.test(val) || val === '' ? val : numberOfStudent;
-        val = val ? Math.min(Math.max(val, 1), 30) : '';
+        val = val ? Math.min(Math.max(val, 1),32) : '';
         setNumberOfStudent(val);
     }
 
@@ -117,7 +117,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         let val = e.target.value;
         const re = /^[0-9\b]+$/;
         val = re.test(val) || val === '' ? val : numberOfGroup;
-        val = val ? Math.min(Math.max(val, 1), numberOfStudent) : '';
+        val = val ? Math.min(Math.max(val, 1), 26) : '';
         setNumberOfGroup(val);
     }
     const onClearClick = e => {
