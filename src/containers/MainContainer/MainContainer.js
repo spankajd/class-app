@@ -26,7 +26,7 @@ import NoiseLevel from '../../components/NoiseLevel/NoiseLevel';
 import SideControls from '../../components/SideControls/SideControls';
 
 const limitedItems = ['symbols', 'teacher', 'whoisnext', 'groupbuilder', 'noiselevel', 'number', 'webcam', 'background'];
-
+var mainCounter = new Map(); 
 class MainContainer extends Component {
     state = {
         stageItems: [],
@@ -82,8 +82,8 @@ class MainContainer extends Component {
             this.setState({
                 stageItems: newStageItems,
                 openedItems: newOpenItems,
-                randomStudentInput: '',
-                randomStudentList: []
+                // randomStudentInput: '',
+                // randomStudentList: []
             });
 
         } else {
@@ -125,8 +125,12 @@ class MainContainer extends Component {
         const key = Math.floor((Math.random() * 100000) + 1);
         let proccessedArr;
         openedItems.push(menuName);
-        let count = 0;
-        openedItems.forEach(i => i === menuName ? count++ : null);
+        let count = mainCounter.get(menuName) || 0;
+        count++
+        mainCounter.set(menuName, count);
+        
+        
+
         switch (menuName) {
             case 'symbols':
                 stageItems.push(<Symbols dataId={menuName} key={key} onCompClick={() => this.onCompClick(key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
@@ -222,7 +226,10 @@ class MainContainer extends Component {
         this.setState({
             stageItems: [],
             openedItems: []
-        })
+        });
+        mainCounter.forEach( (value, key) => {
+            mainCounter.set(key,0);
+          });
     }
 
     render() {

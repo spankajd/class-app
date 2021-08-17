@@ -14,8 +14,12 @@ const TitleInput = ({ defaultVal='', onChange, className }) => {
         onChange && onChange(val);
     }
 
+    const onMouseDown = e => {
+        e.stopPropagation();
+    } 
+
     return (
-        <input className={`${style.titleInput} ${className}`} type="type" onChange={onInputChange} value={value} />
+        <input className={`${style.titleInput} ${className}`} type="type" onChange={onInputChange} value={value} onMouseDown={onMouseDown} />
     );
 };
 

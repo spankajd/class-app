@@ -56,6 +56,7 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
         setPauseFlag(false);
         setCompleteFlag(false);
         if(standardRef && standardRef.current) standardRef.current.state.currentTime = 0;
+        if(countDownRef && countDownRef.current) countDownRef.current.state.currentMode = true;
         if(countDownRef && countDownRef.current) countDownRef.current.state.currentTime = countDownRef.current.state.startSec;
     }
 
@@ -80,7 +81,7 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
             </div>
             <div className={style.row}>
                 {selectedTimer ?
-                    <CountDownTimer ref={countDownRef} editMode={true} intervalStarted={intervalStarted} onCountDownEnd={onCountDownEnd} ></CountDownTimer>
+                    <CountDownTimer ref={countDownRef} isStarted={intervalStarted || pauseFlag } intervalStarted={intervalStarted} onCountDownEnd={onCountDownEnd} ></CountDownTimer>
                     :
                     <StandardTimer ref={standardRef} intervalStarted={intervalStarted}></StandardTimer>
                 }

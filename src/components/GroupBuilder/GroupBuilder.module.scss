@@ -141,14 +141,20 @@ $repeat: 11;  // How often you want the pattern to repeat.
         font-weight: bold;
         color: var(--color-white);
         background-color: var(--color-cerulean);
+        font-size: var(--font-size-button);
 
         input {
             display: none;
         }
+
         &.disabled {
             color: var(--color-white);
             background-color: var(--color-silver);
             pointer-events: none;
+        }
+
+        @include breakpoint(medium) {
+            padding: 12px 22px;
         }
     }
 
@@ -176,6 +182,13 @@ $repeat: 11;  // How often you want the pattern to repeat.
         svg {
             height: 50px;
         }
+    }
+
+    .alertText {
+        text-align: center;
+        font-size: var(--font-size-label);
+        max-width: 450px;
+        margin-bottom: 15px;
     }
 
     .question {
@@ -216,7 +229,7 @@ $repeat: 11;  // How often you want the pattern to repeat.
     .numberOfGroup {
         display: inline-flex;
         flex-direction: row;
-        width: 200px;
+        width: 170px;
         align-items: center;
     }
 
@@ -228,7 +241,7 @@ $repeat: 11;  // How often you want the pattern to repeat.
         margin-top: 50px;
         // max-width: 650px;
         max-height: 450px;
-        overflow: scroll;
+        overflow: visible;
 
     }
     .groupCol {
@@ -256,7 +269,8 @@ $repeat: 11;  // How often you want the pattern to repeat.
     .groupData {
         position: relative;
         padding: 0 10px;
-        overflow: scroll;
+        overflow-x: hidden;
+        overflow-y: auto;
         // height: 100%;
         list-style: none;
     }
@@ -325,8 +339,7 @@ $repeat: 11;  // How often you want the pattern to repeat.
         &.outputWrapper {
             min-width: 285px;
             min-height: 95px;
-            padding: 50px 20px 25px;
-    
+            padding: 50px 20px 25px;;
         }
     
         &.secondStep {

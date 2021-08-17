@@ -5,13 +5,14 @@ import Draggable from 'react-draggable';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-import { DoubleArrow, ClearScreenIcon, CopyRightIcon, ScreenLockIcon } from '../../elements/Icon/Icon';
+import { DoubleArrow, ClearScreenIcon, CopyRightIcon, ScreenLockIcon, ScreenUnlockIcon } from '../../elements/Icon/Icon';
 
 import style from './SideControls.module.scss';
 
 const SideControls = ({ id, onItemClick, clearAll, disableClearButton }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScreenLocked, setIsScreenLocked] = useState(false);
     const dropdownOptions = ['en', 'ger'];
     const { t, i18n } = useTranslation()
     const [selectedOption, setSelectedOption] = useState(i18n.language);
@@ -33,7 +34,8 @@ const SideControls = ({ id, onItemClick, clearAll, disableClearButton }) => {
     }
 
     const onScreenLockClick = () => {
-        alert('onScreenLock');
+        setIsScreenLocked(!isScreenLocked);
+        window.screen.orientation.lock('any');
     }
 
     const initialPos = { x: 0, y: 0 };
@@ -64,7 +66,7 @@ const SideControls = ({ id, onItemClick, clearAll, disableClearButton }) => {
                     </div>
                     <div className={`${style.item} ${style.screenLock}`} onClick={onScreenLockClick}>
                         <div className={style.inner}>
-                            <ScreenLockIcon />
+                            {isScreenLocked ? <ScreenUnlockIcon /> : <ScreenLockIcon />}
                         </div>
                     </div>
                 </div>

@@ -24,8 +24,8 @@
     &.outputWrapper {
         flex-direction: column;
         min-width: 285px;
-        min-height: 95px;
-        padding: 50px 20px 25px;
+        min-height: 120px;
+        padding: 35px 20px 25px;
 
     }
 
@@ -175,6 +175,13 @@
         }
     }
 
+    .alertText {
+        text-align: center;
+        font-size: var(--font-size-label);
+        max-width: 450px;
+        margin-bottom: 15px;
+    }
+
     .question {
         font-size: 15px;
         width: 100%;
@@ -257,7 +264,7 @@
 
         &.outputWrapper {
             min-width: 285px;
-            min-height: 95px;
+            min-height: 120px;
             padding: 50px 20px 25px;
     
         }

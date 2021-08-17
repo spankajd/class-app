@@ -9,7 +9,7 @@ export const intervalForTimer = Comp => {
         state = {
             startSec: 0,
             stopSec: 0,
-            currentTime: this.props.currentSecond ||  0,
+            currentTime: 0,
             factor: 1
         }
         

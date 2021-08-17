@@ -49,6 +49,9 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }
     }
 
     const onBlur = e => {
+        if(!editMode) 
+            return false;
+
         let { total } = time;
         let val = Number(e.target.value);
         let curVal;
@@ -103,37 +106,24 @@ const CommonTimer = ({ editMode, timeInSeconds = 0, onTimeUpdate, warningClass }
         });
     }
 
+    const  onMouseDown = e => {
+        e.stopPropagation();
+    }
+
     return (
         <div className={`${style.commonTimer} ${warningClass}`}>
-            {/* <div className={`${style.group} ${style.hour}`}>
-                <TimeUnit editMode={editMode} onChange={onChange} num={Math.floor ( time.h / 10)} factorSec={36000}></TimeUnit>
-                <TimeUnit editMode={editMode} onChange={onChange} num={( time.h % 10)} factorSec={3600}></TimeUnit>
-                <label>hours</label>
-            </div>
-            <div className={style.separator}>:</div>
-            <div className={`${style.group} ${style.minute}`}>
-                <TimeUnit editMode={editMode} onChange={onChange} num={Math.floor ( time.m / 10)} factorSec={600}></TimeUnit>
-                <TimeUnit editMode={editMode} onChange={onChange} num={( time.m % 10)} factorSec={60}></TimeUnit>
-                <label>minutes</label>
-            </div>
-            <div className={style.separator}>:</div>
-            <div className={`${style.group} ${style.second}`}>
-                <TimeUnit editMode={editMode} onChange={onChange} num={Math.floor ( time.s / 10)} factorSec={10}></TimeUnit>
-                <TimeUnit editMode={editMode} onChange={onChange} num={( time.s % 10)} factorSec={1}></TimeUnit>
-                <label>seconds</label>
-            </div> */}
             <div className={`${style.group} ${style.hour}`}>
-                <input type="text" name="hour" value={hourStr} onChange={onChange} onBlur={onBlur} readOnly={!editMode} />
+                <input type="text" name="hour" value={hourStr} onChange={onChange} onMouseDown={onMouseDown} onBlur={onBlur} readOnly={!editMode} />
                 <label>{t('timer.hours')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.minute}`}>
-                <input type="text" name="minute" value={minuteStr} onChange={onChange} onBlur={onBlur} readOnly={!editMode} />
+                <input type="text" name="minute" value={minuteStr} onChange={onChange} onMouseDown={onMouseDown} onBlur={onBlur} readOnly={!editMode} />
                 <label>{t('timer.minutes')}</label>
             </div>
             <div className={style.separator}><span>:</span></div>
             <div className={`${style.group} ${style.second}`}>
-                <input type="text" name="second" value={secondStr} onChange={onChange} onBlur={onBlur} readOnly={!editMode} />
+                <input type="text" name="second" value={secondStr} onChange={onChange} onMouseDown={onMouseDown} onBlur={onBlur} readOnly={!editMode} />
                 <label>{t('timer.seconds')}</label>
             </div>
 

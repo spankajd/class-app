@@ -6,10 +6,10 @@ import { intervalForTimer } from '../HigherOrder/intervalForTimer';
 import style from './CountDownTimer.module.scss';
 
 
-const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, setParams, startInterval, stopInterval, onCountDownEnd }) => {
+const CountDownTimer = ({ intervalStarted, isStarted, currentSecond = 600, setParams, startInterval, stopInterval, onCountDownEnd }) => {
 
     const [currentTime , setCurrentTime] = useState(currentSecond);
-    const [currentMode , setCurrentMode] = useState(editMode);
+    const [currentMode , setCurrentMode] = useState(true);
 
 
     useEffect( () => { 
@@ -36,14 +36,11 @@ const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, 
     },[currentSecond]);
 
     useEffect( () => { 
-        if(!intervalStarted) {
-            setCurrentMode(editMode);
-        }
-    },[intervalStarted, editMode]);
+        setCurrentMode(!isStarted);
+    },[isStarted]);
 
     useEffect( () => { 
         if(intervalStarted) {
-            setCurrentMode(false);
             startInterval();
         } else {
             stopInterval();
@@ -53,7 +50,7 @@ const CountDownTimer = ({ editMode= true, intervalStarted, currentSecond = 600, 
 
     return (
         <div className={`${style.countDownTimer}`}>
-            <CommonTimer warningClass={(intervalStarted && 11 <= currentSecond && currentSecond <= 20) ?  style.orangeWarning : (intervalStarted && 0 <= currentSecond && currentSecond <= 10) ? style.redWarning :'' } editMode={currentMode} timeInSeconds={currentTime} onTimeUpdate={onTimeUpdate}/>
+            <CommonTimer warningClass={((intervalStarted || isStarted) && 11 <= currentSecond && currentSecond <= 20) ?  style.orangeWarning : (intervalStarted && 0 <= currentSecond && currentSecond <= 10) ? style.redWarning :'' } editMode={currentMode} timeInSeconds={currentTime} onTimeUpdate={onTimeUpdate}/>
         </div>
     );
 };

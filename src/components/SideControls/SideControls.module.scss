@@ -26,13 +26,17 @@
         height: 100%;
         left: -27.5px;
         overflow: hidden;
+        border-radius: 65px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: var(--box-shadow);
 
         .triggerBG {
             @include flexAlignCenter;
             position: relative;
             width: 55px;
             height: 55px;
-            border-radius: 50%;
+            border-radius: 24px;
             background: var(--color-primary_background);
         }
         svg {
@@ -45,6 +49,7 @@
     }
     .itemWrapper {
         @include flexAlignCenter;
+        box-shadow: var(--box-shadow);
     }
     .item {
         @include flexAlignCenter;
@@ -80,6 +85,14 @@
     .screenLock {
         display: none;
     }
+    
+
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .screenLock {
+            display: initial;
+        }
+    }
+
     .copyRight {
         .inner {
             width: 45px;

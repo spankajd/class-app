@@ -21,26 +21,26 @@ const WebCam = ({ onCompClick, onCompClose }) => {
     const webcamRef = useRef(null);
     const cursorRef = useRef(null);
     const stageRef = useRef(null);
-    
+
     useEffect(() => {
-        if(stageRef.current && cursorRef.current) {
-            stageRef.current.addEventListener('mousemove',onMouseMove);
-            stageRef.current.addEventListener('touchmove',onMouseMove);
-            stageRef.current.addEventListener('touchstart',onMouseMove);
+        if (stageRef.current && cursorRef.current) {
+            stageRef.current.addEventListener('mousemove', onMouseMove);
+            stageRef.current.addEventListener('touchmove', onMouseMove);
+            stageRef.current.addEventListener('touchstart', onMouseMove);
         }
         return () => {
-            stageRef.current && stageRef.current.removeEventListener('mousemove',onMouseMove)
-            stageRef.current && stageRef.current.removeEventListener('touchmove',onMouseMove);
-            stageRef.current && stageRef.current.removeEventListener('touchstart',onMouseMove);
+            stageRef.current && stageRef.current.removeEventListener('mousemove', onMouseMove)
+            stageRef.current && stageRef.current.removeEventListener('touchmove', onMouseMove);
+            stageRef.current && stageRef.current.removeEventListener('touchstart', onMouseMove);
         };
     }, [cursorMode])
 
     const onMouseMove = e => {
-        if(e.type == 'touchmove' || e.type == 'touchstart') {
+        if (e.type == 'touchmove' || e.type == 'touchstart') {
             e.pageX = e.touches[0].pageX;
             e.pageY = e.touches[0].pageY;
         }
-        const {left, top} = stageRef.current.getBoundingClientRect();
+        const { left, top } = stageRef.current.getBoundingClientRect();
         cursorRef.current.style.left = `${e.pageX - left}px`;
         cursorRef.current.style.top = `${e.pageY - top}px`;
     }
@@ -52,6 +52,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
 
     const onStartWebcam = () => {
         setImageData(null);
+        setCursorMode(false);
         setStartWebCam(true);
     }
 
@@ -60,7 +61,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
     }
 
     const onCapture = () => {
-        if(!imageData) {
+        if (!imageData) {
             const imageSrc = webcamRef.current.getScreenshot();
             setImageData(imageSrc);
             setCursorMode(true);
@@ -79,14 +80,14 @@ const WebCam = ({ onCompClick, onCompClose }) => {
 
 
     return (
-        <Holder help={ t('tooltip.webcam') } resizeDirect={'rtl'} className={`${style.webcam} ${startWebCam ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
+        <Holder maintainAspectRatio={startWebCam} aspectWithRespectTo={stageRef} resizable={startWebCam} help={t('tooltip.webcam')} resizeDirect={'rtl'} className={`${style.webcam} ${startWebCam ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
 
 
             <div className={style.controlPanel}>
                 <div onClick={onStartWebcam}>
                     <WebCamIcon className={`${style.icon} ${style.webCamIcon} ${(startWebCam && !imageData) ? style.active : ''}`} />
                 </div>
-                <div onClick={onCursorClick} className={!startWebCam ? style.disable : ''}>
+                <div onClick={onCursorClick} className={!startWebCam || !imageData ? style.disable : ''}>
                     <CursorIcon className={`${style.icon} ${style.cursorIcon} ${cursorMode ? style.active : ''}`} />
                 </div>
                 <div onClick={onCapture} className={!startWebCam ? style.disable : ''}>
@@ -102,7 +103,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
                     width={'100%'}
-                    mirrored = {false}
+                    mirrored={false}
                 />)}
                 {cursorMode && <div className={style.cursor} ref={cursorRef}>
                     <CursorIcon />

@@ -13,22 +13,23 @@ let allowToResize = false;
 var initialSize = null;
 var currentSize = null;
 
-const Holder = ({ 
-                
-                onCompClick,
-                onClose,
-                children,
-                className = '',
-                activeClassName,
-                resizable = true,
-                resizeDirect = 'ltr',
-                help,
-                toolDirection = 'top',
-                width = 250,
-                height = 250,
-                minWidth = "250",
-                minHeight = "250",
-                maintainAspectRatio = false }) => {
+const Holder = ({
+
+    onCompClick,
+    onClose,
+    children,
+    className = '',
+    activeClassName,
+    resizable = true,
+    resizeDirect = 'ltr',
+    help,
+    toolDirection = 'top',
+    width = 250,
+    height = 250,
+    minWidth = "250",
+    minHeight = "250",
+    maintainAspectRatio = false,
+    aspectWithRespectTo = null }) => {
 
     const [focused, setFocused] = useState(true);
     const [isMouseDown, setIsMouseDown] = useState(false);
@@ -93,12 +94,14 @@ const Holder = ({
             e.pageY = e.touches[0].pageY;
         }
         const node = holderNodeRef.current;
+        const offsetWidth = aspectWithRespectTo ? (node.offsetWidth - aspectWithRespectTo.current.offsetWidth) : 0;
         initialSize = {
             w: node.offsetWidth,
             h: node.offsetHeight,
             x: e.pageX,
             y: e.pageY,
-            aRatio: node.offsetHeight/node.offsetWidth
+            aRatio: node.offsetHeight / node.offsetWidth,
+            offSetWidth: offsetWidth
         }
         allowToResize = true;
 
@@ -118,8 +121,11 @@ const Holder = ({
             width: resizeDirect == 'ltr' ? (initialSize.w + (e.pageX - initialSize.x)) : (initialSize.w - (e.pageX - initialSize.x)),
             height: (initialSize.h + (e.pageY - initialSize.y))
         }
-        if(maintainAspectRatio) {
-            tempSize.height = (tempSize.width * initialSize.aRatio);
+        if (maintainAspectRatio) {
+            if (aspectWithRespectTo)
+                tempSize.height = ((tempSize.width - initialSize.offsetWidth) * initialSize.aRatio);
+            else
+                tempSize.height = (tempSize.width * initialSize.aRatio);
         }
 
         setSize(tempSize);

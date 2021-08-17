@@ -49,9 +49,9 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         if (sharedList.length > 0) {
             setInputStage(sharedInputStage);
             setList(sharedList);
+            setTextAreaVal(sharedList.join('\n'));
             setNumberOfStudent(sharedList.length);
-            getRandomFromList();
-            setCurrentStep(2);
+            onSubmitClick();
         }
     }, [sharedList]);
 
@@ -180,7 +180,6 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         if (list.length == 0) {
             generateRadomList();
         }
-        // console.log('list ', list, random);
     }
 
     const generateRadomList = () => {
@@ -271,7 +270,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
             {
                 currentStep == 2 && (
                     <>
-                        <div className={style.subtitle}>Do you want me to give you a random student who is next now?</div>
+                        <div className={style.alertText}>Do you want me to give you a random student who is next now?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label={t('whoisnext.yes')} onClick={onSubmitConfirm}></Button>
                             <Button label={t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
@@ -295,7 +294,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
             {
                 currentStep == 4 && (
                     <>
-                        <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
+                        <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
                             <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
                             <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
@@ -306,7 +305,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
             {
                 currentStep == 5 && (
                     <>
-                        <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
+                        <div className={style.alertText}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
                             <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
                             <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>

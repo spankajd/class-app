@@ -56,6 +56,7 @@
     --color-white_9 : rgba(255, 255, 255, .9);
     
 
+    
 
     --color-primary_font: var(--color-blumine);
     --color-primary_background: var(--color-white);
@@ -80,6 +81,8 @@
     --color-redSignalActive: var(--color-scarlet);
     --color-yellowSignalActive: var(--color-mySin);
     --color-greenSignalActive: var(--color-chartreuse);
+
+    --box-shadow: 0 0 0 1px #ccc;
 
 
     @include breakpoint(medium) {

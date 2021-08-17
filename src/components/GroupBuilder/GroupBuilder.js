@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
 import Holder from '../../elements/Holder/Holder';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import _ from "lodash";
 
@@ -27,6 +28,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     const { t, i18n } = useTranslation();
 
     const popUpSteps = [2, 3, 4, 5];
+    const helpForSteps = [1];
     const [inputStage, setInputStage] = useState('');
     const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
@@ -53,6 +55,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         if (sharedList.length > 0) {
             setInputStage(sharedInputStage);
             setList(sharedList);
+            setTextAreaVal(sharedList.join('\n'));
             setNumberOfStudent(sharedList.length);
             getRandomFromList();
             setCurrentStep(2);
@@ -109,7 +112,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         let val = e.target.value;
         const re = /^[0-9\b]+$/;
         val = re.test(val) || val === '' ? val : numberOfStudent;
-        val = val ? Math.min(Math.max(val, 1),32) : '';
+        val = val ? Math.min(Math.max(val, 1), 32) : '';
         setNumberOfStudent(val);
     }
 
@@ -117,7 +120,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         let val = e.target.value;
         const re = /^[0-9\b]+$/;
         val = re.test(val) || val === '' ? val : numberOfGroup;
-        val = val ? Math.min(Math.max(val, 1), 26) : '';
+        val = val ? Math.min(Math.max(val, 1), numberOfStudent / 2) : '';
         setNumberOfGroup(val);
     }
     const onClearClick = e => {
@@ -237,9 +240,18 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
             arr.push(
                 <div key={'1_1_' + keyFactor} className={style.groupCol}>
                     <div key={'1_' + keyFactor} className={style.groupTitle}>{key}</div>
-                    <ul className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li key={counter++} className={`${style.groupDataItem} ${style.symbols}`}>{
-                        inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element
-                    }</li>) : '')}</ul>
+                    <Scrollbars
+                        autoHeight
+                        autoHide
+                        autoHeightMin={100}
+                        autoHeightMax={200}
+                    >
+
+                        <ul className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li key={counter++} className={`${style.groupDataItem} ${style.symbols}`}>{
+                            inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element
+                        }</li>) : '')}</ul>
+
+                    </Scrollbars>
                 </div>
             )
         }
@@ -249,7 +261,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
 
     return (
         <Holder
-            help={tooltip}
+            help={helpForSteps.includes(currentStep) ? tooltip : false}
             resizable={!popUpSteps.includes(currentStep)}
             className={`${style.groupbuilder}
                         ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}
@@ -315,16 +327,23 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                                 {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
                             </div>
                         </div>
-                        {output && (<div className={style.outputWrapper}>
-                            {renderGroup()}
-                        </div>)}
+                        {output && (
+                            <Scrollbars
+                                autoHeight
+                                autoHide
+                                autoHeightMin={100}
+                                autoHeightMax={450}
+                            ><div className={style.outputWrapper}>
+                                    {renderGroup()}
+                                </div>
+                            </Scrollbars>)}
                     </>
                 )
             }
             {
                 currentStep == 3 && output && (
                     <>
-                        <div className={style.subtitle}>Do you want to re-shuffle the group?</div>
+                        <div className={style.alertText }>Do you want to re-shuffle the group?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label={t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
                             <Button label={t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
@@ -335,7 +354,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
             {
                 currentStep == 4 && (
                     <>
-                        <div className={style.subtitle}>Do you want to reset the information on your students you have entered?</div>
+                        <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
                             <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
@@ -346,7 +365,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
             {
                 currentStep == 5 && (
                     <>
-                        <div className={style.subtitle}>Do you want to override the nicknames you have entered?</div>
+                        <div className={style.alertText}>Do you want to override the nicknames you have entered?</div>
                         <div className={style.actionWrapper}>
                             <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>
                             <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
