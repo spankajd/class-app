@@ -234,14 +234,16 @@ $repeat: 11;  // How often you want the pattern to repeat.
     }
 
     .outputWrapper {
-        display: flex;
-        flex-wrap: wrap;
+        // display: flex;
+        // flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
         margin-top: 50px;
         // max-width: 650px;
         max-height: 450px;
         overflow: visible;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
 
     }
     .groupCol {
