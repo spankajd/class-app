@@ -12,9 +12,10 @@ import style from './Text.module.scss';
 
 const Text = ({ count = 1, onCompClick, onCompClose }) => {
 
-    const [editorState, setEditorState ] = useState('');
+    const [editorState, setEditorState] = useState('');
     const textTitle = useRef();
-
+    const [editorReferece, setEditorReferece] = useState(null);
+    // let editorReferece = null;
     useEffect(() => {
         if (textTitle.current) {
             textTitle.current.click();
@@ -29,24 +30,37 @@ const Text = ({ count = 1, onCompClick, onCompClose }) => {
     //     ref.focus();
     // }
 
-    // const onEditorStateChange = e => {
-
+    // const onComponentClick = e => {
+    //     console.log('onComponentClick ', e.target);
     // }
+
+    const setEditorReference = (ref) => {
+        // if(editorReferece === null)
+        //     setEditorReferece(ref);
+
+        if(ref && ref.focus && editorReferece === null){
+            setEditorReferece(ref);
+            ref.focus();
+        }
+        console.log('editorReferece ' ,editorReferece);
+    }
+
     //https://jpuri.github.io/react-draft-wysiwyg/#/docs
     return (
-        <Holder className={style.text} onCompClick={onCompClick} onClose={onCloseClick} activeClassName={style.focused}>
+        <Holder className={style.text} onCompClick={onCompClick} onClose={onCloseClick} activeClassName={style.focused} nodesNotAllowToDrag={editorReferece ? [editorReferece.editorContainer ? editorReferece.editorContainer : editorReferece] : []}>
             <div className={style.title} ref={textTitle}>
                 <TitleInput defaultVal={`Text ${count}`} />
             </div>
             <Editor
                 toolbar={{
                     options: ['fontFamily', 'fontSize', 'inline', 'colorPicker', 'remove', 'history'],
-                    inline: { options: ['bold', 'italic', 'underline'] }
+                    inline: { options: ['bold', 'italic', 'underline'] },
                 }}
                 // editorRef={setEditorReference}
                 wrapperClassName={style.wrapper}
                 toolbarClassName={style.toolbar}
                 editorClassName={style.editor}
+                editorRef={ setEditorReference }
                 placeholder="Type here"
             />
         </Holder>

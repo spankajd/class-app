@@ -67,14 +67,15 @@
     }
     .slick-prev:before, .slick-next:before {
         background: var(--color-white);
-        width: 50px;
-        height: 90%;
-        position: absolute;
-        left: 0;
-        top: 0;
+        width: 30px;
+        height: 30px;
         opacity: 1;
         content: ' ';
-        border-radius: 50%;
+        border-radius: 30px;
+        margin-left: 5px;
+        display: inline-flex;
+        align-content: center;
+        align-items: center
     }
     .slick-prev:after, .slick-next:after {
         content: "";
@@ -85,20 +86,22 @@
         border-width: 5px 0 5px 8.7px;
         border-color: transparent transparent transparent var(--color-primary_font);
         position: absolute;
-        left: 10px;
-        top: 40%;
+        right: 3px;
+        top: 50%;
+        transform: translateY(-50%);    
     }
     .slick-prev {
         left: 0px;
         &:before {
-            left: unset;
-            right: 0px;
+            left: 0;
+            right: unset;
+            margin-left: -15px;
         }
         &:after {
             border-width: 5px 8.7px 5px 0;
             border-color: transparent  var(--color-primary_font) transparent transparent;
-            left:unset;
-            right: 10px;
+            left:3px;
+            right: unset;
         }
     }
     .slick-next {

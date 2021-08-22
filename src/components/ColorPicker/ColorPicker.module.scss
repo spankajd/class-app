@@ -8,12 +8,14 @@
     
     .title {
         font-size: 20px;
+        flex-grow: 2;
     }
     .subtitle {
         font-size: 16px;
     }
 
     .pickColorWrapper {
+        flex-grow: 2;
         margin: 10px 0 0;
 
         img {
@@ -26,6 +28,7 @@
         flex-direction: row;
         align-items: center;
         gap: 15px;
+        flex-grow: 2;
 
         input {
             flex-grow: 2;

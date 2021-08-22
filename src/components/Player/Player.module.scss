@@ -3,7 +3,7 @@
 .menu {
     position: absolute;
     z-index: 100;
-    bottom: 0;
+    bottom: -1px;
     width: 100%;
     text-align: center;
     height: 0;
@@ -31,6 +31,8 @@
         width: 50px;
         height: 25px;
         margin-left: -25px;
+        border-radius: 80px;
+        box-shadow: var(--box-shadow);
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
         // opacity: 0.6;
@@ -78,6 +80,7 @@
         @include flexAlignCenter;
         flex-direction: row;
         background: var(--color-primary_background);
+        box-shadow: var(--box-shadow);
         // padding: 10px 0;
         margin: 0 1px;
         overflow: hidden;

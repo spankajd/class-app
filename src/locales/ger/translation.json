@@ -70,9 +70,11 @@
 
   "number.dice":"Würfel",
   "number.digit":"Zahl",
-  "number.numberOfDice":"Anzahl der Würfel (max. 5)",
+  "number.numberOfDiceInstruction":"Anzahl der Würfel ",
+  "number.maxNumberOfDice":"(Max 5)",
   "number.roll":"Würfeln",
-  "number.numberOfDigit":"Anzahl der Ziffern (max. 10)",
+  "number.numberOfDigitInstruction":"Anzahl der Ziffern ",
+  "number.maxNumberOfDigit":"(Max 10)",
   "number.generate":"Erzeugen",
 
 

@@ -70,9 +70,11 @@
 
   "number.dice":"Dice",
   "number.digit":"Digit",
-  "number.numberOfDice":"Number of dice (Max 5)",
+  "number.numberOfDiceInstruction":"Number of dice ",
+  "number.maxNumberOfDice":"(Max 5)",
   "number.roll":"Roll",
-  "number.numberOfDigit":"Number of digit (Max 10)",
+  "number.numberOfDigitInstruction":"Number of digit ",
+  "number.maxNumberOfDigit":"(Max 10)",
   "number.generate":"Generate",
 
 

@@ -2,6 +2,7 @@
 
 .randomNumber {
 
+
     display: inline-flex;
     flex-direction: column;
     text-align: center;
@@ -49,41 +50,62 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        height: 30px;
     }
     :global {
+        .DigitRoll {
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            background: var(--color-black_1);
+            padding: 0 8px;
+        }
         .DigitRoll__Out {
             position: absolute;
-            height: 50px;
+            height: 34px;
             overflow: hidden;
+        }
+        .DigitRoll__Divider {
+            display: none;
+        }
+        .DigitRoll__Cell {
+            border: none;
+            // background: linear-gradient( var(--color-white), var(--color-gray));
+            display: inline-block;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 36px;
+            // width: 1rem !important;
         }
     }
 
     .numberBottom {
         flex-direction: column;
         gap: 5px;
-        margin-top: 5px;
+        margin-top: 24px;
     }
 
-    .numberBox {
+    .numberBoxWrapper {
+        position: absolute;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        background: var(--color-black_1);
+        padding: 0 8px;
 
-        :global {
-            .DigitRoll__Cell {
-                // position: relative;
-                border: 1px solid var(--color-gray);
-                // width: 35px !important;
-                // height: 35px !important;
-                background: linear-gradient( var(--color-white), var(--color-gray));
-                display: inline-block;
-                text-align: center;
-                font-weight: bold;
-                font-size: 20px;
-                line-height: 36px;
-            }
-        } 
-        
+        span {
+            width: 1rem;
+            height: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 36px;
+            width: 1rem;
+        }
     }
+    
     @include breakpoint(medium) {
+
         .numberOutput {
             height: 55px;
         }
@@ -100,6 +122,25 @@
         }
         .numberBottom {
             gap: 14px;
+            margin-top: 16px;
+        }
+        
+
+        .numberBoxWrapper {
+            span {
+                font-size: 26px;
+                width: 1.5rem;
+                height: 2.5rem;
+            }
+        }
+        :global {
+            .DigitRoll__Cell {
+                font-size: 26px;
+                line-height: 44px;
+            }
+            .DigitRoll__Out {
+                height: 44px;
+            }
         }
     }
     @include breakpoint(large) {
@@ -118,8 +159,24 @@
             }
         }
         .numberBottom {
-            gap: 25px;
+            gap: 20px;
         }
         
+        .numberBoxWrapper {
+            span {
+                font-size: 34px;
+                width: 2rem;
+                height: 3rem;
+            }
+        }
+        :global {
+            .DigitRoll__Cell {
+                font-size: 34px;
+                line-height: 55px;
+            }
+            .DigitRoll__Out {
+                height: 55px;
+            }
+        }
     }
 }

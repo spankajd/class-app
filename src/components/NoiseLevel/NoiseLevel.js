@@ -10,6 +10,7 @@ import RadioButton from '../../elements/RadioButton/RadioButton';
 import { validateNumnerInput } from '../../helper';
 
 import style from './NoiseLevel.module.scss';
+import Alert from '../../elements/Alert/Alert';
 
 let audioContext, analyser, microphone, javascriptNode, streamObj;
 let volume = 0;
@@ -22,6 +23,7 @@ var MAX = 100;
 var sensitivity = 1.5;
 
 var checkAudioStatus = false;
+var bufferTime = false;
 
 // REFERENCES
 // https://makitweb.com/pitch-volume-detection-in-speech-recognition-javascript/
@@ -36,7 +38,9 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     const [noiseLimit, setNoiseLimit] = useState(4);
     const [noiseCounter, setNoiseCounter] = useState(0);
     const [startMic, setStartMic] = useState(false);
-    // const [sensitivity, setSensitivity] = useState(1.5);
+    const [selectedPoint, setSelectedPoint] = useState('medium');
+    const [warningMsg, setWarningMsg] = useState('');
+    const [alertMsg, setAlertMsg] = useState('');
 
     useEffect(() => {
         // maxLevel = maxNoise;
@@ -89,10 +93,21 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     }, [startMic]);
 
     useEffect(() => {
-        if (currentNoise > maxNoise) {
+        if (currentNoise > maxNoise && !bufferTime) {
+            bufferTime = true;
             setNoiseCounter(noiseCounter + 1);
+            
+            setTimeout(() => {
+                bufferTime = false;
+            },2000);
         }
     }, [currentNoise]);
+    useEffect(() => {
+        if(noiseCounter >= noiseLimit) {
+            setStartMic(false);
+            setAlertMsg(warningMsg);
+        }
+    },[noiseCounter]);
 
     const stoppingMic = () => {
 
@@ -120,27 +135,6 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     }
 
     const onStreaming = (event) => {
-        // var array = new Uint8Array(analyser.frequencyBinCount);
-        // analyser.getByteFrequencyData(array);
-        // var values = 0;
-
-        // var length = array.length;
-        // for (var i = 0; i < length; i++) {
-        //     values += (array[i]);
-        // }
-
-        // var average = values / length;
-
-        // //          console.log(Math.round(average - 40));
-
-        // // canvasContext.clearRect(0, 0, 150, 300);
-        // // canvasContext.fillStyle = '#BadA55';
-        // // canvasContext.fillRect(0, 300 - average, 150, 300);
-        // // canvasContext.fillStyle = '#262626';
-        // // canvasContext.font = "48px impact";
-        // // canvasContext.fillText(Math.round(average - 40), -2, 300);
-        // console.log('output >>>> ' , Math.round(average - 40) , average);
-
         var buf = event.inputBuffer.getChannelData(0);
         var bufLength = buf.length;
         var sum = 0;
@@ -210,6 +204,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
 
     const onRadioChange = id => {
         setNoiseCounter(0);
+        setSelectedPoint(id);
         switch (id) {
             case "low": sensitivity = 1;
                 break;
@@ -220,7 +215,16 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
         }
     }
 
+    const onTextAreaChange = e => {
+        setWarningMsg(e.target.value);
+    }
+
+    const onAlertClose = () => {
+        setAlertMsg('');
+    }
+
     return (
+        <>
         <Holder help={t('tooltip.noiselevel')} className={style.noiseLevel} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={`${style.col} ${style.leftPanel}`}>
                 <div className={`${style.row} ${style.inputRow}`}>
@@ -235,28 +239,28 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                     <div className={style.label}>{t('noiselevel.sensitivity')}</div>
                     <div className={`${style.row} ${style.optionWrapper}`}>
                         <label>
-                            <RadioButton name="sensitivity" id="low" value="low" onChange={onRadioChange} disabled={startMic}></RadioButton>
+                            <RadioButton name="sensitivity" id="low" value="low" onChange={onRadioChange} disabled={startMic} checked={selectedPoint == 'low'}></RadioButton>
                             <span className={style.label}>{t('noiselevel.low')}</span>
                         </label>
                         <label>
-                            <RadioButton name="sensitivity" id="medium" value="medium" onChange={onRadioChange} disabled={startMic}></RadioButton>
+                            <RadioButton name="sensitivity" id="medium" value="medium" onChange={onRadioChange} disabled={startMic} checked={selectedPoint == 'medium'}></RadioButton>
                             <span className={style.label}>{t('noiselevel.medium')}</span>
                         </label>
                         <label>
-                            <RadioButton name="sensitivity" id="high" value="high" onChange={onRadioChange} disabled={startMic}></RadioButton>
+                            <RadioButton name="sensitivity" id="high" value="high" onChange={onRadioChange} disabled={startMic} checked={selectedPoint == 'high'}></RadioButton>
                             <span className={style.label}>{t('noiselevel.high')}</span>
                         </label>
                     </div>
                 </div>
                 <div className={`${style.row} ${style.warningInputWrapper}`}>
-                    <textarea disabled={startMic} className={`${style.input} ${style.textarea}`} type="text" placeholder={'The noise level is being exceeded'} />
+                    <textarea disabled={startMic} className={`${style.input} ${style.textarea}`} type="text" placeholder={'The noise level is being exceeded'} onChange={onTextAreaChange} value={warningMsg} />
                 </div>
                 <div className={`${style.row} ${style.bottomPanel}`}>
                     <Button primary label={startMic ? t('noiselevel.stop') : t('noiselevel.start')} onClick={onStartClick}></Button>
                 </div>
             </div>
             <div className={`${style.col} ${style.progressWrapper}`}>
-                <div className={style.progressBar}>
+                <div className={`${style.progressBar} ${((currentNoise/maxNoise) > 0.8) ? style.orangeWarn : '' } ${((currentNoise/maxNoise) >= 1) ? style.redWarn : '' }`}>
                     <div className={`${style.bar} ${style.secondaryBar}`} style={{ height: `${maxNoise}%` }}></div>
                     <div className={`${style.bar} ${style.primaryBar}`} style={{ height: `${currentNoise}%` }}></div>
                     <div className={`${style.indicator}`}>{currentNoise.toFixed()}</div>
@@ -267,6 +271,8 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                 </label>
             </div>
         </Holder>
+        <Alert msg={alertMsg} onClose={onAlertClose}/>
+        </>
     );
 };
 

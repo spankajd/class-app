@@ -76,7 +76,7 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
             </div>
             <div className={style.labelRow}>
                 <label className={!selectedTimer ? style.active : ''}>{t('timer.standardtimer')}</label>
-                <ToggleButton disabled={intervalStarted} onChange={onRadioChange} />
+                <ToggleButton disabled={intervalStarted || pauseFlag} onChange={onRadioChange} />
                 <label className={selectedTimer ? style.active : ''}>{t('timer.countdowntimer')}</label>
             </div>
             <div className={style.row}>

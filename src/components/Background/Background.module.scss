@@ -18,6 +18,7 @@
         background: var(--color-white);
         flex-grow: 1;
         border-radius: 10px;
+        display: inline-flex;
     }
 
     &.active {

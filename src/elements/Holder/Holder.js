@@ -29,7 +29,8 @@ const Holder = ({
     minWidth = "250",
     minHeight = "250",
     maintainAspectRatio = false,
-    aspectWithRespectTo = null }) => {
+    aspectWithRespectTo = null,
+    nodesNotAllowToDrag = []  }) => {
 
     const [focused, setFocused] = useState(true);
     const [isMouseDown, setIsMouseDown] = useState(false);
@@ -63,7 +64,7 @@ const Holder = ({
         } else {
             allowToDrag = false;
         }
-        onCompClick && onCompClick();
+        onCompClick && onCompClick(e);
         try {
             if (e.type == 'touchstart' || e.type == 'tap') {
                 e.srcElement.click(e);
@@ -78,10 +79,24 @@ const Holder = ({
     }
 
     const onStart = (e) => {
-        if (e.target == resizeHandleRef.current)
+        if (e.target == resizeHandleRef.current ||
+            (nodesNotAllowToDrag.length > 0 && checkParent(nodesNotAllowToDrag[0], e.target )) ||
+            (e.target.classList.contains('rc-tooltip-inner')) )
             return false;
 
         return true;// allowToDrag;
+    }
+
+    const checkParent = (parent, child) => {
+        let node = child.parentNode;
+        // keep iterating unless null
+        while (node != null) {
+            if (node == parent) {
+                return true;
+            }
+            node = node.parentNode;
+        }
+        return false;
     }
 
     const onCloseClick = (e) => {
@@ -149,17 +164,14 @@ const Holder = ({
             <div style={size} className={`${style.holder} ${className ? className : ''} ${focused ? style.active : ''} ${focused && activeClassName ? activeClassName : ''}`} ref={holderNodeRef}>
                 {children}
                 {help && (
-                    <>
-
-                        <Tooltip placement={toolDirection} trigger={['click']} overlay={help}>
-                            <div
-                                data-for="helper"
-                                data-tip={help}
-                                className={`${style.button} ${style.helpButton}`}>
-                                <HelpIcon />
-                            </div>
-                        </Tooltip>
-                    </>
+                    <Tooltip placement={toolDirection} trigger={['click']} overlay={help}>
+                        <button
+                            data-for="helper"
+                            data-tip={help}
+                            className={`${style.button} ${style.helpButton}`}>
+                            <HelpIcon />
+                        </button>
+                    </Tooltip>
                 )}
                 <button className={`${style.button} ${style.closeButton}`} onClick={onCloseClick}>
                     <Close></Close>

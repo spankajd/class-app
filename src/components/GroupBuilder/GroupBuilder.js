@@ -12,6 +12,7 @@ import _ from "lodash";
 import style from './GroupBuilder.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
 import Symbols from "../../assets/symbols";
+import Alert from '../../elements/Alert/Alert';
 
 // Steps 
 // 1. choose format
@@ -38,6 +39,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     const [previousStep, setPreviousStep] = useState(1);
     const [output, setOutput] = useState('');
     const [buffer, setBuffer] = useState('');
+    const [alertMsg, setAlertMsg] = useState('');
     const [list, setList] = useState([]);
     const componentRef = useRef();
 
@@ -120,7 +122,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         let val = e.target.value;
         const re = /^[0-9\b]+$/;
         val = re.test(val) || val === '' ? val : numberOfGroup;
-        val = val ? Math.min(Math.max(val, 1), numberOfStudent / 2) : '';
+        val = val ? Math.min(Math.max(val, 1), Math.floor(numberOfStudent / 2)) : '';
         setNumberOfGroup(val);
     }
     const onClearClick = e => {
@@ -140,11 +142,12 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     }
 
     const onSubmitConfirm = e => {
-        if (output) {
-            setCurrentStep(3);
-        } else {
-            getRandomFromList();
-        }
+        // if (output) {
+        //     setCurrentStep(3);
+        // } else {
+        //     getRandomFromList();
+        // }
+        getRandomFromList();
     }
 
     const onCancel = (val) => {
@@ -160,8 +163,9 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
 
 
     const onReset = val => {
-        setCurrentStep(4);
-        setPreviousStep(val);
+        // setCurrentStep(4);
+        // setPreviousStep(val);
+        setAlertMsg('Do you want to reset the information on your students you have entered?');
     }
 
     const onResetConfirm = () => {
@@ -174,6 +178,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         setNumberOfGroup('');
         setPreviousStep(1);
         setBuffer('');
+        setAlertMsg('');
         setList([]);
     }
 
@@ -259,185 +264,192 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         return arr;
     }
 
+    const onAlertClose = () => {
+        setAlertMsg('');
+    }
+
     return (
-        <Holder
-            help={helpForSteps.includes(currentStep) ? tooltip : false}
-            resizable={!popUpSteps.includes(currentStep)}
-            className={`${style.groupbuilder}
+        <>
+            <Holder
+                help={helpForSteps.includes(currentStep) ? tooltip : false}
+                resizable={!popUpSteps.includes(currentStep)}
+                className={`${style.groupbuilder}
                         ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}
                         ${!inputStage ? style.firstStep : ''}
                         ${currentStep === 1 && inputStage ? style.secondStep : ''}
                         ${currentStep === 3 ? style.outputWrapper : ''}
                         ${currentStep == 2 ? style.groupOutPut : ''}`}
-            onCompClick={onCompClick}
-            onClose={onCloseClick}>
+                onCompClick={onCompClick}
+                onClose={onCloseClick}>
 
-            {currentStep == 1 &&
-                (<>
-                    <div className={`${style.panel} ${style.controlPanel}`}>
-                        <div className={style.step}>1</div>
-                        <div className={style.title}>{t('whoisnext.chooseformat')}</div>
-                        <div className={style.controls}>
-                            <label>
-                                <RadioButton name="group_step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
-                                <span className={style.label}>{t('whoisnext.nicknames')}</span>
-                            </label>
+                {currentStep == 1 &&
+                    (<>
+                        <div className={`${style.panel} ${style.controlPanel}`}>
+                            <div className={style.step}>1</div>
+                            <div className={style.title}>{t('whoisnext.chooseformat')}</div>
+                            <div className={style.controls}>
+                                <label>
+                                    <RadioButton name="group_step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
+                                    <span className={style.label}>{t('whoisnext.nicknames')}</span>
+                                </label>
 
-                            <label>
-                                <RadioButton name="group_step" id={NUMBER} value={NUMBER} onChange={onSelectStage} checked={inputStage == NUMBER}></RadioButton>
-                                <span className={style.label}>{t('whoisnext.numbers')}</span>
-                            </label>
+                                <label>
+                                    <RadioButton name="group_step" id={NUMBER} value={NUMBER} onChange={onSelectStage} checked={inputStage == NUMBER}></RadioButton>
+                                    <span className={style.label}>{t('whoisnext.numbers')}</span>
+                                </label>
 
-                            <label>
-                                <RadioButton name="group_step" id={SYMBOLS} value={SYMBOLS} onChange={onSelectStage} checked={inputStage == SYMBOLS}></RadioButton>
-                                <span className={style.label}>{t('whoisnext.symbols')}</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div className={`${style.panel} ${style.inputPanel}`}>
-                        {inputStage &&
-                            (<>
-                                <span className={style.step}>2</span>
-                                <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
-
-                                {inputStage == NICKNAME ? (
-                                    <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
-                                    (<>
-                                        <label className={style.question}>{t('whoisnext.howmanystudent')}</label>
-                                        <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
-                                    </>)}
-                                <div className={`${style.buttomWrapper}`}>
-                                    {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
-                                    {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
-                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                    <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                </div>
-                            </>)}
-                    </div>
-                </>)}
-            {
-                currentStep == 2 && (
-                    <>
-                        <div className={style.numberOfGroupWrapper}>
-                            <div className={style.numberOfGroup}><label>{t('groupbuilder.numberofgroups')}</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
-                            <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
-                                <Button label={t('whoisnext.reset')} onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
-                                <Button label={t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
-                                <Button primary label={output ? t('groupbuilder.shufflegroups') : t('groupbuilder.creategroups')} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
-                                {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
+                                <label>
+                                    <RadioButton name="group_step" id={SYMBOLS} value={SYMBOLS} onChange={onSelectStage} checked={inputStage == SYMBOLS}></RadioButton>
+                                    <span className={style.label}>{t('whoisnext.symbols')}</span>
+                                </label>
                             </div>
                         </div>
-                        {output && (
-                            <Scrollbars
-                                autoHeight
-                                autoHide
-                                autoHeightMin={100}
-                                autoHeightMax={450}
-                            ><div className={style.outputWrapper}>
-                                    {renderGroup()}
+                        <div className={`${style.panel} ${style.inputPanel}`}>
+                            {inputStage &&
+                                (<>
+                                    <span className={style.step}>2</span>
+                                    <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
+
+                                    {inputStage == NICKNAME ? (
+                                        <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
+                                        (<>
+                                            <label className={style.question}>{t('whoisnext.howmanystudent')}</label>
+                                            <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
+                                        </>)}
+                                    <div className={`${style.buttomWrapper}`}>
+                                        {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
+                                        {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
+                                        <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                        <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    </div>
+                                </>)}
+                        </div>
+                    </>)}
+                {
+                    currentStep == 2 && (
+                        <>
+                            <div className={style.numberOfGroupWrapper}>
+                                <div className={style.numberOfGroup}><label>{t('groupbuilder.numberofgroups')}</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
+                                <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
+                                    <Button label={t('whoisnext.reset')} onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
+                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
+                                    <Button primary label={output ? t('groupbuilder.shufflegroups') : t('groupbuilder.creategroups')} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
+                                    {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
                                 </div>
-                            </Scrollbars>)}
-                    </>
-                )
-            }
-            {
-                currentStep == 3 && output && (
-                    <>
-                        <div className={style.alertText }>Do you want to re-shuffle the group?</div>
-                        <div className={style.actionWrapper}>
-                            <Button primary label={t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
-                            <Button label={t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
-                        </div>
-                    </>
-                )
-            }
-            {
-                currentStep == 4 && (
-                    <>
-                        <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
-                        <div className={style.actionWrapper}>
-                            <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
-                            <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
-                        </div>
-                    </>
-                )
-            }
-            {
-                currentStep == 5 && (
-                    <>
-                        <div className={style.alertText}>Do you want to override the nicknames you have entered?</div>
-                        <div className={style.actionWrapper}>
-                            <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>
-                            <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
-                        </div>
-                    </>
-                )
-            }
-            {
-                // currentStep == 6 && (
-                <div className={style.printWrapper}>
-                    <div ref={componentRef}>
-                        {Object.keys(output).map(key =>
-                            <div key={key} >
-                                <div style={{
-                                    margin: "25px"
-                                }}>{(new Date()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
-                                <h3 style={{
-                                    margin: "25px"
-                                }}>{key}</h3>
-                                <table className={style.table} style={{
-                                    borderCollapse: "collapse",
-                                    width: "calc(100% - 50px)",
-                                    background: "#e2ebf8",
-                                    color: "#9ea5ad",
-                                    margin: "25px"
-                                }}>
-                                    <tr>
-                                        <th style={{
-                                            paddingTop: "12px",
-                                            paddingBottom: "12px",
-                                            backgroundColor: "#a1bce6",
-                                            color: "#000",
-                                            border: "1px solid #aab0ba",
-                                            padding: "8px",
-                                            textAlign: "center"
-                                        }}>{inputStage}</th>
-                                        <th style={{
-                                            paddingTop: "12px",
-                                            paddingBottom: "12px",
-                                            backgroundColor: "#a1bce6",
-                                            color: "#000",
-                                            border: "1px solid #aab0ba",
-                                            padding: "8px",
-                                            textAlign: "center"
-                                        }}>Real Names</th>
-                                    </tr>
-                                    {
-                                        output[key].map((element, index) => element != '' && element != undefined && element != '\n' ? (
-                                            <tr key={`${key}_${index}`}>
-                                                <td style={{
-                                                    border: "1px solid #aab0ba",
-                                                    padding: "8px",
-                                                    textAlign: "center"
-                                                }}>{inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element}</td>
-                                                <td style={{
-                                                    border: "1px solid #aab0ba",
-                                                    padding: "8px",
-                                                    textAlign: "center"
-                                                }}></td>
-                                            </tr>
-                                        ) : ''
-                                        )
-                                    }
-                                </table>
                             </div>
-                        )
-                        }
+                            {output && (
+                                <Scrollbars
+                                    autoHeight
+                                    autoHide
+                                    autoHeightMin={100}
+                                    autoHeightMax={450}
+                                ><div className={style.outputWrapper}>
+                                        {renderGroup()}
+                                    </div>
+                                </Scrollbars>)}
+                        </>
+                    )
+                }
+                {
+                    currentStep == 3 && output && (
+                        <>
+                            <div className={style.alertText}>Do you want to re-shuffle the group?</div>
+                            <div className={style.actionWrapper}>
+                                <Button primary label={t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
+                                <Button label={t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
+                            </div>
+                        </>
+                    )
+                }
+                {
+                    currentStep == 4 && (
+                        <>
+                            <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
+                            <div className={style.actionWrapper}>
+                                <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
+                                <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            </div>
+                        </>
+                    )
+                }
+                {
+                    currentStep == 5 && (
+                        <>
+                            <div className={style.alertText}>Do you want to override the nicknames you have entered?</div>
+                            <div className={style.actionWrapper}>
+                                <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>
+                                <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
+                            </div>
+                        </>
+                    )
+                }
+                {
+                    // currentStep == 6 && (
+                    <div className={style.printWrapper}>
+                        <div ref={componentRef}>
+                            {Object.keys(output).map(key =>
+                                <div key={key} >
+                                    <div style={{
+                                        margin: "25px"
+                                    }}>{(new Date()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                                    <h3 style={{
+                                        margin: "25px"
+                                    }}>{key}</h3>
+                                    <table className={style.table} style={{
+                                        borderCollapse: "collapse",
+                                        width: "calc(100% - 50px)",
+                                        background: "#e2ebf8",
+                                        color: "#9ea5ad",
+                                        margin: "25px"
+                                    }}>
+                                        <tr>
+                                            <th style={{
+                                                paddingTop: "12px",
+                                                paddingBottom: "12px",
+                                                backgroundColor: "#a1bce6",
+                                                color: "#000",
+                                                border: "1px solid #aab0ba",
+                                                padding: "8px",
+                                                textAlign: "center"
+                                            }}>{inputStage}</th>
+                                            <th style={{
+                                                paddingTop: "12px",
+                                                paddingBottom: "12px",
+                                                backgroundColor: "#a1bce6",
+                                                color: "#000",
+                                                border: "1px solid #aab0ba",
+                                                padding: "8px",
+                                                textAlign: "center"
+                                            }}>Real Names</th>
+                                        </tr>
+                                        {
+                                            output[key].map((element, index) => element != '' && element != undefined && element != '\n' ? (
+                                                <tr key={`${key}_${index}`}>
+                                                    <td style={{
+                                                        border: "1px solid #aab0ba",
+                                                        padding: "8px",
+                                                        textAlign: "center"
+                                                    }}>{inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element}</td>
+                                                    <td style={{
+                                                        border: "1px solid #aab0ba",
+                                                        padding: "8px",
+                                                        textAlign: "center"
+                                                    }}></td>
+                                                </tr>
+                                            ) : ''
+                                            )
+                                        }
+                                    </table>
+                                </div>
+                            )
+                            }
+                        </div>
                     </div>
-                </div>
-                // )
-            }
-        </Holder>
+                    // )
+                }
+            </Holder>
+            <Alert msg={alertMsg} confirmLabel={t('whoisnext.yes')} onConfirm={onResetConfirm} onClose={onAlertClose} />
+        </>
     );
 };
 

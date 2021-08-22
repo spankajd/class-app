@@ -10,6 +10,7 @@ import _ from "lodash";
 import style from './WhoIsNext.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
 import Symbols from "../../assets/symbols";
+import Alert from '../../elements/Alert/Alert';
 
 
 // Steps 
@@ -37,6 +38,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     const [previousStep, setPreviousStep] = useState(1);
     const [output, setOutput] = useState('');
     const [buffer, setBuffer] = useState('');
+    const [alertMsg, setAlertMsg] = useState('');
     const [list, setList] = useState([]);
     const componentRef = useRef();
 
@@ -153,8 +155,8 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     const onReset = val => {
         // setCurrentStep(4);
         // setPreviousStep(val);
-
-        onResetConfirm();
+        // onResetConfirm();
+        setAlertMsg('Do you want to reset the information on your students you have entered?');
     }
 
     const onResetConfirm = () => {
@@ -164,6 +166,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         setPreviousStep(1);
         setOutput('');
         setBuffer('');
+        setAlertMsg('');
         setList([]);
     }
 
@@ -210,185 +213,198 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         });
     }
 
+    const onAlertClose = () => {
+        setAlertMsg('');
+    }
+
     return (
-        <Holder help={helpForSteps.includes(currentStep) ? tooltip : false}
-            className={`${style.whoIsNext}
+        <>
+            <Holder help={helpForSteps.includes(currentStep) ? tooltip : false}
+                className={`${style.whoIsNext}
                         ${popUpSteps.includes(currentStep) ? style.popUpBox : ''}
                         ${!inputStage ? style.firstStep : ''}
                         ${currentStep === 1 && inputStage ? style.secondStep : ''}
                         ${currentStep === 3 ? style.outputWrapper : ''}
                         ${currentStep === 6 ? style.printPreview : ''}`}
-            onCompClick={onCompClick}
-            onClose={onCloseClick}>
+                onCompClick={onCompClick}
+                onClose={onCloseClick}>
 
-            {currentStep == 1 &&
-                (<>
-                    <div className={`${style.panel} ${style.controlPanel}`}>
-                        <div className={style.step}>1</div>
-                        <div className={style.title}>{t('whoisnext.chooseformat')}</div>
-                        <div className={style.controls}>
-                            <label>
-                                <RadioButton name="step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
-                                <span className={style.label}>{t('whoisnext.nicknames')}</span>
-                            </label>
+                {currentStep == 1 &&
+                    (<>
+                        <div className={`${style.panel} ${style.controlPanel}`}>
+                            <div className={style.step}>1</div>
+                            <div className={style.title}>{t('whoisnext.chooseformat')}</div>
+                            <div className={style.controls}>
+                                <label>
+                                    <RadioButton name="step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
+                                    <span className={style.label}>{t('whoisnext.nicknames')}</span>
+                                </label>
 
-                            <label>
-                                <RadioButton name="step" id={NUMBER} value={NUMBER} onChange={onSelectStage} checked={inputStage == NUMBER}></RadioButton>
-                                <span className={style.label}>{t('whoisnext.numbers')}</span>
-                            </label>
+                                <label>
+                                    <RadioButton name="step" id={NUMBER} value={NUMBER} onChange={onSelectStage} checked={inputStage == NUMBER}></RadioButton>
+                                    <span className={style.label}>{t('whoisnext.numbers')}</span>
+                                </label>
 
-                            <label>
-                                <RadioButton name="step" id={SYMBOLS} value={SYMBOLS} onChange={onSelectStage} checked={inputStage == SYMBOLS}></RadioButton>
-                                <span className={style.label}>{t('whoisnext.symbols')}</span>
-                            </label>
+                                <label>
+                                    <RadioButton name="step" id={SYMBOLS} value={SYMBOLS} onChange={onSelectStage} checked={inputStage == SYMBOLS}></RadioButton>
+                                    <span className={style.label}>{t('whoisnext.symbols')}</span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div className={`${style.panel} ${style.inputPanel}`}>
-                        {inputStage &&
-                            (<>
-                                <div className={style.step}>2</div>
-                                <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
+                        <div className={`${style.panel} ${style.inputPanel}`}>
+                            {inputStage &&
+                                (<>
+                                    <div className={style.step}>2</div>
+                                    <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
 
-                                {inputStage == NICKNAME ? (
-                                    // <Scrollbars style={{ width: 300, height: 176 }}>
-                                    <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>
-                                    // </Scrollbars>
-                                ) :
-                                    (<>
-                                        <label className={style.question}>{t('whoisnext.howmanystudent')}</label>
-                                        <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
-                                    </>)}
-                                <div className={`${style.buttomWrapper} `}  >
-                                    {inputStage == NICKNAME && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
-                                    {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
-                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                    <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                </div>
-                            </>)}
-                    </div>
-                </>)}
-            {
-                currentStep == 2 && (
-                    <>
-                        <div className={style.alertText}>Do you want me to give you a random student who is next now?</div>
-                        <div className={style.actionWrapper}>
-                            <Button primary label={t('whoisnext.yes')} onClick={onSubmitConfirm}></Button>
-                            <Button label={t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
-                            <Button label={t('whoisnext.reset')} onClick={() => onReset(2)}></Button>
+                                    {inputStage == NICKNAME ? (
+                                        // <Scrollbars style={{ width: 300, height: 176 }}>
+                                        <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>
+                                        // </Scrollbars>
+                                    ) :
+                                        (<>
+                                            <label className={style.question}>{t('whoisnext.howmanystudent')}</label>
+                                            <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
+                                        </>)}
+                                    <div className={`${style.buttomWrapper} `}  >
+                                        {inputStage == NICKNAME && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
+                                        {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
+                                        <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                        <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                    </div>
+                                </>)}
                         </div>
-                    </>
-                )
-            }
-            {
-                currentStep == 3 && output && (
-                    <>
-                        <div className={`${style.subtitle} ${style.output}`}>{output}</div>
-                        <div className={style.actionWrapper}>
-                            <Button label={t('whoisnext.reset')} onClick={() => onReset(3)}></Button>
-                            <Button label={t('whoisnext.print')} onClick={() => onPrintClick(3)}></Button>
-                            <Button primary label={t('whoisnext.choosenext')} onClick={onChooseNext}></Button>
-                        </div>
-                    </>
-                )
-            }
-            {
-                currentStep == 4 && (
-                    <>
-                        <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
-                        <div className={style.actionWrapper}>
-                            <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
-                            <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
-                        </div>
-                    </>
-                )
-            }
-            {
-                currentStep == 5 && (
-                    <>
-                        <div className={style.alertText}>Do you want to override the nicknames you have entered?</div>
-                        <div className={style.actionWrapper}>
-                            <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
-                            <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>
-                        </div>
-                    </>
-                )
-            }
+                    </>)}
+                {
+                    currentStep == 2 && (
+                        <>
+                            <div className={style.alertText}>Do you want me to give you a random student who is next now?</div>
+                            <div className={style.actionWrapper}>
+                                <Button primary label={t('whoisnext.yes')} onClick={onSubmitConfirm}></Button>
+                                <Button label={t('whoisnext.cancel')} onClick={() => onCancel(1)}></Button>
+                                <Button label={t('whoisnext.reset')} onClick={() => onReset(2)}></Button>
+                            </div>
+                        </>
+                    )
+                }
+                {
+                    currentStep == 3 && output && (
+                        <>
+                            <div className={`${style.subtitle} ${style.output}`}>{output}</div>
+                            <div className={style.actionWrapper}>
+                                <Button label={t('whoisnext.reset')} onClick={() => onReset(3)}></Button>
+                                <Button label={t('whoisnext.print')} onClick={() => onPrintClick(3)}></Button>
+                                <Button primary label={t('whoisnext.choosenext')} onClick={onChooseNext}></Button>
+                            </div>
+                        </>
+                    )
+                }
+                {
+                    currentStep == 4 && (
+                        <>
+                            <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
+                            <div className={style.actionWrapper}>
+                                <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
+                                <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
+                            </div>
+                        </>
+                    )
+                }
+                {
+                    currentStep == 5 && (
+                        <>
+                            <div className={style.alertText}>Do you want to override the nicknames you have entered?</div>
+                            <div className={style.actionWrapper}>
+                                <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
+                                <Button primary label={t('whoisnext.yes')} onClick={onOverride}></Button>
+                            </div>
+                        </>
+                    )
+                }
+
+            </Holder>
+            <Alert msg={alertMsg} confirmLabel={t('whoisnext.yes')} onConfirm={onResetConfirm} onClose={onAlertClose} />
             {
                 // currentStep == 6 && (
                 <div className={style.printWrapper}>
-                    <div ref={componentRef}>
+                    <div ref={componentRef} style={{
+                        pageBreakInside: "auto",
+                        margin: "25px"
+                    }}>
                         <div style={{
+                            pageBreakInside: "auto",
                             margin: "25px"
                         }}>{(new Date()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
-                        <table className={style.table} style={{
+                        <table style={{
                             borderCollapse: "collapse",
                             width: "calc(100% - 50px)",
                             background: "#e2ebf8",
                             color: "#9ea5ad",
                             margin: "25px",
                             pageBreakInside: "auto",
-                            pageBreakAfter: "auto"
                         }}>
 
                             <thead style={{
                                 display: "table-header-group"
                             }}>
                                 <tr style={{
-                                pageBreakInside: "avoid",
-                                pageBreakAfter: "auto"
-                            }}>
-                                <th style={{
-                                    backgroundColor: "#a1bce6",
-                                    color: "#000",
-                                    border: "1px solid #aab0ba",
-                                    padding: "12px 8px",
-                                    textAlign: "center"
-                                }}>{inputStage}</th>
-                                <th style={{
-                                    backgroundColor: "#a1bce6",
-                                    color: "#000",
-                                    border: "1px solid #aab0ba",
-                                    padding: "12px 8px",
-                                    textAlign: "center"
-                                }}>Real Names</th>
-                            </tr>
+                                    pageBreakInside: "avoid",
+                                    pageBreakAfter: "auto"
+                                }}>
+                                    <th style={{
+                                        backgroundColor: "#a1bce6",
+                                        color: "#000",
+                                        border: "1px solid #aab0ba",
+                                        padding: "12px 8px",
+                                        textAlign: "center"
+                                    }}>{inputStage}</th>
+                                    <th style={{
+                                        backgroundColor: "#a1bce6",
+                                        color: "#000",
+                                        border: "1px solid #aab0ba",
+                                        padding: "12px 8px",
+                                        textAlign: "center"
+                                    }}>Real Names</th>
+                                </tr>
                             </thead>
-                        <tbody>
-                            {
-                                list.map((item, index) =>
-                                    <>
-                                        {/* <tr className={'page-break'}></tr> */}
-                                        <tr key={index}
-                                            style={{
-                                                // pageBreakInside:"avoid",
-                                                // pageBreakAfter:"auto"
-                                                // pageBreakBefore: index%10 == 0 ? "always" : "avoid",
-                                                fontSize: '13px'
-                                            }}
-                                            className={index % 10 == 0 ? style.tableBreak : style.tableRow}
-                                        >
-                                            <td style={{
-                                                border: "1px solid #aab0ba",
-                                                padding: "8px",
-                                                textAlign: "center"
-                                            }}>{inputStage === SYMBOLS ? <img src={Symbols[item]} /> : item}</td>
-                                            <td style={{
-                                                border: "1px solid #aab0ba",
-                                                padding: "8px",
-                                                textAlign: "center"
-                                            }}></td>
-                                        </tr>
-                                    </>
-                                )
-                            }
-                        </tbody>
+                            <tbody style={{
+                                pageBreakInside: "auto",
+                                pageBreakAfter: "auto",
+                            }}>
+                                {
+                                    list.map((item, index) =>
+                                        <>
+                                            {/* <tr className={'page-break'}></tr> */}
+                                            <tr key={index}
+                                                style={{
+                                                    pageBreakInside: "avoid",
+                                                    pageBreakAfter: "auto",
+                                                    fontSize: '13px'
+                                                }}
+                                                className={index % 10 == 0 ? style.tableBreak : style.tableRow}
+                                            >
+                                                <td style={{
+                                                    border: "1px solid #aab0ba",
+                                                    padding: "8px",
+                                                    textAlign: "center"
+                                                }}>{inputStage === SYMBOLS ? <img src={Symbols[item]} /> : item}</td>
+                                                <td style={{
+                                                    border: "1px solid #aab0ba",
+                                                    padding: "8px",
+                                                    textAlign: "center"
+                                                }}></td>
+                                            </tr>
+                                        </>
+                                    )
+                                }
+                            </tbody>
                         </table>
-                </div>
+                    </div>
                 </div>
 
-            // )
-        }
-        </Holder>
+                // )
+            }
+        </>
     );
 };
 

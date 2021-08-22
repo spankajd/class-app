@@ -117,29 +117,17 @@ input, textarea {
     border-radius: 5px;
 }
 
-// @media all {
-//     .page-break {
-//       display: none;
-//     }
-//   }
+  @media print {
+    html, body {
+      height: initial !important;
+      overflow: initial !important;
+      -webkit-print-color-adjust: exact;
+      page-break-inside:auto
+    }
+
+    table { page-break-inside:auto }
+    tr    { page-break-inside:avoid; page-break-after:auto }
+    thead { display:table-header-group }
+    tfoot { display:table-footer-group }
+  }
   
-//   @media print {
-//     html, body {
-//       height: initial !important;
-//       overflow: initial !important;
-//       -webkit-print-color-adjust: exact;
-//     }
-//   }
-  
-//   @media print {
-//     .page-break {
-//       margin-top: 1rem;
-//       display: block;
-//       page-break-before: auto;
-//     }
-//   }
-  
-//   @page {
-//     size: auto;
-//     margin: 20mm;
-//   }

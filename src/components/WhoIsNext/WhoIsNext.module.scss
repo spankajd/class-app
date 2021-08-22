@@ -214,9 +214,6 @@
         text-overflow: ellipsis;
     }
 
-    .printWrapper {
-        display: none;
-    }
 
 
     @include breakpoint(medium) {
@@ -242,6 +239,8 @@
         .controls {
             label {
                 margin-bottom: 18px;
+                gap: 12px;
+                font-size: 15px;
             }
         }
         .textarea {
@@ -309,6 +308,8 @@
         .controls {
             label {
                 margin-bottom: 28px;
+                gap: 16px;
+                font-size: 21px;
             }
         }
         .textarea {
@@ -339,4 +340,23 @@
             }
         }
     }
+
+
+  
 }
+
+.printWrapper {
+    display: none;
+}
+
+@media print {
+    html, body {
+        height: initial !important;
+        overflow: initial !important;
+        -webkit-print-color-adjust: exact;
+      }
+      table { page-break-inside:auto }
+      tr    { page-break-inside:avoid; page-break-after:auto }
+      thead { display:table-header-group }
+      tfoot { display:table-footer-group }
+  }
