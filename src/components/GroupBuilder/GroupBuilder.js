@@ -44,10 +44,14 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     const componentRef = useRef();
 
     useEffect(() => {
+        if(inputStage) {
+            setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
+        }
+    },[inputStage])
+    
+    useEffect(() => {
         if (currentStep === 1) {
             setTooltip(t('tooltip.whoisnext.step_1'));
-        } else if (currentStep === 2) {
-            setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
         } else {
             setTooltip(null);
         }
@@ -165,7 +169,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     const onReset = val => {
         // setCurrentStep(4);
         // setPreviousStep(val);
-        setAlertMsg('Do you want to reset the information on your students you have entered?');
+        setAlertMsg(t('whoisnext.resetWarning'));
     }
 
     const onResetConfirm = () => {
@@ -317,7 +321,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                                             <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
                                         </>)}
                                     <div className={`${style.buttomWrapper}`}>
-                                        {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />Import</label>)}
+                                        {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
                                         {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
                                         <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                         <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
@@ -353,7 +357,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                 {
                     currentStep == 3 && output && (
                         <>
-                            <div className={style.alertText}>Do you want to re-shuffle the group?</div>
+                            <div className={style.alertText}>{t('groupbuilder.shufflegroupsWarning')}</div>
                             <div className={style.actionWrapper}>
                                 <Button primary label={t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
                                 <Button label={t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
@@ -364,7 +368,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                 {
                     currentStep == 4 && (
                         <>
-                            <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
+                            <div className={style.alertText}>{t('whoisnext.resetWarning')}</div>
                             <div className={style.actionWrapper}>
                                 <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
                                 <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
@@ -411,7 +415,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                                                 border: "1px solid #aab0ba",
                                                 padding: "8px",
                                                 textAlign: "center"
-                                            }}>{inputStage}</th>
+                                            }}>{t(`whoisnext.${inputStage}`)}</th>
                                             <th style={{
                                                 paddingTop: "12px",
                                                 paddingBottom: "12px",
@@ -420,7 +424,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                                                 border: "1px solid #aab0ba",
                                                 padding: "8px",
                                                 textAlign: "center"
-                                            }}>Real Names</th>
+                                            }}>{t('whoisnext.tableHeaderRealName')}</th>
                                         </tr>
                                         {
                                             output[key].map((element, index) => element != '' && element != undefined && element != '\n' ? (

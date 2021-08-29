@@ -58,10 +58,14 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     }, [sharedList]);
 
     useEffect(() => {
+        if(inputStage) {
+            setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
+        }
+    },[inputStage])
+
+    useEffect(() => {
         if (currentStep === 1) {
             setTooltip(t('tooltip.whoisnext.step_1'));
-        } else if (currentStep === 2) {
-            setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
         } else {
             setTooltip(null);
         }
@@ -156,7 +160,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
         // setCurrentStep(4);
         // setPreviousStep(val);
         // onResetConfirm();
-        setAlertMsg('Do you want to reset the information on your students you have entered?');
+        setAlertMsg(t('whoisnext.resetWarning'));
     }
 
     const onResetConfirm = () => {
@@ -302,7 +306,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                 {
                     currentStep == 4 && (
                         <>
-                            <div className={style.alertText}>Do you want to reset the information on your students you have entered?</div>
+                            <div className={style.alertText}>{t('whoisnext.resetWarning')}</div>
                             <div className={style.actionWrapper}>
                                 <Button label={t('whoisnext.cancel')} onClick={onCancel}></Button>
                                 <Button primary label={t('whoisnext.yes')} onClick={onResetConfirm}></Button>
@@ -357,14 +361,14 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                                         border: "1px solid #aab0ba",
                                         padding: "12px 8px",
                                         textAlign: "center"
-                                    }}>{inputStage}</th>
+                                    }}>{t(`whoisnext.${inputStage}`)}</th>
                                     <th style={{
                                         backgroundColor: "#a1bce6",
                                         color: "#000",
                                         border: "1px solid #aab0ba",
                                         padding: "12px 8px",
                                         textAlign: "center"
-                                    }}>Real Names</th>
+                                    }}>{t('whoisnext.tableHeaderRealName')}</th>
                                 </tr>
                             </thead>
                             <tbody style={{

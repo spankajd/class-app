@@ -35,6 +35,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
     const { t, i18n } = useTranslation();
     const [maxNoise, setMaxNoise] = useState(75);
     const [currentNoise, setCurrentNoise] = useState(0);
+    const [crossedLimit, setCrossedLimit] = useState(false);
     const [noiseLimit, setNoiseLimit] = useState(4);
     const [noiseCounter, setNoiseCounter] = useState(0);
     const [startMic, setStartMic] = useState(false);
@@ -86,6 +87,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
         } else if (startMic) {
             alert("getUserMedia not supported");
         } else {
+            setCrossedLimit(false);
             stoppingMic();
         }
 
@@ -103,8 +105,9 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
         }
     }, [currentNoise]);
     useEffect(() => {
-        if(noiseCounter >= noiseLimit) {
-            setStartMic(false);
+        if(noiseCounter >= noiseLimit && !crossedLimit) {
+            // setStartMic(false);
+            setCrossedLimit(true);
             setAlertMsg(warningMsg);
         }
     },[noiseCounter]);

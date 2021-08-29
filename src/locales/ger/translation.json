@@ -41,13 +41,15 @@
   "whoisnext.cancel":"Abbrechen",
   "whoisnext.yes":"OK",
   "whoisnext.howmanystudent":"Anzahl der Schüler:innen eingeben",
+  "whoisnext.tableHeaderRealName":"Echte Namen",
   
   "groupbuilder.numberofgroups":"Anzahl der Gruppen",
   "groupbuilder.creategroups":"Gruppen erzeugen",
   "groupbuilder.shufflegroups":"Neu mischen",
+  "groupbuilder.shufflegroupsWarning":"Möchten Sie die Gruppe neu mischen?",
 
 
-  "noiselevel.maximumnoise":"Max. Pegel",
+  "noiselevel.maximumnoise":"Max. pegel",
   "noiselevel.noiselimit":"Wie oft überschreitbar?",
   "noiselevel.sensitivity":"Empfindlichkeit",
   "noiselevel.low":"gering",
@@ -71,16 +73,16 @@
   "number.dice":"Würfel",
   "number.digit":"Zahl",
   "number.numberOfDiceInstruction":"Anzahl der Würfel ",
-  "number.maxNumberOfDice":"(Max 5)",
+  "number.maxNumberOfDice":"(Max. 5)",
   "number.roll":"Würfeln",
   "number.numberOfDigitInstruction":"Anzahl der Ziffern ",
-  "number.maxNumberOfDigit":"(Max 10)",
+  "number.maxNumberOfDigit":"(Max. 10)",
   "number.generate":"Erzeugen",
 
 
   "qrcode.instruction":"URL einer Website eingeben",
   
-  "background.category":"Kategorie:",
+  "background.category":"Kategorie : ",
   "background.color":"Farben",
   "background.pickcolors":"Farbe wählen",
   "background.more":"Mehr",

@@ -41,13 +41,15 @@
   "whoisnext.cancel":"Cancel",
   "whoisnext.yes":"Yes",
   "whoisnext.howmanystudent":"How many students in your class",
+  "whoisnext.tableHeaderRealName":"Real names",
   
   "groupbuilder.numberofgroups":"Number of groups",
   "groupbuilder.creategroups":"Create groups",
   "groupbuilder.shufflegroups":"Shuffle groups",
+  "groupbuilder.shufflegroupsWarning":"Do you want to re-shuffle the group?",
 
 
-  "noiselevel.maximumnoise":"Maximum Noise",
+  "noiselevel.maximumnoise":"Maximum noise",
   "noiselevel.noiselimit":"Noise limit",
   "noiselevel.sensitivity":"Sensitivity",
   "noiselevel.low":"Low",
@@ -71,16 +73,16 @@
   "number.dice":"Dice",
   "number.digit":"Digit",
   "number.numberOfDiceInstruction":"Number of dice ",
-  "number.maxNumberOfDice":"(Max 5)",
+  "number.maxNumberOfDice":"(Max. 5)",
   "number.roll":"Roll",
   "number.numberOfDigitInstruction":"Number of digit ",
-  "number.maxNumberOfDigit":"(Max 10)",
+  "number.maxNumberOfDigit":"(Max. 10)",
   "number.generate":"Generate",
 
 
   "qrcode.instruction":"If you find a website of interest, please insert the URL here. A QR code will be generated for your students to scan.",
   
-  "background.category":"Category",
+  "background.category":"Category : ",
   "background.color":"Colors",
   "background.pickcolors":"Pick colors",
   "background.more":"More",
