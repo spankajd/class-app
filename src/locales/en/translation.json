@@ -27,10 +27,12 @@
 
 
   "whoisnext.chooseformat":"Choose format",
-  "whoisnext.nicknames":"Nicknames",
+  "whoisnext.nickname":"Nicknames",
+  "whoisnext.number":"Number",
   "whoisnext.numbers":"Numbers",
   "whoisnext.symbols":"Symbols",
   "whoisnext.enterorimportdata":"Enter or import data",
+  "whoisnext.enterdata":"Enter data",
   "whoisnext.import":"Import",
   "whoisnext.clear":"Clear",
   "whoisnext.print":"Print",
@@ -40,8 +42,8 @@
   "whoisnext.choosenext":"Choose next",
   "whoisnext.cancel":"Cancel",
   "whoisnext.yes":"Yes",
-  "whoisnext.howmanystudent":"How many students in your class",
-  "whoisnext.tableHeaderRealName":"Real names",
+  "whoisnext.howmanystudent":"How many students in your class?",
+  "whoisnext.tableHeaderRealName":"Real name",
   
   "groupbuilder.numberofgroups":"Number of groups",
   "groupbuilder.creategroups":"Create groups",
@@ -58,6 +60,7 @@
   "noiselevel.start":"Start",
   "noiselevel.stop":"Stop",
   "noiselevel.counter":"Counter",
+  "noiselevel.placeholder":"The noise level is being exceeded",
 
   "timer.standardtimer":"Standard",
   "timer.countdowntimer":"Countdown",
@@ -65,6 +68,8 @@
   "timer.minutes":"Minutes",
   "timer.seconds":"Seconds",
   "timer.reset":"Reset",
+  "timer.pause":"Pause",
+  "timer.resume":"Resume",
   "timer.start":"Start",
   "timer.stop":"Stopp",
 
@@ -83,8 +88,8 @@
   "qrcode.instruction":"If you find a website of interest, please insert the URL here. A QR code will be generated for your students to scan.",
   
   "background.category":"Category : ",
-  "background.color":"Colors",
-  "background.pickcolors":"Pick colors",
+  "background.color":"Color",
+  "background.pickcolors":"Pick color",
   "background.more":"More",
 
 

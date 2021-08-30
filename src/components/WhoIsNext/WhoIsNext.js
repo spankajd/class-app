@@ -199,7 +199,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
             setList(tempArr);
         } else if (inputStage == NUMBER) {
             for (let i = 0; i < numberOfStudent; i++) {
-                tempArr.push(`${inputStage} ${i + 1}`);
+                tempArr.push(`${t('whoisnext.number')} ${i + 1}`);
             }
             setList(tempArr);
         } else if (inputStage == SYMBOLS) {
@@ -241,7 +241,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                             <div className={style.controls}>
                                 <label>
                                     <RadioButton name="step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
-                                    <span className={style.label}>{t('whoisnext.nicknames')}</span>
+                                    <span className={style.label}>{t('whoisnext.nickname')}</span>
                                 </label>
 
                                 <label>
@@ -259,7 +259,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
                             {inputStage &&
                                 (<>
                                     <div className={style.step}>2</div>
-                                    <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
+                                    <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : t('whoisnext.enterdata')}</div>
 
                                     {inputStage == NICKNAME ? (
                                         // <Scrollbars style={{ width: 300, height: 176 }}>

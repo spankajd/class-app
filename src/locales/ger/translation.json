@@ -27,10 +27,12 @@
 
 
   "whoisnext.chooseformat":"Format wählen",
-  "whoisnext.nicknames":"Spitznamen",
+  "whoisnext.nickname":"Spitznamen",
+  "whoisnext.number":"Zahlen",
   "whoisnext.numbers":"Zahlen",
   "whoisnext.symbols":"Symbole",
-  "whoisnext.enterorimportdata":"Spitznamen eingeben",
+  "whoisnext.enterorimportdata":"Daten eingeben oder importieren",
+  "whoisnext.enterdata":"Daten eingeben",
   "whoisnext.import":"Importieren",
   "whoisnext.clear":"Löschen",
   "whoisnext.print":"Drucken",
@@ -40,7 +42,7 @@
   "whoisnext.choosenext":"Nächste:r bitte!",
   "whoisnext.cancel":"Abbrechen",
   "whoisnext.yes":"OK",
-  "whoisnext.howmanystudent":"Anzahl der Schüler:innen eingeben",
+  "whoisnext.howmanystudent":"Anzahl der Schüler:innen eingeben?",
   "whoisnext.tableHeaderRealName":"Echte Namen",
   
   "groupbuilder.numberofgroups":"Anzahl der Gruppen",
@@ -58,6 +60,7 @@
   "noiselevel.start":"Start",
   "noiselevel.stop":"Stop",
   "noiselevel.counter":"Zähler",
+  "noiselevel.placeholder":"Der Geräuschpegel wird überschritten",
 
   "timer.standardtimer":"Standard",
   "timer.countdowntimer":"Countdown",
@@ -65,6 +68,8 @@
   "timer.minutes":"Minuten",
   "timer.seconds":"Sekunden",
   "timer.reset":"löschen",
+  "timer.pause":"Pause",
+  "timer.resume":"Weiter",
   "timer.start":"Start",
   "timer.stop":"Stopp",
 

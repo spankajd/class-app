@@ -219,7 +219,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
             setList(tempArr);
         } else if (inputStage == NUMBER) {
             for (let i = 0; i < numberOfStudent; i++) {
-                tempArr.push(`${inputStage} ${i + 1}`);
+                tempArr.push(`${t('whoisnext.number')} ${i + 1}`);
             }
             setList(tempArr);
             onRandomStudentUpdate({
@@ -294,7 +294,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                             <div className={style.controls}>
                                 <label>
                                     <RadioButton name="group_step" id={NICKNAME} value={NICKNAME} onChange={onSelectStage} checked={inputStage == NICKNAME}></RadioButton>
-                                    <span className={style.label}>{t('whoisnext.nicknames')}</span>
+                                    <span className={style.label}>{t('whoisnext.nickname')}</span>
                                 </label>
 
                                 <label>
@@ -312,7 +312,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
                             {inputStage &&
                                 (<>
                                     <span className={style.step}>2</span>
-                                    <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : 'Enter data'}</div>
+                                    <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : t('whoisnext.enterdata')}</div>
 
                                     {inputStage == NICKNAME ? (
                                         <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :

@@ -88,8 +88,8 @@ const Timer = ({ count = 1, onCompClick, onCompClose }) => {
             </div>
             <div className={style.controlPanel}>
                 {intervalStarted || resetFlag ? (<>
-                     { !completeFlag && (pauseFlag ? (<Button primary label="Resume" onClick={onResumeClick}></Button>) :
-                        (<Button primary label="Pause" onClick={onPauseClick}></Button>))}
+                     { !completeFlag && (pauseFlag ? (<Button primary label={t('timer.resume')} onClick={onResumeClick}></Button>) :
+                        (<Button primary label={t('timer.pause')} onClick={onPauseClick}></Button>))}
                     <Button primary label={t('timer.reset')} onClick={onResetClick}></Button>
                 </>) :
                     (<Button primary label={t('timer.start')} onClick={onStartClick}></Button>)}

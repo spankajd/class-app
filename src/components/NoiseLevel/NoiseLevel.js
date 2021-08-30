@@ -256,7 +256,7 @@ const NoiseLevel = ({ onCompClick, onCompClose }) => {
                     </div>
                 </div>
                 <div className={`${style.row} ${style.warningInputWrapper}`}>
-                    <textarea disabled={startMic} className={`${style.input} ${style.textarea}`} type="text" placeholder={'The noise level is being exceeded'} onChange={onTextAreaChange} value={warningMsg} />
+                    <textarea disabled={startMic} className={`${style.input} ${style.textarea}`} type="text" placeholder={t('noiselevel.placeholder')} onChange={onTextAreaChange} value={warningMsg} />
                 </div>
                 <div className={`${style.row} ${style.bottomPanel}`}>
                     <Button primary label={startMic ? t('noiselevel.stop') : t('noiselevel.start')} onClick={onStartClick}></Button>
