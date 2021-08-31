@@ -49,6 +49,7 @@
   "groupbuilder.creategroups":"Create groups",
   "groupbuilder.shufflegroups":"Shuffle groups",
   "groupbuilder.shufflegroupsWarning":"Do you want to re-shuffle the group?",
+  "groupbuilder.group":"Group",
 
 
   "noiselevel.maximumnoise":"Maximum noise",
@@ -100,5 +101,7 @@
   
   "tooltip.noiselevel":"For “Maximum noise” please enter the maximum level of noise acceptable to you. In “Noise limit” indicate the number of times the noise level may be exceeded. At this time the text you enter in the box will pop up. Change the microphone’s “Sensitivity” according to the background noise.",
   "tooltip.timer":"For the “Countdown timer” please enter a time. It will then be counted down to zero.",
-  "tooltip.webcam":"For (re-)starting your webcam, use the webcam button. For an XL cursor, use the arrow button. For taking a snapshot, use the viewfinder button."
+  "tooltip.webcam":"For (re-)starting your webcam, use the webcam button. For an XL cursor, use the arrow button. For taking a snapshot, use the viewfinder button.",
+  
+  "text.placeholder":"Type here"
 }

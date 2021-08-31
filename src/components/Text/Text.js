@@ -41,6 +41,8 @@ const Text = ({ count = 1, onCompClick, onCompClose }) => {
         if(ref && ref.focus && editorReferece === null){
             setEditorReferece(ref);
             ref.focus();
+            console.log('ref ' ,ref, editorReferece);
+            // ref.click();
         }
         console.log('editorReferece ' ,editorReferece);
     }

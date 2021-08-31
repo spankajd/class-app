@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReactToPrint } from 'react-to-print';
 import QRCode from 'qrcode.react';
@@ -17,6 +17,18 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
     const [qrInput, setQrInput] = useState(placeHolder);
     const componentRef = useRef();
     const [title, setTitle] = useState(`Title ${count}`);
+    const [mainASPR ,setMainASPR] = useState(false);
+    let timeOut = null;
+    useEffect(() => {
+        if(timeOut) clearTimeout(timeOut);
+        if(!!qrInput) {
+            timeOut = setTimeout(() => {
+                setMainASPR(true);
+            }, 100);
+        } else {
+            setMainASPR(false);
+        }
+    }, [qrInput])
 
     const onCloseClick = e => {
         onCompClose(e);
@@ -37,7 +49,7 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
     }
 
     return (
-        <Holder className={style.qrcode} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder className={`${style.qrcode} ${!!qrInput ? style.withQR : ''}`} onCompClick={onCompClick} onClose={onCloseClick} maintainAspectRatio={mainASPR}>
             <div className={style.title}><TitleInput onChange={onTitleInputChange} defaultVal={title} /></div>
             <div className={style.subtitle}>{t('qrcode.instruction')}</div>
             <input className={style.input} type="text" placeholder={placeHolder} value={inputVal} onChange={onInputChange}></input>

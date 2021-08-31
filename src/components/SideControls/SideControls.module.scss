@@ -3,7 +3,7 @@
 .sideControls {
     position: fixed;
     top: 15px;
-    left: 100%;
+    left: calc(100% + 1px);
     display: inline-block;
     background: var(--color-primary_background);
     

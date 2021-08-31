@@ -12,6 +12,10 @@
     left: 3%;
 
     align-items: center;
+
+    &.withQR {
+        min-height: 235px;
+    }
     .title {
         font-weight: bold;
         text-align: left;

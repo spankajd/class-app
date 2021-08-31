@@ -197,11 +197,11 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         var tempOutPut = {};
         var tempList = list.slice(0);
         for (let i = 0; i < numberOfGroup; i++) {
-            tempOutPut["Group " + String.fromCharCode(65 + i)] = [];
+            tempOutPut[t("groupbuilder.group") + ' ' + String.fromCharCode(65 + i)] = [];
         }
         for (let i = 0; i < size; i++) {
             for (let j = 0; j < numberOfGroup; j++) {
-                tempOutPut["Group " + String.fromCharCode(65 + j)].push(
+                tempOutPut[t("groupbuilder.group") + ' ' +  String.fromCharCode(65 + j)].push(
                     tempList.splice(Math.floor(Math.random() * tempList.length), 1)
                 );
             }

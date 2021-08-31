@@ -49,7 +49,8 @@
   "groupbuilder.creategroups":"Gruppen erzeugen",
   "groupbuilder.shufflegroups":"Neu mischen",
   "groupbuilder.shufflegroupsWarning":"Möchten Sie die Gruppe neu mischen?",
-
+  "groupbuilder.group":"Gruppe",
+  
 
   "noiselevel.maximumnoise":"Max. pegel",
   "noiselevel.noiselimit":"Wie oft überschreitbar?",
@@ -100,5 +101,7 @@
   
   "tooltip.noiselevel":"Wählen Sie einen Wert zwischen 0 und 100 für den maximal tolerierbaren Geräuschpegel in Ihrer Klasse. Geben Sie ein, wie oft dieser Pegel überschritten werden darf. Ist dieser Wert erreicht, erscheint der von Ihnen eingegebene Text. Mit „Sensitivität“ steuern Sie die Empfindlichkeit Ihres Mikrofons.",
   "tooltip.timer":"Geben Sie im Timer (Countdown) eine Zeit an, die anschließend heruntergezählt wird.",
-  "tooltip.webcam":"Nutzen Sie den Webcam-Button, um die Webcam (neu) zu starten. Um einen extra großen Cursor zu bekommen, nutzen Sie den Pfeil-Button. Nutzen Sie den Sucher-Button, um das Bild anzuhalten."
+  "tooltip.webcam":"Nutzen Sie den Webcam-Button, um die Webcam (neu) zu starten. Um einen extra großen Cursor zu bekommen, nutzen Sie den Pfeil-Button. Nutzen Sie den Sucher-Button, um das Bild anzuhalten.",
+
+  "text.placeholder":"Text eingeben"
 }

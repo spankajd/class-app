@@ -106,7 +106,7 @@
     .icon {
         height: 30px;
         background: transparent;
-        @include svgStroke(var(--color-primary_font));
+        // @include svgStroke(var(--color-primary_font));
     }
 }
 
