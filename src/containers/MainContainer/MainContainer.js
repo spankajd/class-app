@@ -19,14 +19,14 @@ import WebCam from '../../components/WebCam/WebCam';
 import ScreenShot from '../../components/ScreenShot/ScreenShot';
 import Background from '../../components/Background/Background';
 
-import backgroundPath from '../../assets/background';
+// import backgroundPath from '../../assets/background';
 import WhoIsNext from '../../components/WhoIsNext/WhoIsNext';
 import GroupBuilder from '../../components/GroupBuilder/GroupBuilder';
 import NoiseLevel from '../../components/NoiseLevel/NoiseLevel';
 import SideControls from '../../components/SideControls/SideControls';
 
 const limitedItems = ['symbols', 'teacher', 'whoisnext', 'groupbuilder', 'noiselevel', 'number', 'webcam', 'background'];
-var mainCounter = new Map(); 
+var mainCounter = new Map();
 class MainContainer extends Component {
     state = {
         stageItems: [],
@@ -34,6 +34,7 @@ class MainContainer extends Component {
         screenCapture: '',
         randomStudentInput: '',
         randomStudentList: [],
+        backgroundPath: null,
         background: {
             // type:'color',
             // data:'orange'
@@ -47,7 +48,33 @@ class MainContainer extends Component {
         this.mainContainerRef = React.createRef();
     }
 
-    onCompClick = (e,index) => {
+    componentDidMount() {
+        const _this = this;
+        console.log('componentDidMount ')
+        fetch("background.json", {
+            headers: {
+                'Content-Type': 'application/json'
+              }
+        }).then(
+            function (res) {
+                console.log('res  ' , res);
+                return res.json()
+            }).then(function (data) {
+                // store Data in State Data Variable
+        console.log('componentDidMount data', data)
+                
+                _this.setState({
+                    backgroundPath: data
+                });
+                
+            }).catch(
+                function (err) {
+                    console.log(err, ' error')
+                }
+            )
+    }
+
+    onCompClick = (e, index) => {
         const { stageItems } = this.state;
         let selectedComp;
         let newStageItems = stageItems.filter(comp => {
@@ -119,7 +146,7 @@ class MainContainer extends Component {
     }
 
     onItemClick = (menuName) => {
-        let { stageItems, openedItems, randomStudentList, randomStudentInput } = this.state;
+        let { stageItems, openedItems, randomStudentList, randomStudentInput, backgroundPath } = this.state;
         if (limitedItems.includes(menuName) && openedItems.includes(menuName))
             return false;
         const key = Math.floor((Math.random() * 100000) + 1);
@@ -128,48 +155,48 @@ class MainContainer extends Component {
         let count = mainCounter.get(menuName) || 0;
         count++
         mainCounter.set(menuName, count);
-        
-        
+
+
 
         switch (menuName) {
             case 'symbols':
-                stageItems.push(<Symbols dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
+                stageItems.push(<Symbols dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></Symbols>)
                 break;
             case 'number':
-                stageItems.push(<Number dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></Number>)
+                stageItems.push(<Number dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></Number>)
                 break;
             case 'whoisnext':
-                stageItems.push(<WhoIsNext dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></WhoIsNext>)
+                stageItems.push(<WhoIsNext dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></WhoIsNext>)
                 proccessedArr = this.checkRandomStudentTask(stageItems, openedItems, 'groupbuilder');
                 stageItems = proccessedArr.newStageItems;
                 openedItems = proccessedArr.newOpenedItems;
                 break;
             case 'groupbuilder':
-                stageItems.push(<GroupBuilder dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></GroupBuilder>)
+                stageItems.push(<GroupBuilder dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></GroupBuilder>)
                 proccessedArr = this.checkRandomStudentTask(stageItems, openedItems, 'whoisnext');
                 stageItems = proccessedArr.newStageItems;
                 openedItems = proccessedArr.newOpenedItems;
                 break;
             case 'noiselevel':
-                stageItems.push(<NoiseLevel dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></NoiseLevel>)
+                stageItems.push(<NoiseLevel dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></NoiseLevel>)
                 break;
             case 'teacher':
-                stageItems.push(<Teacher dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
+                stageItems.push(<Teacher dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></Teacher>)
                 break;
             case 'timer':
-                stageItems.push(<Timer count={count} dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></Timer>)
+                stageItems.push(<Timer count={count} dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></Timer>)
                 break;
             case 'text':
-                stageItems.push(<Text count={count} dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></Text>)
+                stageItems.push(<Text count={count} dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></Text>)
                 break;
             case 'qrcode':
-                stageItems.push(<QRcode count={count} dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
+                stageItems.push(<QRcode count={count} dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></QRcode>)
                 break;
             case 'webcam':
-                stageItems.push(<WebCam dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
+                stageItems.push(<WebCam dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></WebCam>)
                 break;
             case 'background':
-                stageItems.push(<Background dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e,key)} onCompClose={() => this.onCompClose(key)} dataset={backgroundPath} onChange={e => this.onBackgroundChange(e)}></Background>)
+                stageItems.push(<Background dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)} dataset={backgroundPath} onChange={e => this.onBackgroundChange(e)}></Background>)
                 break;
         }
 
@@ -227,9 +254,9 @@ class MainContainer extends Component {
             stageItems: [],
             openedItems: []
         });
-        mainCounter.forEach( (value, key) => {
-            mainCounter.set(key,0);
-          });
+        mainCounter.forEach((value, key) => {
+            mainCounter.set(key, 0);
+        });
     }
 
     render() {

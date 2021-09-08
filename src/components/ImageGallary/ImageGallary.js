@@ -7,11 +7,15 @@ import _ from 'lodash';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import img_1 from '../../assets/images/backgrounds/210527_Classroom_Helper_background_5120x2880_1.png';
+import img_2 from '../../assets/images/backgrounds/210527_Classroom_Helper_background_5120x2880_2.png';
+import img_3 from '../../assets/images/backgrounds/210527_Classroom_Helper_background_5120x2880_3.png';
+
 import style from './ImageGallary.module.scss';
 
 
-const ImageGallary = ({ dataset, onSelect }) => {
-
+const ImageGallary = ({ onSelect }) => {
+    const dataset = [{ label:'Topic',data:[img_1,img_2,img_3]}];
     const { t, i18n } = useTranslation();
     const [dropdownOptions, setDropdownOptions] = useState(null);
     const [selectedOption, setSelectedOption] = useState('');
@@ -60,11 +64,11 @@ const ImageGallary = ({ dataset, onSelect }) => {
     }, []);
     useEffect(() => {
         if (selectedDataSet) {
-            selectedDataSet.data.map(item => {
-                item.temp = item.temp ? item.temp : Math.random()
-            });
-            console.log('selectedDataSet change ?? ', selectedDataSet.data[0].thumbnail );
-            setSelectedImage(selectedDataSet.data[0].thumbnail);
+            // selectedDataSet.data.map(item => {
+            //     item.temp = item.temp ? item.temp : Math.random()
+            // });
+            console.log('selectedDataSet change ?? ', selectedDataSet.data[0] );
+            setSelectedImage(selectedDataSet.data[0]);
         }
     }, [selectedDataSet]);
 
@@ -124,10 +128,9 @@ const ImageGallary = ({ dataset, onSelect }) => {
                 <div className={style.thumbnailWrapper}>
 
                     <Slider {...navSettings} ref={navRef}>
-                        {selectedDataSet.data.map(item => {
-                            const temp = item.temp ? item.temp : Math.random();
-                            return (<div key={'Thumb__' + temp} className={style.frameImage} onClick={(e) => onItemClick(e, { type: 'image', 'data': `${item.thumbnail}&${temp}` })}>
-                                <img key={'Thumb_' + temp} src={`${item.thumbnail}&${temp}`} />
+                        {selectedDataSet.data.map((item,index) => {
+                            return (<div key={'Thumb__' + index} className={style.frameImage} onClick={(e) => onItemClick(e, { type: 'image', 'data': `${item}` })}>
+                                <img key={'Thumb_' +index} src={item} />
                             </div>)
                         })}
                     </Slider>

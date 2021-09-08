@@ -1,196 +1,52 @@
 
 const backgroundPath = [
     {
-        "label": 'Seasonal Images',
-        "type": 'image',
-        "data": [
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?season',
-                thumbnail: 'https://source.unsplash.com/1600x900/?season',
-            }]
-    },
-    {
         "label": 'Topics Of interest',
-        "type": 'image',
         "data": [
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?interest',
-                thumbnail: 'https://source.unsplash.com/1600x900/?interest',
-            }]
+            'images/backgroundd/210527_Classroom_Helper_background_5120x2880_1.png',
+            'images/backgroundd/210527_Classroom_Helper_background_5120x2880_2.png',
+            'images/backgroundd/210527_Classroom_Helper_background_5120x2880_3.png',
+        ]
     },
-    {
-        "label": 'Nice things',
-        "type": 'image',
-        "data": [
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            },
-            {
-                original: 'https://source.unsplash.com/1600x900/?things',
-                thumbnail: 'https://source.unsplash.com/1600x900/?things',
-            }]
-    }
     // {
-    //     "label": 'Colors',
-    //     "type": 'color',
-    //     "data": ['rgb(255, 255, 255)', 'rgb(0, 0, 0)', 'rgb(254, 255, 203)', 'rgb(143, 216, 233)', 'rgb(221, 60, 60)', 'rgb(221, 180, 60)', 'rgb(140, 221, 60)', 'rgb(60, 221, 100)', 'rgb(60, 221, 221)', 'rgb(60, 100, 221)', 'rgb(140, 60, 221)', 'rgb(221, 60, 180)']
+    //     "label": 'Topics Of interest',
+    //     "data": [
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //         'https://source.unsplash.com/1600x900/?interest',
+    //     ]
+    // },
+    // {
+    //     "label": 'Nice things',
+    //     "data": [
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //         'https://source.unsplash.com/1600x900/?things',
+    //     ]
     // }
 ];
 
