@@ -9,7 +9,7 @@ import { DoubleArrow, ClearScreenIcon, CopyRightIcon, ScreenLockIcon, ScreenUnlo
 
 import style from './SideControls.module.scss';
 
-const SideControls = ({ id, onItemClick, clearAll, disableClearButton }) => {
+const SideControls = ({ id, onItemClick, clearAll, disableClearButton, onLangChange }) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScreenLocked, setIsScreenLocked] = useState(false);
@@ -18,7 +18,8 @@ const SideControls = ({ id, onItemClick, clearAll, disableClearButton }) => {
     const [selectedOption, setSelectedOption] = useState(i18n.language);
 
     const onDropdownSelect = e => {
-        i18n.changeLanguage(e.value)
+        i18n.changeLanguage(e.value);
+        onLangChange(i18n.language, t);
     }
 
     const onTriggerClick = () => {

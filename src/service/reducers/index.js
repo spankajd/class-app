@@ -1,17 +1,23 @@
-import { combineReducers } from 'redux';
 
-// import mapReducer from './mapReducer';
-// import userReducer from './userReducer';
-// import projectReducer from './projectReducer';
-// import spaceReducer from './spaceReducer';
-// import commonReducer from './commonReducer';
+const initialState = {
+    sharedList: [],
+    lang: 'en'
+};
 
-// export default combineReducers({
-//   user: userReducer,
-//   map: mapReducer,
-//   project: projectReducer,
-//   space: spaceReducer,
-//   common: commonReducer,
-// });
+export default (state = initialState, action) => {
+    switch (action.type) {
+        case 'UPDATE_SHARED_LIST':
+            return {
+                ...state,
+                sharedList: action.payload
+            };
+        case 'UPDATE_LANGUAGE':
+            return {
+                ...state,
+                lang: action.payload
+            };
+        default:
+            return state;
+    }
+};
 
-export default combineReducers({});

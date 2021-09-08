@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useReactToPrint } from 'react-to-print';
 import Button from '../../elements/Button/Button';
@@ -11,6 +12,7 @@ import style from './WhoIsNext.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
 import Symbols from "../../assets/symbols";
 import Alert from '../../elements/Alert/Alert';
+import { translate } from '../../helper';
 
 
 // Steps 
@@ -24,8 +26,9 @@ const NICKNAME = 'nickname';
 const NUMBER = 'number';
 const SYMBOLS = 'symbols';
 const MAXLIMIT = 32;
+let randomIndex = 0;
 
-const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
+const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
 
     const { t, i18n } = useTranslation();
     const popUpSteps = [2, 4, 5];
@@ -53,9 +56,16 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
             setList(sharedList);
             setTextAreaVal(sharedList.join('\n'));
             setNumberOfStudent(sharedList.length);
-            onSubmitClick();
+            onSubmitConfirm();
         }
     }, [sharedList]);
+
+    useEffect(() => {
+        const temp = translate(list,t);
+        setList(temp);
+        setOutput(translate(output,t));
+
+    },[lang]);
 
     useEffect(() => {
         if(inputStage) {
@@ -94,7 +104,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
             data: id
         });
     }
-
+    
     const onBrowse = e => {
         var fr = new FileReader();
         fr.onload = function () {
@@ -179,11 +189,11 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     }
 
     const getRandomFromList = () => {
-        const random = Math.floor(Math.random() * (list.length));
+        randomIndex = Math.floor(Math.random() * (list.length));
         if (inputStage == SYMBOLS)
-            setOutput(<img src={Symbols[list.splice(random, 1)]} />);
+            setOutput(<img src={Symbols[list.splice(randomIndex, 1)]} />);
         else
-            setOutput(list.splice(random, 1));
+            setOutput(list.splice(randomIndex, 1));
         if (list.length == 0) {
             generateRadomList();
         }
@@ -412,4 +422,7 @@ const WhoIsNext = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList
     );
 };
 
-export default WhoIsNext;
+const s2p = state => ({
+    lang: state.lang
+  });
+export default connect(s2p,null)(WhoIsNext);

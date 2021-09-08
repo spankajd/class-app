@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { useReactToPrint } from 'react-to-print';
@@ -13,6 +14,7 @@ import style from './GroupBuilder.module.scss';
 import RadioButton from '../../elements/RadioButton/RadioButton';
 import Symbols from "../../assets/symbols";
 import Alert from '../../elements/Alert/Alert';
+import { translate } from '../../helper';
 
 // Steps 
 // 1. choose format
@@ -25,7 +27,7 @@ const NICKNAME = 'nickname';
 const NUMBER = 'number';
 const SYMBOLS = 'symbols';
 
-const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
+const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
     const { t, i18n } = useTranslation();
 
     const popUpSteps = [2, 3, 4, 5];
@@ -59,14 +61,30 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
 
     useEffect(() => {
         if (sharedList.length > 0) {
+            setList([...sharedList]);
             setInputStage(sharedInputStage);
-            setList(sharedList);
             setTextAreaVal(sharedList.join('\n'));
             setNumberOfStudent(sharedList.length);
-            getRandomFromList();
+            // getRandomFromList();
             setCurrentStep(2);
         }
     }, [sharedList]);
+
+    useEffect(() => {
+        if(output) {
+            let tempOutPut = _.map(output, (item) => {
+                return translate(item,t);
+            })
+            let _counter = 0;
+            tempOutPut = _.keyBy(tempOutPut, function(o) {
+                return t("groupbuilder.group") + ' ' +  String.fromCharCode(65 + (_counter++));
+              });
+            setList(translate(list,t));
+            setOutput(tempOutPut);
+
+        }
+
+    },[lang]);
 
     useEffect(() => {
         // if (currentStep === 6) {
@@ -80,6 +98,10 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     useEffect(() => {
         setOutput('');
     }, [numberOfGroup]);
+
+    useEffect(() => {
+        console.log('list ' , list, sharedList);
+    }, [list]);
 
     const print = useReactToPrint({
         content: () => componentRef.current
@@ -151,6 +173,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         // } else {
         //     getRandomFromList();
         // }
+        console.log('onSubmitConfirm ' , list);
         getRandomFromList();
     }
 
@@ -202,7 +225,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
         for (let i = 0; i < size; i++) {
             for (let j = 0; j < numberOfGroup; j++) {
                 tempOutPut[t("groupbuilder.group") + ' ' +  String.fromCharCode(65 + j)].push(
-                    tempList.splice(Math.floor(Math.random() * tempList.length), 1)
+                    tempList.splice(Math.floor(Math.random() * tempList.length), 1)[0]
                 );
             }
         }
@@ -457,4 +480,7 @@ const GroupBuilder = ({ onCompClick, onCompClose, onRandomStudentUpdate, sharedL
     );
 };
 
-export default GroupBuilder;
+const s2p = state => ({
+    lang: state.lang
+  });
+export default connect(s2p,null)(GroupBuilder);

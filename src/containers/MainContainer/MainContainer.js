@@ -24,6 +24,9 @@ import WhoIsNext from '../../components/WhoIsNext/WhoIsNext';
 import GroupBuilder from '../../components/GroupBuilder/GroupBuilder';
 import NoiseLevel from '../../components/NoiseLevel/NoiseLevel';
 import SideControls from '../../components/SideControls/SideControls';
+import img_1 from '../../assets/images/backgrounds/210527_Classroom_Helper_background_5120x2880_1.png';
+
+import {updateLanguage} from '../../service/actions';
 
 const limitedItems = ['symbols', 'teacher', 'whoisnext', 'groupbuilder', 'noiselevel', 'number', 'webcam', 'background'];
 var mainCounter = new Map();
@@ -39,7 +42,7 @@ class MainContainer extends Component {
             // type:'color',
             // data:'orange'
             type: 'image',
-            data: 'https://source.unsplash.com/1600x900/?season'
+            data: img_1
         }
     }
 
@@ -50,7 +53,6 @@ class MainContainer extends Component {
 
     componentDidMount() {
         const _this = this;
-        console.log('componentDidMount ')
         fetch("background.json", {
             headers: {
                 'Content-Type': 'application/json'
@@ -61,7 +63,6 @@ class MainContainer extends Component {
                 return res.json()
             }).then(function (data) {
                 // store Data in State Data Variable
-        console.log('componentDidMount data', data)
                 
                 _this.setState({
                     backgroundPath: data
@@ -209,7 +210,7 @@ class MainContainer extends Component {
 
     renderItems = () => {
         const { stageItems } = this.state;
-        console.log('renderItems ', stageItems);
+        console.log('renderItems ' , stageItems);
         return stageItems.map(comp => {
             return comp
         })
@@ -259,6 +260,11 @@ class MainContainer extends Component {
         });
     }
 
+    onLangChange = (lang) => {
+        this.props.updateLanguage(lang);
+    }
+
+
     render() {
         const { screenCapture, background, openedItems } = this.state;
 
@@ -271,11 +277,13 @@ class MainContainer extends Component {
             <div className={style.mainContainer} style={inlineStyle} ref={this.mainContainerRef}>
                 {this.renderItems()}
                 <Player openedItems={openedItems} onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture()} id="player"></Player>
-                <SideControls clearAll={() => this.onClearAll()} disableClearButton={openedItems.length == 0} id="sidecontrols"></SideControls>
+                <SideControls clearAll={() => this.onClearAll()} disableClearButton={openedItems.length == 0} id="sidecontrols" onLangChange={this.onLangChange}></SideControls>
                 {screenCapture && (<ScreenShot imgPath={screenCapture} onClose={this.onScreenShotClose}></ScreenShot>)}
             </div>
         )
     }
 }
 
-export default connect(null, null)(MainContainer);
+export default connect(null, {
+    updateLanguage
+})(MainContainer);

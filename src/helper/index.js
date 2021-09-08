@@ -18,3 +18,16 @@ export const validateNumnerInput = val => {
     }
     return null
 }
+
+export const translate = (randomStudentList, t) => {
+    var arr = [];
+    for(var i = 0; i < randomStudentList.length; i++) {
+        if(randomStudentList[i]) {
+            arr.push(`${t('whoisnext.number')} ${randomStudentList[i].split(' ')[1]}`);
+        } else {
+            arr.push(randomStudentList[i]);
+        }
+        
+    }
+    return arr
+}

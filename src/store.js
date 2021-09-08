@@ -4,7 +4,8 @@ import rootReducer from './service/reducers';
 
 
 
-const initialState = {};
+const initialState = {
+};
 
 // const middleware = [autoSave, thunk];
 
