@@ -61,9 +61,11 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     }, [sharedList]);
 
     useEffect(() => {
-        const temp = translate(list,t);
-        setList(temp);
-        setOutput(translate(output,t));
+        if(inputStage === NUMBER && output) {
+            const temp = translate(list,t);
+            setList(temp);
+            setOutput(translate(output,t));
+        }
 
     },[lang]);
 

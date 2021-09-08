@@ -73,15 +73,14 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
     useEffect(() => {
         if(output) {
             let tempOutPut = _.map(output, (item) => {
-                return translate(item,t);
+                return inputStage === NUMBER ? translate(item,t) : item; 
             })
             let _counter = 0;
             tempOutPut = _.keyBy(tempOutPut, function(o) {
                 return t("groupbuilder.group") + ' ' +  String.fromCharCode(65 + (_counter++));
               });
-            setList(translate(list,t));
+            if(inputStage === NUMBER) setList(translate(list,t));
             setOutput(tempOutPut);
-
         }
 
     },[lang]);
