@@ -29,7 +29,7 @@
   "whoisnext.chooseformat":"Format wählen",
   "whoisnext.nickname":"Spitznamen",
   "whoisnext.number":"Nummer",
-  "whoisnext.numbers":"Zahlen",
+  "whoisnext.numbers":"Nummer",
   "whoisnext.symbols":"Symbole",
   "whoisnext.enterorimportdata":"Daten eingeben oder importieren",
   "whoisnext.enterdata":"Daten eingeben",
@@ -60,7 +60,7 @@
   "noiselevel.high":"hoch",
   "noiselevel.start":"Start",
   "noiselevel.stop":"Stop",
-  "noiselevel.counter":"Zähler",
+  "noiselevel.counter":"Nummer",
   "noiselevel.placeholder":"Der Geräuschpegel wird überschritten",
 
   "timer.standardtimer":"Standard",
