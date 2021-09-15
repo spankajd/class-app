@@ -105,6 +105,12 @@ body {
     font-family: 'Myriad Web Pro';
 
     color: var(--color-primary_font);
+
+    div, span, p, h4,h3,h2,h1,h5,h6 {
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+    }
 }
 
 svg {
@@ -122,12 +128,17 @@ input, textarea {
       height: initial !important;
       overflow: initial !important;
       -webkit-print-color-adjust: exact;
-      page-break-inside:auto
+      page-break-inside:auto;
+      position: initial !important;
     }
 
     table { page-break-inside:auto }
     tr    { page-break-inside:avoid; page-break-after:auto }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
+
+    @page {
+        margin: 2cm
+     }
   }
   

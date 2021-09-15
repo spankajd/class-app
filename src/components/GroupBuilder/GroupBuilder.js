@@ -32,25 +32,25 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
 
     const popUpSteps = [2, 3, 4, 5];
     const helpForSteps = [1];
-    const [inputStage, setInputStage] = useState('');
+    const [inputStage, setInputStage] = useState(sharedInputStage || '');
     const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
-    const [numberOfStudent, setNumberOfStudent] = useState('');
+    const [numberOfStudent, setNumberOfStudent] = useState(sharedList ? sharedList.length : '');
     const [numberOfGroup, setNumberOfGroup] = useState('');
     const [currentStep, setCurrentStep] = useState(1);
     const [previousStep, setPreviousStep] = useState(1);
     const [output, setOutput] = useState('');
     const [buffer, setBuffer] = useState('');
     const [alertMsg, setAlertMsg] = useState('');
-    const [list, setList] = useState([]);
+    const [list, setList] = useState(sharedList || []);
     const componentRef = useRef();
 
     useEffect(() => {
-        if(inputStage) {
+        if (inputStage) {
             setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
         }
-    },[inputStage])
-    
+    }, [inputStage])
+
     useEffect(() => {
         if (currentStep === 1) {
             setTooltip(t('tooltip.whoisnext.step_1'));
@@ -71,19 +71,19 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
     }, [sharedList]);
 
     useEffect(() => {
-        if(output) {
+        if (output) {
             let tempOutPut = _.map(output, (item) => {
-                return inputStage === NUMBER ? translate(item,t) : item; 
+                return inputStage === NUMBER ? translate(item, t) : item;
             })
             let _counter = 0;
-            tempOutPut = _.keyBy(tempOutPut, function(o) {
-                return t("groupbuilder.group") + ' ' +  String.fromCharCode(65 + (_counter++));
-              });
-            if(inputStage === NUMBER) setList(translate(list,t));
+            tempOutPut = _.keyBy(tempOutPut, function (o) {
+                return t("groupbuilder.group") + ' ' + String.fromCharCode(65 + (_counter++));
+            });
+            if (inputStage === NUMBER) setList(translate(list, t));
             setOutput(tempOutPut);
         }
 
-    },[lang]);
+    }, [lang]);
 
     useEffect(() => {
         // if (currentStep === 6) {
@@ -99,7 +99,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
     }, [numberOfGroup]);
 
     useEffect(() => {
-        console.log('list ' , list, sharedList);
+        console.log('list ', list, sharedList);
     }, [list]);
 
     const print = useReactToPrint({
@@ -172,7 +172,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
         // } else {
         //     getRandomFromList();
         // }
-        console.log('onSubmitConfirm ' , list);
+        console.log('onSubmitConfirm ', list);
         getRandomFromList();
     }
 
@@ -223,7 +223,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
         }
         for (let i = 0; i < size; i++) {
             for (let j = 0; j < numberOfGroup; j++) {
-                tempOutPut[t("groupbuilder.group") + ' ' +  String.fromCharCode(65 + j)].push(
+                tempOutPut[t("groupbuilder.group") + ' ' + String.fromCharCode(65 + j)].push(
                     tempList.splice(Math.floor(Math.random() * tempList.length), 1)[0]
                 );
             }
@@ -244,10 +244,6 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                 tempArr.push(`${t('whoisnext.number')} ${i + 1}`);
             }
             setList(tempArr);
-            onRandomStudentUpdate({
-                type: 'list',
-                data: tempArr
-            });
         } else if (inputStage == SYMBOLS) {
             // let keys = _.shuffle(_.keys(Symbols));
             let keys = _.keys(Symbols);
@@ -256,10 +252,17 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
             }
             setList(tempArr);
         }
+        console.log('onRandomStudentUpdate ' , tempArr);
         onRandomStudentUpdate({
             type: 'list',
-            data: tempArr
+            data: [...tempArr]
         });
+    }
+
+    const onScrollStartWrapper = (a,b,c,d) => {
+        console.log('onScrollStartWrapper >>>> ' , a,b,c,d );
+
+        // a.stopPropagation()
     }
 
     const renderGroup = () => {
@@ -345,8 +348,8 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                                     <div className={`${style.buttomWrapper}`}>
                                         {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
                                         {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
-                                        <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                        <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                        <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal.trim() && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                        <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal.trim() && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                     </div>
                                 </>)}
                         </div>
@@ -358,7 +361,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                                 <div className={style.numberOfGroup}><label>{t('groupbuilder.numberofgroups')}</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
                                 <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
                                     <Button label={t('whoisnext.reset')} onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
-                                    <Button label={t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>
+                                    {/* <Button label={t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button> */}
                                     <Button primary label={output ? t('groupbuilder.shufflegroups') : t('groupbuilder.creategroups')} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
                                     {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
                                 </div>
@@ -369,7 +372,9 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                                     autoHide
                                     autoHeightMin={100}
                                     autoHeightMax={450}
-                                ><div className={style.outputWrapper}>
+                                    onMouseDown={onScrollStartWrapper}
+                                    onTouchStart={onScrollStartWrapper}
+                                ><div className={`${style.outputWrapper} ${numberOfGroup > 1 ? style.multipleGroups : ''}`}>
                                         {renderGroup()}
                                     </div>
                                 </Scrollbars>)}
@@ -413,11 +418,16 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                     // currentStep == 6 && (
                     <div className={style.printWrapper}>
                         <div ref={componentRef}>
+                            <div style={{
+                                margin: "25px"
+                            }}>{(new Date()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+
                             {Object.keys(output).map(key =>
-                                <div key={key} >
-                                    <div style={{
-                                        margin: "25px"
-                                    }}>{(new Date()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                                <div key={key} style={{
+
+                                    pageBreakInside: "avoid",
+                                    pageBreakAfter: "auto"
+                                }}>
                                     <h3 style={{
                                         margin: "25px"
                                     }}>{key}</h3>
@@ -426,7 +436,9 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                                         width: "calc(100% - 50px)",
                                         background: "#e2ebf8",
                                         color: "#9ea5ad",
-                                        margin: "25px"
+                                        margin: "25px",
+                                        pageBreakInside: "avoid",
+                                        pageBreakAfter: "auto"
                                     }}>
                                         <tr>
                                             <th style={{
@@ -481,5 +493,5 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
 
 const s2p = state => ({
     lang: state.lang
-  });
-export default connect(s2p,null)(GroupBuilder);
+});
+export default connect(s2p, null)(GroupBuilder);

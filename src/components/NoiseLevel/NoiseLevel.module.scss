@@ -19,12 +19,12 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        margin: 2% 0;
     }
 
     .col {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         margin: 0;
         padding: 0;
         width: 80%;
@@ -152,9 +152,9 @@
         font-size: 13px;
         left: calc( 89% - 180px);
         top: 25%;
-        .row{
-            margin: 5% 0;
-        }
+        // .row{
+        //     margin: 5% 0;
+        // }
 
         .inputRow {
             width: 94%;

@@ -110,16 +110,27 @@ $repeat: 16;  // How often you want the pattern to repeat.
         display: inline-flex;
         flex-direction: column;
         justify-content: space-around;
-        // width: 350px;
+        width: 100%;
 
         label {
             display: inline-flex;
             flex-direction: row;
             align-items: center;
             margin-bottom: 10px;
-            gap: 8px; 
+            // gap: 8px; 
             font-size: var(--font-size-normal);
             font-weight: bold;
+
+            &:hover {
+                span {
+                    color: var(--color-blazeOrange);
+                    border-color: var(--color-blazeOrange);
+                }
+            }
+
+            &> span {
+                margin-left: 8px; 
+            } 
         }
     }
 
@@ -128,7 +139,13 @@ $repeat: 16;  // How often you want the pattern to repeat.
         justify-content: flex-start;
         margin-top: 14px;
         // width: 325px;
-        gap: 6px;
+        // gap: 6px;
+        &> button {
+            &:first-child {
+                margin-left: 0; 
+            }
+            margin-left: 6px; 
+        } 
 
     }
 
@@ -159,9 +176,9 @@ $repeat: 16;  // How often you want the pattern to repeat.
     }
 
     &.popUpBox {
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50% , -50%) !important;
+        // top: 50% !important;
+        // left: 50% !important;
+        // transform: translate(-50% , -50%) !important;
         width: auto !important;
         height: auto !important; 
         padding: 55px;
@@ -243,9 +260,12 @@ $repeat: 16;  // How often you want the pattern to repeat.
         max-height: 450px;
         overflow: visible;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
-
     }
+
+    .multipleGroups {
+        grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+    }
+
     .groupCol {
         position: relative;
         background: burlywood;
@@ -268,6 +288,7 @@ $repeat: 16;  // How often you want the pattern to repeat.
         text-align: center;
         font-size: 15px;
         font-weight: bold;
+        padding: 10px 0;
     }
     .groupData {
         position: relative;
@@ -276,6 +297,7 @@ $repeat: 16;  // How often you want the pattern to repeat.
         overflow-y: auto;
         // height: 100%;
         list-style: none;
+        margin: 0;
     }
     .groupDataItem {
         margin: 5px 0;
@@ -319,8 +341,12 @@ $repeat: 16;  // How often you want the pattern to repeat.
         .controls {
             label {
                 margin-bottom: 18px;
-                gap: 12px;
+                // gap: 12px;
                 font-size: 15px;
+
+                &> span {
+                    margin-left: 12px; 
+                } 
             }
         }
         .textarea {
@@ -329,7 +355,13 @@ $repeat: 16;  // How often you want the pattern to repeat.
 
         .buttomWrapper {
             margin-top: 20px;
-            gap: 15px;
+            // gap: 15px;
+            &> button {
+                &:first-child {
+                    margin-left: 0; 
+                }
+                margin-left: 15px; 
+            } 
         }
         .input {
             width: 48px;
@@ -397,8 +429,13 @@ $repeat: 16;  // How often you want the pattern to repeat.
         .controls {
             label {
                 margin-bottom: 28px;
-                gap: 16px;
+                // gap: 16px;
                 font-size: 21px;
+
+
+                &> span {
+                    margin-left: 16px; 
+                } 
             }
         }
         .textarea {
@@ -407,7 +444,13 @@ $repeat: 16;  // How often you want the pattern to repeat.
 
         .buttomWrapper {
             margin-top: 25px;
-            gap: 20px;
+            // gap: 20px;
+            &> button {
+                &:first-child {
+                    margin-left: 0; 
+                }
+                margin-left: 20px; 
+            } 
         }
         .input {
             width: 70px;

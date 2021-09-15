@@ -29,6 +29,9 @@
         position: relative;
         display: inline-flex;
         padding: 2px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        overflow: hidden;
         &.cursorModeOn {
             cursor: none;
         }
@@ -81,6 +84,24 @@
         }
         .screenShotIcon {
             width: 40px;
+        }
+
+        .cameraSwitch {
+            width: 34px;
+        }
+
+        .cameraSwitchButton {
+            display: none;
+        }
+
+
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            .cameraSwitchButton {
+                display: initial;
+            }
+            .cursorIconButton {
+                display: none;
+            }
         }
     }
 

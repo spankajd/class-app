@@ -46,10 +46,15 @@
         }
     }
 
+    .numberTrigger {
+        margin-top: 5px;
+    }
+
     .numberOutput {
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        height: 32px;
     }
     :global {
         .DigitRoll {
@@ -81,11 +86,11 @@
     .numberBottom {
         flex-direction: column;
         gap: 5px;
-        margin-top: 24px;
+        margin-top: 15px;
     }
 
     .numberBoxWrapper {
-        position: absolute;
+        // position: absolute;
         border: 1px solid var(--color-border);
         border-radius: 6px;
         background: var(--color-black_1);
@@ -121,11 +126,14 @@
             }
         }
         .numberBottom {
-            gap: 14px;
+            // gap: 14px;
             margin-top: 16px;
         }
         
 
+        .numberTrigger {
+            margin-top: 14px;
+        }
         .numberBoxWrapper {
             span {
                 font-size: 26px;
@@ -158,10 +166,13 @@
                 font-size: 27px;
             }
         }
-        .numberBottom {
-            gap: 20px;
-        }
+        // .numberBottom {
+        //     gap: 20px;
+        // }
         
+        .numberTrigger {
+            margin-top: 20px;
+        }
         .numberBoxWrapper {
             span {
                 font-size: 34px;

@@ -104,17 +104,19 @@ const Holder = ({
     }
 
     const onResizeHandleMouseDown = e => {
+        let pageX = e.pageX;
+        let pageY = e.pageY;
         if (e.type == 'touchstart') {
-            e.pageX = e.touches[0].pageX;
-            e.pageY = e.touches[0].pageY;
+            pageX = e.touches[0].pageX;
+            pageY = e.touches[0].pageY;
         }
         const node = holderNodeRef.current;
         const offsetWidth = aspectWithRespectTo ? (node.offsetWidth - aspectWithRespectTo.current.offsetWidth) : 0;
         initialSize = {
             w: node.offsetWidth,
             h: node.offsetHeight,
-            x: e.pageX,
-            y: e.pageY,
+            x: pageX,
+            y: pageY,
             aRatio: node.offsetHeight / node.offsetWidth,
             offSetWidth: offsetWidth
         }
@@ -127,14 +129,16 @@ const Holder = ({
     }
 
     const onDocumentMouseMove = e => {
+        let pageX = e.pageX;
+        let pageY = e.pageY;
         if (e.type == 'touchmove') {
-            e.pageX = e.touches[0].pageX;
-            e.pageY = e.touches[0].pageY;
+            pageX = e.touches[0].pageX;
+            pageY = e.touches[0].pageY;
         }
         const node = holderNodeRef.current;
         const tempSize = {
-            width: resizeDirect == 'ltr' ? (initialSize.w + (e.pageX - initialSize.x)) : (initialSize.w - (e.pageX - initialSize.x)),
-            height: (initialSize.h + (e.pageY - initialSize.y))
+            width: resizeDirect == 'ltr' ? (initialSize.w + (pageX - initialSize.x)) : (initialSize.w - (pageX - initialSize.x)),
+            height: (initialSize.h + (pageY - initialSize.y))
         }
         if (maintainAspectRatio) {
             if (aspectWithRespectTo)

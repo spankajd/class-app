@@ -33,7 +33,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     const { t, i18n } = useTranslation();
     const popUpSteps = [2, 4, 5];
     const helpForSteps = [1];
-    const [inputStage, setInputStage] = useState('');
+    const [inputStage, setInputStage] = useState(sharedInputStage || '');
     const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
     const [numberOfStudent, setNumberOfStudent] = useState('');
@@ -42,7 +42,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     const [output, setOutput] = useState('');
     const [buffer, setBuffer] = useState('');
     const [alertMsg, setAlertMsg] = useState('');
-    const [list, setList] = useState([]);
+    const [list, setList] = useState(sharedList || []);
     const componentRef = useRef();
 
 
@@ -184,6 +184,10 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
         setBuffer('');
         setAlertMsg('');
         setList([]);
+        onRandomStudentUpdate({
+            type: 'list',
+            data: []
+        });
     }
 
     const onChooseNext = e => {
@@ -223,9 +227,10 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
             }
             setList(tempArr);
         }
+        console.log('tempArr ' , tempArr);
         onRandomStudentUpdate({
             type: 'list',
-            data: tempArr.slice(0)
+            data: [...tempArr]
         });
     }
 
@@ -285,8 +290,8 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
                                     <div className={`${style.buttomWrapper} `}  >
                                         {inputStage == NICKNAME && (<label className={`${style.importButton} `}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
                                         {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
-                                        <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
-                                        <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                        <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal.trim() && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                        <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal.trim() && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                     </div>
                                 </>)}
                         </div>
@@ -354,14 +359,14 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
                         <table style={{
                             borderCollapse: "collapse",
                             width: "calc(100% - 50px)",
-                            background: "#e2ebf8",
                             color: "#9ea5ad",
                             margin: "25px",
                             pageBreakInside: "auto",
                         }}>
 
                             <thead style={{
-                                display: "table-header-group"
+                                display: "table-header-group",
+                                background: "#e2ebf8",
                             }}>
                                 <tr style={{
                                     pageBreakInside: "avoid",
@@ -395,7 +400,8 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
                                                 style={{
                                                     pageBreakInside: "avoid",
                                                     pageBreakAfter: "auto",
-                                                    fontSize: '13px'
+                                                    fontSize: '13px',
+                                                    background: "#e2ebf8",
                                                 }}
                                                 className={index % 10 == 0 ? style.tableBreak : style.tableRow}
                                             >

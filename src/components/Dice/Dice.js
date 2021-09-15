@@ -8,6 +8,9 @@ import { generateRandomNumber } from '../HigherOrder/generateRandomNumber';
 
 const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
 
+    const [curVal, setCurrentVal] = useState(1);
+    const [flag, setFlag] = useState(true);
+
     const { t, i18n } = useTranslation();
     const dice_1 = useRef();
     const dice_2 = useRef();
@@ -26,8 +29,7 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
         }
     }, [output]);
 
-    const [curVal, setCurrentVal] = useState(1);
-    const [flag, setFlag] = useState(true);
+   
 
     const onInputChange = (e) => {
         const val = e.target.value;
@@ -36,8 +38,10 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
         setCurrentVal(curVal);
     }
 
+    
+
     const onGenerateClick = () => {
-        setFlag(!flag);
+        setFlag(!flag);   
         generateNumber && generateNumber(true);
     }
 
@@ -47,7 +51,7 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
         for (let i = 1; i <= curVal; i++) {
             arr.push(
                 <div key={i + "_dice"} className={style.dice}>
-                    <ol key={i + "_ol"} className={`${style['die-list']} ${style[flag ? 'even-roll' : 'odd-roll']}`} dataroll="1" ref={refArr[i - 1]}>
+                    <ol key={i + "_ol"} className={`${style['die-list']} ${style[flag ? 'even-roll' : 'odd-roll']}`} data-roll="1" ref={refArr[i - 1]}>
                         <li key={i + "_1"} className={style['die-item']} data-side="1">
                             <span className={style['dot']}></span>
                         </li>
