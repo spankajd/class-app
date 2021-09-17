@@ -35,7 +35,8 @@
 
     .qrContainer {
         margin: 10px 0;
-        width: 65%;
+        width: 100%;
+        max-height: calc(100% - 126px);
         // background: url('../../assets/images/capture.svg');
         // background-position: center;
         // background-size: 100%;

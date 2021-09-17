@@ -15,20 +15,14 @@ import style from './Text.module.scss';
 const CopyComp = ({ editorState, onChange }) => {
 
     const onCopyClick = () => {
-        const node = document.createElement('textarea');
-        node.value = window.getSelection() /// editorState.getSelection().getFocusKey();
-        document.body.appendChild(node);
-        node.select();
-        document.execCommand('copy');
-        document.body.removeChild(node);
-        console.log(' >>>>> ', editorState, window.getSelection());
-        // const contentState = Modifier.replaceText(
-        //     editorState.getCurrentContent(),
-        //     editorState.getSelection(),
-        //     '⭐',
-        //     editorState.getCurrentInlineStyle(),
-        // );
-        // onChange(EditorState.push(editorState, contentState, 'insert-characters'));
+        var selectionState = editorState.getSelection();
+        var anchorKey = selectionState.getAnchorKey();
+        var currentContent = editorState.getCurrentContent();
+        var currentContentBlock = currentContent.getBlockForKey(anchorKey);
+        var start = selectionState.getStartOffset();
+        var end = selectionState.getEndOffset();
+        var selectedText = currentContentBlock.getText().slice(start, end);
+        navigator.clipboard.writeText(selectedText);
     };
 
     return (
@@ -39,11 +33,12 @@ const CopyComp = ({ editorState, onChange }) => {
 
 const PasteComp = ({ editorState, onChange }) => {
 
-    const onCopyClick = () => {
+    const onCopyClick = async () => {
+        let text = await navigator.clipboard.readText();
         const contentState = Modifier.replaceText(
             editorState.getCurrentContent(),
             editorState.getSelection(),
-            '⭐',
+            text,
             editorState.getCurrentInlineStyle(),
         );
         onChange(EditorState.push(editorState, contentState, 'insert-characters'));
@@ -51,6 +46,16 @@ const PasteComp = ({ editorState, onChange }) => {
 
     return (
         <div title="Paste" className="rdw-option-wrapper" onClick={onCopyClick}><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUwMiA1MDIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUwMiA1MDI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8Zz4NCgkJCTxwYXRoIGQ9Ik00NjcuMzUsMTkwLjE3NmwtNzAuNDY4LTcwLjQ2OGMtMS44NzYtMS44NzUtNC40MTktMi45MjktNy4wNzEtMi45MjloLTIzLjA4OVY0OWMwLTUuNTIzLTQuNDc4LTEwLTEwLTEwaC0xMTV2LTIuNDENCgkJCQljMC0yMC4xNzYtMTYuNDE0LTM2LjU5LTM2LjU5LTM2LjU5aC0xMS44MTljLTIwLjE3NiwwLTM2LjU5MSwxNi40MTUtMzYuNTkxLDM2LjU5VjM5aC0xMTVjLTUuNTIyLDAtMTAsNC40NzctMTAsMTB2Mzg2DQoJCQkJYzAsNS41MjMsNC40NzgsMTAsMTAsMTBoMTQ2LjM4NnY0N2MwLDUuNTIzLDQuNDc4LDEwLDEwLDEwaDI2Mi4xNzFjNS41MjIsMCwxMC00LjQ3NywxMC0xMFYxOTcuMjQ3DQoJCQkJQzQ3MC4yNzksMTk0LjU5NSw0NjkuMjI1LDE5Mi4wNTEsNDY3LjM1LDE5MC4xNzZ6IE0zOTkuODExLDE1MC45MjFsMzYuMzI2LDM2LjMyNmgtMzYuMzI2VjE1MC45MjF6IE0xNDQuNzIxLDU5aDQ3DQoJCQkJYzUuNTIyLDAsMTAtNC40NzcsMTAtMTBzLTQuNDc4LTEwLTEwLTEwaC0xNXYtMi40MWMwLTkuMTQ4LDcuNDQyLTE2LjU5LDE2LjU5MS0xNi41OWgxMS44MTljOS4xNDcsMCwxNi41OSw3LjQ0MiwxNi41OSwxNi41OVY0OQ0KCQkJCWMwLDUuNTIzLDQuNDc4LDEwLDEwLDEwaDIydjIwaC0xMDlWNTl6IE0xOTguMTA3LDExNi43NzljLTUuNTIyLDAtMTAsNC40NzctMTAsMTBWNDI1SDUxLjcyMVY1OWg3M3YzMGMwLDUuNTIzLDQuNDc4LDEwLDEwLDEwDQoJCQkJaDEyOWM1LjUyMiwwLDEwLTQuNDc3LDEwLTEwVjU5aDczdjU3Ljc3OUgxOTguMTA3eiBNNDUwLjI3OCw0ODJIMjA4LjEwN1YxMzYuNzc5SDM3OS44MXY2MC40NjhjMCw1LjUyMyw0LjQ3OCwxMCwxMCwxMGg2MC40NjgNCgkJCQlWNDgyeiIvPg0KCQkJPHBhdGggZD0iTTI0My45NDksMjUzLjQ2OGgxMjUuNDAyYzUuNTIyLDAsMTAtNC40NzcsMTAtMTBjMC01LjUyMy00LjQ3OC0xMC0xMC0xMEgyNDMuOTQ5Yy01LjUyMiwwLTEwLDQuNDc3LTEwLDEwDQoJCQkJQzIzMy45NDksMjQ4Ljk5MSwyMzguNDI3LDI1My40NjgsMjQzLjk0OSwyNTMuNDY4eiIvPg0KCQkJPHBhdGggZD0iTTQxNC40MzcsMjgzLjQ3OEgyNDMuOTQ5Yy01LjUyMiwwLTEwLDQuNDc3LTEwLDEwczQuNDc4LDEwLDEwLDEwaDE3MC40ODdjNS41MjIsMCwxMC00LjQ3NywxMC0xMA0KCQkJCVM0MTkuOTU5LDI4My40NzgsNDE0LjQzNywyODMuNDc4eiIvPg0KCQkJPHBhdGggZD0iTTQxNC40MzcsMzMzLjQ4N0gyNDMuOTQ5Yy01LjUyMiwwLTEwLDQuNDc3LTEwLDEwczQuNDc4LDEwLDEwLDEwaDE3MC40ODdjNS41MjIsMCwxMC00LjQ3NywxMC0xMA0KCQkJCVM0MTkuOTU5LDMzMy40ODcsNDE0LjQzNywzMzMuNDg3eiIvPg0KCQkJPHBhdGggZD0iTTQxNC40MzcsMzgzLjQ5N0gyNDMuOTQ5Yy01LjUyMiwwLTEwLDQuNDc3LTEwLDEwczQuNDc4LDEwLDEwLDEwaDE3MC40ODdjNS41MjIsMCwxMC00LjQ3NywxMC0xMA0KCQkJCVM0MTkuOTU5LDM4My40OTcsNDE0LjQzNywzODMuNDk3eiIvPg0KCQkJPHBhdGggZD0iTTM5Ny43NjcsMjUzLjQ2OGgxNi42N2M1LjUyMiwwLDEwLTQuNDc3LDEwLTEwYzAtNS41MjMtNC40NzgtMTAtMTAtMTBoLTE2LjY3Yy01LjUyMiwwLTEwLDQuNDc3LTEwLDEwDQoJCQkJQzM4Ny43NjcsMjQ4Ljk5MSwzOTIuMjQ1LDI1My40NjgsMzk3Ljc2NywyNTMuNDY4eiIvPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=" /></div>
+    );
+}
+
+
+const Wrapper = ({ editorState, onChange }) => {
+    return (
+        <div className="rdw-clipAction-wrapper">
+            <CopyComp editorState={editorState} onChange={onChange} />
+            <PasteComp editorState={editorState} onChange={onChange} />
+        </div>
     );
 }
 
@@ -70,26 +75,16 @@ const Text = ({ count = 1, onCompClick, onCompClose }) => {
     const onCloseClick = e => {
         onCompClose(e);
     }
-    // const setEditorReference = (ref) => {
-    //     // this.editorReferece = ref;
-    //     ref.focus();
-    // }
-
-    // const onComponentClick = e => {
-    //     console.log('onComponentClick ', e.target);
-    // }
-
     const setEditorReference = (ref) => {
-        // if(editorReferece === null)
-        //     setEditorReferece(ref);
-
         if (ref && ref.focus && editorReferece === null) {
             setEditorReferece(ref);
             ref.focus();
-            console.log('ref ', ref, editorReferece);
             // ref.click();
         }
-        console.log('editorReferece ', editorReferece);
+    }
+
+    const onChang = () => {
+
     }
 
     //https://jpuri.github.io/react-draft-wysiwyg/#/docs
@@ -103,11 +98,7 @@ const Text = ({ count = 1, onCompClick, onCompClose }) => {
                     options: ['fontFamily', 'fontSize', 'inline', 'colorPicker', 'remove', 'history'],
                     inline: { options: ['bold', 'italic', 'underline'] },
                 }}
-                toolbarCustomButtons={[
-                    <div className="rdw-clipAction-wrapper">
-                        <CopyComp />
-                        <PasteComp />
-                    </div>]}
+                toolbarCustomButtons={[<Wrapper />]}
                 // editorRef={setEditorReference}
                 wrapperClassName={style.wrapper}
                 toolbarClassName={style.toolbar}

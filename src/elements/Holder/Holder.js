@@ -88,6 +88,9 @@ const Holder = ({
     }
 
     const checkParent = (parent, child) => {
+        if (child == parent) {
+            return true
+        }
         let node = child.parentNode;
         // keep iterating unless null
         while (node != null) {

@@ -44,6 +44,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
     const [alertMsg, setAlertMsg] = useState('');
     const [list, setList] = useState(sharedList || []);
     const componentRef = useRef();
+    const textAreaRef = useRef();
 
     useEffect(() => {
         if (inputStage) {
@@ -112,6 +113,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
 
     const onSelectStage = e => {
         setInputStage(e);
+        setNumberOfStudent('');
         onRandomStudentUpdate({
             type: 'inputStage',
             data: e
@@ -252,15 +254,13 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
             }
             setList(tempArr);
         }
-        console.log('onRandomStudentUpdate ' , tempArr);
         onRandomStudentUpdate({
             type: 'list',
             data: [...tempArr]
         });
     }
 
-    const onScrollStartWrapper = (a,b,c,d) => {
-        console.log('onScrollStartWrapper >>>> ' , a,b,c,d );
+    const onScrollStartWrapper = (a, b, c, d) => {
 
         // a.stopPropagation()
     }
@@ -309,7 +309,8 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                         ${currentStep === 3 ? style.outputWrapper : ''}
                         ${currentStep == 2 ? style.groupOutPut : ''}`}
                 onCompClick={onCompClick}
-                onClose={onCloseClick}>
+                onClose={onCloseClick}
+                nodesNotAllowToDrag={[textAreaRef.current]}>
 
                 {currentStep == 1 &&
                     (<>
@@ -340,7 +341,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                                     <div className={style.title}>{inputStage == NICKNAME ? t('whoisnext.enterorimportdata') : t('whoisnext.enterdata')}</div>
 
                                     {inputStage == NICKNAME ? (
-                                        <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>) :
+                                        <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal} ref={textAreaRef}></textarea>) :
                                         (<>
                                             <label className={style.question}>{t('whoisnext.howmanystudent')}</label>
                                             <input type="text" className={style.input} onChange={onNumberInputChange} value={numberOfStudent}></input>
@@ -348,7 +349,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                                     <div className={`${style.buttomWrapper}`}>
                                         {inputStage == NICKNAME && (<label className={style.importButton}><input type="file" onChange={e => onBrowse(e)} />{t('whoisnext.import')}</label>)}
                                         {/* <Button primary label={t('whoisnext.clear')} onClick={onClearClick} disabled={(!textAreaVal && inputStage == NICKNAME ) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
-                                        <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal.trim() && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
+                                        {/* <Button label={t('whoisnext.print')} onClick={() => onPrintClick(1)} disabled={(!textAreaVal.trim() && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button> */}
                                         <Button primary label={t('whoisnext.submit')} onClick={onSubmitClick} disabled={(!textAreaVal.trim() && inputStage == NICKNAME) || (!numberOfStudent && inputStage != NICKNAME)}></Button>
                                     </div>
                                 </>)}
@@ -361,9 +362,8 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                                 <div className={style.numberOfGroup}><label>{t('groupbuilder.numberofgroups')}</label> <input type="text" className={style.input} onChange={onNumberOfGroupInput} value={numberOfGroup}></input></div>
                                 <div className={`${style.actionWrapper} ${!numberOfGroup && style.disabled}`}>
                                     <Button label={t('whoisnext.reset')} onClick={() => onReset(2)} disabled={!numberOfGroup}></Button>
-                                    {/* <Button label={t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button> */}
+                                    {output && <Button label={t('whoisnext.print')} onClick={() => onPrintClick(2)} disabled={!numberOfGroup}></Button>}
                                     <Button primary label={output ? t('groupbuilder.shufflegroups') : t('groupbuilder.creategroups')} onClick={onSubmitConfirm} disabled={!numberOfGroup}></Button>
-                                    {/* {output && <Button label="Print" onClick={handlePrint}></Button>} */}
                                 </div>
                             </div>
                             {output && (
@@ -386,8 +386,8 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                         <>
                             <div className={style.alertText}>{t('groupbuilder.shufflegroupsWarning')}</div>
                             <div className={style.actionWrapper}>
-                                <Button primary label={t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
                                 <Button label={t('whoisnext.cancel')} onClick={() => onCancel(2)}></Button>
+                                <Button primary label={t('whoisnext.yes')} onClick={onConfirmShuffle}></Button>
                             </div>
                         </>
                     )

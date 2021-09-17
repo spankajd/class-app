@@ -5,7 +5,7 @@ import symbol_4 from './images/symbols/Baby_Chick.png';
 import symbol_5 from './images/symbols/Blossom.png';
 import symbol_6 from './images/symbols/Burger.png';
 import symbol_7 from './images/symbols/Bovinae.png';
-import symbol_8 from './images/symbols/Burger.png';
+import symbol_8 from './images/symbols/Watch.png';
 import symbol_9 from './images/symbols/Cow.png';
 import symbol_10 from './images/symbols/Crown.png';
 import symbol_11 from './images/symbols/Dolphin.png';
@@ -30,8 +30,7 @@ import symbol_29 from './images/symbols/Soccer.png';
 import symbol_30 from './images/symbols/Tangerine.png';
 import symbol_31 from './images/symbols/Train.png';
 import symbol_32 from './images/symbols/violin.png';
-import symbol_33 from './images/symbols/Watch.png';
 
-const Symbols = [symbol_1,symbol_2,symbol_3,symbol_4,symbol_5,symbol_6,symbol_7,symbol_8,symbol_9,symbol_10,symbol_11,symbol_12,symbol_13,symbol_14,symbol_15,symbol_16,symbol_17,symbol_18,symbol_19,symbol_20,symbol_21,symbol_22,symbol_23,symbol_24,symbol_25,symbol_26,symbol_27,symbol_28,symbol_29,symbol_30,symbol_31,symbol_32,symbol_33];
+const Symbols = [symbol_1,symbol_2,symbol_3,symbol_4,symbol_5,symbol_6,symbol_7,symbol_8,symbol_9,symbol_10,symbol_11,symbol_12,symbol_13,symbol_14,symbol_15,symbol_16,symbol_17,symbol_18,symbol_19,symbol_20,symbol_21,symbol_22,symbol_23,symbol_24,symbol_25,symbol_26,symbol_27,symbol_28,symbol_29,symbol_30,symbol_31,symbol_32];
 
 export default Symbols;

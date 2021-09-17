@@ -88,7 +88,7 @@ const SideControls = ({ id, onItemClick, clearAll, disableClearButton, onLangCha
                 </div>
             </div >
         </Draggable>
-        <Alert cancelLabel={t('close')} className={style.copyRightAlert} msg={alertMsg} onClose={onAlertClose} />
+        <Alert cancelLabel={t('close')} maxHeight={300} className={style.copyRightAlert} msg={alertMsg} onClose={onAlertClose} />
         </>
     )
 }

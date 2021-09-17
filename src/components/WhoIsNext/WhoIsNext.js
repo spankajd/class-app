@@ -44,7 +44,8 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     const [alertMsg, setAlertMsg] = useState('');
     const [list, setList] = useState(sharedList || []);
     const componentRef = useRef();
-
+    const textAreaRef = useRef();
+    
 
     // useEffect(() => {
     //     Symbols = _.shuffle(Symbols);
@@ -61,19 +62,19 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     }, [sharedList]);
 
     useEffect(() => {
-        if(inputStage === NUMBER && output) {
-            const temp = translate(list,t);
+        if (inputStage === NUMBER && output) {
+            const temp = translate(list, t);
             setList(temp);
-            setOutput(translate(output,t));
+            setOutput(translate(output, t));
         }
 
-    },[lang]);
+    }, [lang]);
 
     useEffect(() => {
-        if(inputStage) {
+        if (inputStage) {
             setTooltip(t('tooltip.whoisnext.step_2_' + inputStage));
         }
-    },[inputStage])
+    }, [inputStage])
 
     useEffect(() => {
         if (currentStep === 1) {
@@ -101,12 +102,13 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
 
     const onSelectStage = id => {
         setInputStage(id);
+        setNumberOfStudent('');
         onRandomStudentUpdate({
             type: 'inputStage',
             data: id
         });
     }
-    
+
     const onBrowse = e => {
         var fr = new FileReader();
         fr.onload = function () {
@@ -227,7 +229,6 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
             }
             setList(tempArr);
         }
-        console.log('tempArr ' , tempArr);
         onRandomStudentUpdate({
             type: 'list',
             data: [...tempArr]
@@ -248,7 +249,8 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
                         ${currentStep === 3 ? style.outputWrapper : ''}
                         ${currentStep === 6 ? style.printPreview : ''}`}
                 onCompClick={onCompClick}
-                onClose={onCloseClick}>
+                onClose={onCloseClick}
+                nodesNotAllowToDrag={[textAreaRef.current]}>
 
                 {currentStep == 1 &&
                     (<>
@@ -280,7 +282,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
 
                                     {inputStage == NICKNAME ? (
                                         // <Scrollbars style={{ width: 300, height: 176 }}>
-                                        <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal}></textarea>
+                                        <textarea className={style.textarea} onChange={e => onTextAreaChange(e)} value={textAreaVal} ref={textAreaRef}></textarea>
                                         // </Scrollbars>
                                     ) :
                                         (<>
@@ -432,5 +434,5 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
 
 const s2p = state => ({
     lang: state.lang
-  });
-export default connect(s2p,null)(WhoIsNext);
+});
+export default connect(s2p, null)(WhoIsNext);
