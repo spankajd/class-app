@@ -34,14 +34,18 @@ const CopyComp = ({ editorState, onChange }) => {
 const PasteComp = ({ editorState, onChange }) => {
 
     const onCopyClick = async () => {
-        let text = await navigator.clipboard.readText();
-        const contentState = Modifier.replaceText(
-            editorState.getCurrentContent(),
-            editorState.getSelection(),
-            text,
-            editorState.getCurrentInlineStyle(),
-        );
-        onChange(EditorState.push(editorState, contentState, 'insert-characters'));
+        if(navigator && navigator.clipboard) {
+            let text = await navigator.clipboard.readText();
+            if(text) {
+                const contentState = Modifier.replaceText(
+                    editorState.getCurrentContent(),
+                    editorState.getSelection(),
+                    text,
+                    editorState.getCurrentInlineStyle(),
+                );
+                onChange(EditorState.push(editorState, contentState, 'insert-characters'));
+            }
+        }        
     };
 
     return (
@@ -89,7 +93,7 @@ const Text = ({ count = 1, onCompClick, onCompClose }) => {
 
     //https://jpuri.github.io/react-draft-wysiwyg/#/docs
     return (
-        <Holder className={style.text} onCompClick={onCompClick} onClose={onCloseClick} activeClassName={style.focused} nodesNotAllowToDrag={editorReferece ? [editorReferece.editorContainer ? editorReferece.editorContainer : editorReferece] : []}>
+        <Holder className={style.text} onCompClick={onCompClick} onClose={onCloseClick} activeClassName={style.focused} nodesNotAllowToDrag={editorReferece && editorReferece.editorContainer ? ['rdw-editor-main'] : null }>
             <div className={style.title} ref={textTitle}>
                 <TitleInput defaultVal={`Text ${count}`} />
             </div>

@@ -43,6 +43,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
     const [buffer, setBuffer] = useState('');
     const [alertMsg, setAlertMsg] = useState('');
     const [list, setList] = useState(sharedList || []);
+    const [dragRestrictedArr, setDragRestrictedArr] = useState([]);
     const componentRef = useRef();
     const textAreaRef = useRef();
 
@@ -55,6 +56,8 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
     useEffect(() => {
         if (currentStep === 1) {
             setTooltip(t('tooltip.whoisnext.step_1'));
+            // setDragRestrictedArr([textAreaRef.current]);
+            setDragRestrictedArr([style.textarea]);
         } else {
             setTooltip(null);
         }
@@ -87,13 +90,19 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
     }, [lang]);
 
     useEffect(() => {
-        // if (currentStep === 6) {
-        //     setTimeout( () => {
-        //         setCurrentStep(previousStep);
-        //     }, 500);
-        //     print();
-        // }
-    }, [currentStep]);
+        if (output && currentStep == 2) {
+            const tempArr = [];
+            // const matches = document.getElementsByClassName(style.groupCol)
+            // for (var i = 0; i < matches.length; i++) {
+            //     tempArr.push(matches[i]);
+            // }
+            tempArr.push(document.getElementsByClassName(style.outputWrapper)[0])
+            console.log('setDragRestrictedArr ' , tempArr);
+            // setDragRestrictedArr(tempArr);
+            setDragRestrictedArr([style.outputWrapper]);
+
+        }
+    }, [output, currentStep]);
 
     useEffect(() => {
         setOutput('');
@@ -274,18 +283,18 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
             arr.push(
                 <div key={'1_1_' + keyFactor} className={style.groupCol}>
                     <div key={'1_' + keyFactor} className={style.groupTitle}>{key}</div>
-                    <Scrollbars
+                    {/* <Scrollbars
                         autoHeight
                         autoHide
                         autoHeightMin={100}
                         autoHeightMax={200}
-                    >
+                    > */}
 
                         <ul className={style.groupData}>{output[key].map(element => element != '' && element != undefined && element != '\n' ? (<li key={counter++} className={`${style.groupDataItem} ${style.symbols}`}>{
                             inputStage == SYMBOLS ? <img src={Symbols[element]} /> : element
                         }</li>) : '')}</ul>
 
-                    </Scrollbars>
+                    {/* </Scrollbars> */}
                 </div>
             )
         }
@@ -310,7 +319,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
                         ${currentStep == 2 ? style.groupOutPut : ''}`}
                 onCompClick={onCompClick}
                 onClose={onCloseClick}
-                nodesNotAllowToDrag={[textAreaRef.current]}>
+                nodesNotAllowToDrag={dragRestrictedArr}>
 
                 {currentStep == 1 &&
                     (<>

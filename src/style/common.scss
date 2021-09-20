@@ -106,10 +106,10 @@ body {
 
     color: var(--color-primary_font);
 
-    div, span, p, h4,h3,h2,h1,h5,h6 {
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
+    div, span, p, h4, h3, h2, h1, h5, h6 {
         user-select: none; /* Standard syntax */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        -webkit-user-select: none; /* Safari */
     }
 }
 

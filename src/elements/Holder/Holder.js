@@ -35,6 +35,7 @@ const Holder = ({
     const [focused, setFocused] = useState(true);
     const [isMouseDown, setIsMouseDown] = useState(false);
     const [size, setSize] = useState(null);
+    const [cancelElements, setCancelElements] = useState('');
     const holderNodeRef = useRef();
     const resizeHandleRef = useRef();
 
@@ -45,10 +46,28 @@ const Holder = ({
 
     useEffect(() => {
         document.addEventListener('click', handleDocClick);
+    
+        generateCancelElements();
+
         return () => {
             document.removeEventListener('click', handleDocClick);
         };
     }, []);
+
+    useEffect(() => {
+        generateCancelElements();
+    },[nodesNotAllowToDrag]);
+
+    const generateCancelElements = () => {
+        let temp = '.'+style.resizeHandle;
+        
+        if(nodesNotAllowToDrag) {
+            for(let i = 0; i < nodesNotAllowToDrag.length; i++) {
+                temp += ', .'+nodesNotAllowToDrag[i];
+            }
+        }
+        setCancelElements(temp);
+    }
 
     const handleDocClick = (e) => {
         if (holderNodeRef && holderNodeRef.current) {
@@ -167,7 +186,7 @@ const Holder = ({
     }
 
     return (
-        <Draggable calcel={style.resizeHandle} onTouchStart={onMouseDown} onMouseDown={onMouseDown} onStart={onStart} defaultClassNameDragging={style.dragging}>
+        <Draggable cancel={cancelElements} onTouchStart={onMouseDown} onMouseDown={onMouseDown} onStart={onStart} defaultClassNameDragging={style.dragging}>
             <div style={size} className={`${style.holder} ${className ? className : ''} ${focused ? style.active : ''} ${focused && activeClassName ? activeClassName : ''}`} ref={holderNodeRef}>
                 {children}
                 {help && (

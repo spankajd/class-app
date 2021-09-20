@@ -250,7 +250,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
                         ${currentStep === 6 ? style.printPreview : ''}`}
                 onCompClick={onCompClick}
                 onClose={onCloseClick}
-                nodesNotAllowToDrag={[textAreaRef.current]}>
+                nodesNotAllowToDrag={[style.textarea]}>
 
                 {currentStep == 1 &&
                     (<>

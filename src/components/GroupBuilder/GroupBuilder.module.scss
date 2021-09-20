@@ -217,7 +217,7 @@ $repeat: 16;  // How often you want the pattern to repeat.
 
     .actionWrapper {
         margin-left: 15px;
-        width: 270px;
+        // width: 270px;
         @include flexAlignCenter;
         button {
             margin: 0 10px;
@@ -246,7 +246,7 @@ $repeat: 16;  // How often you want the pattern to repeat.
     .numberOfGroup {
         display: inline-flex;
         flex-direction: row;
-        width: 170px;
+        // width: 170px;
         align-items: center;
     }
 
@@ -385,13 +385,13 @@ $repeat: 16;  // How often you want the pattern to repeat.
         }
 
         .numberOfGroup {
-            width: 255px;
+            // width: 255px;
             input {
                 margin-left: 15px;
             }
         }
         .actionWrapper {
-            width: 400px;
+            // width: 400px;
         }
     }
 
@@ -473,13 +473,13 @@ $repeat: 16;  // How often you want the pattern to repeat.
         }
 
         .numberOfGroup {
-            width: 325px;
+            // width: 325px;
             input {
                 margin-left: 30px;
             }
         }
         .actionWrapper {
-            width: 450px;
+            // width: 450px;
         }
     }
 }
