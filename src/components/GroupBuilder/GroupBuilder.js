@@ -71,6 +71,13 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
             setNumberOfStudent(sharedList.length);
             // getRandomFromList();
             setCurrentStep(2);
+            const storedGroup = localStorage.getItem('group');
+            if(storedGroup) {
+                const tempArr = JSON.parse(storedGroup);
+                setOutput({...tempArr});
+                console.log('tempArr !!!' , tempArr , Object.keys(tempArr).length);
+                setNumberOfGroup(Object.keys(tempArr).length);
+            }
         }
     }, [sharedList]);
 
@@ -85,20 +92,21 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
             });
             if (inputStage === NUMBER) setList(translate(list, t));
             setOutput(tempOutPut);
+            localStorage.setItem('group', JSON.stringify(tempOutPut));
         }
 
     }, [lang]);
 
     useEffect(() => {
         if (output && currentStep == 2) {
-            const tempArr = [];
+            const classArr = [];
             // const matches = document.getElementsByClassName(style.groupCol)
             // for (var i = 0; i < matches.length; i++) {
             //     tempArr.push(matches[i]);
             // }
-            tempArr.push(document.getElementsByClassName(style.outputWrapper)[0])
-            console.log('setDragRestrictedArr ' , tempArr);
-            // setDragRestrictedArr(tempArr);
+            classArr.push(document.getElementsByClassName(style.outputWrapper)[0])
+            console.log('setDragRestrictedArr ' , classArr);
+            // setDragRestrictedArr(classArr);
             setDragRestrictedArr([style.outputWrapper]);
 
         }
@@ -217,6 +225,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
         setBuffer('');
         setAlertMsg('');
         setList([]);
+        localStorage.removeItem('group');
     }
 
     const onConfirmShuffle = e => {
@@ -240,6 +249,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
             }
         }
         setOutput(tempOutPut);
+        localStorage.setItem('group', JSON.stringify(tempOutPut));
     }
 
     const generateRadomList = () => {
@@ -276,7 +286,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, s
 
     const renderGroup = () => {
         let arr = [];
-
+        console.log('renderGroup ' , output);
         for (var key in output) {
             let counter = 0;
             let keyFactor = counter + Math.random();

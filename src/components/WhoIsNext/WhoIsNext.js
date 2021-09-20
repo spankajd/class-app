@@ -190,6 +190,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
             type: 'list',
             data: []
         });
+        localStorage.removeItem('group');
     }
 
     const onChooseNext = e => {

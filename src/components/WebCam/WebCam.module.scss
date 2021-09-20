@@ -51,6 +51,7 @@
         padding: 10px;
         margin-top: 25px;
         height: 250px;
+        max-width: 60px;
         div {
             padding-bottom: 25px;
             margin-bottom: 25px;
@@ -140,6 +141,7 @@
         }
         .controlPanel {
             margin-top: 35px;
+            max-width: 75px;
         }
         video {
             border-top-left-radius: 14px;
@@ -154,6 +156,7 @@
         }
         .controlPanel {
             margin-top: 55px;
+            max-width: 80px;
         }
     }
 }
