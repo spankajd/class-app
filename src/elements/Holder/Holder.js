@@ -46,9 +46,9 @@ const Holder = ({
 
     useEffect(() => {
         document.addEventListener('click', handleDocClick);
-    
+        
         generateCancelElements();
-
+        
         return () => {
             document.removeEventListener('click', handleDocClick);
         };
@@ -57,6 +57,10 @@ const Holder = ({
     useEffect(() => {
         generateCancelElements();
     },[nodesNotAllowToDrag]);
+
+    useEffect(() => {
+        console.log('focused >>>> ' , focused);
+    },[focused]);
 
     const generateCancelElements = () => {
         let temp = '.'+style.resizeHandle;
@@ -139,8 +143,8 @@ const Holder = ({
             h: node.offsetHeight,
             x: pageX,
             y: pageY,
-            aRatio: node.offsetHeight / node.offsetWidth,
-            offSetWidth: offsetWidth
+            aRatio: node.offsetHeight / (node.offsetWidth - offsetWidth),
+            offsetWidth: offsetWidth
         }
         allowToResize = true;
 

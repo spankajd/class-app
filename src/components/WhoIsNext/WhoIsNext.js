@@ -28,12 +28,12 @@ const SYMBOLS = 'symbols';
 const MAXLIMIT = 32;
 let randomIndex = 0;
 
-const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, sharedList, sharedInputStage }) => {
+const WhoIsNext = ({ lang, onCompClick, onCompClose}) => {
 
     const { t, i18n } = useTranslation();
     const popUpSteps = [2, 4, 5];
     const helpForSteps = [1];
-    const [inputStage, setInputStage] = useState(sharedInputStage || '');
+    const [inputStage, setInputStage] = useState('');
     const [tooltip, setTooltip] = useState(null);
     const [textAreaVal, setTextAreaVal] = useState('');
     const [numberOfStudent, setNumberOfStudent] = useState('');
@@ -42,30 +42,35 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     const [output, setOutput] = useState('');
     const [buffer, setBuffer] = useState('');
     const [alertMsg, setAlertMsg] = useState('');
-    const [list, setList] = useState(sharedList || []);
+    const [list, setList] = useState([]);
     const componentRef = useRef();
     const textAreaRef = useRef();
-    
-
-    // useEffect(() => {
-    //     Symbols = _.shuffle(Symbols);
-    // }, [Symbols]);
 
     useEffect(() => {
-        if (sharedList.length > 0) {
-            setInputStage(sharedInputStage);
-            setList(sharedList);
-            setTextAreaVal(sharedList.join('\n'));
-            setNumberOfStudent(sharedList.length);
-            onSubmitConfirm();
+        const storedInputStage = localStorage.getItem('inputStage');
+        const storedList = localStorage.getItem('list');
+        const storedTextareaVal = localStorage.getItem('textarea');
+
+        if(storedInputStage) {
+            setInputStage(storedInputStage);
         }
-    }, [sharedList]);
+        if(storedTextareaVal) {
+            setTextAreaVal(storedTextareaVal);
+        }
+        if(storedList) {
+            const tempArr = JSON.parse(storedList);
+            setNumberOfStudent(tempArr.length);
+            setList(tempArr);
+            setCurrentStep(3);
+        }
+    },[]);
 
     useEffect(() => {
         if (inputStage === NUMBER && output) {
             const temp = translate(list, t);
             setList(temp);
-            setOutput(translate(output, t));
+            localStorage.setItem('list',JSON.stringify(temp));
+            setOutput(translate([output], t)[0]);
         }
 
     }, [lang]);
@@ -103,10 +108,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     const onSelectStage = id => {
         setInputStage(id);
         setNumberOfStudent('');
-        onRandomStudentUpdate({
-            type: 'inputStage',
-            data: id
-        });
+        localStorage.setItem('inputStage',id);
     }
 
     const onBrowse = e => {
@@ -119,12 +121,14 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
             //     setTextAreaVal(fr.result);
             // }
             setTextAreaVal(fr.result);
+            localStorage.setItem('textarea',fr.result);
         }
         fr.readAsText(e.target.files[0]);
     }
 
     const onTextAreaChange = e => {
         setTextAreaVal(e.target.value);
+        localStorage.setItem('textarea',e.target.value);
     }
 
     const onNumberInputChange = e => {
@@ -138,6 +142,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     const onClearClick = e => {
         setTextAreaVal('');
         setNumberOfStudent('');
+        localStorage.removeItem('textarea');
     }
 
     const onSubmitClick = e => {
@@ -166,6 +171,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
     const onOverride = e => {
         setTextAreaVal(buffer);
         setCurrentStep(1);
+        localStorage.setItem('textarea',buffer);
     }
 
 
@@ -186,11 +192,10 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
         setBuffer('');
         setAlertMsg('');
         setList([]);
-        onRandomStudentUpdate({
-            type: 'list',
-            data: []
-        });
         localStorage.removeItem('group');
+        localStorage.removeItem('list');
+        localStorage.removeItem('inputStage');
+        localStorage.removeItem('textarea');
     }
 
     const onChooseNext = e => {
@@ -199,41 +204,40 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose, onRandomStudentUpdate, shar
 
     const getRandomFromList = () => {
         randomIndex = Math.floor(Math.random() * (list.length));
-        if (inputStage == SYMBOLS)
-            setOutput(<img src={Symbols[list.splice(randomIndex, 1)]} />);
-        else
-            setOutput(list.splice(randomIndex, 1));
+        let currentItem = list.splice(randomIndex, 1);
+        currentItem = currentItem[0];
+        if (inputStage == SYMBOLS) {
+            setOutput(<img src={Symbols[currentItem]} />);
+        }
+        else 
+            setOutput(currentItem);
         if (list.length == 0) {
-            generateRadomList();
+            generateRadomList(currentItem);
         }
     }
 
-    const generateRadomList = () => {
+    const generateRadomList = (ignoreItem) => {
         let tempArr = [];
         if (inputStage == NICKNAME) {
             tempArr = textAreaVal.split("\n");
             tempArr = tempArr.filter(i => i.trim() != '');
             _.without(tempArr, ['', ' ', '\n']);
             setNumberOfStudent(tempArr.length);
-            setList(tempArr);
         } else if (inputStage == NUMBER) {
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(`${t('whoisnext.number')} ${i + 1}`);
             }
-            setList(tempArr);
         } else if (inputStage == SYMBOLS) {
-
-            // let keys = _.shuffle(_.keys(Symbols));
             let keys = _.keys(Symbols);
             for (let i = 0; i < numberOfStudent; i++) {
                 tempArr.push(keys[i]);
             }
-            setList(tempArr);
         }
-        onRandomStudentUpdate({
-            type: 'list',
-            data: [...tempArr]
-        });
+        localStorage.setItem('list',JSON.stringify(tempArr));
+        if(ignoreItem !== undefined) {
+            tempArr = tempArr.filter( i => i !== ignoreItem);
+        }
+        setList(tempArr);
     }
 
     const onAlertClose = () => {

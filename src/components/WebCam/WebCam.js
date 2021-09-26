@@ -101,7 +101,7 @@ const WebCam = ({ onCompClick, onCompClose }) => {
 
 
     return (
-        <Holder maintainAspectRatio={startWebCam} aspectWithRespectTo={stageRef} resizable={startWebCam} help={t('tooltip.webcam')} resizeDirect={'rtl'} className={`${style.webcam} ${startWebCam ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
+        <Holder maintainAspectRatio={startWebCam || imageData} aspectWithRespectTo={stageRef} resizable={startWebCam || imageData} help={t('tooltip.webcam')} resizeDirect={'rtl'} className={`${style.webcam} ${startWebCam || imageData ? style.webCamOn : ''}`} onCompClick={onCompClick} onClose={onCloseClick} >
 
 
             <div className={style.controlPanel}>

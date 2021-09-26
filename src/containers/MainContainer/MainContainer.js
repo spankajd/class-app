@@ -35,8 +35,6 @@ class MainContainer extends Component {
         stageItems: [],
         openedItems: [],
         screenCapture: '',
-        randomStudentInput: '',
-        randomStudentList: [],
         backgroundPath: null,
         background: {
             // type:'color',
@@ -123,11 +121,6 @@ class MainContainer extends Component {
         }
     }
 
-    randomStudentUpdate = ({ type, data }) => {
-        let tempObj = {};
-        tempObj[type == 'inputStage' ? 'randomStudentInput' : 'randomStudentList'] = data;
-        this.setState(tempObj);
-    }
 
     checkRandomStudentTask = (stageItems, openedItems, closeTask) => {
         let curItemName;
@@ -147,7 +140,7 @@ class MainContainer extends Component {
     }
 
     onItemClick = (menuName) => {
-        let { stageItems, openedItems, randomStudentList, randomStudentInput, backgroundPath } = this.state;
+        let { stageItems, openedItems, backgroundPath } = this.state;
         if (limitedItems.includes(menuName) && openedItems.includes(menuName))
             return false;
         const key = Math.floor((Math.random() * 100000) + 1);
@@ -167,13 +160,13 @@ class MainContainer extends Component {
                 stageItems.push(<Number dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)}></Number>)
                 break;
             case 'whoisnext':
-                stageItems.push(<WhoIsNext dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></WhoIsNext>)
+                stageItems.push(<WhoIsNext dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)} ></WhoIsNext>)
                 proccessedArr = this.checkRandomStudentTask(stageItems, openedItems, 'groupbuilder');
                 stageItems = proccessedArr.newStageItems;
                 openedItems = proccessedArr.newOpenedItems;
                 break;
             case 'groupbuilder':
-                stageItems.push(<GroupBuilder dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)} onRandomStudentUpdate={e => this.randomStudentUpdate(e)} sharedList={randomStudentList} sharedInputStage={randomStudentInput}></GroupBuilder>)
+                stageItems.push(<GroupBuilder dataId={menuName} key={key} onCompClick={(e) => this.onCompClick(e, key)} onCompClose={() => this.onCompClose(key)} ></GroupBuilder>)
                 proccessedArr = this.checkRandomStudentTask(stageItems, openedItems, 'whoisnext');
                 stageItems = proccessedArr.newStageItems;
                 openedItems = proccessedArr.newOpenedItems;
