@@ -45,10 +45,10 @@ const Holder = ({
     };
 
     useEffect(() => {
-        document.addEventListener('click', handleDocClick);
-        
+        setTimeout( () => {
+            document.addEventListener('click', handleDocClick);
+        },100)
         generateCancelElements();
-        
         return () => {
             document.removeEventListener('click', handleDocClick);
         };

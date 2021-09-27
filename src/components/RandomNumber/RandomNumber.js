@@ -63,13 +63,17 @@ const RandomNumber = ({ output, setNumberOfDigits, generateNumber }) => {
         return <div className={style.numberBoxWrapper}>{arr}</div>;
     }
 
+    const  onMouseDown = e => {
+        e.stopPropagation();
+    }
+
     return (
         <div className={`${style.randomNumber}`}>
             <div className={`${style.row} ${style.numberOutput}`}>{renderOutput()}</div>
             <div className={`${style.row} ${style.numberBottom}`}>
                 <div className={`${style.col} ${style.numberInput}`}>
                     <label>{t('number.numberOfDigitInstruction')}<span>{t('number.maxNumberOfDigit')}</span></label>
-                    <input type="text" onChange={onInputChange} maxLength="2" value={curVal} />
+                    <input type="text" onChange={onInputChange} onMouseDown={onMouseDown} maxLength="2" value={curVal} />
                 </div>
                 <div className={`${style.col} ${style.numberTrigger}`}>
                     <Button label={t('number.generate')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>

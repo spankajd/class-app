@@ -45,6 +45,10 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
         generateNumber && generateNumber(true);
     }
 
+    const  onMouseDown = e => {
+        e.stopPropagation();
+    }
+
     const renderDice = () => {
         let arr = [];
         const refArr = [dice_1, dice_2, dice_3, dice_4, dice_5];
@@ -100,7 +104,7 @@ const Dice = ({ output, setNumberOfDigits, generateNumber }) => {
             <div className={`${style.row} ${style.diceBottom}`}>
                 <div className={`${style.col} ${style.diceInput}`}>
                     <label>{t('number.numberOfDiceInstruction')}<span>{t('number.maxNumberOfDice')}</span></label>
-                    <input type="text" onChange={onInputChange} maxLength="1" value={curVal} />
+                    <input type="text" onMouseDown={onMouseDown} onChange={onInputChange} maxLength="1" value={curVal} />
                 </div>
                 <div className={`${style.col} ${style.diceTrigger}`}>
                     <Button label={t('number.roll')} primary={true} onClick={onGenerateClick} disabled={curVal === ''}></Button>

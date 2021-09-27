@@ -86,7 +86,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose}) => {
         if (currentStep === 1) {
             setTooltip(t('tooltip.whoisnext.step_1'));
             // setDragRestrictedArr([textAreaRef.current]);
-            setDragRestrictedArr([style.textarea]);
+            setDragRestrictedArr([style.textarea, style.input]);
         } else {
             setTooltip(null);
         }
@@ -121,7 +121,7 @@ const GroupBuilder = ({ lang, onCompClick, onCompClose}) => {
             // }
             classArr.push(document.getElementsByClassName(style.outputWrapper)[0])
             // setDragRestrictedArr(classArr);
-            setDragRestrictedArr([style.outputWrapper]);
+            setDragRestrictedArr([style.outputWrapper, style.input]);
 
         }
     }, [output, currentStep]);

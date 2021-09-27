@@ -49,7 +49,11 @@ const QRcode = ({ onCompClick, onCompClose, count }) => {
     }
 
     return (
-        <Holder className={`${style.qrcode} ${!!qrInput ? style.withQR : ''}`} onCompClick={onCompClick} onClose={onCloseClick} maintainAspectRatio={mainASPR}>
+        <Holder className={`${style.qrcode} ${!!qrInput ? style.withQR : ''}`}
+        onCompClick={onCompClick}
+        onClose={onCloseClick}
+        maintainAspectRatio={mainASPR}
+        nodesNotAllowToDrag={[style.input]}>
             <div className={style.title}><TitleInput onChange={onTitleInputChange} defaultVal={title} /></div>
             <div className={style.subtitle}>{t('qrcode.instruction')}</div>
             <input className={style.input} type="text" placeholder={placeHolder} value={inputVal} onChange={onInputChange}></input>

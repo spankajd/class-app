@@ -255,7 +255,7 @@ const WhoIsNext = ({ lang, onCompClick, onCompClose}) => {
                         ${currentStep === 6 ? style.printPreview : ''}`}
                 onCompClick={onCompClick}
                 onClose={onCloseClick}
-                nodesNotAllowToDrag={[style.textarea]}>
+                nodesNotAllowToDrag={[style.textarea, style.input]}>
 
                 {currentStep == 1 &&
                     (<>
