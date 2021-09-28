@@ -13,7 +13,7 @@ const ScreenShot = ({ imgPath = '', onClose }) => {
 
     const onShareClick = () => {
         console.log('onShareClick >>>>>>');
-        alert('Shared...');
+        window.location.href = "mailto:"
     }
     const onSaveClick = () => {
         const screenCaptureSource = imgPath;
