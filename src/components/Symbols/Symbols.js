@@ -42,7 +42,7 @@ const Symbols = ({ onCompClick, onCompClose }) => {
     }
 
     return (
-        <Holder className={style.symbols} onCompClick={onCompClick} onClose={onCloseClick}>
+        <Holder maintainAspectRatio={true} fontResize={true} className={style.symbols} onCompClick={onCompClick} onClose={onCloseClick}>
             <div className={style.symbolsRow}>
                 <Tile disabled={validate(1)} label={t('symbol.individualwork')} onClick={onTileClick} id={1}>
                     <IndividualWork />

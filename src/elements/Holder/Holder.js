@@ -28,6 +28,7 @@ const Holder = ({
     height = 250,
     minWidth = "250",
     minHeight = "250",
+    fontResize = false,
     maintainAspectRatio = false,
     aspectWithRespectTo = null,
     nodesNotAllowToDrag = []  }) => {
@@ -57,6 +58,10 @@ const Holder = ({
     useEffect(() => {
         generateCancelElements();
     },[nodesNotAllowToDrag]);
+
+    useEffect(() => {
+        console.log('focused >>>> ' , holderNodeRef.current.offsetWidth);
+    },[holderNodeRef]);
 
     useEffect(() => {
         console.log('focused >>>> ' , focused);
@@ -171,6 +176,10 @@ const Holder = ({
                 tempSize.height = ((tempSize.width - initialSize.offsetWidth) * initialSize.aRatio);
             else
                 tempSize.height = (tempSize.width * initialSize.aRatio);
+        }
+
+        if(fontResize) {
+            tempSize.fontSize = Math.max(12, (tempSize.width * (16 / initialSize.w)))
         }
 
         setSize(tempSize);

@@ -1,3 +1,5 @@
+@import '../../style/mixin.scss';
+
 .mainContainer {
     position: absolute;
     height: 100%;
@@ -6,4 +8,26 @@
     // background-position: center;
     background-position: left;
     background-size: cover;
+
+    .logo {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 60px;
+    }
+
+    @include breakpoint(medium) {
+        .logo {
+            top: 18px;
+            left: 18px;
+            width: 80px;
+        }
+    }
+    @include breakpoint(large) {
+        .logo {
+            top: 25px;
+            left: 25px;
+            width: 100px;
+        }
+    }
 }

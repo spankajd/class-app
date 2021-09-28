@@ -26,6 +26,8 @@ import NoiseLevel from '../../components/NoiseLevel/NoiseLevel';
 import SideControls from '../../components/SideControls/SideControls';
 import img_1 from '../../assets/images/backgrounds/210527_Classroom_Helper_background_5120x2880_1.png';
 
+import Logo from '../../assets/images/klett_logo_mit.svg';
+
 import {updateLanguage} from '../../service/actions';
 
 const limitedItems = ['symbols', 'teacher', 'whoisnext', 'groupbuilder', 'noiselevel', 'number', 'webcam', 'background'];
@@ -268,6 +270,7 @@ class MainContainer extends Component {
 
         return (
             <div className={style.mainContainer} style={inlineStyle} ref={this.mainContainerRef}>
+                <div className={style.logo}><img src={Logo} /></div>
                 {this.renderItems()}
                 <Player openedItems={openedItems} onItemClick={e => this.onItemClick(e)} onScreenCapture={e => this.onStartCapture()} id="player"></Player>
                 <SideControls clearAll={() => this.onClearAll()} disableClearButton={openedItems.length == 0} id="sidecontrols" onLangChange={this.onLangChange}></SideControls>
